@@ -22,9 +22,24 @@
   # Some bug with locals: https://github.com/nix-community/home-manager/issues/432#issuecomment-434577486
   programs.man.enable = false;
 
+  # TODO: Move this into programs.bash = { ... } See example: https://github.com/burke/b/blob/master/etc/nix/home.nix
+  home.sessionVariables = rec {
+    EDITOR = "vim";
+  };
+
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+    extraConfig = "colorscheme gruvbox";
+    plugins = with pkgs.vimPlugins; [
+      vim-nix
+      gruvbox
+    ];
+  };
+
   # Raw configuration files
-  home.file.".gitconfig".source = ./.gitconfig;
-  home.file.".bashrc".source = ./.bashrc;
-  home.file.".bash_aliases".source = ./.bash_aliases;
-  home.file.".bash_aliases.priv".source = ./.bash_aliases.priv;
+  home.file.".gitconfig".source = ./home/.gitconfig;
+  home.file.".bashrc".source = ./home/.bashrc;
+  home.file.".bash_aliases".source = ./home/.bash_aliases;
+  home.file.".bash_aliases.priv".source = ./home/.bash_aliases.priv;
 }
