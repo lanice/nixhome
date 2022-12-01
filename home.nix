@@ -72,5 +72,4 @@
   home.file.".profile".source = ./home/.profile;
   home.file.".bashrc".source = ./home/.bashrc;
   home.file.".bash_aliases".source = ./home/.bash_aliases;
-  home.file.".bash_aliases.priv".source = ./home/.bash_aliases.priv;
 }

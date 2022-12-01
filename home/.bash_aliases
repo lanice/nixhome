@@ -20,4 +20,5 @@ alias awsume='. awsume'
 
 alias at='alacritty-themes'
 
-. ~/.bash_aliases.priv
+alias frontend='yarn watch:webpack'
+alias 5etools='( pushd /media/lanice/DriveOfHolding/5etools && gp && npm run serve:dev && popd )'
