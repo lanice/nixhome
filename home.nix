@@ -21,4 +21,10 @@
 
   # Some bug with locals: https://github.com/nix-community/home-manager/issues/432#issuecomment-434577486
   programs.man.enable = false;
+
+  # Raw configuration files
+  home.file.".gitconfig".source = ./.gitconfig;
+  home.file.".bashrc".source = ./.bashrc;
+  home.file.".bash_aliases".source = ./.bash_aliases;
+  home.file.".bash_aliases.priv".source = ./.bash_aliases.priv;
 }
