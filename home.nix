@@ -3,6 +3,8 @@
   pkgs,
   ...
 }: {
+  imports = [./alacritty.nix];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "lanice";
@@ -18,13 +20,17 @@
   # changes in each release.
   home.stateVersion = "22.05";
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  home.activation.report-changes = config.lib.dag.entryAnywhere ''
+    # # Disable nvd if there are lesser than 2 profiles in the system.
+    # if [ `ls -d1v /nix/var/nix/profiles/per-user/${config.home.username}/home-manager-*-link 2>/dev/null | wc -l ` -lt 2 ];
+    # then
+    #     return 0
+    # fi
+    ${pkgs.nvd}/bin/nvd diff $(/usr/bin/ls -d1v /nix/var/nix/profiles/per-user/${config.home.username}/home-manager-*-link | tail -2)
+  '';
 
-  # Some bug with locales: https://github.com/nix-community/home-manager/issues/432#issuecomment-434577486
-  programs.man.enable = false;
-
-  imports = [./alacritty.nix];
+  # Raw configuration files
+  home.file.".config/hstr/config".source = ./home/.config/hstr/config;
 
   home.packages = with pkgs; [
     # Rust CLI tools
@@ -39,6 +45,12 @@
 
     alejandra # Nix formatter
   ];
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+
+  # Some bug with locales: https://github.com/nix-community/home-manager/issues/432#issuecomment-434577486
+  programs.man.enable = false;
 
   programs.zoxide.enable = true;
 
@@ -63,6 +75,8 @@
     shellAliases = {
       lld = "exa -alF --group-directories-first"; # ls,ll,la,lt,lla - set above (programs.exa.enableAliases)
       cat = "bat";
+      hm = "home-manager";
+      hms = "home-manager switch";
 
       # Git
       gs = "git status";
@@ -187,7 +201,4 @@
       diff.colorMoved = "default";
     };
   };
-
-  # Raw configuration files
-  home.file.".config/hstr/config".source = ./home/.config/hstr/config;
 }
