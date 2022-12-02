@@ -38,6 +38,8 @@
     htop
     wtf
     lazygit
+
+    alejandra # Nix formatter
   ];
 
   # programs.exa = {
@@ -45,16 +47,104 @@
   #   enableAliases = true;
   # };
 
-  # programs.zoxide = {
-  #   enable = true;
-  # };
+  programs.zoxide = {
+    enable = true;
+  };
 
-  # programs.bash = {
-  #   enable = true;
+  programs.bash = {
+    enable = true;
 
-  #   historySize = 10000;
-  #   historyFileSize = 10000;
-  # };
+    historySize = 10000;
+    historyFileSize = 10000;
+    historyControl = [ "ignorespace" ];
+
+    shellOptions = [ "histappend" "checkwinsize" "extglob" "globstar" "checkjobs" ];
+
+    sessionVariables = {
+      EDITOR = "vim";
+    };
+
+    shellAliases = {
+      # https://the.exa.website/ - A modern replacement for ‘ls’
+      ls="exa";
+      ll="exa -alF";
+      la="exa -a";
+      lld="exa -alF --group-directories-first";
+
+      # https://github.com/sharkdp/bat - A cat(1) clone with wings
+      cat="bat";
+
+      # Git shorthands
+      gs="git status";
+      gf="git fetch";
+      gp="git pull";
+      gd="git diff";
+      gcan="git commit --amend --no-edit";
+      gprf="git pull --rebase && git forbranch";
+
+      # https://awsu.me/
+      awsume=". awsume";
+
+      at="alacritty-themes";
+
+      frontend="yarn watch:webpack";
+      "5etools"="( pushd /media/lanice/DriveOfHolding/5etools && gp && npm run serve:dev && popd )";
+    };
+
+    initExtra = ''
+      if [ -f ~/.config/hstr/config ]; then
+          . ~/.config/hstr/config
+      fi
+
+      # NVM
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+      # Work
+      if [ -f ~/.kialo_profile ]; then
+          . ~/.kialo_profile
+      fi
+
+      # Alacritty bash completion
+      source ~/.bash_completion/alacritty
+    '';
+  };
+
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = false;
+      line_break.disabled = true;
+      status.disabled = false;
+      sudo.disabled = false;
+
+      aws.disabled = true;
+      nodejs.disabled = true;
+      package.disabled = true;
+
+      memory_usage = {
+        disabled = false;
+        symbol = " ";
+      };
+
+      rust = {
+        symbol = " ";
+        style = "bold #FF6600";
+      };
+
+      character = {
+        success_symbol = "[❯](bold blue)";
+        error_symbol = "[✗](bold red)";
+      };
+
+      git_branch.symbol = " ";
+      python.symbol = " ";
+      golang.symbol = " ";
+      docker_context.symbol = " ";
+      java.symbol = " ";
+    };
+  };
 
   programs.neovim = {
     enable = true;
@@ -94,8 +184,8 @@
 
   # Raw configuration files
   # home.file.".gitconfig".source = ./backup/.gitconfig;
-  home.file.".profile".source = ./home/.profile;
-  home.file.".bashrc".source = ./home/.bashrc;
-  home.file.".bash_aliases".source = ./home/.bash_aliases;
-  home.file.".hstr".source = ./home/.hstr;
+  # home.file.".profile".source = ./backup/.profile;
+  # home.file.".bashrc".source = ./backup/.bashrc;
+  # home.file.".bash_aliases".source = ./backup/.bash_aliases;
+  home.file.".config/hstr/config".source = ./home/.config/hstr/config;
 }
