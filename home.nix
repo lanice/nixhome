@@ -24,17 +24,13 @@
   # Some bug with locales: https://github.com/nix-community/home-manager/issues/432#issuecomment-434577486
   programs.man.enable = false;
 
-  # TODO: Move this into programs.bash = { ... } See example: https://github.com/burke/b/blob/master/etc/nix/home.nix
-  home.sessionVariables = rec {
-    EDITOR = "vim";
-  };
+  imports = [./alacritty.nix];
 
   home.packages = with pkgs; [
     # Rust CLI tools
     bat
     bottom
     dua
-    exa
     fd
 
     htop
@@ -44,13 +40,11 @@
     alejandra # Nix formatter
   ];
 
-  # programs.exa = {
-  #   enable = true;
-  #   enableAliases = true;
-  # };
+  programs.zoxide.enable = true;
 
-  programs.zoxide = {
+  programs.exa = {
     enable = true;
+    enableAliases = true; # ls,ll,la,lt,lla
   };
 
   programs.bash = {
@@ -67,16 +61,10 @@
     };
 
     shellAliases = {
-      # https://the.exa.website/ - A modern replacement for ‘ls’
-      ls = "exa";
-      ll = "exa -alF";
-      la = "exa -a";
-      lld = "exa -alF --group-directories-first";
-
-      # https://github.com/sharkdp/bat - A cat(1) clone with wings
+      lld = "exa -alF --group-directories-first"; # ls,ll,la,lt,lla - set above (programs.exa.enableAliases)
       cat = "bat";
 
-      # Git shorthands
+      # Git
       gs = "git status";
       gf = "git fetch";
       gp = "git pull";
@@ -89,9 +77,14 @@
 
       at = "alacritty-themes";
 
+      # TODO: Move that stuff elsewhere
       frontend = "yarn watch:webpack";
       "5etools" = "( pushd /media/lanice/DriveOfHolding/5etools && gp && npm run serve:dev && popd )";
     };
+
+    profileExtra = ''
+      . "$HOME/.cargo/env"
+    '';
 
     initExtra = ''
       if [ -f ~/.config/hstr/config ]; then
@@ -158,6 +151,17 @@
     ];
   };
 
+  programs.tealdeer = {
+    enable = true;
+    settings = {
+      display = {
+        compact = false;
+        use_pager = false;
+      };
+      updates = {auto_update = true;};
+    };
+  };
+
   programs.git = {
     enable = true;
     userName = "Leander Neiß";
@@ -185,9 +189,5 @@
   };
 
   # Raw configuration files
-  # home.file.".gitconfig".source = ./backup/.gitconfig;
-  # home.file.".profile".source = ./backup/.profile;
-  # home.file.".bashrc".source = ./backup/.bashrc;
-  # home.file.".bash_aliases".source = ./backup/.bash_aliases;
   home.file.".config/hstr/config".source = ./home/.config/hstr/config;
 }
