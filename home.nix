@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "lanice";
@@ -56,9 +58,9 @@
 
     historySize = 10000;
     historyFileSize = 10000;
-    historyControl = [ "ignorespace" ];
+    historyControl = ["ignorespace"];
 
-    shellOptions = [ "histappend" "checkwinsize" "extglob" "globstar" "checkjobs" ];
+    shellOptions = ["histappend" "checkwinsize" "extglob" "globstar" "checkjobs"];
 
     sessionVariables = {
       EDITOR = "vim";
@@ -66,29 +68,29 @@
 
     shellAliases = {
       # https://the.exa.website/ - A modern replacement for ‘ls’
-      ls="exa";
-      ll="exa -alF";
-      la="exa -a";
-      lld="exa -alF --group-directories-first";
+      ls = "exa";
+      ll = "exa -alF";
+      la = "exa -a";
+      lld = "exa -alF --group-directories-first";
 
       # https://github.com/sharkdp/bat - A cat(1) clone with wings
-      cat="bat";
+      cat = "bat";
 
       # Git shorthands
-      gs="git status";
-      gf="git fetch";
-      gp="git pull";
-      gd="git diff";
-      gcan="git commit --amend --no-edit";
-      gprf="git pull --rebase && git forbranch";
+      gs = "git status";
+      gf = "git fetch";
+      gp = "git pull";
+      gd = "git diff";
+      gcan = "git commit --amend --no-edit";
+      gprf = "git pull --rebase && git forbranch";
 
       # https://awsu.me/
-      awsume=". awsume";
+      awsume = ". awsume";
 
-      at="alacritty-themes";
+      at = "alacritty-themes";
 
-      frontend="yarn watch:webpack";
-      "5etools"="( pushd /media/lanice/DriveOfHolding/5etools && gp && npm run serve:dev && popd )";
+      frontend = "yarn watch:webpack";
+      "5etools" = "( pushd /media/lanice/DriveOfHolding/5etools && gp && npm run serve:dev && popd )";
     };
 
     initExtra = ''
