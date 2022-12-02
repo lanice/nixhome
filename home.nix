@@ -21,16 +21,13 @@
   home.stateVersion = "22.05";
 
   home.activation.report-changes = config.lib.dag.entryAnywhere ''
-    # # Disable nvd if there are lesser than 2 profiles in the system.
-    # if [ `ls -d1v /nix/var/nix/profiles/per-user/${config.home.username}/home-manager-*-link 2>/dev/null | wc -l ` -lt 2 ];
-    # then
-    #     return 0
-    # fi
     ${pkgs.nvd}/bin/nvd diff $(/usr/bin/ls -d1v /nix/var/nix/profiles/per-user/${config.home.username}/home-manager-*-link | tail -2)
   '';
 
   # Raw configuration files
   home.file.".config/hstr/config".source = ./home/.config/hstr/config;
+
+  targets.genericLinux.enable = true;
 
   home.packages = with pkgs; [
     # Rust CLI tools
@@ -38,6 +35,7 @@
     bottom
     dua
     fd
+    ripgrep
 
     htop
     wtf
@@ -53,6 +51,7 @@
   programs.man.enable = false;
 
   programs.zoxide.enable = true;
+  programs.zathura.enable = true;
 
   programs.exa = {
     enable = true;
@@ -117,6 +116,8 @@
 
       # Alacritty bash completion
       source ~/.bash_completion/alacritty
+
+      export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels''${NIX_PATH:+:$NIX_PATH}
     '';
   };
 
