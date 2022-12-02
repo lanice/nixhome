@@ -19,13 +19,42 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # Some bug with locals: https://github.com/nix-community/home-manager/issues/432#issuecomment-434577486
+  # Some bug with locales: https://github.com/nix-community/home-manager/issues/432#issuecomment-434577486
   programs.man.enable = false;
 
   # TODO: Move this into programs.bash = { ... } See example: https://github.com/burke/b/blob/master/etc/nix/home.nix
   home.sessionVariables = rec {
     EDITOR = "vim";
   };
+
+  home.packages = with pkgs; [
+    # Rust CLI tools
+    bat
+    bottom
+    dua
+    exa
+    fd
+
+    htop
+    wtf
+    lazygit
+  ];
+
+  # programs.exa = {
+  #   enable = true;
+  #   enableAliases = true;
+  # };
+
+  # programs.zoxide = {
+  #   enable = true;
+  # };
+
+  # programs.bash = {
+  #   enable = true;
+
+  #   historySize = 10000;
+  #   historyFileSize = 10000;
+  # };
 
   programs.neovim = {
     enable = true;
@@ -36,10 +65,6 @@
       gruvbox
     ];
   };
-
-  # programs.bash = {
-  #   enable = true;
-  # };
 
   programs.git = {
     enable = true;
@@ -72,4 +97,5 @@
   home.file.".profile".source = ./home/.profile;
   home.file.".bashrc".source = ./home/.bashrc;
   home.file.".bash_aliases".source = ./home/.bash_aliases;
+  home.file.".hstr".source = ./home/.hstr;
 }
