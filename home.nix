@@ -25,7 +25,7 @@
   '';
 
   # Raw configuration files
-  home.file.".config/hstr/config".source = ./home/.config/hstr/config;
+  # home.file."<file-in-home>".source = <path-to-file>;
 
   targets.genericLinux.enable = true;
 
@@ -52,6 +52,8 @@
 
   programs.zoxide.enable = true;
   programs.zathura.enable = true;
+  programs.mcfly.enable = true;
+  programs.navi.enable = true;
 
   programs.exa = {
     enable = true;
@@ -69,6 +71,8 @@
 
     sessionVariables = {
       EDITOR = "vim";
+      MCFLY_RESULTS = 42;
+      MCFLY_FUZZY = 2;
     };
 
     shellAliases = {
@@ -184,7 +188,7 @@
     userEmail = "1871704+lanice@users.noreply.github.com";
 
     aliases = {
-      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%a │ n>%Creset' --abbrev-commit";
+      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
     };
 
     delta = {
