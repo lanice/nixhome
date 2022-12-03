@@ -19,6 +19,3 @@ alias gprf='git pull --rebase && git forbranch'
 alias awsume='. awsume'
 
 alias at='alacritty-themes'
-
-alias frontend='yarn watch:webpack'
-alias 5etools='( pushd /media/lanice/DriveOfHolding/5etools && gp && npm run serve:dev && popd )'

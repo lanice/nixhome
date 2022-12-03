@@ -89,10 +89,6 @@
       awsume = ". awsume";
 
       at = "alacritty-themes";
-
-      # TODO: Move that stuff elsewhere
-      frontend = "yarn watch:webpack";
-      "5etools" = "( pushd /media/lanice/DriveOfHolding/5etools && gp && npm run serve:dev && popd )";
     };
 
     profileExtra = ''
@@ -100,6 +96,11 @@
     '';
 
     initExtra = ''
+      # Local stuff
+      if [ -f ~/.env ]; then
+          . ~/.env
+      fi
+
       if [ -f ~/.config/hstr/config ]; then
           . ~/.config/hstr/config
       fi
