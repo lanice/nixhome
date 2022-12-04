@@ -37,6 +37,7 @@ in {
 
   # Raw configuration files
   # home.file."<file-in-home>".source = <path-to-file>;
+  home.file.".config/alacritty/alacritty.yml".source = .config/alacritty/alacritty.yml;
 
   targets.genericLinux.enable = true;
 
