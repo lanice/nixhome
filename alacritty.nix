@@ -1,6 +1,18 @@
-{...}: {
+{pkgs, ...}: let
+  alacritty-wrapped = pkgs.symlinkJoin {
+    name = "alacritty";
+    paths = [
+      (pkgs.writeShellScriptBin "alacritty"
+        ''
+          ${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel ${pkgs.alacritty}/bin/alacritty
+        '')
+      pkgs.alacritty
+    ];
+  };
+in {
   programs.alacritty = {
-    enable = false;
+    enable = true;
+    package = alacritty-wrapped;
     settings = {
       window = {
         dimensions = {
@@ -12,6 +24,7 @@
           y = 2;
         };
         dynamic_padding = true;
+        decorations_theme_variant = "dark";
       };
       font = {
         normal = {

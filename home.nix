@@ -37,7 +37,7 @@ in {
 
   # Raw configuration files
   # home.file."<file-in-home>".source = <path-to-file>;
-  home.file.".config/alacritty/alacritty.yml".source = .config/alacritty/alacritty.yml;
+  # home.file.".config/alacritty/alacritty.yml".source = .config/alacritty/alacritty.yml;
 
   targets.genericLinux.enable = true;
 
@@ -61,8 +61,6 @@ in {
 
     obsidian
     spotify
-
-    # tdesktop # Telegram
 
     telegram-wrapped
 
@@ -116,7 +114,7 @@ in {
       cat = "bat";
       hm = "home-manager";
       hms = "home-manager switch";
-      # hmf = "home-manager switch --flake ${builtins.getEnv "PWD"}";
+      hmf = "home-manager switch --flake $HOME/nixhome/";
 
       # Git
       gs = "git status";
@@ -185,7 +183,7 @@ in {
       };
 
       character = {
-        success_symbol = "[❯](bold blue)";
+        success_symbol = "[❯](bold green)";
         error_symbol = "[✗](bold red)";
       };
 
