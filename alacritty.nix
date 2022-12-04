@@ -1,13 +1,8 @@
 {pkgs, ...}: let
-  alacritty-wrapped = pkgs.symlinkJoin {
+  alacritty-wrapped = import ./nixGLWrapper.nix {
+    inherit pkgs;
+    targetPkg = pkgs.alacritty;
     name = "alacritty";
-    paths = [
-      (pkgs.writeShellScriptBin "alacritty"
-        ''
-          ${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel ${pkgs.alacritty}/bin/alacritty
-        '')
-      pkgs.alacritty
-    ];
   };
 in {
   programs.alacritty = {
