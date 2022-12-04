@@ -1,8 +1,19 @@
 {
   config,
   pkgs,
+  lib,
   ...
-}: {
+}: let
+  telegram-wrapped = import ./telegram.nix {inherit pkgs;};
+in {
+  # See https://github.com/nix-community/home-manager/issues/2942
+  # nixpkgs.config.allowUnfreePredicate = _: true;
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "obsidian"
+      "spotify"
+    ];
+
   imports = [./alacritty.nix];
 
   # Home Manager needs a bit of information about you and the
@@ -37,12 +48,26 @@
     fd
     ripgrep
 
+    # nixgl.nixGL
+    nixgl.nixGLIntel
+    # nixgl.nixVulkanIntel
+    # nixgl.nixGLNvidia
+    # nixgl.nixGLNvidiaBumblebee
+
     htop
     wtf
     lazygit
 
+    obsidian
+    spotify
+
+    # tdesktop # Telegram
+
+    telegram-wrapped
+
     alejandra # Nix formatter
   ];
+  # home.packages.telegram-wrapped.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -58,6 +83,16 @@
   programs.exa = {
     enable = true;
     enableAliases = true; # ls,ll,la,lt,lla
+  };
+
+  programs.zsh = {
+    enable = true;
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = ["git"];
+      theme = "robbyrussell";
+    };
   };
 
   programs.bash = {
@@ -80,6 +115,7 @@
       cat = "bat";
       hm = "home-manager";
       hms = "home-manager switch";
+      # hmf = "home-manager switch --flake ${builtins.getEnv "PWD"}";
 
       # Git
       gs = "git status";
@@ -121,13 +157,12 @@
 
       # Alacritty bash completion
       source ~/.bash_completion/alacritty
-
-      export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels''${NIX_PATH:+:$NIX_PATH}
     '';
   };
 
   programs.starship = {
     enable = true;
+    enableZshIntegration = false;
     settings = {
       add_newline = false;
       line_break.disabled = true;
