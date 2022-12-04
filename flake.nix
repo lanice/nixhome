@@ -8,9 +8,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
+    nixgl,
     nixpkgs,
     home-manager,
     ...
@@ -23,7 +28,14 @@
 
       # Specify your home configuration modules here, for example,
       # the path to your home.nix.
-      modules = [./home.nix];
+      modules = [
+        ({
+          config,
+          pkgs,
+          ...
+        }: {nixpkgs.overlays = [nixgl.overlay];})
+        ./home.nix
+      ];
 
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
