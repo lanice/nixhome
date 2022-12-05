@@ -13,6 +13,8 @@ in {
     builtins.elem (lib.getName pkg) [
       "obsidian"
       "spotify"
+      "google-chrome"
+      "sublime-merge"
     ];
 
   imports = [./alacritty.nix];
@@ -60,12 +62,17 @@ in {
     wtf
     lazygit
 
+    sublime-merge
+
     obsidian
     spotify
+    google-chrome
 
     telegram-wrapped
     whatsapp-wrapped
     element-desktop
+
+    bitwarden
 
     alejandra # Nix formatter
   ];
