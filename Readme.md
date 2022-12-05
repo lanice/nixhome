@@ -1,19 +1,25 @@
 # nixhome
 
-Bootstrap:
+## Home Manager Configuration
 
-```console
-# clone this repo to ~/nixhome
-ln -s ~/nixhome ~/.config/nixpkgs
-cd ~/nixhome
-nix build --extra-experimental-features "nix-command flakes" .#homeConfigurations.lanice.activationPackage
+To build the home configuration:
+
+```shell
+nix build "github:lanice/nixhome#homeConfigurations.lanice.activationPackage"
 ./result/activate
 ```
 
-Afterwards:
+To create a local copy and adjust it:
 
-```console
+```shell
+git clone https://github.com/lanice/nixhome.git
+cd nixhome
+nix build .#homeConfigurations.lanice.activationPackage
+./result/activate
+```
+
+After activating the config the first time, it can be rebuilt using:
+
+```shell
 home-manager switch --flake ~/nixhome
-# aliased to
-hms
 ```
