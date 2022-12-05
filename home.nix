@@ -70,6 +70,11 @@ in {
     alejandra # Nix formatter
   ];
 
+  home.sessionVariables = {
+    EDITOR = "vim";
+    MCFLY_RESULTS = 42;
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -78,7 +83,10 @@ in {
 
   programs.zoxide.enable = true;
   programs.zathura.enable = true;
-  programs.mcfly.enable = true;
+  programs.mcfly = {
+    enable = true;
+    fuzzySearchFactor = 2;
+  };
   programs.navi.enable = true;
 
   programs.exa = {
@@ -105,11 +113,7 @@ in {
 
     shellOptions = ["histappend" "checkwinsize" "extglob" "globstar" "checkjobs"];
 
-    sessionVariables = {
-      EDITOR = "vim";
-      MCFLY_RESULTS = 42;
-      MCFLY_FUZZY = 2;
-    };
+    # sessionVariables = {};
 
     shellAliases = {
       lld = "exa -alF --group-directories-first"; # ls,ll,la,lt,lla - set above (programs.exa.enableAliases)
