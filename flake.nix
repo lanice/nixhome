@@ -22,6 +22,7 @@
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    channelsModule = import ./channels.nix {inherit nixpkgs;};
   in {
     homeConfigurations.lanice = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -34,6 +35,7 @@
           pkgs,
           ...
         }: {nixpkgs.overlays = [nixgl.overlay];})
+        channelsModule
         ./home.nix
       ];
 
