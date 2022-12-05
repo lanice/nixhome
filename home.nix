@@ -50,7 +50,7 @@ in {
     ripgrep
 
     # nixgl.nixGL
-    nixgl.nixGLIntel
+    # nixgl.nixGLIntel
     # nixgl.nixVulkanIntel
     # nixgl.nixGLNvidia
     # nixgl.nixGLNvidiaBumblebee
@@ -165,7 +165,6 @@ in {
     settings = {
       add_newline = false;
       line_break.disabled = true;
-      status.disabled = false;
       sudo.disabled = false;
 
       aws.disabled = true;
@@ -185,6 +184,13 @@ in {
       character = {
         success_symbol = "[❯](bold green)";
         error_symbol = "[✗](bold red)";
+      };
+
+      shlvl = {
+        disabled = false;
+        threshold = 1;
+        # symbol = " ";
+        symbol = " ";
       };
 
       git_branch.symbol = " ";
