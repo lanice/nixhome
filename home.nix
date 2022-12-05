@@ -5,6 +5,7 @@
   ...
 }: let
   telegram-wrapped = import ./telegram.nix {inherit pkgs;};
+  whatsapp-wrapped = import ./whatsapp.nix {inherit pkgs;};
 in {
   # See https://github.com/nix-community/home-manager/issues/2942
   # nixpkgs.config.allowUnfreePredicate = _: true;
@@ -63,10 +64,11 @@ in {
     spotify
 
     telegram-wrapped
+    whatsapp-wrapped
+    element-desktop
 
     alejandra # Nix formatter
   ];
-  # home.packages.telegram-wrapped.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -190,7 +192,8 @@ in {
         disabled = false;
         threshold = 1;
         # symbol = " ";
-        symbol = " ";
+        # symbol = " ";
+        symbol = "ﰬ";
       };
 
       git_branch.symbol = " ";
