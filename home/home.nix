@@ -141,8 +141,7 @@ in {
       lld = "exa -alF --group-directories-first"; # ls,ll,la,lt,lla - set above (programs.exa.enableAliases)
       cat = "bat";
       hm = "home-manager";
-      hms = "home-manager switch";
-      hmf = "home-manager switch --flake $HOME/nixhome/";
+      hms = "home-manager switch --flake $HOME/nixhome/";
 
       # Git
       gs = "git status";
