@@ -4,8 +4,8 @@
   lib,
   ...
 }: let
-  telegram-wrapped = import ./telegram.nix {inherit pkgs;};
-  whatsapp-wrapped = import ./whatsapp.nix {inherit pkgs;};
+  telegram-wrapped = import ./programs/telegram.nix {inherit pkgs;};
+  whatsapp-wrapped = import ./programs/whatsapp.nix {inherit pkgs;};
 in {
   # See https://github.com/nix-community/home-manager/issues/2942
   # nixpkgs.config.allowUnfreePredicate = _: true;
@@ -17,7 +17,7 @@ in {
       "sublime-merge"
     ];
 
-  imports = [./alacritty.nix];
+  imports = [./programs/alacritty.nix];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -40,7 +40,7 @@ in {
 
   # Raw configuration files
   # home.file."<file-in-home>".source = <path-to-file>;
-  # home.file.".config/alacritty/alacritty.yml".source = .config/alacritty/alacritty.yml;
+  home.file.".config/nix/nix.conf".source = .config/nix/nix.conf;
 
   targets.genericLinux.enable = true;
 

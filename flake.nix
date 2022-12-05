@@ -22,8 +22,8 @@
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    channelsModule = import ./channels.nix {inherit nixpkgs;};
-    nixGLOverlay = import ./overlay.nix {package = nixgl;};
+    nixGLOverlay = import ./misc/overlay.nix {package = nixgl;};
+    channelsModule = import ./misc/channels.nix {inherit nixpkgs;};
   in {
     homeConfigurations.lanice = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -31,9 +31,9 @@
       # Specify your home configuration modules here, for example,
       # the path to your home.nix.
       modules = [
+        ./home/home.nix
         nixGLOverlay
         channelsModule
-        ./home.nix
       ];
 
       # Optionally use extraSpecialArgs
