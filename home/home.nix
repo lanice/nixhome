@@ -44,6 +44,8 @@ in {
 
   targets.genericLinux.enable = true;
 
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     # Rust CLI tools
     bat
@@ -57,6 +59,8 @@ in {
     # nixgl.nixVulkanIntel
     # nixgl.nixGLNvidia
     # nixgl.nixGLNvidiaBumblebee
+
+    (pkgs.nerdfonts.override {fonts = ["Go-Mono"];}) # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
 
     htop
     wtf
