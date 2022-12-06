@@ -184,9 +184,6 @@ in {
       if [ -f ~/.kialo_profile ]; then
           . ~/.kialo_profile
       fi
-
-      # Alacritty bash completion
-      source ~/.bash_completion/alacritty
     '';
   };
 
