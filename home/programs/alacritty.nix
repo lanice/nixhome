@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  alacritty-wrapped = import ./nixGLWrapper.nix {
+  alacritty-wrapped = import ./nixGL/nixGLWrapper.nix {
     inherit pkgs;
     targetPkg = pkgs.alacritty;
     name = "alacritty";

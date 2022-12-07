@@ -4,8 +4,9 @@
   lib,
   ...
 }: let
-  telegram-wrapped = import ./programs/telegram.nix {inherit pkgs;};
-  whatsapp-wrapped = import ./programs/whatsapp.nix {inherit pkgs;};
+  telegram-wrapped = import ./programs/nixGL/telegram.nix {inherit pkgs;};
+  whatsapp-wrapped = import ./programs/nixGL/whatsapp.nix {inherit pkgs;};
+  nerdfont-overrides = pkgs.nerdfonts.override {fonts = ["Go-Mono"];}; # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
 in {
   # See https://github.com/nix-community/home-manager/issues/2942
   # nixpkgs.config.allowUnfreePredicate = _: true;
@@ -16,8 +17,6 @@ in {
       "google-chrome"
       "sublime-merge"
     ];
-
-  imports = [./programs/alacritty.nix];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -46,6 +45,11 @@ in {
 
   fonts.fontconfig.enable = true;
 
+  home.sessionVariables = {
+    EDITOR = "vim";
+    MCFLY_RESULTS = 42;
+  };
+
   home.packages = with pkgs; [
     # Rust CLI tools
     bat
@@ -60,7 +64,7 @@ in {
     # nixgl.nixGLNvidia
     # nixgl.nixGLNvidiaBumblebee
 
-    (pkgs.nerdfonts.override {fonts = ["Go-Mono"];}) # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
+    nerdfont-overrides
 
     htop
     wtf
@@ -81,10 +85,7 @@ in {
     alejandra # Nix formatter
   ];
 
-  home.sessionVariables = {
-    EDITOR = "vim";
-    MCFLY_RESULTS = 42;
-  };
+  imports = [./programs];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -105,131 +106,6 @@ in {
     enableAliases = true; # ls,ll,la,lt,lla
   };
 
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "colored-man-pages"
-        "command-not-found"
-        "docker"
-        "git"
-        "npm"
-        "pep8"
-        "pip"
-        "pyenv"
-        "python"
-        "sudo"
-        "systemd"
-        "ubuntu"
-      ];
-      theme = "robbyrussell";
-    };
-  };
-
-  programs.bash = {
-    enable = true;
-
-    historySize = 10000;
-    historyFileSize = 10000;
-    historyControl = ["ignorespace"];
-
-    shellOptions = ["histappend" "checkwinsize" "extglob" "globstar" "checkjobs"];
-
-    # sessionVariables = {};
-
-    shellAliases = {
-      lld = "exa -alF --group-directories-first"; # ls,ll,la,lt,lla - set above (programs.exa.enableAliases)
-      cat = "bat";
-      hm = "home-manager";
-      hms = "home-manager switch --flake $HOME/nixhome/";
-
-      # Git
-      gs = "git status";
-      gf = "git fetch";
-      gp = "git pull";
-      gd = "git diff";
-      gcan = "git commit --amend --no-edit";
-      gprf = "git pull --rebase && git forbranch";
-
-      # https://awsu.me/
-      awsume = ". awsume";
-
-      at = "alacritty-themes";
-    };
-
-    profileExtra = ''
-      . "$HOME/.cargo/env"
-    '';
-
-    initExtra = ''
-      # Local stuff
-      if [ -f ~/.env ]; then
-          . ~/.env
-      fi
-
-      if [ -f ~/.config/hstr/config ]; then
-          . ~/.config/hstr/config
-      fi
-
-      # NVM
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-      # Work
-      if [ -f ~/.kialo_profile ]; then
-          . ~/.kialo_profile
-      fi
-    '';
-  };
-
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = false;
-    settings = {
-      add_newline = false;
-      line_break.disabled = true;
-      sudo.disabled = false;
-
-      aws.disabled = true;
-      nodejs.disabled = true;
-      package.disabled = true;
-
-      memory_usage = {
-        disabled = false;
-        symbol = " ";
-      };
-
-      rust = {
-        symbol = " ";
-        style = "bold #FF6600";
-      };
-
-      character = {
-        success_symbol = "[❯](bold green)";
-        error_symbol = "[✗](bold red)";
-      };
-
-      shlvl = {
-        disabled = false;
-        threshold = 1;
-        # symbol = " ";
-        # symbol = " ";
-        symbol = "ﰬ";
-      };
-
-      git_branch.symbol = " ";
-      python.symbol = " ";
-      golang.symbol = " ";
-      docker_context.symbol = " ";
-      java.symbol = " ";
-    };
-  };
-
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -248,32 +124,6 @@ in {
         use_pager = false;
       };
       updates = {auto_update = true;};
-    };
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "Leander Neiß";
-    userEmail = "1871704+lanice@users.noreply.github.com";
-
-    aliases = {
-      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-    };
-
-    delta = {
-      enable = true;
-      options = {
-        navigate = true;
-        line-numbers = true;
-        side-by-side = true;
-        syntax-theme = "Monokai Extended Bright";
-      };
-    };
-
-    extraConfig = {
-      init.defaultBranch = "main";
-      merge.conflictstyle = "diff3";
-      diff.colorMoved = "default";
     };
   };
 }
