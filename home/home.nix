@@ -8,6 +8,10 @@
   whatsapp-wrapped = import ./programs/nixGL/whatsapp.nix {inherit pkgs;};
   nerdfont-overrides = pkgs.nerdfonts.override {fonts = ["Go-Mono"];}; # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
 in {
+  home.username = "lanice";
+  home.homeDirectory = "/home/lanice";
+  home.stateVersion = "22.05";
+
   # See https://github.com/nix-community/home-manager/issues/2942
   # nixpkgs.config.allowUnfreePredicate = _: true;
   nixpkgs.config.allowUnfreePredicate = pkg:
@@ -18,28 +22,12 @@ in {
       "sublime-merge"
     ];
 
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = "lanice";
-  home.homeDirectory = "/home/lanice";
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "22.05";
-
   home.activation.report-changes = config.lib.dag.entryAnywhere ''
     ${pkgs.nvd}/bin/nvd diff $(/usr/bin/ls -d1v /nix/var/nix/profiles/per-user/${config.home.username}/home-manager-*-link | tail -2)
   '';
 
   # Raw configuration files
   # home.file."<file-in-home>".source = <path-to-file>;
-  home.file.".config/nix/nix.conf".source = .config/nix/nix.conf;
 
   targets.genericLinux.enable = true;
 
