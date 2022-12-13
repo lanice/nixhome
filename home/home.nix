@@ -18,13 +18,16 @@ in {
     builtins.elem (lib.getName pkg) [
       "obsidian"
       "spotify"
-      "google-chrome"
       "sublime-merge"
+      "vscode"
+      "slack"
     ];
 
   home.activation.report-changes = config.lib.dag.entryAnywhere ''
     ${pkgs.nvd}/bin/nvd diff $(/usr/bin/ls -d1v /nix/var/nix/profiles/per-user/${config.home.username}/home-manager-*-link | tail -2)
   '';
+
+  imports = [./programs];
 
   # Raw configuration files
   # home.file."<file-in-home>".source = <path-to-file>;
@@ -58,11 +61,14 @@ in {
     wtf
     lazygit
 
+    yarn
+    # docker
     sublime-merge
+    vscode
+    slack
 
     obsidian
     spotify
-    google-chrome
 
     telegram-wrapped
     whatsapp-wrapped
@@ -72,8 +78,6 @@ in {
 
     alejandra # Nix formatter
   ];
-
-  imports = [./programs];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
