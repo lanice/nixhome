@@ -16,6 +16,8 @@
       hm = "home-manager";
       hms = "home-manager switch --flake $HOME/nixhome/";
 
+      aptade = "sudo apt update && sudo apt upgrade";
+
       # Git
       gs = "git status";
       gf = "git fetch";
