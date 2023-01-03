@@ -23,6 +23,7 @@ in {
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
     ./programs
+    ./features
   ];
 
   nixpkgs = {
@@ -51,7 +52,6 @@ in {
     };
   };
 
-  # TODO: Set your username
   home = {
     username = "lanice";
     homeDirectory = "/home/lanice";
@@ -77,7 +77,7 @@ in {
       ripgrep
 
       # nixgl.nixGL
-      # nixgl.nixGLIntel
+      nixgl.nixGLIntel
       # nixgl.nixVulkanIntel
       # nixgl.nixGLNvidia
       # nixgl.nixGLNvidiaBumblebee
@@ -150,6 +150,11 @@ in {
       };
       updates = {auto_update = true;};
     };
+  };
+
+  programs.rbw = {
+    enable = true;
+    settings.email = "leanderneiss+bitwarden@gmail.com";
   };
 
   # Nicely reload system units when changing configs
