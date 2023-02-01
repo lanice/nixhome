@@ -29,11 +29,11 @@ in {
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      # If you want to use overlays your own flake exports (from overlays dir):
-      # outputs.overlays.modifications
-      # outputs.overlays.additions
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.modifications
+      outputs.overlays.additions
 
-      # Or overlays exported from other flakes:
+      # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
@@ -84,9 +84,13 @@ in {
 
       nerdfont-overrides
 
+      gnome.gnome-tweaks # mainly for changing capslock to ctrl
+
       htop
       wtf
       lazygit
+
+      exif
 
       yarn
       # docker
@@ -96,6 +100,7 @@ in {
 
       obsidian
       spotify
+      gimp
 
       telegram-wrapped
       whatsapp-wrapped
@@ -107,13 +112,8 @@ in {
     ];
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
-
-  # Enable home-manager and git
+  # Enable home-manager
   programs.home-manager.enable = true;
-  programs.git.enable = true;
 
   # Some bug with locales: https://github.com/nix-community/home-manager/issues/432#issuecomment-434577486
   # programs.man.enable = false;

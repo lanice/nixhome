@@ -23,7 +23,9 @@
       gf = "git fetch";
       gp = "git pull";
       gd = "git diff";
+      gauc = "git add -u && git commit";
       gcan = "git commit --amend --no-edit";
+      gpr = "git pull --rebase";
       gprf = "git pull --rebase && git forbranch";
 
       # https://awsu.me/
