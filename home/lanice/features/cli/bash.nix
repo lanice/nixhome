@@ -16,7 +16,7 @@
       hm = "home-manager";
       hms = "home-manager switch --flake $HOME/nixhome/";
 
-      aptade = "sudo apt update && sudo apt upgrade";
+      aptgrade = "sudo apt update && sudo apt upgrade";
 
       # Git
       gs = "git status";
@@ -26,10 +26,7 @@
       gauc = "git add -u && git commit";
       gcan = "git commit --amend --no-edit";
       gpr = "git pull --rebase";
-      gprf = "git pull --rebase && git forbranch";
-
-      # https://awsu.me/
-      awsume = ". awsume";
+      # gprf moved to features/kialo
 
       at = "alacritty-themes";
     };
@@ -46,16 +43,6 @@
 
       if [ -f ~/.config/hstr/config ]; then
           . ~/.config/hstr/config
-      fi
-
-      # NVM
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-      # Work
-      if [ -f ~/.kialo_profile ]; then
-          . ~/.kialo_profile
       fi
     '';
   };

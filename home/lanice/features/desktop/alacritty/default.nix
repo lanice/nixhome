@@ -1,13 +1,6 @@
-{pkgs, ...}: let
-  alacritty-wrapped = import ./nixGL/nixGLWrapper.nix {
-    inherit pkgs;
-    targetPkg = pkgs.alacritty;
-    name = "alacritty";
-  };
-in {
+{
   programs.alacritty = {
     enable = true;
-    package = alacritty-wrapped;
     settings = {
       window = {
         dimensions = {

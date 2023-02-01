@@ -1,5 +1,19 @@
 # nixhome
 
+## Bootstrap
+
+Nix and Git installed. https://nixos.org/download.html
+
+Clone the repository, bootstrap into a flake-enabled nix-shell with home-manager enabled, and switch to
+
+```
+#####  echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+git clone https://github.com/lanice/nixhome.git
+cd nixhome
+nix-shell
+home-manager switch --flake .#<username@hostname>
+```
+
 ## Home Manager Configuration
 
 To build the home configuration:
