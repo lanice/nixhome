@@ -2,38 +2,22 @@
 
 ## Bootstrap
 
-Nix and Git installed. https://nixos.org/download.html
+**Prerequisites:** Nix (https://nixos.org/download.html) and Git installed.
 
-Clone the repository, bootstrap into a flake-enabled nix-shell with home-manager enabled, and switch to
+Clone the repository, then bootstrap into a flake-enabled nix-shell with home-manager enabled, and switch to your configuration:
 
 ```
-#####  echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 git clone https://github.com/lanice/nixhome.git
 cd nixhome
 nix-shell
 home-manager switch --flake .#<username@hostname>
 ```
 
-## Home Manager Configuration
+## From There
 
-To build the home configuration:
+To change home manager configurations, the bash alias `hms` maps to `home-manager switch --flake $HOME/nixhome/`.
 
-```shell
-nix build "github:lanice/nixhome#homeConfigurations.lanice.activationPackage"
-./result/activate
-```
+## My hosts
 
-To create a local copy and adjust it:
-
-```shell
-git clone https://github.com/lanice/nixhome.git
-cd nixhome
-nix build .#homeConfigurations.lanice.activationPackage
-./result/activate
-```
-
-After activating the config the first time, it can be rebuilt using:
-
-```shell
-home-manager switch --flake ~/nixhome
-```
+- `GreenGen5`: Lenovo ThinkPad P1 Gen5 - 32GB RAM, i7 12700H, RTX A1000 | **Ubuntu** | Gnome
+- `unstable`: Desktop PC - 16GB RAM, Xeon E3-1240, GTX 3060 | **Ubuntu** | Gnome
