@@ -1,5 +1,7 @@
 # nixhome
 
+This config is based on [Misterio77's starter config](https://github.com/Misterio77/nix-starter-configs) and their own [NixOS configuration](https://github.com/Misterio77/nix-config).
+
 ## Bootstrap
 
 **Prerequisites:** Nix (https://nixos.org/download.html) and Git installed.
@@ -13,7 +15,7 @@ nix-shell
 home-manager switch --flake .#<username@hostname>
 ```
 
-## From There
+## From there
 
 To change home manager configurations, the bash alias `hms` maps to `home-manager switch --flake $HOME/nixhome/`.
 

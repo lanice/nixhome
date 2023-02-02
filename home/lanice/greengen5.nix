@@ -1,11 +1,4 @@
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   telegram-wrapped = import ./features/desktop/nixGL/telegram.nix {inherit pkgs;};
   whatsapp-wrapped = import ./features/desktop/nixGL/whatsapp.nix {inherit pkgs;};
 in {
@@ -14,6 +7,7 @@ in {
     ./features/email
     ./features/kialo
     ./features/desktop/gnome
+    ./features/desktop/alacritty/alacritty-wrapped.nix
   ];
 
   home = {

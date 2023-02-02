@@ -1,16 +1,8 @@
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: let
-  telegram-wrapped = import ./features/desktop/nixGL/telegram.nix {inherit pkgs;};
-in {
+{pkgs, ...}: {
   imports = [
     ./global
     ./features/desktop/gnome
+    ./features/desktop/alacritty
   ];
 
   home = {
@@ -20,9 +12,7 @@ in {
     };
 
     packages = with pkgs; [
-      telegram-wrapped
+      telegram
     ];
   };
-
-  targets.genericLinux.enable = true;
 }

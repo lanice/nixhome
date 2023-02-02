@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
     ../common
-    ../alacritty/alacritty-wrapped.nix
   ];
 
   home.packages = with pkgs; [
