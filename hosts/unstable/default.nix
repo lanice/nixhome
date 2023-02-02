@@ -134,12 +134,25 @@
     lanice = {
       isNormalUser = true;
       description = "lanice";
+      shell = pkgs.bash;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
       extraGroups = ["networkmanager" "wheel"];
     };
+  };
+
+
+  environment = {
+    enableAllTerminfo = true;
+    sessionVariables.TERMINAL = [ "alacritty" ];
+    gnome.excludePackages = with pkgs; [
+      gnome-console
+    ];
+    systemPackages = with pkgs; [
+      nautilus-open-any-terminal
+    ];
   };
 
   # Enable automatic login for the user.
@@ -160,7 +173,10 @@
     passwordAuthentication = false;
   };
 
-  hardware.nvidia.prime.offload.enable = false;
+  hardware = {
+    opengl.enable = true;
+    nvidia.prime.offload.enable = false;
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "22.11";
