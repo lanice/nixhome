@@ -71,7 +71,7 @@
     nixosConfigurations = {
       unstable = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/unstable.nix];
+        modules = [./hosts/unstable];
       };
     };
 

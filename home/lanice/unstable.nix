@@ -12,7 +12,9 @@
     };
 
     packages = with pkgs; [
-      telegram
+      tdesktop
+      firefox
+      discord
     ];
   };
 }
