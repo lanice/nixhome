@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   imports = [
     ./global
     ./features/desktop/gnome
@@ -26,10 +26,13 @@
       ];
     };
 
-  "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-    binding = "<Control><Alt>t";
-    command = "alacritty";
-    name = "open-terminal";
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Control><Alt>t";
+      command = "alacritty";
+      name = "open-terminal";
+    };
   };
-  };
+
+  services.dropbox.enable = true;
+  services.dropbox.path = "${config.home.homeDirectory}/Dropbox";
 }
