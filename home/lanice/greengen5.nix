@@ -24,6 +24,8 @@ in {
       whatsapp-wrapped
       element-desktop
 
+      seafile-client
+
       # nixgl.nixGL
       nixgl.nixGLIntel
       # nixgl.nixVulkanIntel

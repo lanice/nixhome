@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./global
     ./features/desktop/gnome
@@ -16,6 +20,7 @@
       tdesktop
       firefox
       discord
+      seafile-client
     ];
   };
 

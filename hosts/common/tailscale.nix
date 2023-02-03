@@ -1,9 +1,12 @@
-{ config, pkgs, ... }: {
-
+{
+  config,
+  pkgs,
+  ...
+}: {
   # enable the tailscale daemon; this will do a variety of tasks:
   # 1. create the TUN network device
   # 2. setup some IP routes to route through the TUN
-  services.tailscale = { enable = true; };
+  services.tailscale = {enable = true;};
 
   # Let's open the UDP port with which the network is tunneled through
   # networking.firewall.allowedUDPPorts = [ 41641 ];
@@ -17,20 +20,19 @@
   # services.openssh.openFirewall = false;
 
   # Let's make the tailscale binary available to all users
-  environment.systemPackages = [ pkgs.tailscale ];
+  environment.systemPackages = [pkgs.tailscale];
 
   networking.firewall = {
     # enable the firewall
     enable = true;
 
     # always allow traffic from your Tailscale network
-    trustedInterfaces = [ "tailscale0" ];
+    trustedInterfaces = ["tailscale0"];
 
     # allow the Tailscale UDP port through the firewall
-    allowedUDPPorts = [ config.services.tailscale.port ];
+    allowedUDPPorts = [config.services.tailscale.port];
 
     # allow you to SSH in over the public internet
-    allowedTCPPorts = [ 22 ];
-};
-
+    allowedTCPPorts = [22];
+  };
 }
