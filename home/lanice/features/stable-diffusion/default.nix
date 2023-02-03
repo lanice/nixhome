@@ -1,5 +1,9 @@
 # Dependencies to launch AUTOMATIC1111's stable-diffusion-webui, taken from: https://github.com/virchau13/automatic1111-webui-nix
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   ldLibs = with pkgs; [
     stdenv.cc.cc.lib
     stdenv.cc
@@ -9,7 +13,11 @@
     glib
   ];
 in {
+  programs.bash.shellAliases.stable-diffusion = "${config.home.homeDirectory}/sd-launcher.sh";
+  programs.bash.shellAliases.stable-diffusion-admin = "SD_ADMIN=true ${config.home.homeDirectory}/sd-launcher.sh";
   home = {
+    file."sd-launcher.sh".source = ./sd-launcher.sh;
+
     sessionVariables = {
       LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ldLibs;
       CUDA_PATH = pkgs.cudatoolkit;
@@ -23,12 +31,28 @@ in {
       stdenv.cc
       ncurses5
       binutils
-      gitRepo gnupg autoconf curl
-      procps gnumake util-linux m4 gperf unzip
-      cudatoolkit linuxPackages.nvidia_x11
-      libGLU libGL
-      xorg.libXi xorg.libXmu freeglut
-      xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib
+      gitRepo
+      gnupg
+      autoconf
+      curl
+      procps
+      gnumake
+      util-linux
+      m4
+      gperf
+      unzip
+      cudatoolkit
+      linuxPackages.nvidia_x11
+      libGLU
+      libGL
+      xorg.libXi
+      xorg.libXmu
+      freeglut
+      xorg.libXext
+      xorg.libX11
+      xorg.libXv
+      xorg.libXrandr
+      zlib
       glib
     ];
   };
