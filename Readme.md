@@ -4,22 +4,40 @@ This config is based on [Misterio77's starter config](https://github.com/Misteri
 
 ## Bootstrap
 
-**Prerequisites:** Nix (https://nixos.org/download.html) and Git installed.
+### NixOS
 
-Clone the repository, then bootstrap into a flake-enabled nix-shell with home-manager enabled, and switch to your configuration:
+Execute `nix-shell -p git` to enter a nix shell with git available. From there:
 
-```
+```bash
 git clone https://github.com/lanice/nixhome.git
 cd nixhome
-nix-shell
-home-manager switch --flake .#<username@hostname>
+nix-shell # Enter the provided flake-enabled nix shell to bootstrap nixos and home-manager
+cp /etc/nixos/hardware-configuration.nix hosts/<hostname>/hardware-configuration.nix # Make sure you use the nixos-generated hardware config
+sudo nixos-rebuild switch --flake .#<hostname>
+home-manager switch --flake .#<username>@<hostname>
 ```
 
-## From there
+Reboot, done.
 
-To change home manager configurations, the bash alias `hms` maps to `home-manager switch --flake $HOME/nixhome/`.
+### Non-NixOS
 
-## My hosts
+**Prerequisites:** Nix (https://nixos.org/download.html) installed.
+
+Execute `nix-shell -p git` to enter a nix shell with git available. From there:
+
+```bash
+git clone https://github.com/lanice/nixhome.git
+cd nixhome
+nix-shell # Enter the provided flake-enabled nix shell to bootstrap home-manager
+home-manager switch --flake .#<username>@<hostname>
+```
+
+## Hosts
 
 - `GreenGen5`: Lenovo ThinkPad P1 Gen5 - 32GB RAM, i7 12700H, RTX A1000 | **Ubuntu** | Gnome
-- `unstable`: Desktop PC - 16GB RAM, Xeon E3-1240, GTX 3060 | **Ubuntu** | Gnome
+- `unstable`: Desktop PC - 16GB RAM, Xeon E3-1240, GTX 3060 | **NixOS** | Gnome
+
+## Useful aliases provided by the HM configuration
+
+- `hm` → `home-manager`
+- `hms` → `home-manager switch --flake $HOME/nixhome/`
