@@ -21,6 +21,7 @@
       firefox
       discord
       seafile-client
+      rustup
     ];
   };
 

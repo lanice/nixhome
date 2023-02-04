@@ -6,14 +6,14 @@ modelstargetdir="$basedir/models/Stable-diffusion"
 modelssourcedir="$HOME/sd-models"
 
 lntarget="$basedir/outputs/dropbox"
-dropboxbasedir="$HOME/Dropbox"
+sharingbasedir="$HOME/Seafile"
 
 if [ -z "${SD_ADMIN}" ]; then
-    lnsource="$dropboxbasedir/stable-diffusion"
+    lnsource="$sharingbasedir/stable-diffusion"
     port=9000
     declare -a models=("anime" "fantasy" "general" "inpaint" "realism" "stable-diffusion")
 else    
-    lnsource="$dropboxbasedir/sd"
+    lnsource="$sharingbasedir/sd"
     port=9001
     declare -a models=("admin" "anime" "fantasy" "general" "inpaint" "realism" "stable-diffusion")
 fi

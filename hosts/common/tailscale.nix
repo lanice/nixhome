@@ -17,7 +17,7 @@
   # This may cause a chicken & egg problem since you need to register a machine
   # first using `tailscale up`
   # Better to rely on EC2 SecurityGroups
-  # services.openssh.openFirewall = false;
+  services.openssh.openFirewall = false;
 
   # Let's make the tailscale binary available to all users
   environment.systemPackages = [pkgs.tailscale];

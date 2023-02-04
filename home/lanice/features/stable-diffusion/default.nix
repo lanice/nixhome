@@ -15,6 +15,7 @@
 in {
   programs.bash.shellAliases.stable-diffusion = "${config.home.homeDirectory}/sd-launcher.sh";
   programs.bash.shellAliases.stable-diffusion-admin = "SD_ADMIN=true ${config.home.homeDirectory}/sd-launcher.sh";
+
   home = {
     file."sd-launcher.sh".source = ./sd-launcher.sh;
 

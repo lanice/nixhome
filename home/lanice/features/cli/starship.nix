@@ -40,6 +40,8 @@
         symbol = "❄️";
       };
 
+      hostname.ssh_symbol = " ";
+
       git_branch.symbol = " ";
       python.symbol = " ";
       golang.symbol = " ";
