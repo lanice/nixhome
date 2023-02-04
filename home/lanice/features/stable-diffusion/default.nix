@@ -12,9 +12,30 @@
     libGL
     glib
   ];
+  sdLauncher = "${config.home.homeDirectory}/sd-launcher.sh";
 in {
-  programs.bash.shellAliases.stable-diffusion = "${config.home.homeDirectory}/sd-launcher.sh";
-  programs.bash.shellAliases.stable-diffusion-admin = "SD_ADMIN=true ${config.home.homeDirectory}/sd-launcher.sh";
+  programs.bash = {
+    shellAliases = {
+      stable-diffusion = "${sdLauncher}";
+      stable-diffusion-admin = "SD_ADMIN=true ${sdLauncher}";
+    };
+
+    profileExtra = ''
+      pushd ${config.home.homeDirectory}/docker
+      docker-compose up -d
+      popd
+      tmux start-server
+    '';
+  };
+
+  programs.tmux = {
+    enable = true;
+
+    extraConfig = ''
+      new-session
+      new-window ${sdLauncher}
+    '';
+  };
 
   home = {
     file."sd-launcher.sh".source = ./sd-launcher.sh;
