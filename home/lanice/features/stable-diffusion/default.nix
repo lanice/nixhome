@@ -22,9 +22,10 @@ in {
 
     profileExtra = ''
       pushd ${config.home.homeDirectory}/docker
-      docker-compose up -d
+      ${pkgs.docker-compose}/bin/docker-compose up -d
       popd
-      tmux start-server
+      ${pkgs.seafile-shared}/bin/seaf-cli start
+      ${pkgs.tmux}/bin/tmux start-server
     '';
   };
 

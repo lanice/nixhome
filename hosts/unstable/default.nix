@@ -158,9 +158,6 @@
       docker-compose
       nautilus-open-any-terminal
     ];
-    # loginShellInit = ''
-    #   exec ${pkgs.seafile-client}/bin/seafile-applet
-    # '';
   };
 
   # Enable automatic login for the user.
