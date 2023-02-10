@@ -77,6 +77,7 @@ in {
       xorg.libXrandr
       zlib
       glib
+      mariadb-embedded # for the Unprompted extension
     ];
   };
 }
