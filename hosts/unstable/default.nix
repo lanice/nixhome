@@ -80,6 +80,9 @@
     useOSProber = true;
   };
 
+  # Since we can't manually respond to a panic, just reboot.
+  boot.kernelParams = ["panic=1" "boot.panic_on_fail"];
+
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Berlin";
@@ -97,41 +100,11 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "intl";
-  };
+  # X11
+  services.xserver.enable = false;
 
   # Configure console keymap
   console.keyMap = "us-acentos";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
 
   users.users = {
     lanice = {
@@ -149,24 +122,11 @@
   virtualisation.docker.enable = true;
 
   environment = {
-    enableAllTerminfo = true;
-    sessionVariables.TERMINAL = ["alacritty"];
-    gnome.excludePackages = with pkgs; [
-      gnome-console
-    ];
-    systemPackages = with pkgs; [
-      docker-compose
-      nautilus-open-any-terminal
-    ];
+    systemPackages = with pkgs; [docker-compose];
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "lanice";
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+  services.getty.autologinUser = "lanice";
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.

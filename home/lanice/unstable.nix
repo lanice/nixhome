@@ -5,8 +5,8 @@
 }: {
   imports = [
     ./global
-    ./features/desktop/gnome
-    ./features/desktop/alacritty
+    # ./features/desktop/gnome
+    # ./features/desktop/alacritty
     ./features/stable-diffusion
   ];
 
@@ -17,26 +17,26 @@
     };
 
     packages = with pkgs; [
-      tdesktop
-      firefox
-      discord
+      # tdesktop
+      # firefox
+      # discord
       seafile-client
       seafile-shared
       rustup
     ];
   };
 
-  dconf.settings = {
-    "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-      ];
-    };
+  # dconf.settings = {
+  #   "org/gnome/settings-daemon/plugins/media-keys" = {
+  #     custom-keybindings = [
+  #       "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+  #     ];
+  #   };
 
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      binding = "<Control><Alt>t";
-      command = "alacritty";
-      name = "open-terminal";
-    };
-  };
+  #   "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+  #     binding = "<Control><Alt>t";
+  #     command = "alacritty";
+  #     name = "open-terminal";
+  #   };
+  # };
 }
