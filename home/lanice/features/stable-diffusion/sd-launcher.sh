@@ -31,4 +31,5 @@ do
     ln -s $modelssourcedir/$i $modelstargetdir/$i
 done
 
+pushd $basedir && git pull && popd
 . $script
