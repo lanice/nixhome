@@ -8,6 +8,9 @@ modelssourcedir="$HOME/sd-models"
 lntarget="$basedir/outputs/dropbox"
 sharingbasedir="$HOME/Seafile"
 
+inspirationlntarget="$basedir/extensions/stable-diffusion-webui-inspiration/inspiration"
+[ -e $inspirationlntarget ] && rm -r $inspirationlntarget
+
 if [ -z "${SD_ADMIN}" ]; then
     lnsource="$sharingbasedir/stable-diffusion"
     port=9000
@@ -16,6 +19,8 @@ else
     lnsource="$sharingbasedir/sd"
     port=9001
     declare -a models=("admin" "anime" "fantasy" "general" "inpaint" "realism" "stable-diffusion")
+
+    ln -s $sharingbasedir/sd-misc/inspiration $inspirationlntarget
 fi
 
 export COMMANDLINE_ARGS="--xformers --listen --port $port --enable-insecure-extension-access"
@@ -31,5 +36,7 @@ do
     ln -s $modelssourcedir/$i $modelstargetdir/$i
 done
 
-pushd $basedir && git pull && popd
+pushd $basedir
+git pull
 . $script
+popd
