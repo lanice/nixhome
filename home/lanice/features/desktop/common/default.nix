@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./font.nix
+    ./syncthing.nix
   ];
 
   home.packages = with pkgs; [
@@ -8,7 +9,7 @@
     vscode
 
     obsidian
-    spotify
+    # spotify
     gimp
 
     bitwarden
