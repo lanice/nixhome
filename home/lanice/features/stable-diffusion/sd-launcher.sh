@@ -6,7 +6,7 @@ modelstargetdir="$basedir/models/Stable-diffusion"
 modelssourcedir="$HOME/sd-models"
 
 lntarget="$basedir/outputs/dropbox"
-sharingbasedir="$HOME/Seafile"
+sharingbasedir="$HOME/Sync"
 
 inspirationlntarget="$basedir/extensions/stable-diffusion-webui-inspiration/inspiration"
 [ -e $inspirationlntarget ] && rm -r $inspirationlntarget

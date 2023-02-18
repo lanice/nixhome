@@ -140,6 +140,37 @@
 
   services.vscode-server.enable = true;
 
+  services.syncthing = {
+    enable = true;
+    user = "lanice";
+    dataDir = "/home/lanice/Sync"; # Default folder for new synced folders
+    configDir = "/home/lanice/.config/syncthing"; # Folder for Syncthing's settings and keys
+
+    overrideDevices = true; # overrides any devices added or deleted through the WebUI
+    overrideFolders = true; # overrides any folders added or deleted through the WebUI
+
+    guiAddress = "0.0.0.0:8384";
+
+    devices = {
+      "GreenGen5" = {id = "I6JCY3B-KPPCAXE-IMRWPTB-MGZKKHV-RZIVWRH-AZXD3HA-HM6Z4BL-VF2QVAH";};
+    };
+
+    folders = {
+      "sd" = {
+        path = "/home/lanice/Sync/sd"; # Which folder to add to Syncthing
+        devices = ["GreenGen5"]; # Which devices to share the folder with
+      };
+      "sd-misc" = {
+        path = "/home/lanice/Sync/sd-misc"; # Which folder to add to Syncthing
+        devices = ["GreenGen5"]; # Which devices to share the folder with
+      };
+      "stable-diffusion" = {
+        path = "/home/lanice/Sync/stable-diffusion"; # Which folder to add to Syncthing
+        devices = ["GreenGen5"]; # Which devices to share the folder with
+      };
+    };
+  };
+
   hardware = {
     opengl.enable = true;
     nvidia.prime.offload.enable = false;
