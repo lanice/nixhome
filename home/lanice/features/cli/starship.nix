@@ -28,7 +28,7 @@
 
       shlvl = {
         disabled = false;
-        threshold = 1;
+        # threshold = 1;
         # symbol = " ";
         # symbol = " ";
         symbol = "ﰬ";

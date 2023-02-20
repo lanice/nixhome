@@ -8,6 +8,7 @@ in {
     ./features/kialo
     ./features/desktop/gnome
     ./features/desktop/alacritty/alacritty-wrapped.nix
+    ./features/desktop/wezterm/wezterm-wrapped.nix
   ];
 
   home = {
@@ -23,6 +24,8 @@ in {
       telegram-wrapped
       whatsapp-wrapped
       element-desktop
+
+      skypeforlinux
 
       # nixgl.nixGL
       nixgl.nixGLIntel
