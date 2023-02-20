@@ -123,6 +123,7 @@
 
   environment = {
     systemPackages = with pkgs; [docker-compose];
+    enableAllTerminfo = true;
   };
 
   # Enable automatic login for the user.
