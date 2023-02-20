@@ -28,6 +28,7 @@
   programs.nix-index.enable = true;
   programs.zoxide.enable = true;
   programs.navi.enable = true;
+  programs.broot.enable = true; # A better way to navigate directories
 
   programs.mcfly = {
     enable = true;

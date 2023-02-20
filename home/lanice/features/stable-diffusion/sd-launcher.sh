@@ -9,21 +9,25 @@ lntarget="$basedir/outputs/dropbox"
 sharingbasedir="$HOME/Sync"
 
 inspirationlntarget="$basedir/extensions/stable-diffusion-webui-inspiration/inspiration"
-[ -e $inspirationlntarget ] && rm -r $inspirationlntarget
 
 if [ -z "${SD_ADMIN}" ]; then
     lnsource="$sharingbasedir/stable-diffusion"
     port=9000
     declare -a models=("anime" "fantasy" "general" "inpaint" "realism" "stable-diffusion")
+
+    inspirationlnsource="$HOME/Pictures/inspiration"
 else    
     lnsource="$sharingbasedir/sd"
     port=9001
     declare -a models=("admin" "anime" "fantasy" "general" "inpaint" "realism" "stable-diffusion")
 
-    ln -s $sharingbasedir/sd-misc/inspiration $inspirationlntarget
+    inspirationlnsource="$sharingbasedir/sd-misc/inspiration"
 fi
 
 export COMMANDLINE_ARGS="--xformers --listen --port $port --enable-insecure-extension-access"
+
+[ -e $inspirationlntarget ] && rm -r $inspirationlntarget
+ln -s $inspirationlnsource $inspirationlntarget
 
 [ -e $lntarget ] && rm $lntarget
 ln -s $lnsource $lntarget
