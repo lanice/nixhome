@@ -65,6 +65,15 @@
             top = 2,
             bottom = 2,
           },
+
+          keys = {
+            -- Turn off the default ALT-ENTER Hide action
+            {
+              key = 'Enter',
+              mods = 'ALT',
+              action = wezterm.action.DisableDefaultAssignment,
+            },
+          },
         }
       '';
   };
