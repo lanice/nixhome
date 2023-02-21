@@ -47,7 +47,8 @@
           font = wezterm.font("GoMono Nerd Font Mono"),
           font_size = 12.0,
           color_scheme = "Breeze Custom",
-          hide_tab_bar_if_only_one_tab = true,
+          hide_tab_bar_if_only_one_tab = false,
+          window_decorations = "RESIZE",
 
           set_environment_variables = {
             TERMINFO_DIRS = '/home/lanice/.nix-profile/share/terminfo',
@@ -67,7 +68,7 @@
           },
 
           keys = {
-            -- Turn off the default ALT-ENTER Hide action
+            -- Turn off the default ALT-ENTER action
             {
               key = 'Enter',
               mods = 'ALT',
