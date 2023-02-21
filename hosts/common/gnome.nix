@@ -18,7 +18,7 @@
 
   environment = {
     enableAllTerminfo = true;
-    sessionVariables.TERMINAL = ["alacritty"];
+    # sessionVariables.TERMINAL = ["alacritty"];
     # gnome.excludePackages = with pkgs; [
     #   gnome-console
     # ];

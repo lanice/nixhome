@@ -8,7 +8,7 @@ in {
     ./features/kialo
     ./features/desktop/gnome
     ./features/desktop/alacritty/alacritty-wrapped.nix
-    ./features/desktop/wezterm/wezterm-wrapped.nix
+    ./features/desktop/wezterm # only config files, installed via .deb package now because of nixGl issues
   ];
 
   home = {
