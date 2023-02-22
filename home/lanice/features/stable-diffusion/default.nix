@@ -1,4 +1,5 @@
 # Dependencies to launch AUTOMATIC1111's stable-diffusion-webui, taken from: https://github.com/virchau13/automatic1111-webui-nix
+# plus some extra config and helper script
 {
   pkgs,
   config,

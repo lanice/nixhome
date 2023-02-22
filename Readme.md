@@ -35,7 +35,7 @@ home-manager switch --flake .#<username>@<hostname>
 ## Hosts
 
 - `GreenGen5`: Lenovo ThinkPad P1 Gen5 - 32GB RAM, i7 12700H, RTX A1000 | **Ubuntu** | Gnome
-- `unstable`: Desktop PC - 16GB RAM, Xeon E3-1240, GTX 3060 | **NixOS** | Gnome
+- `unstable`: Desktop PC - 16GB RAM, Xeon E3-1240, GTX 3060 | **NixOS** | headless
 
 ## Useful aliases provided by the HM configuration
 
