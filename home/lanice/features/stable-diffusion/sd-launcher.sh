@@ -9,6 +9,7 @@ lntarget="$basedir/outputs/dropbox"
 sharingbasedir="$HOME/Sync"
 
 inspirationlntarget="$basedir/extensions/stable-diffusion-webui-inspiration/inspiration"
+wildcardslntarget="$basedir/extensions/sd-dynamic-prompts/wildcards"
 
 if [ -z "${SD_ADMIN}" ]; then
     lnsource="$sharingbasedir/stable-diffusion"
@@ -16,18 +17,23 @@ if [ -z "${SD_ADMIN}" ]; then
     declare -a models=("anime" "fantasy" "general" "inpaint" "realism" "stable-diffusion")
 
     inspirationlnsource="$HOME/Pictures/inspiration"
+    wildcardslnsource="$HOME/Pictures/wildcards"
 else    
     lnsource="$sharingbasedir/sd"
     port=9001
     declare -a models=("admin" "anime" "fantasy" "general" "inpaint" "realism" "stable-diffusion")
 
     inspirationlnsource="$sharingbasedir/sd-misc/inspiration"
+    wildcardslnsource="$sharingbasedir/sd-misc/wildcards"
 fi
 
 export COMMANDLINE_ARGS="--xformers --listen --port $port --enable-insecure-extension-access"
 
 [ -e $inspirationlntarget ] && rm -r $inspirationlntarget
 ln -s $inspirationlnsource $inspirationlntarget
+
+[ -e $wildcardslntarget ] && rm -r $wildcardslntarget
+ln -s $wildcardslnsource $wildcardslntarget
 
 [ -e $lntarget ] && rm $lntarget
 ln -s $lnsource $lntarget
