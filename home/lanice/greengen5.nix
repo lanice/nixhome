@@ -1,5 +1,4 @@
 {pkgs, ...}: let
-  telegram-wrapped = import ./features/desktop/nixGL/telegram.nix {inherit pkgs;};
   whatsapp-wrapped = import ./features/desktop/nixGL/whatsapp.nix {inherit pkgs;};
 in {
   imports = [
@@ -21,7 +20,6 @@ in {
     };
 
     packages = with pkgs; [
-      telegram-wrapped
       whatsapp-wrapped
       element-desktop
 
