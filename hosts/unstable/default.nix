@@ -122,7 +122,7 @@
   virtualisation.docker.enable = true;
 
   environment = {
-    systemPackages = with pkgs; [docker-compose];
+    systemPackages = with pkgs; [];
     enableAllTerminfo = true;
   };
 
