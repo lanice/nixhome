@@ -51,6 +51,8 @@
   };
 
   nix = {
+    package = pkgs.nixUnstable;
+
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
