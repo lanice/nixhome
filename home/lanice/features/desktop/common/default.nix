@@ -9,7 +9,7 @@
     vscode
 
     obsidian
-    # spotify
+    spotify
     gimp
 
     bitwarden

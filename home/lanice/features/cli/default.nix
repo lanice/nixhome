@@ -21,7 +21,9 @@
     wtf
     lazygit
 
-    yarn # Maybe move into separate 'webdev' feature
+    # Maybe move into separate 'webdev' feature
+    yarn
+    pscale
 
     alejandra # Nix formatter
   ];
