@@ -4,6 +4,8 @@ wezterm.add_to_config_reload_watch_list(wezterm.config_dir)
 return {
     color_scheme = "Breeze (Gogh)",
 
+    force_reverse_video_cursor = true,
+
     font = wezterm.font("GoMono Nerd Font Mono"),
     font_size = 12.0,
 

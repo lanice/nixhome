@@ -33,6 +33,10 @@
       # gprf moved to features/kialo
     };
 
+    functions = {
+      wh = "readlink -f (which $argv)";
+    };
+
     plugins = [
       {
         name = "foreign-env";

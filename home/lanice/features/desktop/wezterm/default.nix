@@ -11,4 +11,13 @@
       }
     '';
   };
+
+  programs.fish.functions = {
+    founderterms = ''
+      cd /home/lanice/dev/projects/founderbuddies
+      wezterm cli split-pane --right --cwd /home/lanice/dev/projects/founderbuddies
+      wezterm cli split-pane --bottom --cwd /home/lanice/dev/projects/founderbuddies
+      pscale connect founderbuddies dev --port 3309
+    '';
+  };
 }
