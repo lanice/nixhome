@@ -14,7 +14,7 @@
       options = {
         navigate = true;
         line-numbers = true;
-        side-by-side = true;
+        side-by-side = false;
         syntax-theme = "Monokai Extended Bright";
       };
     };

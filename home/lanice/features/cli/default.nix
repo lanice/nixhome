@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   imports = [
+    ./fish.nix
     ./bash.nix
     ./zsh.nix
     ./starship.nix
@@ -35,6 +36,12 @@
   programs.mcfly = {
     enable = true;
     fuzzySearchFactor = 2;
+  };
+
+  home.sessionVariables = {
+    MCFLY_RESULTS = 42;
+    MCFLY_FUZZY = 2;
+    MCFLY_KEY_SCHEME = "emacs";
   };
 
   programs.exa = {

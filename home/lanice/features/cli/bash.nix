@@ -8,15 +8,13 @@
 
     shellOptions = ["histappend" "checkwinsize" "extglob" "globstar" "checkjobs"];
 
-    # sessionVariables = {};
-
     shellAliases = {
-      lld = "exa -alF --group-directories-first"; # ls,ll,la,lt,lla - set above (programs.exa.enableAliases)
+      aptgrade = "sudo apt update && sudo apt upgrade";
+
+      lld = "exa -alF --group-directories-first"; # ls,ll,la,lt,lla - set with exa (programs.exa.enableAliases)
       cat = "bat";
       hm = "home-manager";
-      hms = "home-manager switch --flake $HOME/nixhome/";
-
-      aptgrade = "sudo apt update && sudo apt upgrade";
+      hms = "home-manager --flake . switch";
 
       # Git
       gs = "git status";
@@ -27,8 +25,6 @@
       gcan = "git commit --amend --no-edit";
       gpr = "git pull --rebase";
       # gprf moved to features/kialo
-
-      at = "alacritty-themes";
     };
 
     profileExtra = ''
@@ -39,10 +35,6 @@
       # Local stuff
       if [ -f ~/.env ]; then
           . ~/.env
-      fi
-
-      if [ -f ~/.config/hstr/config ]; then
-          . ~/.config/hstr/config
       fi
     '';
   };
