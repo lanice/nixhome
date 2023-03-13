@@ -18,6 +18,10 @@
       aptgrade = "sudo apt update && sudo apt upgrade";
 
       cat = "bat";
+      df = "duf";
+
+      zj = "zellij";
+
       hm = "home-manager";
       hms = "home-manager --flake . switch";
 
@@ -46,9 +50,9 @@
       fish_greeting = ''
         begin
             echo (date) " @ " (hostname)
-            echo
-            ${pkgs.fortune}/bin/fortune art goedel wisdom tao literature songs-poems paradoxum
-            echo
+            # echo
+            # ${pkgs.fortune}/bin/fortune art goedel wisdom tao literature songs-poems paradoxum
+            # echo
         end | ${pkgs.lolcat}/bin/lolcat
       '';
       wh = "readlink -f (which $argv)";

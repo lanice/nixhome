@@ -31,6 +31,11 @@
         symbol = "ﰬ";
       };
 
+      shell = {
+        disabled = false;
+        fish_indicator = "";
+      };
+
       nix_shell = {
         disabled = false;
         impure_msg = "";
@@ -44,6 +49,30 @@
       golang.symbol = " ";
       docker_context.symbol = " ";
       java.symbol = " ";
+
+      # right_format = "$git_branch";
+
+      custom = {
+        file_number = {
+          command = "find . -maxdepth 1 -type f -not -name '.DS_Store' | wc -l";
+          when = "exit 0"; # run always
+          symbol = " ";
+          description = "Number of files in the current working directory";
+          format = "[$symbol$output]($style) ";
+          style = "fg:yellow bg:black bold"; # terminus different
+        };
+
+        folder_number = {
+          command = "find . -maxdepth 1 -type d -not -name '.git' -not -name '.' | wc -l";
+          when = "exit 0";
+          symbol = " ";
+          description = "Number of folders in the current working directory";
+          format = "[$symbol$output]($style) ";
+          style = "fg:yellow bg:black bold"; # terminus different
+        };
+
+        # distrobox: https://github.com/starship/starship/discussions/1252#discussioncomment-2622328
+      };
     };
   };
 }

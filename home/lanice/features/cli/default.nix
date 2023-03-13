@@ -6,6 +6,7 @@
     ./starship.nix
     ./git.nix
     ./broot.nix
+    ./zellij.nix
   ];
 
   home.packages = with pkgs; [
@@ -17,6 +18,7 @@
     dua # Disk Usage Analyzer
     fd # Better find
     ripgrep # Better grep
+    duf # Better df
 
     htop
     wtf
