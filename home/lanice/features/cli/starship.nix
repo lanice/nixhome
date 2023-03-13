@@ -3,8 +3,8 @@
     enable = true;
     enableZshIntegration = false;
     settings = {
-      add_newline = false;
-      line_break.disabled = true;
+      add_newline = true;
+      line_break.disabled = false;
       sudo.disabled = false;
 
       aws.disabled = true;
@@ -28,9 +28,6 @@
 
       shlvl = {
         disabled = false;
-        # threshold = 1;
-        # symbol = " ";
-        # symbol = " ";
         symbol = "ﰬ";
       };
 

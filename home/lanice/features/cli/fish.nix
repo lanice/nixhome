@@ -30,6 +30,8 @@
       gcan = "git commit --amend --no-edit";
       gpr = "git pull --rebase";
       # gprf moved to features/kialo
+      gw = "git worktree";
+      gwa = "git worktree add";
 
       # exa
       ls = "exa";
@@ -41,7 +43,20 @@
     };
 
     functions = {
+      fish_greeting = ''
+        begin
+            echo (date) " @ " (hostname)
+            echo
+            ${pkgs.fortune}/bin/fortune art goedel wisdom tao literature songs-poems paradoxum
+            echo
+        end | ${pkgs.lolcat}/bin/lolcat
+      '';
       wh = "readlink -f (which $argv)";
+
+      update-wezterm = ''
+        curl -L0 https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb -o ${config.home.homeDirectory}/Downloads/wezterm-nightly.Ubuntu22.04.deb
+        sudo apt install -y ${config.home.homeDirectory}/Downloads/wezterm-nightly.Ubuntu22.04.deb
+      '';
     };
 
     plugins = [
