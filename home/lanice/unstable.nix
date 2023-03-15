@@ -20,6 +20,7 @@
       # firefox
       # discord
       rustup
+      distrobox
     ];
   };
 

@@ -21,6 +21,8 @@
       df = "duf";
 
       zj = "zellij";
+      db = "distrobox";
+      dbe = "distrobox enter";
 
       hm = "home-manager";
       hms = "home-manager --flake . switch";
@@ -55,6 +57,7 @@
             # echo
         end | ${pkgs.lolcat}/bin/lolcat
       '';
+
       wh = "readlink -f (which $argv)";
 
       update-wezterm = ''
