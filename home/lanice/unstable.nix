@@ -10,6 +10,8 @@
     ./features/stable-diffusion
   ];
 
+  programs.git.lfs.enable = true;
+
   home = {
     sessionVariables = {
       EDITOR = "vim";
