@@ -134,6 +134,7 @@
   };
 
   environment = {
+    shells = with pkgs; [fish];
     systemPackages = with pkgs; [];
     enableAllTerminfo = true;
   };

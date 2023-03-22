@@ -26,6 +26,18 @@ in {
     '';
   };
 
+  programs.fish = {
+    shellAliases = {
+      stable-diffusion = "${sdLauncher}";
+      stable-diffusion-admin = "SD_ADMIN=true ${sdLauncher}";
+    };
+
+    shellAbbrs = {
+      sd = "stable-diffusion";
+      sda = "stable-diffusion-admin";
+    };
+  };
+
   programs.tmux = {
     enable = true;
 
