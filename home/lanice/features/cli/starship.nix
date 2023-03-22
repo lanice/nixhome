@@ -59,7 +59,7 @@
           symbol = " ";
           description = "Number of files in the current working directory";
           format = "[$symbol$output]($style) ";
-          style = "fg:yellow bg:black bold"; # terminus different
+          style = "fg:yellow bold"; # terminus different
         };
 
         folder_number = {
@@ -68,7 +68,7 @@
           symbol = " ";
           description = "Number of folders in the current working directory";
           format = "[$symbol$output]($style) ";
-          style = "fg:yellow bg:black bold"; # terminus different
+          style = "fg:yellow bold"; # terminus different
         };
 
         # distrobox: https://github.com/starship/starship/discussions/1252#discussioncomment-2622328

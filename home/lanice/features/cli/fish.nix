@@ -26,6 +26,7 @@
 
       hm = "home-manager";
       hms = "home-manager --flake . switch";
+      nfu = "nix flake update";
 
       # Git
       gs = "git status";
