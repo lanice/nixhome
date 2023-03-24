@@ -24,6 +24,8 @@
       db = "distrobox";
       dbe = "distrobox enter";
 
+      sshu = "ssh -t unstable fish";
+
       hm = "home-manager";
       hms = "home-manager --flake . switch";
       nfu = "nix flake update";
