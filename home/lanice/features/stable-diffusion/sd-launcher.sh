@@ -27,7 +27,7 @@ else
     wildcardslnsource="$sharingbasedir/sd-misc/wildcards"
 fi
 
-export COMMANDLINE_ARGS="--xformers --listen --port $port --enable-insecure-extension-access"
+export COMMANDLINE_ARGS="--xformers --listen --port $port --enable-insecure-extension-access --api"
 
 [ -e $inspirationlntarget ] && rm -r $inspirationlntarget
 ln -s $inspirationlnsource $inspirationlntarget
