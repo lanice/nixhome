@@ -67,27 +67,27 @@ in {
           };
       };
 
-      #   sb3 = {
-      #     enable = true;
-      #     rsyncSSHKeys = [];
-      #     jvmOpts =
-      #       jvmOpts
-      #       + " "
-      #       + (concatStringsSep " " [
-      #         "-javaagent:log4jfix/Log4jPatcher-1.0.0.jar"
-      #         "@libraries/net/minecraftforge/forge/1.18.2-40.1.84/unix_args.txt"
-      #       ]);
-      #     jvmPackage = jre17;
-      #     jvmMaxAllocation = "6G";
-      #     jvmInitialAllocation = "2G";
-      #     serverConfig =
-      #       defaults
-      #       // {
-      #         server-port = 25573;
-      #         rcon-port = 25574;
-      #         motd = "Stoneblock 3";
-      #       };
-      #   };
+      atm8 = {
+        enable = false;
+        rsyncSSHKeys = [""];
+        jvmOpts =
+          jvmOpts
+          + " "
+          + (concatStringsSep " " [
+            "-javaagent:log4jfix/Log4jPatcher-1.0.0.jar"
+            "@libraries/net/minecraftforge/forge/1.19.2-43.2.6/unix_args.txt"
+          ]);
+        jvmPackage = jre17;
+        jvmMaxAllocation = "8G";
+        jvmInitialAllocation = "4G";
+        serverConfig =
+          defaults
+          // {
+            server-port = 25573;
+            rcon-port = 25574;
+            motd = "All the Mods 8 - ATM8";
+          };
+      };
     };
   };
 }

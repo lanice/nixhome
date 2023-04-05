@@ -27,7 +27,7 @@
   };
 
   programs.fish.shellAbbrs = {
-    mcjournal = "journalctl -fu mc-e2es.service | ${pkgs.ccze}/bin/ccze";
+    mcjournal = "journalctl -fu mc-atm8.service | ${pkgs.ccze}/bin/ccze";
   };
 
   # dconf.settings = {
