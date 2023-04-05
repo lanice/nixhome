@@ -26,6 +26,10 @@
     ];
   };
 
+  programs.fish.shellAbbrs = {
+    mcjournal = "journalctl -fu mc-e2es.service | ${pkgs.ccze}/bin/ccze";
+  };
+
   # dconf.settings = {
   #   "org/gnome/settings-daemon/plugins/media-keys" = {
   #     custom-keybindings = [

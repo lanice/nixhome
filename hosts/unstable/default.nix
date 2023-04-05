@@ -24,6 +24,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ../common/tailscale.nix
+    ../common/minecraft-servers.nix
   ];
 
   nixpkgs = {
@@ -66,6 +67,8 @@
       experimental-features = "nix-command flakes";
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
+
+      warn-dirty = false;
     };
 
     gc = {
