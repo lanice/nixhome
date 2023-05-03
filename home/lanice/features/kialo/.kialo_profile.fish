@@ -15,3 +15,5 @@ set -gx KIALO_ROOT $HOME/work/kialo
 set -gx KIALO_INITIALS ln
 set -gx KIALO_BACKEND_CONFIG $KIALO_ROOT/development/config/local/backend_config.yaml
 # source $KIALO_ROOT/documentation/tasks/shell-utilities.sh
+
+set -gx DOCKER_BUILDKIT 1
