@@ -22,7 +22,7 @@ in {
     };
 
     profileExtra = ''
-      ${pkgs.tmux}/bin/tmux start-server
+     # ${pkgs.tmux}/bin/tmux start-server
     '';
   };
 
