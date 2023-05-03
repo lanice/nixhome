@@ -24,6 +24,8 @@ in {
 
       skypeforlinux
 
+      rcon
+
       # nixgl.nixGL
       nixgl.nixGLIntel
       # nixgl.nixVulkanIntel
