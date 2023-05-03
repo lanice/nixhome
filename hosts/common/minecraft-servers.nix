@@ -68,7 +68,7 @@ in {
       };
 
       atm8 = {
-        enable = false;
+        enable = true;
         rsyncSSHKeys = [""];
         jvmOpts =
           jvmOpts
@@ -78,7 +78,7 @@ in {
             "@libraries/net/minecraftforge/forge/1.19.2-43.2.6/unix_args.txt"
           ]);
         jvmPackage = jre17;
-        jvmMaxAllocation = "8G";
+        jvmMaxAllocation = "12G";
         jvmInitialAllocation = "4G";
         serverConfig =
           defaults
@@ -86,6 +86,7 @@ in {
             server-port = 25573;
             rcon-port = 25574;
             motd = "All the Mods 8 - ATM8";
+            level-seed = "6269683411705152640";
           };
       };
     };

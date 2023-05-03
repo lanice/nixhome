@@ -23,11 +23,13 @@
       # discord
       rustup
       distrobox
+      multitail
+      ccze
     ];
   };
 
   programs.fish.shellAbbrs = {
-    mcjournal = "journalctl -fu mc-atm8.service | ${pkgs.ccze}/bin/ccze";
+    mcjournal = "journalctl -fu mc-atm8.service | ${pkgs.ccze}/bin/ccze -A";
   };
 
   # dconf.settings = {
