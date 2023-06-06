@@ -25,6 +25,7 @@
       distrobox
       multitail
       ccze
+      rcon
     ];
   };
 
