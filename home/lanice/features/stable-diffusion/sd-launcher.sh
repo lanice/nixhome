@@ -2,11 +2,11 @@
 basedir="$HOME/stable-diffusion-webui"
 script="$basedir/webui.sh"
 
-modelstargetdir="$basedir/models/Stable-diffusion"
-modelssourcedir="$HOME/sd-models"
-
 lntarget="$basedir/outputs/dropbox"
 sharingbasedir="$HOME/Sync"
+
+modelstargetdir="$basedir/models/Stable-diffusion"
+modelssourcedir="$sharingbasedir/models"
 
 inspirationlntarget="$basedir/extensions/stable-diffusion-webui-inspiration/inspiration"
 wildcardslntarget="$basedir/extensions/sd-dynamic-prompts/wildcards"
