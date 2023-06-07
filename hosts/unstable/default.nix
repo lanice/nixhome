@@ -182,6 +182,10 @@
         path = "/home/lanice/Sync/sd-misc"; # Which folder to add to Syncthing
         devices = ["GreenGen5"]; # Which devices to share the folder with
       };
+      "models" = {
+        path = "/home/lanice/Sync/models"; # Which folder to add to Syncthing
+        devices = ["GreenGen5"]; # Which devices to share the folder with
+      };
       "stable-diffusion" = {
         path = "/home/lanice/Sync/stable-diffusion"; # Which folder to add to Syncthing
         devices = ["GreenGen5" "Orange Laptop"]; # Which devices to share the folder with
