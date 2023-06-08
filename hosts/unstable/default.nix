@@ -16,7 +16,7 @@
     # Or modules from other flakes (such as nixos-hardware):
     inputs.hardware.nixosModules.common-cpu-intel
     inputs.hardware.nixosModules.common-gpu-nvidia
-    inputs.hardware.nixosModules.common-pc-hdd
+    inputs.hardware.nixosModules.common-pc-ssd
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
@@ -25,6 +25,7 @@
     ./hardware-configuration.nix
     ../common/tailscale.nix
     ../common/minecraft-servers.nix
+    # ../common/gnome.nix
   ];
 
   nixpkgs = {
@@ -78,12 +79,11 @@
   };
 
   networking.hostName = "unstable";
+  networking.interfaces.eno1.wakeOnLan.enable = true;
 
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/sdb";
-    useOSProber = true;
-  };
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # Since we can't manually respond to a panic, just reboot.
   boot.kernelParams = ["panic=1" "boot.panic_on_fail"];
@@ -199,5 +199,5 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 }
