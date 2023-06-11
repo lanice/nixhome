@@ -198,6 +198,29 @@
     nvidia.prime.offload.enable = false;
   };
 
+  systemd.services.shutdown-when-idle = {
+    path = [pkgs.rcon pkgs.gnugrep pkgs.systemd];
+    script = ''
+      noPlayers=$(${pkgs.rcon}/bin/rcon -s atm8 list | ${pkgs.gnugrep}/bin/grep "There are 0 of a max of 20 players online" || true)
+      sessions=$(${pkgs.systemd}/bin/loginctl show-user lanice --property=Sessions --value)
+      echo $noPlayers
+      if [[ -n "$noPlayers" ]]; then
+        echo "No player online."
+      fi
+      if [["$sessions" == "1" ]]; then
+        echo "No user connected via SSH."
+      fi
+      if [[ -n "$noPlayers" && "$sessions" == "1" ]]; then
+        echo "Shutting down."
+        shutdown -h now
+      fi
+      echo "DONE"
+    '';
+    serviceConfig.User = "root";
+    # startAt = "minutely";
+    startAt = "*-*-* *:0,30";
+  };
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
 }
