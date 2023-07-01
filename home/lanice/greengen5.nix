@@ -31,6 +31,8 @@ in {
       # nixgl.nixVulkanIntel
       # nixgl.nixGLNvidia
       # nixgl.nixGLNvidiaBumblebee
+
+      cachix
     ];
   };
 

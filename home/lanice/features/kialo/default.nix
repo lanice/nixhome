@@ -46,15 +46,11 @@
     # update development dependencies
     functions = {
       dependencies = ''
-        pushd $KIALO_ROOT/backend || exit 1
+        cd $KIALO_ROOT && source ${config.home.homeDirectory}/.virtualenvs/kialo/bin/activate.fish
         yarn
-        pip3 install -r requirements-dev.txt
-        rm -rf ./kialo/__pycache__
-        python setup.py develop
-        pushd $KIALO_ROOT/development/compose || exit 1
-        ./build.sh
-        popd || exit 1
-        popd || exit 1
+        yarn setup:backend
+        rm -rf backend/kialo/__pycache__
+        development/compose/build.sh
       '';
 
       nvm = ''

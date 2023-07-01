@@ -16,4 +16,6 @@ set -gx KIALO_INITIALS ln
 set -gx KIALO_BACKEND_CONFIG $KIALO_ROOT/development/config/local/backend_config.yaml
 # source $KIALO_ROOT/documentation/tasks/shell-utilities.sh
 
+fish_add_path -g $KIALO_ROOT/development/bin
+
 set -gx DOCKER_BUILDKIT 1
