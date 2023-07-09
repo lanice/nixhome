@@ -14,11 +14,14 @@
     glib
   ];
   sdLauncher = "${config.home.homeDirectory}/sd-launcher.sh";
+  sdnextLauncher = "${config.home.homeDirectory}/sdnext-launcher.sh";
 in {
   programs.bash = {
     shellAliases = {
       stable-diffusion = "${sdLauncher}";
       stable-diffusion-admin = "SD_ADMIN=true ${sdLauncher}";
+      sdnext = "${sdnextLauncher}";
+      sdnext-admin = "SD_ADMIN=true ${sdnextLauncher}";
     };
 
     profileExtra = ''
@@ -30,11 +33,13 @@ in {
     shellAliases = {
       stable-diffusion = "${sdLauncher}";
       stable-diffusion-admin = "SD_ADMIN=true ${sdLauncher}";
+      sdnext = "${sdnextLauncher}";
+      sdnext-admin = "SD_ADMIN=true ${sdnextLauncher}";
     };
 
     shellAbbrs = {
-      sd = "stable-diffusion";
-      sda = "stable-diffusion-admin";
+      sd = "sdnext";
+      sda = "sdnext-admin";
     };
   };
 
@@ -49,6 +54,7 @@ in {
 
   home = {
     file."sd-launcher.sh".source = ./sd-launcher.sh;
+    file."sdnext-launcher.sh".source = ./sdnext-launcher.sh;
 
     sessionVariables = {
       LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ldLibs;

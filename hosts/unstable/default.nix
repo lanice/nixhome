@@ -218,7 +218,8 @@
     '';
     serviceConfig.User = "root";
     # startAt = "minutely";
-    startAt = "*-*-* *:0,30";
+    # startAt = "*-*-* *:0,30";
+    startAt = "*-*-* *:0";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
