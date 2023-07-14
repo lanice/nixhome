@@ -12,7 +12,7 @@
           y = 2;
         };
         dynamic_padding = true;
-        decorations_theme_variant = "dark";
+        decorations_theme_variant = "Dark";
       };
       font = {
         normal = {
