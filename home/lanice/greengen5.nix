@@ -2,10 +2,11 @@
   whatsapp-wrapped = import ./features/desktop/nixGL/whatsapp.nix {inherit pkgs;};
 in {
   imports = [
-    ./global
+    ./global # includes features/cli/default.nix
     ./features/email
     ./features/kialo
     ./features/desktop/gnome
+    ./features/cli/latex.nix
     ./features/desktop/alacritty/alacritty-wrapped.nix
     ./features/desktop/wezterm # only config files, installed via .deb package now because of nixGl issues
   ];
