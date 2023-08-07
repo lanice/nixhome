@@ -48,7 +48,7 @@ in {
 
     extraConfig = ''
       new-session
-      new-window ${sdLauncher}
+      new-window ${sdnextLauncher}
     '';
   };
 

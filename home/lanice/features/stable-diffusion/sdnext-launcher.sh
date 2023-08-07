@@ -8,7 +8,7 @@ sharingbasedir="$HOME/Sync"
 modelstargetdir="$basedir/models/Stable-diffusion"
 modelssourcedir="$sharingbasedir/models"
 
-controlnettarget="$basedir/extensions-builtin/sd-webui-controlnet/models"
+controlnettarget="$basedir/models/ControlNet"
 controlnetsource="$modelssourcedir/controlnet"
 
 embeddingstarget="$basedir/models/embeddings"
