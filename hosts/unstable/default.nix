@@ -27,6 +27,7 @@
     ../common/minecraft-servers.nix
     # ../common/gnome.nix
     ../common/steam.nix
+    # ../common/sunshine.nix
   ];
 
   nixpkgs = {
@@ -105,9 +106,6 @@
     LC_TELEPHONE = "de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
   };
-
-  # X11
-  services.xserver.enable = false;
 
   # Configure console keymap
   console.keyMap = "us-acentos";
@@ -200,6 +198,9 @@
 
   hardware = {
     opengl.enable = true;
+    opengl.driSupport = true;
+    opengl.driSupport32Bit = true;
+    # nvidia.modesetting.enable = true;
     nvidia.prime.offload.enable = false;
   };
 
