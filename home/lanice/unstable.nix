@@ -6,7 +6,7 @@
   imports = [
     ./global
     # ./features/desktop/gnome
-    # ./features/desktop/alacritty
+    ./features/desktop/alacritty
     ./features/stable-diffusion
   ];
 
@@ -31,6 +31,9 @@
 
   programs.fish.shellAbbrs = {
     mcjournal = "journalctl -fu mc-atm8.service | ${pkgs.ccze}/bin/ccze -A";
+
+    nr = "sudo nixos-rebuild switch --flake .#unstable";
+    nrr = "sudo nixos-rebuild switch --flake .#unstable && sudo reboot";
   };
 
   # dconf.settings = {

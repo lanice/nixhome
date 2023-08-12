@@ -21,8 +21,6 @@
   };
 
   systemd.user.services.sunshine = {
-    # script = "/run/current-system/sw/bin/env /run/wrappers/bin/sunshine";
-
     unitConfig = {
       Description = "Sunshine is a Game stream host for Moonlight.";
       StartLimitIntervalSec = 500;
@@ -32,23 +30,16 @@
     wantedBy = ["graphical-session.target"];
 
     serviceConfig = {
-      # Environment = "WAYLAND_DISPLAY=wayland-1";
-      # auto restart
-      # Restart = "on-failure";
-      # RestartSec = "5s";
+      Restart = "on-failure";
+      RestartSec = "5s";
 
       ExecStart = "${config.security.wrapperDir}/sunshine";
-
-      # ExecStart = pkgs.writeShellScript "sunshine" ''
-      #   . /etc/set-environment
-      #   ${config.security.wrapperDir}/sunshine
-      # '';
-      RestartSec = 3;
-      Restart = "always";
-
-      # DeviceAllow = pkgs.lib.mkForce ["char-drm rw" "char-nvidia-frontend rw" "char-nvidia-uvm rw"];
-      # PrivateDevices = pkgs.lib.mkForce false;
-      # RestrictAddressFamilies = pkgs.lib.mkForce ["AF_UNIX" "AF_NETLINK" "AF_INET" "AF_INET6"];
     };
   };
 }
+#
+# In case of problems, check sunshine status:
+# systemctl --user status sunshine
+# If it can't find any working encoder, manually restart, that seems to solve it:
+# systemctl --user restart sunshine
+

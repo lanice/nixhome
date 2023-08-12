@@ -7,7 +7,14 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  nvStable = config.boot.kernelPackages.nvidiaPackages.stable;
+  nvBeta = config.boot.kernelPackages.nvidiaPackages.beta;
+  nvidiaPkg =
+    if (lib.versionOlder nvBeta.version nvStable.version)
+    then config.boot.kernelPackages.nvidiaPackages.stable
+    else config.boot.kernelPackages.nvidiaPackages.beta;
+in {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -15,8 +22,9 @@
 
     # Or modules from other flakes (such as nixos-hardware):
     inputs.hardware.nixosModules.common-cpu-intel
-    inputs.hardware.nixosModules.common-gpu-nvidia
     inputs.hardware.nixosModules.common-pc-ssd
+    # This is covered manually now
+    # inputs.hardware.nixosModules.common-gpu-nvidia
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
@@ -25,9 +33,9 @@
     ./hardware-configuration.nix
     ../common/tailscale.nix
     ../common/minecraft-servers.nix
-    # ../common/gnome.nix
+    ../common/gnome.nix
     ../common/steam.nix
-    # ../common/sunshine.nix
+    ../common/sunshine.nix
   ];
 
   nixpkgs = {
@@ -152,8 +160,6 @@
     settings.PermitRootLogin = "no";
     # Use keys only. Remove if you want to SSH using password (not recommended)
     settings.PasswordAuthentication = false;
-
-    # settings.X11Forwarding = true;
   };
 
   services.vscode-server.enable = true;
@@ -196,13 +202,31 @@
     };
   };
 
+  # security.polkit.enable = true;
   hardware = {
     opengl.enable = true;
     opengl.driSupport = true;
     opengl.driSupport32Bit = true;
-    # nvidia.modesetting.enable = true;
-    nvidia.prime.offload.enable = false;
+    opengl.extraPackages = [pkgs.vaapiVdpau];
+
+    nvidia = {
+      package = nvidiaPkg;
+      open = true;
+      modesetting.enable = true;
+      nvidiaSettings = false;
+      powerManagement.enable = false;
+    };
   };
+
+  environment.sessionVariables = {
+    WLR_DRM_NO_ATOMIC = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    EGL_PLATFORM = "wayland";
+  };
+
+  services.xserver.videoDrivers = ["nvidia"];
 
   systemd.services.shutdown-when-idle = {
     path = [pkgs.rcon pkgs.gnugrep pkgs.systemd];
