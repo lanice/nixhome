@@ -98,8 +98,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zzhaolei";
           repo = "transient.fish";
-          rev = "15e27ac6700a736a16dbf59e5c99d9907dac704a";
-          sha256 = "lYHYU1t4riA2AgQFwIlQFiU/Xx6hQP5ICf3561TQBLg=";
+          rev = "832374f2f4c3d0c860fb1ad23bfcf9ac29eb8d79";
+          sha256 = "WZ1Jjitz8O/G/Q6lstp8e4PnGiYxLTwFsh2jhFlb43Q=";
         };
       }
     ];
