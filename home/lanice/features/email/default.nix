@@ -133,5 +133,21 @@
       };
       thunderbird.enable = true;
     };
+
+    accounts.leanderneiss = {
+      primary = false;
+      address = "me@leanderneiss.com";
+      userName = "me@leanderneiss.com";
+      realName = "Leander Neiss";
+      imap = {
+        host = "witcher.mxrouting.net";
+        port = 993;
+      };
+      smtp = {
+        host = "witcher.mxrouting.net";
+        port = 465;
+      };
+      thunderbird.enable = true;
+    };
   };
 }
