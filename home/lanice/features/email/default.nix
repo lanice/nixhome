@@ -134,7 +134,7 @@
       thunderbird.enable = true;
     };
 
-    accounts.leanderneiss = {
+    accounts."me@leanderneiss.com" = {
       primary = false;
       address = "me@leanderneiss.com";
       userName = "me@leanderneiss.com";
@@ -145,6 +145,22 @@
       };
       smtp = {
         host = "witcher.mxrouting.net";
+        port = 465;
+      };
+      thunderbird.enable = true;
+    };
+
+    accounts."tech@orangesfm.com" = {
+      primary = false;
+      address = "tech@orangesfm.com";
+      userName = "tech@orangesfm.com";
+      realName = "Orange SFM";
+      imap = {
+        host = "eagle.mxlogin.com";
+        port = 993;
+      };
+      smtp = {
+        host = "eagle.mxlogin.com";
         port = 465;
       };
       thunderbird.enable = true;
