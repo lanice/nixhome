@@ -28,7 +28,9 @@
     };
 
     profileExtra = ''
-      . "$HOME/.cargo/env"
+      if [ -f ~/.cargo/env ]; then
+        . ~/.cargo/env
+      fi
     '';
 
     initExtra = ''
