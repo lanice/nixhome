@@ -68,7 +68,7 @@ in {
       };
 
       atm8 = {
-        enable = true;
+        enable = false;
         rsyncSSHKeys = [""];
         jvmOpts =
           jvmOpts

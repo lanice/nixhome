@@ -223,10 +223,28 @@ in {
     WLR_NO_HARDWARE_CURSORS = "1";
     LIBVA_DRIVER_NAME = "nvidia";
     MOZ_DISABLE_RDD_SANDBOX = "1";
-    EGL_PLATFORM = "wayland";
+    # EGL_PLATFORM = "wayland";
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver = {
+    displayManager.gdm.wayland = false;
+
+    videoDrivers = ["nvidia"];
+    # displayManager.setupCommands = "${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode 2560x1600";
+    displayManager.setupCommands = "xrandr --output HDMI-0 --mode 2560x1440";
+
+    # screenSection = ''
+    #   Option "metamodes" "HDMI-0: 2560x1600_60 +0+0, DP-0: 2560x1440_165 +2560+0"
+    # '';
+
+    xrandrHeads = [
+      {
+        output = "HDMI-0";
+        primary = true;
+        monitorConfig = "DisplaySize 2560 1440";
+      }
+    ];
+  };
 
   systemd.services.shutdown-when-idle = {
     path = [pkgs.rcon pkgs.gnugrep pkgs.systemd];
