@@ -2,26 +2,24 @@
 basedir="$HOME/automatic"
 script="$basedir/webui.sh"
 
-lntarget="$basedir/outputs/sync"
+synctarget="$basedir/outputs/sync"
 sharingbasedir="$HOME/Sync"
 
 modelstargetdir="$basedir/models/Stable-diffusion"
-modelssourcedir="$sharingbasedir/models"
+modelssourcedir="$sharingbasedir/models/models"
 
 controlnettarget="$basedir/models/ControlNet"
-controlnetsource="$modelssourcedir/controlnet"
+controlnetsource="$sharingbasedir/models/controlnet"
 
 embeddingstarget="$basedir/models/embeddings"
-embeddingssource="$modelssourcedir/embeddings"
+embeddingssource="$sharingbasedir/models/embeddings"
 
 if [ -z "${SD_ADMIN}" ]; then
-    lnsource="$sharingbasedir/stable-diffusion"
+    syncsource="$sharingbasedir/stable-diffusion"
     port=9000
-    declare -a models=("anime" "fantasy" "general" "inpaint" "realism" "stable-diffusion")
 else
-    lnsource="$sharingbasedir/sd"
+    syncsource="$sharingbasedir/sd"
     port=9001
-    declare -a models=("admin" "anime" "fantasy" "general" "inpaint" "realism" "stable-diffusion")
 fi
 
 . $basedir/.env
@@ -34,15 +32,14 @@ ln -s $controlnetsource $controlnettarget
 [ -e $embeddingstarget ] && rm -r $embeddingstarget
 ln -s $embeddingssource $embeddingstarget
 
-[ -e $lntarget ] && rm $lntarget
-ln -s $lnsource $lntarget
+[ -e $synctarget ] && rm $synctarget
+ln -s $syncsource $synctarget
 
 # delete all symlinks in the models directory
 find $modelstargetdir -type l -exec rm {} +
 
-for i in "${models[@]}"
-do
-    ln -s $modelssourcedir/$i $modelstargetdir/$i
+for d in $modelssourcedir/*; do
+    ln -s $d $modelstargetdir/$(basename $d)
 done
 
 pushd $basedir
