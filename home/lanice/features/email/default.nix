@@ -165,5 +165,21 @@
       };
       thunderbird.enable = true;
     };
+
+    accounts."leander@crowdedorangebus.com" = {
+      primary = false;
+      address = "leander@crowdedorangebus.com";
+      userName = "leander@crowdedorangebus.com";
+      realName = "Leander at Crowded Orange Bus";
+      imap = {
+        host = "eagle.mxlogin.com";
+        port = 993;
+      };
+      smtp = {
+        host = "eagle.mxlogin.com";
+        port = 465;
+      };
+      thunderbird.enable = true;
+    };
   };
 }
