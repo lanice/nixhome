@@ -42,13 +42,13 @@
       gw = "git worktree";
       gwa = "git worktree add";
 
-      # exa
-      ls = "exa";
-      la = "exa -a";
-      ll = "exa -l";
-      lla = "exa -la";
-      lt = "exa --tree";
-      lld = "exa -alF --group-directories-first";
+      # eza
+      ls = "eza";
+      la = "eza -a";
+      ll = "eza -l";
+      lla = "eza -la";
+      lt = "eza --tree";
+      lld = "eza -alF --group-directories-first";
 
       github-last-commit = "echo \"[$(git rev-parse --short HEAD)]($(gh browse --no-browser $(git rev-parse HEAD)))\" | ${pkgs.xclip}/bin/xclip -sel clip";
     };

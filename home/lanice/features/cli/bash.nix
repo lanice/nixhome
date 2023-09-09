@@ -11,7 +11,7 @@
     shellAliases = {
       aptgrade = "sudo apt update && sudo apt upgrade";
 
-      lld = "exa -alF --group-directories-first"; # ls,ll,la,lt,lla - set with exa (programs.exa.enableAliases)
+      lld = "eza -alF --group-directories-first"; # ls,ll,la,lt,lla - set with eza (programs.eza.enableAliases)
       cat = "bat";
       hm = "home-manager";
       hms = "home-manager --flake . switch";

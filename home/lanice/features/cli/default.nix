@@ -46,7 +46,7 @@
     MCFLY_KEY_SCHEME = "emacs";
   };
 
-  programs.exa = {
+  programs.eza = {
     enable = true;
     enableAliases = true; # ls,ll,la,lt,lla
   };
