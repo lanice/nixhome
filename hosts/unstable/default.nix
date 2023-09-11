@@ -198,6 +198,10 @@ in {
           path = "/home/lanice/Sync/stable-diffusion"; # Which folder to add to Syncthing
           devices = ["GreenGen5" "Orange Laptop"]; # Which devices to share the folder with
         };
+        "photo-share" = {
+          path = "/home/lanice/Sync/photo-share"; # Which folder to add to Syncthing
+          devices = ["GreenGen5" "Orange Laptop"]; # Which devices to share the folder with
+        };
       };
     };
   };
