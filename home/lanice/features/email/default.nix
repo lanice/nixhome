@@ -150,6 +150,22 @@
       thunderbird.enable = true;
     };
 
+    accounts."me@lndr.io" = {
+      primary = false;
+      address = "me@lndr.io";
+      userName = "me@lndr.io";
+      realName = "Leander Neiss";
+      imap = {
+        host = "witcher.mxrouting.net";
+        port = 993;
+      };
+      smtp = {
+        host = "witcher.mxrouting.net";
+        port = 465;
+      };
+      thunderbird.enable = true;
+    };
+
     accounts."tech@orangesfm.com" = {
       primary = false;
       address = "tech@orangesfm.com";

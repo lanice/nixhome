@@ -34,6 +34,7 @@
   programs.nix-index.enable = true;
   programs.zoxide.enable = true;
   programs.navi.enable = true;
+  programs.btop.enable = true;
 
   programs.mcfly = {
     enable = true;
@@ -53,7 +54,9 @@
 
   programs.neovim = {
     enable = true;
+    viAlias = true;
     vimAlias = true;
+    vimdiffAlias = true;
     extraConfig = "colorscheme gruvbox";
     plugins = with pkgs.vimPlugins; [
       vim-nix
