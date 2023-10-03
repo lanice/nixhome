@@ -33,9 +33,9 @@ in {
     ./hardware-configuration.nix
     ../common/tailscale.nix
     ../common/minecraft-servers.nix
-    ../common/gnome.nix
-    ../common/steam.nix
-    ../common/sunshine.nix
+    # ../common/gnome.nix
+    # ../common/steam.nix
+    # ../common/sunshine.nix
   ];
 
   nixpkgs = {
