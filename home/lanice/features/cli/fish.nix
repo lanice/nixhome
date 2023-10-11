@@ -93,15 +93,17 @@
           sha256 = "aij48yQHeAKCoAD43rGhqW8X/qmEGGkg8B4jSeqjVU0=";
         };
       }
-      {
-        name = "transient-prompt";
-        src = pkgs.fetchFromGitHub {
-          owner = "zzhaolei";
-          repo = "transient.fish";
-          rev = "832374f2f4c3d0c860fb1ad23bfcf9ac29eb8d79";
-          sha256 = "WZ1Jjitz8O/G/Q6lstp8e4PnGiYxLTwFsh2jhFlb43Q=";
-        };
-      }
+
+      # Superseded by starhip.enableTransience
+      # {
+      #   name = "transient-prompt";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "zzhaolei";
+      #     repo = "transient.fish";
+      #     rev = "832374f2f4c3d0c860fb1ad23bfcf9ac29eb8d79";
+      #     sha256 = "WZ1Jjitz8O/G/Q6lstp8e4PnGiYxLTwFsh2jhFlb43Q=";
+      #   };
+      # }
     ];
   };
 }
