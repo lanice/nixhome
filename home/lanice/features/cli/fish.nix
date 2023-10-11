@@ -12,6 +12,8 @@
       if test -e ${config.home.homeDirectory}/.env.fish
         source ${config.home.homeDirectory}/.env.fish
       end
+
+      thefuck --alias | source
     '';
 
     shellAbbrs = {

@@ -35,6 +35,7 @@
   programs.zoxide.enable = true;
   programs.navi.enable = true;
   programs.btop.enable = true;
+  programs.thefuck.enable = true;
 
   programs.mcfly = {
     enable = true;

@@ -16,4 +16,5 @@
   ];
 
   programs.zathura.enable = true;
+  # programs.rio.enable = true;
 }
