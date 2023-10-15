@@ -14,6 +14,9 @@ controlnetsource="$sharingbasedir/models/controlnet"
 embeddingstarget="$basedir/models/embeddings"
 embeddingssource="$sharingbasedir/models/embeddings"
 
+loratarget="$basedir/models/Lora"
+lorasource="$sharingbasedir/models/Lora"
+
 if [ -z "${SD_ADMIN}" ]; then
     syncsource="$sharingbasedir/stable-diffusion"
     port=9000
@@ -31,6 +34,9 @@ ln -s $controlnetsource $controlnettarget
 
 [ -e $embeddingstarget ] && rm -r $embeddingstarget
 ln -s $embeddingssource $embeddingstarget
+
+[ -e $loratarget ] && rm -r $loratarget
+ln -s $lorasource $loratarget
 
 [ -e $synctarget ] && rm $synctarget
 ln -s $syncsource $synctarget
