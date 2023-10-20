@@ -33,8 +33,8 @@ in {
     ./hardware-configuration.nix
     ../common/tailscale.nix
     ../common/minecraft-servers.nix
-    # ../common/gnome.nix
-    # ../common/steam.nix
+    ../common/gnome.nix
+    ../common/steam.nix
     # ../common/sunshine.nix
   ];
 
