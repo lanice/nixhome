@@ -24,6 +24,7 @@
     ./hardware-configuration.nix
 
     ../common/global
+    ../common/gnome.nix
     ../common/tailscale.nix
   ];
 
@@ -36,7 +37,7 @@
     hostName = "sencha";
     networkmanager.enable = true;
 
-    wireless.enable = true;
+    # wireless.enable = true;
 
     # useDHCP = true;
   };
@@ -48,7 +49,7 @@
 
   # powerManagement.powertop.enable = true;
 
-  users.mutableUsers = false;
+  users.mutableUsers = true;
   users.users.lanice = {
     isNormalUser = true;
     description = "lanice";

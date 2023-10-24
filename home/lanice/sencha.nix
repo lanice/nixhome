@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   imports = [
     ./global # includes features/cli/default.nix
     ./features/desktop/alacritty
+    ./features/desktop/common/font.nix
   ];
 
   home = {

@@ -231,7 +231,11 @@ in {
   };
 
   services.xserver = {
-    displayManager.gdm.wayland = false;
+    displayManager = {
+      gdm.wayland = false;
+      autoLogin.enable = true;
+      autoLogin.user = "lanice";
+    };
 
     videoDrivers = ["nvidia"];
     # displayManager.setupCommands = "${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode 2560x1600";
@@ -249,6 +253,10 @@ in {
       }
     ];
   };
+
+  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
   # systemd.services.shutdown-when-idle = {
   #   path = [pkgs.rcon pkgs.gnugrep pkgs.systemd];
