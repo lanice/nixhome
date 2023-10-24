@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   whatsapp-wrapped = import ./features/desktop/nixGL/whatsapp.nix {inherit pkgs;};
 in {
   imports = [
@@ -35,6 +39,8 @@ in {
 
       cachix
     ];
+
+    stateVersion = lib.mkDefault "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   };
 
   targets.genericLinux.enable = true;

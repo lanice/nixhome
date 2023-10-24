@@ -1,6 +1,6 @@
 {
   pkgs,
-  config,
+  lib
   ...
 }: {
   imports = [
@@ -49,4 +49,6 @@
   #     name = "open-terminal";
   #   };
   # };
+
+  stateVersion = lib.mkDefault "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
 }

@@ -5,9 +5,7 @@
   config,
   outputs,
   ...
-}: let
-  nerdfont-overrides = pkgs.nerdfonts.override {fonts = ["Go-Mono"];}; # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
-in {
+}: {
   imports = [
     ../features/cli
   ];
@@ -41,7 +39,6 @@ in {
   home = {
     username = lib.mkDefault "lanice";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
-    stateVersion = lib.mkDefault "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
 
     # Produce a nice diff of added/removed/changed packages after home-manager switch
     # activation.report-changes = config.lib.dag.entryAnywhere ''

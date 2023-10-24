@@ -58,33 +58,42 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      unstable = nixpkgs.lib.nixosSystem {
+      tofu = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/tofu];
         specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/unstable
-          inputs.vscode-server.nixosModule
-        ];
+      };
+      sencha = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/sencha];
+        specialArgs = {inherit inputs outputs;};
+      };
+      unstable = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/unstable inputs.vscode-server.nixosModule];
+        specialArgs = {inherit inputs outputs;};
       };
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      # Laptop
-      "lanice@GreenGen5" = home-manager.lib.homeManagerConfiguration {
+      "lanice@tofu" = home-manager.lib.homeManagerConfiguration {
+        modules = [./home/lanice/tofu.nix nixGlOverlay];
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/lanice/greengen5.nix
-          nixGlOverlay
-        ];
       };
-
-      # Server
-      "lanice@unstable" = home-manager.lib.homeManagerConfiguration {
+      "lanice@sencha" = home-manager.lib.homeManagerConfiguration {
+        modules = [./home/lanice/sencha.nix nixGlOverlay];
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
+      };
+      "lanice@GreenGen5" = home-manager.lib.homeManagerConfiguration {
+        modules = [./home/lanice/greengen5.nix nixGlOverlay];
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
+      "lanice@unstable" = home-manager.lib.homeManagerConfiguration {
         modules = [./home/lanice/unstable.nix];
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
       };
     };
   };
