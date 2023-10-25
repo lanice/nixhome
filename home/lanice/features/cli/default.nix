@@ -1,12 +1,12 @@
 {pkgs, ...}: {
   imports = [
-    ./fish.nix
     ./bash.nix
-    ./zsh.nix
-    ./starship.nix
-    ./git.nix
     ./broot.nix
+    ./fish.nix
+    ./git.nix
+    ./starship.nix
     ./zellij.nix
+    ./zsh.nix
   ];
 
   home.packages = with pkgs; [

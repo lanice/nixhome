@@ -1,15 +1,14 @@
 {pkgs, ...}: {
   imports = [
-    ./global # includes features/cli/default.nix
-    # ./features/cli/latex.nix
-    ./features/email
+    ./global # includes features/cli,features/helix
+    ./features/desktop/hyprland
     ./features/desktop/alacritty
-    # ./features/desktop/wezterm # only config files, installed via .deb package now because of nixGl issues
   ];
 
   home = {
     sessionVariables = {
       EDITOR = "vim";
+      TERMINAL = "alacritty";
     };
 
     packages = with pkgs; [

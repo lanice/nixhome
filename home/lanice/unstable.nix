@@ -1,6 +1,6 @@
 {
   pkgs,
-  lib
+  lib,
   ...
 }: {
   imports = [
@@ -14,6 +14,7 @@
   home = {
     sessionVariables = {
       EDITOR = "vim";
+      TERMINAL = "alacritty";
     };
 
     packages = with pkgs; [

@@ -40,7 +40,6 @@
       gauc = "git add -u && git commit";
       gcan = "git commit --amend --no-edit";
       gpr = "git pull --rebase";
-      # gprf moved to features/kialo
       gw = "git worktree";
       gwa = "git worktree add";
 
@@ -66,11 +65,6 @@
       '';
 
       wh = "readlink -f (which $argv)";
-
-      update-wezterm = ''
-        curl -L0 https://github.com/wez/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu22.04.deb -o ${config.home.homeDirectory}/Downloads/wezterm-nightly.Ubuntu22.04.deb
-        sudo apt install -y ${config.home.homeDirectory}/Downloads/wezterm-nightly.Ubuntu22.04.deb
-      '';
     };
 
     plugins = [
@@ -95,17 +89,6 @@
           sha256 = "aij48yQHeAKCoAD43rGhqW8X/qmEGGkg8B4jSeqjVU0=";
         };
       }
-
-      # Superseded by starhip.enableTransience
-      # {
-      #   name = "transient-prompt";
-      #   src = pkgs.fetchFromGitHub {
-      #     owner = "zzhaolei";
-      #     repo = "transient.fish";
-      #     rev = "832374f2f4c3d0c860fb1ad23bfcf9ac29eb8d79";
-      #     sha256 = "WZ1Jjitz8O/G/Q6lstp8e4PnGiYxLTwFsh2jhFlb43Q=";
-      #   };
-      # }
     ];
   };
 }

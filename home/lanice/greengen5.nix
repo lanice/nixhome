@@ -7,11 +7,11 @@
   whatsapp-wrapped = import ./features/desktop/nixGL/whatsapp.nix {inherit pkgs;};
 in {
   imports = [
-    ./global # includes features/cli/default.nix
+    ./global # includes features/cli,features/helix
     ./features/email
     ./features/kialo
+    ./features/misc/latex.nix
     ./features/desktop/gnome
-    ./features/cli/latex.nix
     ./features/desktop/alacritty/alacritty-wrapped.nix
     ./features/desktop/wezterm # only config files, installed via .deb package now because of nixGl issues
   ];
@@ -19,15 +19,21 @@ in {
   colorscheme = inputs.nix-colors.colorschemes.catppuccin-frappe;
 
   home = {
-    # Raw configuration files
-    # file."<file-in-home>".source = <path-to-file>;
-
     sessionVariables = {
       EDITOR = "vim";
       TERMINAL = "alacritty";
     };
 
     packages = with pkgs; [
+      sublime-merge
+      vscode
+
+      obsidian
+      spotify
+      gimp
+
+      bitwarden
+
       whatsapp-wrapped
       element-desktop
 
@@ -45,6 +51,17 @@ in {
     ];
 
     stateVersion = lib.mkDefault "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  };
+
+  programs.zathura.enable = true;
+
+  services.syncthing = {
+    enable = true;
+    extraOptions = ["--no-default-folder"];
+    tray = {
+      enable = true;
+      command = "syncthingtray --wait";
+    };
   };
 
   services.xsettingsd.enable = false;

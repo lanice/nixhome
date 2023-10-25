@@ -5,10 +5,9 @@
   ...
 }: {
   imports = [
-    ./global # includes features/cli/default.nix
+    ./global # includes features/cli,features/helix
     ./features/desktop/hyprland
     ./features/desktop/alacritty
-    ./features/desktop/common/font.nix
   ];
 
   colorscheme = inputs.nix-colors.colorschemes.tokyo-night-storm;

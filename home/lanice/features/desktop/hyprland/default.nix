@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    # ../common
+    ../common
     ../common/wayland-wm
 
     ./tty-init.nix
