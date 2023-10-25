@@ -24,7 +24,7 @@
     ./hardware-configuration.nix
 
     ../common/global
-    ../common/gnome.nix
+    # ../common/gnome.nix
     ../common/tailscale.nix
   ];
 

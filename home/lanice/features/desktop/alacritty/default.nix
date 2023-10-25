@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   programs.alacritty = {
     enable = true;
     settings = {
@@ -16,7 +16,7 @@
       };
       font = {
         normal = {
-          family = "GoMono Nerd Font Mono";
+          family = config.fontProfiles.monospace.family;
         };
         size = 12;
       };
