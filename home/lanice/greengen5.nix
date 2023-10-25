@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   ...
@@ -14,6 +15,8 @@ in {
     ./features/desktop/alacritty/alacritty-wrapped.nix
     ./features/desktop/wezterm # only config files, installed via .deb package now because of nixGl issues
   ];
+
+  colorscheme = inputs.nix-colors.colorschemes.catppuccin-frappe;
 
   home = {
     # Raw configuration files
