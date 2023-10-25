@@ -65,17 +65,6 @@
     ];
   };
 
-  programs.helix = {
-    enable = true;
-    settings = {
-      theme = "gruvbox";
-      editor = {
-        line-number = "relative";
-        indent-guides.render = true;
-      };
-    };
-  };
-
   programs.tealdeer = {
     enable = true;
     settings = {

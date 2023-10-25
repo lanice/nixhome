@@ -13,6 +13,7 @@ in {
     [
       inputs.nix-colors.homeManagerModule
       ../features/cli
+      ../features/helix
     ]
     ++ (builtins.attrValues outputs.homeManagerModules);
 
