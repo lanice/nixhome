@@ -5,7 +5,6 @@
 }: {
   imports = [
     ./global
-    # ./features/desktop/gnome
     ./features/desktop/alacritty
     ./features/stable-diffusion
   ];

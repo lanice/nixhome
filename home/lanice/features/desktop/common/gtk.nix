@@ -1,9 +1,12 @@
-{ config, pkgs, inputs, ... }:
-
-let
-  inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
-in
-rec {
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  ...
+}: let
+  inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+in rec {
   gtk = {
     enable = true;
     font = {
@@ -12,7 +15,7 @@ rec {
     };
     theme = {
       name = "${config.colorscheme.slug}";
-      package = gtkThemeFromScheme { scheme = config.colorscheme; };
+      package = gtkThemeFromScheme {scheme = config.colorscheme;};
     };
     iconTheme = {
       name = "Papirus";
@@ -21,10 +24,15 @@ rec {
   };
 
   services.xsettingsd = {
-    enable = true;
+    enable = lib.mkDefault true;
     settings = {
       "Net/ThemeName" = "${gtk.theme.name}";
       "Net/IconThemeName" = "${gtk.iconTheme.name}";
+
+      # "Xft/DPI" = 196608;
+      # "Gdk/UnscaledDPI" = 98304;
+      # # "Gdk/UnscaledDPI" = 196608;
+      # # "Gdk/WindowScalingFactor" = 2;
     };
   };
 }

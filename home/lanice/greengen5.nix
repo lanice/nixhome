@@ -21,6 +21,7 @@ in {
 
     sessionVariables = {
       EDITOR = "vim";
+      TERMINAL = "alacritty";
     };
 
     packages = with pkgs; [
@@ -42,6 +43,8 @@ in {
 
     stateVersion = lib.mkDefault "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   };
+
+  services.xsettingsd.enable = false;
 
   targets.genericLinux.enable = true;
 }

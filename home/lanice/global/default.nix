@@ -37,6 +37,9 @@ in {
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
   };
 
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
+
   programs = {
     home-manager.enable = true;
     git.enable = true;
@@ -55,9 +58,6 @@ in {
   };
 
   xdg.configFile."nix/inputs/nixpkgs".source = inputs.nixpkgs.outPath;
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
 
   colorscheme = lib.mkDefault colorSchemes.dracula;
   wallpaper = let
