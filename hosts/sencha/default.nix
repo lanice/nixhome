@@ -47,15 +47,6 @@
 
   powerManagement.powertop.enable = true;
 
-  users.mutableUsers = true;
-  users.users.lanice = {
-    isNormalUser = true;
-    description = "lanice";
-    shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [];
-    extraGroups = ["networkmanager" "wheel"];
-  };
-
   hardware = {
     nvidia = {
       prime.offload.enable = false;

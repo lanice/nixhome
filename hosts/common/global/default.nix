@@ -6,6 +6,7 @@
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    ./lanice.nix
     ./fish.nix
     ./locale.nix
     ./nix.nix
@@ -20,5 +21,5 @@
     };
   };
 
-  #   hardware.enableRedistributableFirmware = true;
+  hardware.enableRedistributableFirmware = true;
 }

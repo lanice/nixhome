@@ -49,17 +49,6 @@
     dconf.enable = true;
   };
 
-  users.mutableUsers = true;
-  users.users.lanice = {
-    isNormalUser = true;
-    description = "lanice";
-    shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [];
-    extraGroups = ["networkmanager" "wheel"];
-  };
-
-  home-manager.users.lanice = import ../../home/lanice/${config.networking.hostName}.nix;
-
   hardware = {
     nvidia = {
       prime.offload.enable = false;
