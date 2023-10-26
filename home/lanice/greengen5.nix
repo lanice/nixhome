@@ -12,6 +12,7 @@ in {
     ./features/kialo
     ./features/misc/latex.nix
     ./features/desktop/gnome
+    ./features/desktop/vscode
     ./features/desktop/alacritty/alacritty-wrapped.nix
     ./features/desktop/wezterm # only config files, installed via .deb package now because of nixGl issues
   ];
@@ -26,7 +27,7 @@ in {
 
     packages = with pkgs; [
       sublime-merge
-      vscode
+      # vscode
 
       obsidian
       spotify

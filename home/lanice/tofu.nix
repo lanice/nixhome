@@ -2,6 +2,7 @@
   imports = [
     ./global # includes features/cli,features/helix
     ./features/desktop/hyprland
+    ./features/desktop/vscode
     ./features/desktop/alacritty
   ];
 
@@ -14,7 +15,6 @@
     packages = with pkgs; [
       firefox
       sublime-merge
-      vscode
 
       slack
       discord
