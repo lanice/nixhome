@@ -20,7 +20,7 @@
     multiCursorModifier = "ctrlCmd";
     renderIndentGuides = true;
     renderWhitespace = "boundary";
-    ruler = [80 120];
+    rulers = [80 120];
     scrollBeyondLastLine = true;
     showFoldingControls = "never";
     snippetSuggestions = "bottom";
@@ -138,4 +138,6 @@
     "plaintext" = false;
   };
   "git.autofetch" = false;
+  "telemetry.telemetryLevel" = "off";
+  "update.showReleaseNotes" = false;
 }
