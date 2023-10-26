@@ -242,6 +242,26 @@
         "type": "github"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1697946153,
+        "narHash": "sha256-7k7qIwWLaYPgQ4fxmEdew3yCffhK6rM4I4Jo3X/79DA=",
+        "owner": "Mic92",
+        "repo": "nix-index-database",
+        "rev": "5a2006282caaf32663cdcd582c5b18809c7d7d8d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nixgl": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -333,6 +353,7 @@
         "hyprland": "hyprland",
         "minecraft-servers": "minecraft-servers",
         "nix-colors": "nix-colors",
+        "nix-index-database": "nix-index-database",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_2",
         "vscode-server": "vscode-server"

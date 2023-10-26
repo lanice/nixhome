@@ -45,6 +45,10 @@
 
   powerManagement.powertop.enable = true;
 
+  programs = {
+    dconf.enable = true;
+  };
+
   users.mutableUsers = true;
   users.users.lanice = {
     isNormalUser = true;
@@ -53,6 +57,8 @@
     openssh.authorizedKeys.keys = [];
     extraGroups = ["networkmanager" "wheel"];
   };
+
+  home-manager.users.lanice = import ../../home/lanice/${config.networking.hostName}.nix;
 
   hardware = {
     nvidia = {

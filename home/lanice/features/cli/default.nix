@@ -10,8 +10,6 @@
   ];
 
   home.packages = with pkgs; [
-    comma # Install and run programs by sticking a , before them
-
     # Rust CLI tools
     bat # Better cat
     bottom # System viewer
@@ -32,6 +30,8 @@
   ];
 
   programs.nix-index.enable = true;
+  programs.nix-index-database.comma.enable = true;
+
   programs.zoxide.enable = true;
   programs.navi.enable = true;
   programs.btop.enable = true;
