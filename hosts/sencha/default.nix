@@ -24,8 +24,10 @@
     ./hardware-configuration.nix
 
     ../common/global
-    # ../common/gnome.nix
+    ../common/greetd.nix
     ../common/tailscale.nix
+
+    # ./syncthing.nix
   ];
 
   nixpkgs = {
@@ -36,10 +38,6 @@
   networking = {
     hostName = "sencha";
     networkmanager.enable = true;
-
-    # wireless.enable = true;
-
-    # useDHCP = true;
   };
 
   # Bootloader.
@@ -47,17 +45,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
-  # powerManagement.powertop.enable = true;
+  powerManagement.powertop.enable = true;
 
   users.mutableUsers = true;
   users.users.lanice = {
     isNormalUser = true;
     description = "lanice";
     shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [
-      # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-    ];
-    # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
+    openssh.authorizedKeys.keys = [];
     extraGroups = ["networkmanager" "wheel"];
   };
 

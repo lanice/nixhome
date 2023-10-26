@@ -2,6 +2,7 @@
   imports = [
     ./mako.nix
     ./swaylock.nix
+    ./swayidle.nix
     ./waybar.nix
     ./wofi.nix
     ./zathura.nix
@@ -14,7 +15,7 @@
     # imv
     # mimeo
     # primary-xwayland
-    # pulseaudio
+    pulseaudio
     # slurp
     # waypipe
     # wf-recorder

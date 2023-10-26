@@ -148,8 +148,8 @@ in {
           exec = let
             inherit (builtins) concatStringsSep attrNames;
             hosts = attrNames outputs.nixosConfigurations;
-            homeMachine = "merope";
-            remoteMachine = "alcyone";
+            homeMachine = "tofu";
+            remoteMachine = "unstable";
           in
             jsonOutput "tailscale-ping" {
               # Build variables for each host

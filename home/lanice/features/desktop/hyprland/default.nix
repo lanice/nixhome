@@ -90,12 +90,12 @@
 
       bind = let
         # swaylock = "${config.programs.swaylock.package}/bin/swaylock";
-        # playerctl = "${config.services.playerctld.package}/bin/playerctl";
-        # playerctld = "${config.services.playerctld.package}/bin/playerctld";
+        playerctl = "${config.services.playerctld.package}/bin/playerctl";
+        playerctld = "${config.services.playerctld.package}/bin/playerctld";
         # makoctl = "${config.services.mako.package}/bin/makoctl";
         wofi = "${config.programs.wofi.package}/bin/wofi";
         # grimblast = "${pkgs.inputs.hyprwm-contrib.grimblast}/bin/grimblast";
-        # pactl = "${pkgs.pulseaudio}/bin/pactl";
+        pactl = "${pkgs.pulseaudio}/bin/pactl";
         # tly = "${pkgs.tly}/bin/tly";
         # gtk-play = "${pkgs.libcanberra-gtk3}/bin/canberra-gtk-play";
         # notify-send = "${pkgs.libnotify}/bin/notify-send";
@@ -116,12 +116,12 @@
           # Brightness control (only works if the system has lightd)
           ",XF86MonBrightnessUp,exec,light -A 10"
           ",XF86MonBrightnessDown,exec,light -U 10"
-          # # Volume
-          # ",XF86AudioRaiseVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
-          # ",XF86AudioLowerVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
-          # ",XF86AudioMute,exec,${pactl} set-sink-mute @DEFAULT_SINK@ toggle"
-          # "SHIFT,XF86AudioMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
-          # ",XF86AudioMicMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
+          # Volume
+          ",XF86AudioRaiseVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
+          ",XF86AudioLowerVolume,exec,${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
+          ",XF86AudioMute,exec,${pactl} set-sink-mute @DEFAULT_SINK@ toggle"
+          "SHIFT,XF86AudioMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
+          ",XF86AudioMicMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
           # # Screenshotting
           # ",Print,exec,${grimblast} --notify --freeze copy output"
           # "SHIFT,Print,exec,${grimblast} --notify --freeze copy active"
@@ -134,16 +134,16 @@
           # "SUPERCONTROLSHIFT,z,exec,${tly} reset && ${gtk-play} -i complete" # Reset
           # "SUPERSHIFT,z,exec,${notify-send} -t 1000 $(${tly} time)" # Show current time
         ]
-        # ++ (lib.optionals config.services.playerctld.enable [
-        #   # Media control
-        #   ",XF86AudioNext,exec,${playerctl} next"
-        #   ",XF86AudioPrev,exec,${playerctl} previous"
-        #   ",XF86AudioPlay,exec,${playerctl} play-pause"
-        #   ",XF86AudioStop,exec,${playerctl} stop"
-        #   "ALT,XF86AudioNext,exec,${playerctld} shift"
-        #   "ALT,XF86AudioPrev,exec,${playerctld} unshift"
-        #   "ALT,XF86AudioPlay,exec,systemctl --user restart playerctld"
-        # ])
+        ++ (lib.optionals config.services.playerctld.enable [
+          # Media control
+          ",XF86AudioNext,exec,${playerctl} next"
+          ",XF86AudioPrev,exec,${playerctl} previous"
+          ",XF86AudioPlay,exec,${playerctl} play-pause"
+          ",XF86AudioStop,exec,${playerctl} stop"
+          "ALT,XF86AudioNext,exec,${playerctld} shift"
+          "ALT,XF86AudioPrev,exec,${playerctld} unshift"
+          "ALT,XF86AudioPlay,exec,systemctl --user restart playerctld"
+        ])
         # ++
         # # Screen lock
         # (lib.optionals config.programs.swaylock.enable [
