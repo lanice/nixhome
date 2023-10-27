@@ -29,6 +29,11 @@
     hyprland.url = "github:hyprwm/hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-colors.url = "github:misterio77/nix-colors";
   };
 
@@ -60,12 +65,12 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      tofu = lib.nixosSystem {
-        modules = [./hosts/tofu];
-        specialArgs = {inherit inputs outputs;};
-      };
       sencha = lib.nixosSystem {
         modules = [./hosts/sencha];
+        specialArgs = {inherit inputs outputs;};
+      };
+      tofu = lib.nixosSystem {
+        modules = [./hosts/tofu];
         specialArgs = {inherit inputs outputs;};
       };
       unstable = lib.nixosSystem {
@@ -77,23 +82,23 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "lanice@tofu" = lib.homeManagerConfiguration {
-        modules = [./home/lanice/tofu.nix];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-      };
       "lanice@sencha" = lib.homeManagerConfiguration {
         modules = [./home/lanice/sencha.nix];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
-      "lanice@GreenGen5" = lib.homeManagerConfiguration {
-        modules = [./home/lanice/greengen5.nix nixGlOverlay];
+      "lanice@tofu" = lib.homeManagerConfiguration {
+        modules = [./home/lanice/tofu.nix];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
       "lanice@unstable" = lib.homeManagerConfiguration {
         modules = [./home/lanice/unstable.nix];
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
+      "lanice@GreenGen5" = lib.homeManagerConfiguration {
+        modules = [./home/lanice/greengen5.nix nixGlOverlay];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };

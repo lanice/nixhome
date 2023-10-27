@@ -7,6 +7,7 @@
   imports = [
     ./global # includes features/cli,features/helix
     ./features/desktop/hyprland
+    ./features/desktop/firefox
     ./features/desktop/vscode
     ./features/desktop/alacritty
   ];
@@ -20,8 +21,6 @@
     };
 
     packages = with pkgs; [
-      firefox
-
       slack
       discord
       telegram-desktop

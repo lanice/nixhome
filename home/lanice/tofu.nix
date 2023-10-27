@@ -7,13 +7,14 @@
   imports = [
     ./global # includes features/cli,features/helix
     ./features/desktop/hyprland
+    ./features/desktop/firefox
     ./features/desktop/vscode
     ./features/desktop/alacritty
   ];
 
   colorscheme = inputs.nix-colors.colorschemes.tokyo-night-storm;
 
-    monitors = [
+  monitors = [
     {
       name = "eDP-1";
       width = 1600;
@@ -30,8 +31,6 @@
     };
 
     packages = with pkgs; [
-      firefox
-
       slack
       discord
       telegram-desktop
