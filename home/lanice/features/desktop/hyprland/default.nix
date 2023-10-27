@@ -21,7 +21,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    # package = pkgs.inputs.hyprland.hyprland;
+    package = pkgs.inputs.hyprland.hyprland;
 
     settings = {
       general = {
