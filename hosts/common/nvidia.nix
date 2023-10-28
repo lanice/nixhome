@@ -1,7 +1,6 @@
 # Taken from: https://github.com/TLATER/dotfiles/blob/b39af91fbd13d338559a05d69f56c5a97f8c905d/nixos-config/yui/nvidia.nix
 {
   config,
-  flake-inputs,
   lib,
   pkgs,
   ...
@@ -66,7 +65,7 @@
       {
           "file_format_version" : "1.0.0",
           "ICD" : {
-              "library_path" : "${flake-inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.egl-wayland}/lib/libnvidia-egl-wayland.so"
+              "library_path" : "${pkgs.egl-wayland}/lib/libnvidia-egl-wayland.so"
           }
       }
     '';
