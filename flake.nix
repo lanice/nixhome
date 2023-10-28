@@ -29,6 +29,9 @@
     hyprland.url = "github:hyprwm/hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
+    hyprwm-contrib.url = "github:hyprwm/contrib";
+    hyprwm-contrib.inputs.nixpkgs.follows = "nixpkgs";
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,6 +66,8 @@
     # packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
     devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
     formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+
+    wallpapers = import ./home/lanice/wallpapers;
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'

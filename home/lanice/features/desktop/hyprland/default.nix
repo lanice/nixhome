@@ -14,7 +14,7 @@
   ];
 
   home.packages = with pkgs; [
-    # inputs.hyprwm-contrib.grimblast
+    inputs.hyprwm-contrib.grimblast
     # hyprslurp
     # hyprpicker
   ];
@@ -91,12 +91,12 @@
       # ];
 
       bind = let
-        # swaylock = "${config.programs.swaylock.package}/bin/swaylock";
+        swaylock = "${config.programs.swaylock.package}/bin/swaylock";
         playerctl = "${config.services.playerctld.package}/bin/playerctl";
         playerctld = "${config.services.playerctld.package}/bin/playerctld";
-        # makoctl = "${config.services.mako.package}/bin/makoctl";
+        makoctl = "${config.services.mako.package}/bin/makoctl";
         wofi = "${config.programs.wofi.package}/bin/wofi";
-        # grimblast = "${pkgs.inputs.hyprwm-contrib.grimblast}/bin/grimblast";
+        grimblast = "${pkgs.inputs.hyprwm-contrib.grimblast}/bin/grimblast";
         pactl = "${pkgs.pulseaudio}/bin/pactl";
         # tly = "${pkgs.tly}/bin/tly";
         # gtk-play = "${pkgs.libcanberra-gtk3}/bin/canberra-gtk-play";
@@ -124,12 +124,12 @@
           ",XF86AudioMute,exec,${pactl} set-sink-mute @DEFAULT_SINK@ toggle"
           "SHIFT,XF86AudioMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
           ",XF86AudioMicMute,exec,${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
-          # # Screenshotting
-          # ",Print,exec,${grimblast} --notify --freeze copy output"
-          # "SHIFT,Print,exec,${grimblast} --notify --freeze copy active"
-          # "CONTROL,Print,exec,${grimblast} --notify --freeze copy screen"
-          # "SUPER,Print,exec,${grimblast} --notify --freeze copy area"
-          # "ALT,Print,exec,${grimblast} --notify --freeze copy area"
+          # Screenshotting
+          ",Print,exec,${grimblast} --notify --freeze copy output"
+          "SHIFT,Print,exec,${grimblast} --notify --freeze copy active"
+          "CONTROL,Print,exec,${grimblast} --notify --freeze copy screen"
+          "SUPER,Print,exec,${grimblast} --notify --freeze copy area"
+          "ALT,Print,exec,${grimblast} --notify --freeze copy area"
           # # Tally counter
           # "SUPER,z,exec,${notify-send} -t 1000 $(${tly} time) && ${tly} add && ${gtk-play} -i dialog-information" # Add new entry
           # "SUPERCONTROL,z,exec,${notify-send} -t 1000 $(${tly} time) && ${tly} undo && ${gtk-play} -i dialog-warning" # Undo last entry
@@ -146,24 +146,39 @@
           "ALT,XF86AudioPrev,exec,${playerctld} unshift"
           "ALT,XF86AudioPlay,exec,systemctl --user restart playerctld"
         ])
-        # ++
-        # # Screen lock
-        # (lib.optionals config.programs.swaylock.enable [
-        #   ",XF86Launch5,exec,${swaylock} -i ${config.wallpaper}"
-        #   ",XF86Launch4,exec,${swaylock} -i ${config.wallpaper}"
-        #   "SUPER,backspace,exec,${swaylock} -i ${config.wallpaper}"
-        # ])
-        # ++
-        # # Notification manager
-        # (lib.optionals config.services.mako.enable [
-        #   "SUPER,w,exec,${makoctl} dismiss"
-        # ])
+        ++
+        # Screen lock
+        (lib.optionals config.programs.swaylock.enable [
+          ",XF86Launch5,exec,${swaylock} -i ${config.wallpaper}"
+          ",XF86Launch4,exec,${swaylock} -i ${config.wallpaper}"
+          "SUPER,backspace,exec,${swaylock} -i ${config.wallpaper}"
+        ])
+        ++
+        # Notification manager
+        (lib.optionals config.services.mako.enable [
+          "SUPER,w,exec,${makoctl} dismiss"
+        ])
         ++
         # Launcher
         (lib.optionals config.programs.wofi.enable [
           "SUPER,x,exec,${wofi} -S drun -x 10 -y 10 -W 25% -H 60%"
           "SUPER,d,exec,${wofi} -S run"
         ]);
+
+      monitor = map (
+        m: let
+          resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+          position = "${toString m.x}x${toString m.y}";
+        in "${m.name},${
+          if m.enabled
+          then "${resolution},${position},1"
+          else "disable"
+        }"
+      ) (config.monitors);
+
+      workspace = map (
+        m: "${m.name},${m.workspace}"
+      ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors);
     };
   };
 }
