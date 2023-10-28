@@ -23,6 +23,8 @@
     enable = true;
     package = pkgs.inputs.hyprland.hyprland;
 
+    enableNvidiaPatches = true;
+
     settings = {
       general = {
         gaps_in = 15;

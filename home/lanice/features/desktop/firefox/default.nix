@@ -7,6 +7,7 @@
   programs.firefox = {
     enable = true;
     profiles.lanice = {
+      bookmarks = {};
       extensions = with pkgs.inputs.firefox-addons; [
         ublock-origin
         bitwarden
@@ -22,7 +23,6 @@
         tree-style-tab
         tst-tab-search
       ];
-      bookmarks = {};
       settings = {
         "beacon.enabled" = false;
         "browser.contentblocking.category" = "strict";

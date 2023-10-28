@@ -24,6 +24,7 @@
     ./hardware-configuration.nix
 
     ../common/global
+    ../common/nvidia.nix
     ../common/greetd.nix
     ../common/tailscale.nix
   ];

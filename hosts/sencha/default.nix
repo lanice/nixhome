@@ -24,6 +24,7 @@
     ./hardware-configuration.nix
 
     ../common/global
+    ../common/nvidia.nix
     ../common/greetd.nix
     ../common/tailscale.nix
 
@@ -46,6 +47,10 @@
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   powerManagement.powertop.enable = true;
+
+  programs = {
+    dconf.enable = true;
+  };
 
   hardware = {
     nvidia = {
