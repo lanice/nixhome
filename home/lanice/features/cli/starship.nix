@@ -15,7 +15,7 @@
 
       memory_usage = {
         disabled = false;
-        symbol = " ";
+        symbol = "󰍛 ";
       };
 
       rust = {
@@ -30,12 +30,12 @@
 
       shlvl = {
         disabled = false;
-        symbol = "ﰬ";
+        symbol = "󰜮";
       };
 
       shell = {
         disabled = false;
-        fish_indicator = "";
+        fish_indicator = "󰈺";
       };
 
       nix_shell = {
@@ -67,7 +67,7 @@
         folder_number = {
           command = "find . -maxdepth 1 -type d -not -name '.git' -not -name '.' | wc -l";
           when = "exit 0";
-          symbol = " ";
+          symbol = "󰉕 ";
           description = "Number of folders in the current working directory";
           format = "[$symbol$output]($style) ";
           style = "fg:yellow bold"; # terminus different

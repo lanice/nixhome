@@ -4,8 +4,8 @@
     monospace = {
       family = "GoMono Nerd Font Mono";
       package = pkgs.nerdfonts.override {fonts = ["Go-Mono"];}; # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
-      # family = "Iosevka Term";
-      # package = pkgs.iosevka-bin.override {variant = "sgr-iosevka-term";};
+      # family = "IosevkaTerm Nerd Font Mono";
+      # package = pkgs.nerdfonts.override {fonts = ["IosevkaTerm"];}; # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
     };
     regular = {
       family = "Fira Sans";
