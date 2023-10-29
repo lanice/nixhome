@@ -28,4 +28,6 @@ in {
   };
 
   home-manager.users.lanice = import ../../../home/lanice/${config.networking.hostName}.nix;
+
+  security.pam.services = {swaylock = {};};
 }
