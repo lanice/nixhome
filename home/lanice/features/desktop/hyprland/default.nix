@@ -27,22 +27,30 @@
 
     settings = {
       general = {
-        gaps_in = 15;
-        gaps_out = 20;
-        border_size = 2.7;
+        layout = "dwindle";
+        gaps_in = 5; #15;
+        gaps_out = 10; #20;
+        border_size = 2; #2.7;
         cursor_inactive_timeout = 4;
         "col.active_border" = "0xff${config.colorscheme.colors.base0C}";
         "col.inactive_border" = "0xff${config.colorscheme.colors.base02}";
       };
       group = {
-        # "col.border_active" = "0xff${config.colorscheme.colors.base0B}";
-        # "col.border_inactive" = "0xff${config.colorscheme.colors.base04}";
+        "col.border_active" = "0xff${config.colorscheme.colors.base0B}";
+        "col.border_inactive" = "0xff${config.colorscheme.colors.base04}";
       };
       input = {
         kb_layout = "us";
-        touchpad.disable_while_typing = false;
+        follow_mouse = 2; #1;
+        touchpad = {
+          disable_while_typing = false;
+          natural_scroll = true;
+        };
       };
-      dwindle.split_width_multiplier = 1.35;
+      dwindle = {
+        # preserve_split = true; # maybe?
+        split_width_multiplier = 1.35;
+      };
       misc.vfr = true;
 
       decoration = {
@@ -86,9 +94,9 @@
         ];
       };
 
-      # exec = [
-      #   "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill"
-      # ];
+      exec = [
+        "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill"
+      ];
 
       bind = let
         swaylock = "${config.programs.swaylock.package}/bin/swaylock";
