@@ -27,6 +27,8 @@
     pscale
 
     alejandra # Nix formatter
+
+    neofetch
   ];
 
   programs.nix-index.enable = true;
