@@ -9,7 +9,7 @@
     modesetting.enable = true;
     # Power management is required to get nvidia GPUs to behave on
     # suspend, due to firmware bugs. Aren't nvidia great?
-    powerManagement.enable = true;
+    powerManagement.enable = lib.mkDefault true;
   };
 
   boot.extraModprobeConfig =
@@ -37,7 +37,7 @@
     # Firefox.
     LIBVA_DRIVER_NAME = "nvidia";
     # Required to run the correct GBM backend for nvidia GPUs on wayland
-    GBM_BACKEND = "nvidia-drm";
+    #    GBM_BACKEND = "nvidia-drm";
     # Apparently, without this nouveau may attempt to be used instead
     # (despite it being blacklisted)
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
