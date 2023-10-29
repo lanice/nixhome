@@ -112,7 +112,7 @@
     # closeWhenEmpty = false;
   };
   workbench = {
-    colorTheme = "GitHub Light";
+    colorTheme = "Catppuccin Latte";
     iconTheme = "material-icon-theme";
     settings.editor = "json";
     editorAssociations = {

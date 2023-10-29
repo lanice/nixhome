@@ -28,6 +28,7 @@ with pkgs.vscode-extensions;
     usernamehw.errorlens
     eamodio.gitlens
 
+    catppuccin.catppuccin-vsc
     github.github-vscode-theme
     pkief.material-icon-theme
 

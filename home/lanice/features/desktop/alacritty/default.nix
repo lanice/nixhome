@@ -26,30 +26,74 @@ in {
         primary = {
           background = "#${colors.base00}";
           foreground = "#${colors.base05}";
+          dim_foreground = "#${colors.base05}";
+          bright_foreground = "#${colors.base05}";
         };
         cursor = {
           text = "#${colors.base00}";
-          cursor = "#${colors.base05}";
+          cursor = "#${colors.base06}";
+        };
+        vi_mode_cursor = {
+          text = "#${colors.base00}";
+          cursor = "#${colors.base07}";
+        };
+        search = {
+          matches = {
+            foreground = "#${colors.base00}";
+            background = "#${colors.base05}";
+          };
+          focused_match = {
+            foreground = "#${colors.base00}";
+            background = "#${colors.base0B}";
+          };
+          footer_bar = {
+            foreground = "#${colors.base00}";
+            background = "#${colors.base05}";
+          };
+        };
+        hints = {
+          start = {
+            foreground = "#${colors.base00}";
+            background = "#${colors.base0A}";
+          };
+          end = {
+            foreground = "#${colors.base00}";
+            background = "#${colors.base04}";
+          };
+        };
+        selection = {
+          text = "#${colors.base00}";
+          background = "#${colors.base06}";
         };
         normal = {
-          black = "#${colors.base08}";
-          red = "#${colors.base09}";
-          green = "#${colors.base0A}";
-          yellow = "#${colors.base0B}";
-          blue = "#${colors.base0C}";
-          magenta = "#${colors.base0D}";
-          cyan = "#${colors.base0E}";
-          white = "#${colors.base0F}";
+          black = "#${colors.base05}";
+          red = "#${colors.base08}";
+          green = "#${colors.base0B}";
+          yellow = "#${colors.base0A}";
+          blue = "#${colors.base0D}";
+          magenta = "#${colors.base0F}";
+          cyan = "#${colors.base0C}";
+          white = "#${colors.base04}";
         };
         bright = {
-          black = "#${colors.base00}";
-          red = "#${colors.base01}";
-          green = "#${colors.base02}";
-          yellow = "#${colors.base03}";
-          blue = "#${colors.base04}";
-          magenta = "#${colors.base05}";
-          cyan = "#${colors.base06}";
-          white = "#${colors.base07}";
+          black = "#${colors.base04}";
+          red = "#${colors.base08}";
+          green = "#${colors.base0B}";
+          yellow = "#${colors.base0A}";
+          blue = "#${colors.base0D}";
+          magenta = "#${colors.base0F}";
+          cyan = "#${colors.base0C}";
+          white = "#${colors.base02}";
+        };
+        dim = {
+          black = "#${colors.base05}";
+          red = "#${colors.base08}";
+          green = "#${colors.base0B}";
+          yellow = "#${colors.base0A}";
+          blue = "#${colors.base0D}";
+          magenta = "#${colors.base0F}";
+          cyan = "#${colors.base0C}";
+          white = "#${colors.base04}";
         };
       };
       theme = config.colorscheme.slug;
