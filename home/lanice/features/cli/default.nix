@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   imports = [
+    ./neofetch
     ./bash.nix
     ./broot.nix
     ./fish.nix
@@ -27,8 +28,6 @@
     pscale
 
     alejandra # Nix formatter
-
-    neofetch
   ];
 
   programs.nix-index.enable = true;

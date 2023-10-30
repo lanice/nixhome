@@ -14,6 +14,7 @@
         addy_io
         skip-redirect
         omnivore
+        kagi-search
         toolkit-for-ynab
         multi-account-containers
 
