@@ -9,6 +9,7 @@
     profiles.lanice = {
       bookmarks = {};
       extensions = with pkgs.inputs.firefox-addons; [
+        # https://gitlab.com/rycee/nur-expressions/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix
         ublock-origin
         bitwarden
         addy_io
@@ -17,6 +18,7 @@
         kagi-search
         toolkit-for-ynab
         multi-account-containers
+        sidebery
 
         bypass-paywalls-clean
         anchors-reveal
