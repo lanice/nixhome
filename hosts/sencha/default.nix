@@ -74,6 +74,8 @@
     bluetooth.powerOnBoot = true;
   };
 
+  environment.systemPackages = with pkgs; [nvtop];
+
   #  services.blueman.enable = true;
 
   services.fwupd.enable = true;
