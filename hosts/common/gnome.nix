@@ -21,9 +21,11 @@
       (with pkgs; [
         gnome-photos
         gnome-tour
+        gnome-console
       ])
       ++ (with pkgs.gnome; [
         cheese # webcam tool
+        gnome-maps
         gnome-music
         gedit # text editor
         epiphany # web browser
@@ -36,10 +38,15 @@
         yelp # Help view
         gnome-contacts
         gnome-initial-setup
+
+        gnome-shell-extensions # Superseded by gnome-extension-manager, not actually doing anything
+        gnome-software # Software store, useless in NixOS
       ]);
 
     systemPackages = with pkgs; [
       gnome.gnome-tweaks
+      gnome.dconf-editor
+      dconf2nix
     ];
   };
 
