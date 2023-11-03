@@ -24,8 +24,9 @@
     ./hardware-configuration.nix
 
     ../common/global
-    ../common/nvidia.nix
-    ../common/greetd.nix
+    ../common/gnome.nix
+    #    ../common/nvidia.nix
+    #    ../common/greetd.nix
     ../common/tailscale.nix
 
     # ./syncthing.nix
@@ -54,15 +55,29 @@
 
   hardware = {
     nvidia = {
-      prime.offload.enable = false;
+      prime = {
+        offload.enable = false;
+        sync.enable = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:01:0:0";
+      };
       modesetting.enable = true;
+      open = true;
     };
     opengl = {
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
+      #      mesaPackage = pkgs.mesa_23;
     };
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
   };
+
+  #  services.blueman.enable = true;
+
+  services.fwupd.enable = true;
+  services.flatpak.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
