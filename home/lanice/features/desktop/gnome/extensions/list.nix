@@ -46,10 +46,10 @@ in
       dconfSettings = {};
     }
 
-    {
-      package = media-controls;
-      dconfSettings = {};
-    }
+    # {
+    #   package = media-controls;
+    #   dconfSettings = {};
+    # }
 
     {
       package = caffeine;
