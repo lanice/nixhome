@@ -15,6 +15,7 @@
   ];
   sdLauncher = "${config.home.homeDirectory}/sd-launcher.sh";
   sdnextLauncher = "${config.home.homeDirectory}/sdnext-launcher.sh";
+  comfyuiLauncher = "${config.home.homeDirectory}/comfyui-launcher.sh";
 in {
   programs.bash = {
     shellAliases = {
@@ -22,6 +23,7 @@ in {
       stable-diffusion-admin = "SD_ADMIN=true ${sdLauncher}";
       sdnext = "${sdnextLauncher}";
       sdnext-admin = "SD_ADMIN=true ${sdnextLauncher}";
+      comfy = "${comfyuiLauncher}";
     };
 
     profileExtra = ''
@@ -35,6 +37,7 @@ in {
       stable-diffusion-admin = "SD_ADMIN=true ${sdLauncher}";
       sdnext = "${sdnextLauncher}";
       sdnext-admin = "SD_ADMIN=true ${sdnextLauncher}";
+      comfy = "${comfyuiLauncher}";
     };
 
     shellAbbrs = {
@@ -55,6 +58,7 @@ in {
   home = {
     file."sd-launcher.sh".source = ./sd-launcher.sh;
     file."sdnext-launcher.sh".source = ./sdnext-launcher.sh;
+    file."comfyui-launcher.sh".source = ./comfyui-launcher.sh;
 
     sessionVariables = {
       LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ldLibs;
