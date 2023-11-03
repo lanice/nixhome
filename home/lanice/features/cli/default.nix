@@ -81,4 +81,11 @@
     enable = true;
     settings.email = "leanderneiss+bitwarden@gmail.com";
   };
+
+  programs = {
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+  };
 }
