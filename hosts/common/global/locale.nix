@@ -9,5 +9,5 @@
       "de_DE.UTF-8/UTF-8"
     ];
   };
-  time.timeZone = lib.mkDefault "Europe/Berlin";
+  time.timeZone = lib.mkDefault "America/New_York";
 }
