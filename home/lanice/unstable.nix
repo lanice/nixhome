@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./global
+    ./features/desktop/gnome
     ./features/desktop/alacritty
     ./features/stable-diffusion
   ];
@@ -27,6 +28,8 @@
       ccze
       rcon
     ];
+
+    stateVersion = lib.mkDefault "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   };
 
   programs.fish.shellAbbrs = {
@@ -49,6 +52,4 @@
   #     name = "open-terminal";
   #   };
   # };
-
-  stateVersion = lib.mkDefault "22.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
 }

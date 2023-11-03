@@ -177,30 +177,30 @@ in {
 
     settings = {
       devices = {
-        "GreenGen5" = {id = "I6JCY3B-KPPCAXE-IMRWPTB-MGZKKHV-RZIVWRH-AZXD3HA-HM6Z4BL-VF2QVAH";};
+        "sencha" = {id = "4BN4A3S-EUA2SVD-QNEJHI6-LJKBVWW-7FV4YRE-5YOIQBR-A4CWZLB-OQLGBA6";};
         "Orange Laptop" = {id = "P5ZXGOQ-WYCICPY-3ZS7XKZ-6YKJKUD-U5RXUEA-R64HDVZ-4KHAFNA-CMKZIQN";};
       };
 
       folders = {
         "sd" = {
           path = "/home/lanice/Sync/sd"; # Which folder to add to Syncthing
-          devices = ["GreenGen5"]; # Which devices to share the folder with
+          devices = ["sencha"]; # Which devices to share the folder with
         };
         "sd-misc" = {
           path = "/home/lanice/Sync/sd-misc"; # Which folder to add to Syncthing
-          devices = ["GreenGen5"]; # Which devices to share the folder with
+          devices = ["sencha"]; # Which devices to share the folder with
         };
         "models" = {
           path = "/home/lanice/Sync/models"; # Which folder to add to Syncthing
-          devices = ["GreenGen5"]; # Which devices to share the folder with
+          devices = ["sencha"]; # Which devices to share the folder with
         };
         "stable-diffusion" = {
           path = "/home/lanice/Sync/stable-diffusion"; # Which folder to add to Syncthing
-          devices = ["GreenGen5" "Orange Laptop"]; # Which devices to share the folder with
+          devices = ["sencha" "Orange Laptop"]; # Which devices to share the folder with
         };
         "photo-share" = {
           path = "/home/lanice/Sync/photo-share"; # Which folder to add to Syncthing
-          devices = ["GreenGen5" "Orange Laptop"]; # Which devices to share the folder with
+          devices = ["sencha" "Orange Laptop"]; # Which devices to share the folder with
         };
       };
     };
