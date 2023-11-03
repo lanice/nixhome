@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   services.syncthing = {
     enable = true;
     user = "lanice";
@@ -12,7 +12,7 @@
 
     settings = {
       devices = {
-        "unstable" = {id = "";};
+        "unstable" = {id = "ZSOKQGJ-K55JPO2-W4N75YJ-6NJI64R-HLQTT72-JENBU3L-DU44IG5-BVHIXAS";};
         "Orange Laptop" = {id = "P5ZXGOQ-WYCICPY-3ZS7XKZ-6YKJKUD-U5RXUEA-R64HDVZ-4KHAFNA-CMKZIQN";};
       };
 
@@ -40,4 +40,8 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    syncthingtray
+  ];
 }

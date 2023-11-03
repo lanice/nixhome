@@ -29,7 +29,7 @@
     #    ../common/greetd.nix
     ../common/tailscale.nix
 
-    # ./syncthing.nix
+    ./syncthing.nix
   ];
 
   nixpkgs = {
