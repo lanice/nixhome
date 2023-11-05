@@ -20,6 +20,13 @@ in
         indicator-location = "TOP";
 
         isolate-workspaces = false;
+        isolate-monitors = false;
+
+        unity-badges = false;
+        notification-badges = false;
+
+        show-panel-activities-button = false;
+        show-apps-button = mkTuple [true 0];
 
         window-previews-show-timeout = 0;
         window-previews-hide-timeout = 0;
