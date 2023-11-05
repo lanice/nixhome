@@ -2,8 +2,6 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
-  outputs,
-  lib,
   config,
   pkgs,
   ...
@@ -13,23 +11,20 @@
     # outputs.nixosModules.example
 
     # Or modules from other flakes (such as nixos-hardware):
-    inputs.hardware.nixosModules.common-cpu-intel
-    inputs.hardware.nixosModules.common-pc-ssd
+    inputs.hardware.nixosModules.lenovo-thinkpad-p1
     inputs.hardware.nixosModules.common-gpu-nvidia
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
-    ../common/global
-    ../common/gnome.nix
-    #    ../common/nvidia.nix
-    #    ../common/greetd.nix
-    ../common/tailscale.nix
-
     ./syncthing.nix
+    ../common/global
+    ../common/tailscale.nix
+    ../common/pipewire.nix
+
+    ../common/gnome.nix
+    # ../common/greetd.nix
+    # ../common/nvidia.nix
   ];
 
   nixpkgs = {
@@ -50,7 +45,13 @@
   powerManagement.powertop.enable = true;
 
   programs = {
+    light.enable = true;
     dconf.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
   };
 
   hardware = {
@@ -68,13 +69,13 @@
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
-      #      mesaPackage = pkgs.mesa_23;
+      # mesaPackage = pkgs.mesa_23;
     };
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
   };
 
-  environment.systemPackages = with pkgs; [nvtop];
+  environment.systemPackages = with pkgs; [nvtop libva-utils];
 
   #  services.blueman.enable = true;
 
