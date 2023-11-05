@@ -8,6 +8,7 @@
   imports = [
     ./global # includes features/cli,features/helix
     ./features/email
+    ./features/maestral
     ./features/desktop/firefox
     ./features/desktop/vscode
     ./features/desktop/alacritty
@@ -43,8 +44,6 @@
   #     # enabled = false;
   #   }
   # ];
-
-  services.dropbox.enable = true;
 
   home = {
     sessionVariables = {
