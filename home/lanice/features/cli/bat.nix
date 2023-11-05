@@ -4,7 +4,7 @@
     then "GitHub"
     else "1337";
 in {
-  programs.git = {
+  programs.bat = {
     enable = true;
     config = {
       theme = theme;

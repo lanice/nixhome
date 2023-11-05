@@ -2,6 +2,7 @@
   imports = [
     ./neofetch
     ./bash.nix
+    ./bat.nix
     ./broot.nix
     ./fish.nix
     ./git.nix
@@ -12,7 +13,6 @@
 
   home.packages = with pkgs; [
     # Rust CLI tools
-    bat # Better cat
     bottom # System viewer
     dua # Disk Usage Analyzer
     fd # Better find
