@@ -57,6 +57,7 @@
       telegram-desktop
       zoom-us
       whatsapp-for-linux
+      fractal
 
       obsidian
       spotify
