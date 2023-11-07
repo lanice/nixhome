@@ -28,6 +28,9 @@ in
         show-panel-activities-button = false;
         show-apps-button = mkTuple [true 0];
 
+        click-action = "CYCLE";
+
+        window-previews = false;
         window-previews-show-timeout = 0;
         window-previews-hide-timeout = 0;
       };

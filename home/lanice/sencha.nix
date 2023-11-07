@@ -56,6 +56,7 @@
       discord
       telegram-desktop
       zoom-us
+      whatsapp-for-linux
 
       obsidian
       spotify

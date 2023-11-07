@@ -42,7 +42,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
-  powerManagement.powertop.enable = true;
+  powerManagement.powertop.enable = false;
 
   programs = {
     light.enable = true;
