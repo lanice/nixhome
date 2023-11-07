@@ -11,6 +11,8 @@
     profiles.lanice = {
       isDefault = true;
       settings = {
+        "mail.identity.default.reply_on_top" = 1;
+        "mail.identity.default.sig_bottom" = false;
         # "font.size.variable.x-western" = 16;
         "mailnews.default_sort_order" = 2; # descending order
         "mailnews.default_sort_type" = 18; # sort by date
@@ -32,6 +34,9 @@
       realName = "Leander Neiß";
       # passwordCommand = "${pkgs.rbw}/bin/rbw get gmail-apppassword-leanderneiss";
       thunderbird.enable = true;
+      thunderbird.settings = id: {
+        "mail.smtpserver.smtp_${id}.authMethod" = 10; # oauth
+      };
     };
 
     accounts.posteo = {
