@@ -21,6 +21,7 @@
     ../common/global
     ../common/tailscale.nix
     ../common/pipewire.nix
+    ../common/virtualisation.nix
 
     ../common/gnome.nix
     # ../common/greetd.nix

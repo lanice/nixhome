@@ -14,6 +14,7 @@
         "Alacritty.desktop"
         "thunderbird.desktop"
         "org.telegram.desktop.desktop"
+        "discord.desktop"
         "spotify.desktop"
         "org.gnome.Nautilus.desktop"
       ];

@@ -32,6 +32,7 @@ in {
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ../common/tailscale.nix
+    ../common/virtualisation.nix
     ../common/minecraft-servers.nix
     ../common/gnome.nix
     ../common/steam.nix
@@ -128,18 +129,6 @@ in {
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
       extraGroups = ["networkmanager" "wheel" "docker"];
-    };
-  };
-
-  virtualisation = {
-    podman = {
-      enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
     };
   };
 

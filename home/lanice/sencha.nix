@@ -63,6 +63,8 @@
 
       bitwarden
 
+      distrobox
+
       xorg.xrandr
     ];
 
