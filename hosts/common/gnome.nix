@@ -27,7 +27,7 @@
         cheese # webcam tool
         gnome-maps
         gnome-music
-        gedit # text editor
+        # gedit # text editor
         epiphany # web browser
         geary # email reader
         gnome-characters

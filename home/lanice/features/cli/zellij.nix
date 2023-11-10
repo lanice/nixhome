@@ -2,8 +2,8 @@
   programs.zellij = {
     enable = true;
 
-    settings = {
-      theme = "default";
-    };
+    # settings = {
+    #   theme = "default";
+    # };
   };
 }

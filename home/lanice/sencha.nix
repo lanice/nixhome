@@ -18,10 +18,6 @@
     # ./features/desktop/hyprland
   ];
 
-  # colorscheme = inputs.nix-colors.colorschemes.gigavolt;
-  colorscheme = inputs.nix-colors.colorschemes.catppuccin-latte;
-  wallpaper = outputs.wallpapers.watercolor-beach;
-
   #  -------   ----------
   # | eDP-1 | | HDMI-1-0 |
   #  -------   ----------

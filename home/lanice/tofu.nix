@@ -1,8 +1,6 @@
 {
   pkgs,
   lib,
-  inputs,
-  outputs,
   ...
 }: {
   imports = [
@@ -12,9 +10,6 @@
     ./features/desktop/vscode
     ./features/desktop/alacritty
   ];
-
-  colorscheme = inputs.nix-colors.colorschemes.tokyo-night-storm;
-  wallpaper = outputs.wallpapers.watercolor-beach;
 
   monitors = [
     {

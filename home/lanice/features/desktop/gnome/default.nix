@@ -21,7 +21,7 @@
 
     "org/gnome/desktop/interface" = {
       enable-hot-corners = false;
-      cursor-size = 33;
+      # cursor-size = 33;
     };
 
     "org/gnome/mutter" = {

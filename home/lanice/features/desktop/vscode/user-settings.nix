@@ -7,7 +7,7 @@
     accessibilitySupport = "off";
     detectIndentation = true;
     find.seedSearchStringFromSelection = "always";
-    fontFamily = fontFamily;
+    # fontFamily = fontFamily;
     fontLigatures = false;
     fontSize = 14;
     formatOnSave = true;
@@ -79,9 +79,9 @@
   search.exclude = {
     "**/.vscode/**" = true;
   };
-  terminal = {
-    integrated.fontFamily = fontFamily;
-  };
+  # terminal = {
+  #   integrated.fontFamily = fontFamily;
+  # };
   todohighlight = {
     isEnable = true;
     include = [
@@ -112,7 +112,7 @@
     # closeWhenEmpty = false;
   };
   workbench = {
-    colorTheme = "Catppuccin Latte";
+    # colorTheme = "Catppuccin Latte";
     iconTheme = "material-icon-theme";
     settings.editor = "json";
     editorAssociations = {

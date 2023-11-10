@@ -27,6 +27,8 @@
     # ../common/nvidia.nix
   ];
 
+  theme = "catppuccin-latte";
+
   nixpkgs = {
     overlays = [];
     config.allowUnfree = true;
