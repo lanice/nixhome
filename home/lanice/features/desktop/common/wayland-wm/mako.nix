@@ -7,7 +7,7 @@ in {
       if kind == "dark"
       then "${config.gtk.iconTheme.package}/share/icons/Papirus-Dark"
       else "${config.gtk.iconTheme.package}/share/icons/Papirus-Light";
-    font = "${config.fontProfiles.regular.family} 12";
+    font = "${config.stylix.fonts.sansSerif.name} 12";
     padding = "10,20";
     anchor = "top-center";
     width = 400;

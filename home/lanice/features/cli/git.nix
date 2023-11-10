@@ -1,11 +1,10 @@
-# {config, ...}: let
-#   light = config.lib.stylix.colors.polarity == "light";
-#   syntax-theme =
-#     if light
-#     then "GitHub"
-#     else "1337";
-# in
-{
+{config, ...}: let
+  light = config.stylix.polarity == "light";
+  syntax-theme =
+    if light
+    then "GitHub"
+    else "1337";
+in {
   programs.git = {
     enable = true;
     userName = "Leander Neiß";
@@ -22,8 +21,8 @@
         navigate = true;
         line-numbers = true;
         side-by-side = false;
-        # syntax-theme = syntax-theme;
-        # light = light;
+        syntax-theme = syntax-theme;
+        light = light;
       };
     };
 

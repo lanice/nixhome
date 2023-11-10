@@ -1,11 +1,11 @@
-{ config, ... }:
-let inherit (config.colorscheme) colors;
+{config, ...}: let
+  inherit (config.colorscheme) colors;
 in {
   programs.zathura = {
     enable = true;
     options = {
       selection-clipboard = "clipboard";
-      font = "${config.fontProfiles.regular.family} 12";
+      font = "${config.stylix.fonts.sansSerif.name} 12";
       recolor = true;
       default-bg = "#${colors.base00}";
       default-fg = "#${colors.base01}";
