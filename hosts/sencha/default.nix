@@ -30,11 +30,6 @@
 
   theme = "catppuccin-latte";
 
-  nixpkgs = {
-    overlays = [];
-    config.allowUnfree = true;
-  };
-
   networking = {
     hostName = "sencha";
     networkmanager.enable = true;

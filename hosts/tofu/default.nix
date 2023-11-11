@@ -29,11 +29,6 @@
     ../common/tailscale.nix
   ];
 
-  nixpkgs = {
-    overlays = [];
-    config.allowUnfree = true;
-  };
-
   networking = {
     hostName = "tofu";
     networkmanager.enable = true;

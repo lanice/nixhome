@@ -47,15 +47,15 @@
     username = lib.mkDefault "lanice";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
 
+    sessionVariables = {
+      FLAKE = "$HOME/nixhome";
+    };
+
     # Produce a nice diff of added/removed/changed packages after home-manager switch
     # activation.report-changes = config.lib.dag.entryAnywhere ''
     #   ${pkgs.nvd}/bin/nvd diff $(ls -d1v /nix/var/nix/profiles/per-user/${config.home.username}/profile-*-link | tail -2)
     # '';
-
-    sessionVariables.NIX_PATH = "nixpkgs=${config.xdg.configHome}/nix/inputs/nixpkgs$\{NIX_PATH:+:$NIX_PATH}";
   };
-
-  xdg.configFile."nix/inputs/nixpkgs".source = inputs.nixpkgs.outPath;
 
   home.file.".colorscheme".text = config.lib.stylix.colors.slug;
 }
