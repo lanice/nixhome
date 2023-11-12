@@ -34,7 +34,7 @@ in {
         theme_name = laniceCfg.gtk.theme.name;
       };
       background = {
-        path = laniceCfg.wallpaper;
+        path = config.stylix.image;
         fit = "Cover";
       };
     };

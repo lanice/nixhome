@@ -5,7 +5,6 @@
     ./swayidle.nix
     ./waybar.nix
     ./wofi.nix
-    ./zathura.nix
   ];
 
   xdg.mimeApps.enable = true;

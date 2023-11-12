@@ -10,8 +10,8 @@
   themePath = "../../../../themes/" + theme + "/";
   scheme = themePath + theme + ".yaml";
   themePolarity = lib.removeSuffix "\n" (builtins.readFile (./. + themePath + "/polarity.txt"));
-  # backgroundUrl = builtins.readFile (./. + themePath + "/backgroundurl.txt");
-  # backgroundSha256 = builtins.readFile (./. + themePath + "/backgroundsha256.txt");
+  backgroundUrl = builtins.readFile (./. + themePath + "/backgroundurl.txt");
+  backgroundSha256 = builtins.readFile (./. + themePath + "/backgroundsha256.txt");
 in {
   imports = [inputs.stylix.nixosModules.stylix];
 
@@ -19,12 +19,12 @@ in {
     base16Scheme = ./. + scheme;
     polarity = themePolarity;
 
-    # image = pkgs.fetchurl {
-    #   url = backgroundUrl;
-    #   sha256 = backgroundSha256;
-    # };
+    image = pkgs.fetchurl {
+      url = backgroundUrl;
+      sha256 = backgroundSha256;
+    };
 
-    image = ../../../themes/background.webp;
+    # image = ../../../themes/background.webp;
 
     fonts = {
       monospace = {

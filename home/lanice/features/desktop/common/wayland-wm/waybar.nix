@@ -307,7 +307,7 @@ in {
     # x y z -> top, horizontal, bottom
     # w x y z -> top, right, bottom, left
     style = let
-      inherit (config.colorscheme) colors;
+      inherit (config.lib.stylix) colors;
     in
       /*
       css

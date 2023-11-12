@@ -32,13 +32,13 @@
         gaps_out = 10; #20;
         border_size = 2; #2.7;
         cursor_inactive_timeout = 4;
-        "col.active_border" = "0xff${config.colorscheme.colors.base0C}";
-        "col.inactive_border" = "0xff${config.colorscheme.colors.base02}";
+        # "col.active_border" = "0xff${config.lib.stylix.colors.base0C}";
+        # "col.inactive_border" = "0xff${config.lib.stylix.colors.base02}";
       };
-      group = {
-        "col.border_active" = "0xff${config.colorscheme.colors.base0B}";
-        "col.border_inactive" = "0xff${config.colorscheme.colors.base04}";
-      };
+      # group = {
+      #   "col.border_active" = "0xff${config.lib.stylix.colors.base0B}";
+      #   "col.border_inactive" = "0xff${config.lib.stylix.colors.base04}";
+      # };
       input = {
         kb_layout = "us";
         follow_mouse = 2; #1;
@@ -68,7 +68,7 @@
         drop_shadow = true;
         shadow_range = 12;
         shadow_offset = "3 3";
-        "col.shadow" = "0x44000000";
+        # "col.shadow" = "0x44000000";
         "col.shadow_inactive" = "0x66000000";
       };
       animations = {
@@ -95,7 +95,7 @@
       };
 
       exec = [
-        "${pkgs.swaybg}/bin/swaybg -i ${config.wallpaper} --mode fill"
+        "${pkgs.swaybg}/bin/swaybg -i ${config.stylix.image} --mode fill"
       ];
 
       bind = let
@@ -157,9 +157,9 @@
         ++
         # Screen lock
         (lib.optionals config.programs.swaylock.enable [
-          ",XF86Launch5,exec,${swaylock} -i ${config.wallpaper}"
-          ",XF86Launch4,exec,${swaylock} -i ${config.wallpaper}"
-          "SUPER,backspace,exec,${swaylock} -i ${config.wallpaper}"
+          ",XF86Launch5,exec,${swaylock} -i ${config.stylix.image}"
+          ",XF86Launch4,exec,${swaylock} -i ${config.stylix.image}"
+          "SUPER,backspace,exec,${swaylock} -i ${config.stylix.image}"
         ])
         ++
         # Notification manager
@@ -179,7 +179,7 @@
           position = "${toString m.x}x${toString m.y}";
         in "${m.name},${
           if m.enabled
-          then "${resolution},${position},1"
+          then "${resolution},${position},${m.scale}"
           else "disable"
         }"
       ) (config.monitors);
