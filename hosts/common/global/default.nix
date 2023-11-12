@@ -11,7 +11,6 @@
       ./fish.nix
       ./locale.nix
       ./nix.nix
-      ./stylix.nix
       ./systemd-boot.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);

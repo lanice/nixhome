@@ -5,11 +5,11 @@
   pkgs,
   ...
 }: let
-  theme = config.theme;
+  themePath = "/" + config.theme;
 
-  themePath = "../../../../themes/" + theme + "/";
-  scheme = themePath + theme + ".yaml";
+  scheme = themePath + "/" + config.theme + ".yaml";
   themePolarity = lib.removeSuffix "\n" (builtins.readFile (./. + themePath + "/polarity.txt"));
+
   backgroundUrl = builtins.readFile (./. + themePath + "/backgroundurl.txt");
   backgroundSha256 = builtins.readFile (./. + themePath + "/backgroundsha256.txt");
 in {

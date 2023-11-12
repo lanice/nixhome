@@ -28,7 +28,8 @@
     # ../common/nvidia.nix
   ];
 
-  theme = "catppuccin-latte";
+    ../../themes/catppuccin-latte
+  ];
 
   networking = {
     hostName = "sencha";

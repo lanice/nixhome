@@ -4,6 +4,7 @@
     ./bash.nix
     ./bat.nix
     ./broot.nix
+    ./btop.nix
     ./fish.nix
     ./git.nix
     ./starship.nix
@@ -35,7 +36,6 @@
 
   programs.zoxide.enable = true;
   programs.navi.enable = true;
-  programs.btop.enable = true;
   programs.thefuck.enable = true;
 
   programs.mcfly = {
