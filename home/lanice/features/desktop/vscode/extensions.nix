@@ -18,7 +18,7 @@ with pkgs.vscode-extensions;
     ms-toolsai.jupyter
     ms-vscode-remote.remote-ssh
 
-    github.copilot
+    # github.copilot
     # github.copilot-chat
     dbaeumer.vscode-eslint
     esbenp.prettier-vscode

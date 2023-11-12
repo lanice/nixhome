@@ -9,6 +9,7 @@
   imports =
     [
       inputs.nix-index-database.hmModules.nix-index
+      ./mimeapps.nix
       ../features/cli
       ../features/helix
     ]
