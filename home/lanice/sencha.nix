@@ -14,8 +14,8 @@
     ./features/desktop/alacritty
     ./features/desktop/wezterm
 
-    # ./features/desktop/gnome
-    ./features/desktop/hyprland
+    ./features/desktop/gnome
+    # ./features/desktop/hyprland
   ];
 
   #  -------   ----------

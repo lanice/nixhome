@@ -26,7 +26,6 @@
     ../common/gnome.nix
     # ../common/greetd.nix
     # ../common/nvidia.nix
-  ];
 
     ../../themes/catppuccin-latte
   ];
