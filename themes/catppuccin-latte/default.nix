@@ -23,6 +23,12 @@
     };
     home.file.".config/btop/themes/catppuccin-latte.theme".source = ./btop-catppuccin-latte.theme;
 
+    stylix.targets.rofi.enable = false;
+    programs.rofi.theme = builtins.fetchurl {
+      url = "https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-latte.rasi";
+      sha256 = "sha256:1qkb19lpl2qpfvxyyw0rp05k92al2m7s59rpxpmmf99rblgs9313";
+    };
+
     # Seems not to work atm
     # programs.discocss = {
     #   enable = true;

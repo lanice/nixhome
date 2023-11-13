@@ -3,6 +3,7 @@
     ./gtk.nix
     ./playerctl.nix
     ./qt.nix
+    ./rofi.nix
     ./zathura.nix
   ];
 
