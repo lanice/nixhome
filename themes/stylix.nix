@@ -24,7 +24,7 @@ in {
       sha256 = backgroundSha256;
     };
 
-    # image = ../../../themes/background.webp;
+    # image = ./background.webp;
 
     fonts = {
       monospace = {
