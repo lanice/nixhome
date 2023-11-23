@@ -2,7 +2,7 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = false;
-    enableTransience = true;
+    # enableTransience = true;
 
     settings = {
       add_newline = true;

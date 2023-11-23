@@ -14,11 +14,17 @@
         bitwarden
         addy_io
         skip-redirect
-        omnivore
         kagi-search
         toolkit-for-ynab
         multi-account-containers
         sidebery
+
+        # TODO: Go back to unpinned omnivore when https://github.com/omnivore-app/omnivore/issues/3100 is resolved
+        # omnivore
+        pkgs.inputs.firefox-addons-omnivore.omnivore
+
+        # Firefox addons come from an external flake and don't respect my nixpkgs.allowUnfree setting
+        (lastpass-password-manager.overrideAttrs {meta.license.free = true;})
 
         bypass-paywalls-clean
         anchors-reveal

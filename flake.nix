@@ -32,10 +32,12 @@
     hyprwm-contrib.url = "github:hyprwm/contrib";
     hyprwm-contrib.inputs.nixpkgs.follows = "nixpkgs";
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
+
+    # firefox-addons-omnivore.url = "gitlab:rycee/nur-expressions/-/tree/c29ffd949fc3c46abb59f9cc602776a14f597262/pkgs/firefox-addons";
+    firefox-addons-omnivore.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons&rev=c29ffd949fc3c46abb59f9cc602776a14f597262";
+    firefox-addons-omnivore.inputs.nixpkgs.follows = "nixpkgs";
 
     stylix.url = "github:danth/stylix";
   };

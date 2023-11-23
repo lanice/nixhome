@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./global
+    ./features/distrobox
     ./features/desktop/gnome
     ./features/desktop/alacritty
     ./features/stable-diffusion
@@ -23,7 +24,6 @@
       # firefox
       # discord
       rustup
-      distrobox
       multitail
       ccze
       rcon

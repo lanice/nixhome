@@ -20,7 +20,7 @@
     multiCursorModifier = "ctrlCmd";
     renderIndentGuides = true;
     renderWhitespace = "boundary";
-    rulers = [80 120];
+    rulers = [100];
     scrollBeyondLastLine = true;
     showFoldingControls = "never";
     snippetSuggestions = "bottom";

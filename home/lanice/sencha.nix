@@ -9,10 +9,14 @@
     ./global # includes features/cli,features/helix
     ./features/email
     ./features/maestral
+    ./features/distrobox
     ./features/desktop/firefox
     ./features/desktop/vscode
     ./features/desktop/alacritty
     ./features/desktop/wezterm
+    ./features/desktop/office
+
+    ./features/ottertune
 
     ./features/desktop/gnome
     # ./features/desktop/hyprland
@@ -66,8 +70,6 @@
       sxiv
 
       bitwarden
-
-      distrobox
 
       xorg.xrandr
     ];

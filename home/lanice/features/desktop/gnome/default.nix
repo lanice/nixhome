@@ -12,6 +12,7 @@
         "firefox.desktop"
         "code.desktop"
         "Alacritty.desktop"
+        "slack.desktop"
         "thunderbird.desktop"
         "org.telegram.desktop.desktop"
         "discord.desktop"

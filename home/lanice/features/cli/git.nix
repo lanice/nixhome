@@ -7,7 +7,7 @@
 in {
   programs.git = {
     enable = true;
-    userName = "Leander Neiß";
+    userName = "Leander Neiss";
     userEmail = "1871704+lanice@users.noreply.github.com";
 
     aliases = {
