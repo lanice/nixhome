@@ -19,6 +19,7 @@
     fd # Better find
     ripgrep # Better grep
     duf # Better df
+    dirstat-rs # Fast, cross-platform disk usage CLI
 
     htop
     wtf
