@@ -26,9 +26,9 @@ in
         notification-badges = false;
 
         show-panel-activities-button = false;
-        show-apps-button = mkTuple [true 0];
+        show-apps-button = mkTuple [false 0];
 
-        click-action = "CYCLE";
+        click-action = "RAISE";
 
         window-previews = false;
         window-previews-show-timeout = 0;

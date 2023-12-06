@@ -3,7 +3,7 @@
     renderSideBySide = true;
   };
   editor = {
-    acceptSuggestionOnEnter = "off";
+    acceptSuggestionOnEnter = "on";
     accessibilitySupport = "off";
     detectIndentation = true;
     find.seedSearchStringFromSelection = "always";

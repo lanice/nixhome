@@ -22,6 +22,7 @@
     ../common/tailscale.nix
     ../common/pipewire.nix
     ../common/virtualisation.nix
+    ../common/steam.nix
 
     ../common/gnome.nix
     # ../common/greetd.nix

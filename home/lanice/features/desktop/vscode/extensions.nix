@@ -12,6 +12,8 @@ with pkgs.vscode-extensions;
     bmalehorn.vscode-fish
     rust-lang.rust-analyzer
 
+    # arrterian.nix-env-selector
+
     ms-python.python
     ms-python.vscode-pylance
     ms-python.isort

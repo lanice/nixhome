@@ -17,7 +17,7 @@
         kagi-search
         toolkit-for-ynab
         multi-account-containers
-        sidebery
+        link-cleaner
 
         # TODO: Go back to unpinned omnivore when https://github.com/omnivore-app/omnivore/issues/3100 is resolved
         # omnivore
@@ -27,10 +27,7 @@
         (lastpass-password-manager.overrideAttrs {meta.license.free = true;})
 
         bypass-paywalls-clean
-        anchors-reveal
-        link-cleaner
-        tree-style-tab
-        tst-tab-search
+        stylus
       ];
       settings = {
         "beacon.enabled" = false;

@@ -63,6 +63,8 @@
       whatsapp-for-linux
       fractal
 
+      google-chrome
+
       obsidian
       spotify
       gimp
