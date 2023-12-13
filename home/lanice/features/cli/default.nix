@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./neofetch
+    ./zellij
     ./bash.nix
     ./bat.nix
     ./broot.nix
@@ -8,7 +9,6 @@
     ./fish.nix
     ./git.nix
     ./starship.nix
-    ./zellij.nix
     ./zsh.nix
   ];
 
