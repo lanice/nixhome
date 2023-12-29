@@ -9,7 +9,7 @@
     find.seedSearchStringFromSelection = "always";
     # fontFamily = fontFamily;
     fontLigatures = false;
-    fontSize = 14;
+    fontSize = 13;
     formatOnSave = true;
     formatOnPaste = false;
     formatOnType = false;

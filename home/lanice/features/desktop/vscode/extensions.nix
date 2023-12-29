@@ -20,8 +20,8 @@ with pkgs.vscode-extensions;
     ms-toolsai.jupyter
     ms-vscode-remote.remote-ssh
 
-    # github.copilot
-    # github.copilot-chat
+    github.copilot
+    github.copilot-chat
     dbaeumer.vscode-eslint
     esbenp.prettier-vscode
     naumovs.color-highlight

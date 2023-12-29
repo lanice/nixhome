@@ -81,6 +81,7 @@
   programs.rbw = {
     enable = true;
     settings.email = "leanderneiss+bitwarden@gmail.com";
+    settings.pinentry = "tty";
   };
 
   programs = {
