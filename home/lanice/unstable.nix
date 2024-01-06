@@ -35,8 +35,8 @@
   programs.fish.shellAbbrs = {
     mcjournal = "journalctl -fu mc-atm8.service | ${pkgs.ccze}/bin/ccze -A";
 
-    nr = "sudo nixos-rebuild switch --flake .#unstable";
-    nrr = "sudo nixos-rebuild switch --flake .#unstable && sudo reboot";
+    #nr = "sudo nixos-rebuild switch --flake .#unstable";
+    #nrr = "sudo nixos-rebuild switch --flake .#unstable && sudo reboot";
   };
 
   # dconf.settings = {
