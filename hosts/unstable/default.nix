@@ -31,12 +31,16 @@ in {
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+
+    ../common/global
     ../common/tailscale.nix
     ../common/virtualisation.nix
     ../common/minecraft-servers.nix
     ../common/gnome.nix
     ../common/steam.nix
     # ../common/sunshine.nix
+
+    ../../themes/catppuccin-latte
   ];
 
   nixpkgs = {
@@ -95,42 +99,15 @@ in {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   # Since we can't manually respond to a panic, just reboot.
   boot.kernelParams = ["panic=1" "boot.panic_on_fail"];
 
   networking.networkmanager.enable = true;
 
-  time.timeZone = "Europe/Berlin";
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.UTF-8";
-    LC_IDENTIFICATION = "de_DE.UTF-8";
-    LC_MEASUREMENT = "de_DE.UTF-8";
-    LC_MONETARY = "de_DE.UTF-8";
-    LC_NAME = "de_DE.UTF-8";
-    LC_NUMERIC = "de_DE.UTF-8";
-    LC_PAPER = "de_DE.UTF-8";
-    LC_TELEPHONE = "de_DE.UTF-8";
-    LC_TIME = "de_DE.UTF-8";
-  };
-
   # Configure console keymap
   console.keyMap = "us-acentos";
-
-  users.users = {
-    lanice = {
-      isNormalUser = true;
-      description = "lanice";
-      shell = pkgs.bash;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["networkmanager" "wheel" "docker"];
-    };
-  };
 
   environment = {
     shells = with pkgs; [fish];
