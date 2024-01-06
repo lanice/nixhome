@@ -64,8 +64,7 @@ in {
   };
 
   nix = {
-    # package = pkgs.nixUnstable;
-    package = pkgs.nixVersions.nix_2_17;
+    package = pkgs.nixUnstable;
 
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
