@@ -43,6 +43,8 @@ in {
     ../../themes/catppuccin-latte
   ];
 
+  users.users.lanice.shell = lib.mkForce pkgs.bash;
+
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -156,7 +158,7 @@ in {
 
     nvidia = {
       package = nvidiaPkg;
-      open = true;
+      open = false;
       modesetting.enable = true;
       nvidiaSettings = false;
       powerManagement.enable = false;

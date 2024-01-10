@@ -50,8 +50,8 @@ in {
     enable = true;
 
     extraConfig = ''
-      new-session
-      new-window ${sdnextLauncher}
+      new-session -s SD -d 
+      send-keys -t SD "${sdnextLauncher}" C-m
     '';
   };
 
