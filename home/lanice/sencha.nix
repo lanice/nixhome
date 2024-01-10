@@ -68,6 +68,7 @@
       obsidian
       spotify
       gimp
+      xournalpp
 
       sxiv
 
