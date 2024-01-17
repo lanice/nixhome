@@ -65,7 +65,7 @@
         nvidiaBusId = "PCI:01:0:0";
       };
       modesetting.enable = true;
-      open = true;
+      open = false;
     };
     opengl = {
       enable = true;
