@@ -7,7 +7,7 @@
   programs.firefox = {
     enable = true;
     profiles.lanice = {
-      bookmarks = {};
+      bookmarks = import ./bookmarks.nix {};
       extensions = with pkgs.inputs.firefox-addons; [
         # https://gitlab.com/rycee/nur-expressions/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix
         ublock-origin
