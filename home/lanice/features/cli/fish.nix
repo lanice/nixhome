@@ -45,6 +45,8 @@
       lt = "eza --tree";
       lld = "eza -alF --group-directories-first";
 
+      k = "kubectl";
+
       # github-last-commit = "echo \"[$(git rev-parse --short HEAD)]($(gh browse --no-browser $(git rev-parse HEAD)))\" | ${pkgs.xclip}/bin/xclip -sel clip";
     };
 

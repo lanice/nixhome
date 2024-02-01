@@ -77,6 +77,10 @@
             name = "Opsgenie";
             url = "https://ottertune.app.opsgenie.com/settings/schedule/detail/4e998f94-1827-42f4-9009-2c900d39dfe8";
           }
+          {
+            name = "Carta";
+            url = "https://app.carta.com/";
+          }
         ];
       }
       {
@@ -94,6 +98,10 @@
             name = "Roadmap Planning";
             url = "https://ottertune-docs.atlassian.net/wiki/spaces/PROD/pages/161972225/Roadmap+Planning+Meeting+Notes";
           }
+          {
+            name = "Sprint Kickoff Meeting Notes";
+            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/32210945/Sprint+Kickoff+Meeting+Notes";
+          }
         ];
       }
       {
@@ -106,6 +114,10 @@
           {
             name = "Django Admin (prod)";
             url = "https://admin.service.ottertune.com/admin";
+          }
+          {
+            name = "ArgoCD";
+            url = "https://deploy.internal.ottertune.com/";
           }
           {
             name = "Hotjar";
