@@ -8,12 +8,12 @@
   pkgs,
   ...
 }: let
-  nvStable = config.boot.kernelPackages.nvidiaPackages.stable;
-  nvBeta = config.boot.kernelPackages.nvidiaPackages.beta;
-  nvidiaPkg =
-    if (lib.versionOlder nvBeta.version nvStable.version)
-    then config.boot.kernelPackages.nvidiaPackages.stable
-    else config.boot.kernelPackages.nvidiaPackages.beta;
+  # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/os-specific/linux/nvidia-x11/default.nix
+#  nvidiaPkg =
+#    if (lib.versionOlder nvBeta.version nvStable.version)
+#    then config.boot.kernelPackages.nvidiaPackages.stable
+#    else config.boot.kernelPackages.nvidiaPackages.beta;
+  nvidiaPkg = config.boot.kernelPackages.nvidiaPackages.latest;
 in {
   # You can import other NixOS modules here
   imports = [
