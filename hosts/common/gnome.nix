@@ -10,9 +10,11 @@
       gdm.wayland = false;
     };
 
-    layout = "us";
-    xkbVariant = "intl";
-    # xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "intl";
+      # variant = "";
+    };
   };
 
   environment = {
