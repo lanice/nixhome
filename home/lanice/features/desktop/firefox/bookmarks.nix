@@ -64,6 +64,10 @@
             name = "Customer Success";
             url = "https://ottertune-docs.atlassian.net/wiki/spaces/Marketing/pages/161054721/Customer+Success";
           }
+          {
+            name = "Releases";
+            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/1933318/Releases";
+          }
         ];
       }
       {

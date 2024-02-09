@@ -13,7 +13,6 @@
     settings = {
       devices = {
         "unstable" = {id = "ZSOKQGJ-K55JPO2-W4N75YJ-6NJI64R-HLQTT72-JENBU3L-DU44IG5-BVHIXAS";};
-        "Orange Laptop" = {id = "P5ZXGOQ-WYCICPY-3ZS7XKZ-6YKJKUD-U5RXUEA-R64HDVZ-4KHAFNA-CMKZIQN";};
         "SunsetDragon" = {id = "GQWATA7-Y6EUELT-HZYCAOU-O6AMUID-YIU4AYD-O7QT3V4-ZUE4ZP7-LIITDAE";};
       };
 
@@ -32,11 +31,11 @@
         };
         "stable-diffusion" = {
           path = "/home/lanice/Sync/stable-diffusion";
-          devices = ["unstable" "Orange Laptop" "SunsetDragon"];
+          devices = ["unstable" "SunsetDragon"];
         };
         "photo-share" = {
           path = "/home/lanice/Sync/photo-share";
-          devices = ["unstable" "Orange Laptop" "SunsetDragon"];
+          devices = ["unstable" "SunsetDragon"];
         };
       };
     };

@@ -9,10 +9,10 @@
   ...
 }: let
   # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/os-specific/linux/nvidia-x11/default.nix
-#  nvidiaPkg =
-#    if (lib.versionOlder nvBeta.version nvStable.version)
-#    then config.boot.kernelPackages.nvidiaPackages.stable
-#    else config.boot.kernelPackages.nvidiaPackages.beta;
+  # nvidiaPkg =
+  #   if (lib.versionOlder nvBeta.version nvStable.version)
+  #   then config.boot.kernelPackages.nvidiaPackages.stable
+  #   else config.boot.kernelPackages.nvidiaPackages.beta;
   nvidiaPkg = config.boot.kernelPackages.nvidiaPackages.latest;
 in {
   # You can import other NixOS modules here
@@ -120,7 +120,6 @@ in {
     settings = {
       devices = {
         "sencha" = {id = "4BN4A3S-EUA2SVD-QNEJHI6-LJKBVWW-7FV4YRE-5YOIQBR-A4CWZLB-OQLGBA6";};
-        "Orange Laptop" = {id = "P5ZXGOQ-WYCICPY-3ZS7XKZ-6YKJKUD-U5RXUEA-R64HDVZ-4KHAFNA-CMKZIQN";};
         "SunsetDragon" = {id = "GQWATA7-Y6EUELT-HZYCAOU-O6AMUID-YIU4AYD-O7QT3V4-ZUE4ZP7-LIITDAE";};
       };
 
@@ -139,11 +138,11 @@ in {
         };
         "stable-diffusion" = {
           path = "/home/lanice/Sync/stable-diffusion"; # Which folder to add to Syncthing
-          devices = ["sencha" "Orange Laptop" "SunsetDragon"]; # Which devices to share the folder with
+          devices = ["sencha" "SunsetDragon"]; # Which devices to share the folder with
         };
         "photo-share" = {
           path = "/home/lanice/Sync/photo-share"; # Which folder to add to Syncthing
-          devices = ["sencha" "Orange Laptop" "SunsetDragon"]; # Which devices to share the folder with
+          devices = ["sencha" "SunsetDragon"]; # Which devices to share the folder with
         };
       };
     };
