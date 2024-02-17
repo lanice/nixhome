@@ -65,6 +65,10 @@
             url = "https://ottertune-docs.atlassian.net/wiki/spaces/Marketing/pages/161054721/Customer+Success";
           }
           {
+            name = "Support Runbook";
+            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/26050595/Support+Runbook";
+          }
+          {
             name = "Releases";
             url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/1933318/Releases";
           }
@@ -106,18 +110,26 @@
             name = "Sprint Kickoff Meeting Notes";
             url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/32210945/Sprint+Kickoff+Meeting+Notes";
           }
+          {
+            name = "Backend/Recommendation Raft Weekly";
+            url = "https://docs.google.com/document/d/1L_IgcHXLX4yIjcaMF54cSwon1-kZOiChUMzREwfCtu4/edit";
+          }
         ];
       }
       {
         name = "OT dev";
         bookmarks = [
           {
-            name = "Django Admin (dev)";
+            name = "DEV Django Admin";
             url = "https://dev.service.ottertune.com/admin";
           }
           {
-            name = "Django Admin (prod)";
+            name = "PROD Django Admin";
             url = "https://admin.service.ottertune.com/admin";
+          }
+          {
+            name = "PROD Django Admin (org roles)";
+            url = "https://admin.service.ottertune.com/admin/ot_models/organizationrole/?q=leander";
           }
           {
             name = "ArgoCD";

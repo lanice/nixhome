@@ -28,7 +28,6 @@ with pkgs.vscode-extensions;
     ryu1kn.partial-diff
     kamadorueda.alejandra
     usernamehw.errorlens
-    eamodio.gitlens
 
     github.github-vscode-theme
     pkief.material-icon-theme
@@ -65,8 +64,27 @@ with pkgs.vscode-extensions;
     {
       name = "vsliveshare";
       publisher = "ms-vsliveshare";
-      version = "1.0.5883";
-      sha256 = "sha256-BNxLINcbat2F4PHCrKHKIuMpXW1q9aP2SDb0oIv48v0=";
+      version = "1.0.5905";
+      sha256 = "sha256-y1MMO6fd/4a9PhdBpereEBPRk50CDgdiRc8Vwqn0PXY=";
+    }
+    {
+      name = "gitlens";
+      publisher = "eamodio";
+      version = "14.8.0";
+      sha256 = "sha256-UVMFCgt082GPcPkhlMgmp5mJaoTSGpWKtQARjHQFjTo=";
+    }
+
+    {
+      name = "catppuccin-vsc";
+      publisher = "catppuccin";
+      version = "3.11.1";
+      sha256 = "sha256-wO3UwS2/I3ASNpAS9daBKnltTJfamhsSiOnH0QD8vkA=";
+    }
+    {
+      name = "catppuccin-vsc-icons";
+      publisher = "catppuccin";
+      version = "1.8.0";
+      sha256 = "sha256-H31UtqqiqGm2r60e44KWTI2rmPRVLQ53vbfaDYBLXIs=";
     }
 
     # {

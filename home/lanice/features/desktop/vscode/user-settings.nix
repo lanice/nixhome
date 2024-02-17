@@ -113,7 +113,7 @@
   };
   workbench = {
     # colorTheme = "Catppuccin Latte";
-    iconTheme = "material-icon-theme";
+    # iconTheme = "material-icon-theme";
     settings.editor = "json";
     editorAssociations = {
       "*.ipynb" = "jupyter-notebook";

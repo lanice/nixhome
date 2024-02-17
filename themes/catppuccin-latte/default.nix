@@ -9,13 +9,16 @@
   config.theme = "catppuccin-latte";
 
   config.home-manager.users.lanice = {
+    stylix.targets.vscode.enable = false;
     programs.vscode = {
-      userSettings.workbench.colorTheme = lib.mkForce "Catppuccin Latte";
-      userSettings.workbench.iconTheme = lib.mkForce "catppuccin-latte";
-      extensions = with pkgs.vscode-extensions; [
-        catppuccin.catppuccin-vsc
-        catppuccin.catppuccin-vsc-icons
-      ];
+      userSettings."workbench.colorTheme" = "Catppuccin Latte";
+      userSettings."workbench.iconTheme" = "catppuccin-latte";
+
+      # Done in vscode/extensions.nix
+      # extensions = with pkgs.vscode-extensions; [
+      #   catppuccin.catppuccin-vsc
+      #   catppuccin.catppuccin-vsc-icons
+      # ];
     };
 
     programs.btop.settings = {

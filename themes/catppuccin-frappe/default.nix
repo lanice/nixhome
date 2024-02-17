@@ -9,13 +9,10 @@
   config.theme = "catppuccin-frappe";
 
   config.home-manager.users.lanice = {
+    stylix.targets.vscode.enable = false;
     programs.vscode = {
-      userSettings.workbench.colorTheme = lib.mkForce "Catppuccin Frappé";
-      userSettings.workbench.iconTheme = lib.mkForce "catppuccin-frappe";
-      extensions = with pkgs.vscode-extensions; [
-        catppuccin.catppuccin-vsc
-        catppuccin.catppuccin-vsc-icons
-      ];
+      userSettings."workbench.colorTheme" = "Catppuccin Frappé";
+      userSettings."workbench.iconTheme" = "catppuccin-frappe";
     };
 
     programs.btop.settings = {
