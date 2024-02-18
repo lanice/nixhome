@@ -46,6 +46,10 @@
       lld = "eza -alF --group-directories-first";
 
       k = "kubectl";
+      kgp = "kubectl get pods";
+      kx = "kubectl exec -it";
+      kns = "kubens";
+      kctx = "kubectx";
 
       # github-last-commit = "echo \"[$(git rev-parse --short HEAD)]($(gh browse --no-browser $(git rev-parse HEAD)))\" | ${pkgs.xclip}/bin/xclip -sel clip";
     };
