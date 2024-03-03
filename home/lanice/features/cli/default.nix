@@ -40,15 +40,9 @@
   programs.navi.enable = true;
   programs.thefuck.enable = true;
 
-  programs.mcfly = {
+  programs.atuin = {
     enable = true;
-    fuzzySearchFactor = 2;
-  };
-
-  home.sessionVariables = {
-    MCFLY_RESULTS = 42;
-    MCFLY_FUZZY = 2;
-    MCFLY_KEY_SCHEME = "emacs";
+    flags = ["--disable-up-arrow"];
   };
 
   programs.eza = {
