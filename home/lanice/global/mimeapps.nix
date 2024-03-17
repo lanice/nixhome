@@ -2,11 +2,11 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "image/apng" = "imv.desktop";
-      "image/gif" = "imv.desktop";
-      "image/jpeg" = "imv.desktop";
-      "image/png" = "imv.desktop";
-      "image/webp" = "imv.desktop";
+      "image/apng" = "qimgv.desktop";
+      "image/gif" = "qimgv.desktop";
+      "image/jpeg" = "qimgv.desktop";
+      "image/png" = "qimgv.desktop";
+      "image/webp" = "qimgv.desktop";
 
       "video/mp4" = "mpv.desktop";
       "video/mpv" = "mpv.desktop";

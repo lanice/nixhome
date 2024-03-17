@@ -7,5 +7,5 @@
     ./zathura.nix
   ];
 
-  home.packages = with pkgs; [pavucontrol imv mpv];
+  home.packages = with pkgs; [pavucontrol qimgv mpv];
 }
