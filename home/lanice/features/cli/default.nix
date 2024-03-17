@@ -36,6 +36,7 @@
   programs.nix-index.enable = true;
   programs.nix-index-database.comma.enable = true;
 
+  programs.eza.enable = true; # Adds aliases for ls,ll,la,lt,lla
   programs.zoxide.enable = true;
   programs.navi.enable = true;
   programs.thefuck.enable = true;
@@ -43,11 +44,6 @@
   programs.atuin = {
     enable = true;
     flags = ["--disable-up-arrow"];
-  };
-
-  programs.eza = {
-    enable = true;
-    enableAliases = true; # ls,ll,la,lt,lla
   };
 
   programs.neovim = {
@@ -76,7 +72,7 @@
   programs.rbw = {
     enable = true;
     settings.email = "leanderneiss+bitwarden@gmail.com";
-    settings.pinentry = "tty";
+    settings.pinentry = pkgs.pinentry-tty;
   };
 
   programs = {

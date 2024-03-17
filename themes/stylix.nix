@@ -33,7 +33,7 @@ in {
       };
       serif = {
         name = "Iosevka Etoile";
-        package = pkgs.iosevka-bin.override {variant = "etoile";};
+        package = pkgs.iosevka-bin.override {variant = "Etoile";};
       };
       sansSerif = {
         name = "Fira Sans";

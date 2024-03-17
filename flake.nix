@@ -11,11 +11,13 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # MacOS
+    darwin.url = "github:lnl7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     # nixGL
     nixgl.url = "github:guibou/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
-
-    hardware.url = "github:nixos/nixos-hardware";
 
     vscode-server.url = "github:msteen/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +37,7 @@
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
 
+    hardware.url = "github:nixos/nixos-hardware";
     stylix.url = "github:danth/stylix";
   };
 
@@ -47,7 +50,7 @@
   } @ inputs: let
     inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
-    systems = ["x86_64-linux"];
+    systems = ["x86_64-linux" "aarch64-darwin"];
     forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
     pkgsFor = lib.genAttrs systems (system:
       import nixpkgs {
@@ -85,6 +88,13 @@
       };
     };
 
+    darwinConfigurations = {
+      wakame = lib.darwinSystem {
+        modules = [./hosts/wakame];
+        specialArgs = {inherit inputs outputs;};
+      };
+    };
+
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
@@ -93,6 +103,11 @@
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
       };
+      # "lanice@wakame" = lib.homeManagerConfiguration {
+      #   modules = [./home/lanice/wakame.nix];
+      #   pkgs = pkgsFor.aarch64-darwin;
+      #   extraSpecialArgs = {inherit inputs outputs;};
+      # };
       "lanice@tofu" = lib.homeManagerConfiguration {
         modules = [./home/lanice/tofu.nix];
         pkgs = pkgsFor.x86_64-linux;
