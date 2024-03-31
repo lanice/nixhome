@@ -20,7 +20,7 @@
     multiCursorModifier = "ctrlCmd";
     renderIndentGuides = true;
     renderWhitespace = "boundary";
-    rulers = [100];
+    rulers = [120];
     scrollBeyondLastLine = true;
     showFoldingControls = "never";
     snippetSuggestions = "bottom";
@@ -131,6 +131,10 @@
   "[typescriptreact]" = {
     "editor.defaultFormatter" = "esbenp.prettier-vscode";
   };
+  "[astro]" = {
+    "editor.defaultFormatter" = "esbenp.prettier-vscode";
+  };
+  "prettier.documentSelectors" = ["**/*.astro"];
   "github.copilot.enable" = {
     "*" = true;
     "yaml" = true;

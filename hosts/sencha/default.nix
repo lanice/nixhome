@@ -77,7 +77,7 @@
     bluetooth.powerOnBoot = true;
   };
 
-  environment.systemPackages = with pkgs; [nvtop libva-utils];
+  environment.systemPackages = with pkgs; [nvtopPackages.full libva-utils];
 
   #  services.blueman.enable = true;
 

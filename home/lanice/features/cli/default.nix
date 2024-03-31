@@ -29,6 +29,7 @@
     # Maybe move into separate 'webdev' feature
     yarn
     pscale
+    bun
 
     alejandra # Nix formatter
   ];

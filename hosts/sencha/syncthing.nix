@@ -37,6 +37,10 @@
           path = "/home/lanice/Sync/photo-share";
           devices = ["unstable" "SunsetDragon"];
         };
+        "projects" = {
+          path = "/home/lanice/Sync/projects";
+          devices = ["SunsetDragon"];
+        };
       };
     };
   };
