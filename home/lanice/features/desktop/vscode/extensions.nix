@@ -28,6 +28,7 @@ with pkgs.vscode-extensions;
     ryu1kn.partial-diff
     kamadorueda.alejandra
     usernamehw.errorlens
+    eamodio.gitlens
 
     github.github-vscode-theme
     pkief.material-icon-theme
@@ -67,24 +68,24 @@ with pkgs.vscode-extensions;
       version = "1.0.5905";
       sha256 = "sha256-y1MMO6fd/4a9PhdBpereEBPRk50CDgdiRc8Vwqn0PXY=";
     }
-    {
-      name = "gitlens";
-      publisher = "eamodio";
-      version = "14.8.0";
-      sha256 = "sha256-UVMFCgt082GPcPkhlMgmp5mJaoTSGpWKtQARjHQFjTo=";
-    }
+    # {
+    #   name = "gitlens";
+    #   publisher = "eamodio";
+    #   version = "14.8.0";
+    #   sha256 = "sha256-UVMFCgt082GPcPkhlMgmp5mJaoTSGpWKtQARjHQFjTo=";
+    # }
 
     {
       name = "catppuccin-vsc";
       publisher = "catppuccin";
-      version = "3.11.1";
-      sha256 = "sha256-wO3UwS2/I3ASNpAS9daBKnltTJfamhsSiOnH0QD8vkA=";
+      version = "3.13.0";
+      sha256 = "sha256-z6sQhC0V6j2ws9AyQE6eaTehj+2PpDjDOplB99aTPY8=";
     }
     {
       name = "catppuccin-vsc-icons";
       publisher = "catppuccin";
-      version = "1.8.0";
-      sha256 = "sha256-H31UtqqiqGm2r60e44KWTI2rmPRVLQ53vbfaDYBLXIs=";
+      version = "1.11.0";
+      sha256 = "sha256-6klrnMHAIr+loz7jf7l5EZPLBhgkJODFHL9fzl1MqFI=";
     }
 
     # {

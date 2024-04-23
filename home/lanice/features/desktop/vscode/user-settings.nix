@@ -28,6 +28,7 @@
     wordSeparators = "./\\()\"'-:,.;<>~-!@#$%^&*|+=[]{}`~?";
     wordWrap = "on";
     inlineSuggest.enabled = true;
+    semanticHighlighting.enabled = true;
   };
   emmet = {
     showSuggestionsAsSnippets = false;
@@ -79,9 +80,10 @@
   search.exclude = {
     "**/.vscode/**" = true;
   };
-  # terminal = {
-  #   integrated.fontFamily = fontFamily;
-  # };
+  terminal = {
+    # integrated.fontFamily = fontFamily;
+    integrated.minimumContrastRatio = 1;
+  };
   todohighlight = {
     isEnable = true;
     include = [
