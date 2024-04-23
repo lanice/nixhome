@@ -172,12 +172,13 @@ in {
     # EGL_PLATFORM = "wayland";
   };
 
+  services.displayManager = {
+    autoLogin.enable = true;
+    autoLogin.user = "lanice";
+  };
+
   services.xserver = {
-    displayManager = {
-      gdm.wayland = false;
-      autoLogin.enable = true;
-      autoLogin.user = "lanice";
-    };
+    displayManager.gdm.wayland = false;
 
     videoDrivers = ["nvidia"];
     # displayManager.setupCommands = "${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode 2560x1600";
