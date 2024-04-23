@@ -13,6 +13,8 @@
       df = "duf";
 
       zj = "zellij";
+      zjf = "zellij --layout ot-frontend";
+
       db = "distrobox";
       dbe = "distrobox enter";
 

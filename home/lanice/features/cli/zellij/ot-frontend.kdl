@@ -1,4 +1,5 @@
 layout {
+    cwd "/home/lanice/ottertune/frontend"
     default_tab_template {
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
@@ -11,8 +12,15 @@ layout {
     tab {
         pane focus=true
         pane split_direction="vertical" {
-            pane
-            pane
+            pane {
+                cwd "frontend"
+                command "yarn"
+                args "start"
+            }
+            pane {
+                command "kubectl"
+                args "port-forward" "deployments/django-backend" "-n" "ot-dev-service" "8000:8000"
+            }
         }
     }
 }
