@@ -21,10 +21,8 @@
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
-      # TODO: Remove when obsidian has been upgraded: https://github.com/NixOS/nixpkgs/issues/273611
       permittedInsecurePackages = [
-        "electron-25.9.0"
-        "freeimage-unstable-2021-11-01"
+        # "pkgname"
       ];
     };
   };
