@@ -24,7 +24,7 @@
         # Firefox addons come from an external flake and don't respect my nixpkgs.allowUnfree setting
         (lastpass-password-manager.overrideAttrs {meta.license.free = true;})
 
-        bypass-paywalls-clean
+        # bypass-paywalls-clean
         stylus
       ];
       settings = {
