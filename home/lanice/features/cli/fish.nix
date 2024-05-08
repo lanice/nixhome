@@ -53,6 +53,8 @@
       kns = "kubens";
       kctx = "kubectx";
 
+      p = "pnpm";
+
       # github-last-commit = "echo \"[$(git rev-parse --short HEAD)]($(gh browse --no-browser $(git rev-parse HEAD)))\" | ${pkgs.xclip}/bin/xclip -sel clip";
     };
 

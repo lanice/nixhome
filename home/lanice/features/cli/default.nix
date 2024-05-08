@@ -30,6 +30,8 @@
     yarn
     pscale
     bun
+    nodejs_20
+    nodejs_20.pkgs.pnpm
 
     alejandra # Nix formatter
   ];

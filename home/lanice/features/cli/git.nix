@@ -32,4 +32,30 @@ in {
       diff.colorMoved = "default";
     };
   };
+
+  programs.gh.enable = true;
+  programs.gh-dash = {
+    enable = true;
+    settings = {
+      theme = {
+        # https://github.com/catppuccin/gh-dash/blob/main/themes/latte/catppuccin-latte-mauve.yml
+        colors = {
+          text = {
+            primary = "#4c4f69";
+            secondary = "#8839ef";
+            inverted = "#dce0e8";
+            faint = "#5c5f77";
+            warning = "#d20f39";
+            success = "#40a02b";
+          };
+          background = {selected = "#ccd0da";};
+          border = {
+            primary = "#7287fd";
+            secondary = "#bcc0cc";
+            faint = "#ccd0da";
+          };
+        };
+      };
+    };
+  };
 }
