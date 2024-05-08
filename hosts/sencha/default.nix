@@ -41,11 +41,11 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 20;
+  boot.loader.systemd-boot.configurationLimit = 30;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
-  powerManagement.powertop.enable = false;
+  powerManagement.powertop.enable = true;
 
   programs = {
     light.enable = true;
