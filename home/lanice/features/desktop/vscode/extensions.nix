@@ -17,6 +17,7 @@ with pkgs.vscode-extensions;
     ms-python.python
     ms-python.vscode-pylance
     ms-python.isort
+    ms-python.black-formatter
     ms-toolsai.jupyter
     ms-vscode-remote.remote-ssh
 

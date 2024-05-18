@@ -136,6 +136,9 @@
   "[astro]" = {
     "editor.defaultFormatter" = "esbenp.prettier-vscode";
   };
+  "[python]" = {
+    "editor.defaultFormatter" = "ms-python.black-formatter";
+  };
   "prettier.documentSelectors" = ["**/*.astro"];
   "github.copilot.enable" = {
     "*" = true;
