@@ -23,6 +23,8 @@ in {
         "podman"
         "git"
       ];
+
+    packages = [pkgs.home-manager];
   };
 
   home-manager.users.lanice = import ../../../home/lanice/${config.networking.hostName}.nix;
