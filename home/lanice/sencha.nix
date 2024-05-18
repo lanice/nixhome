@@ -69,6 +69,7 @@
       spotify
       gimp
       xournalpp
+      zed-editor
 
       sxiv
 
