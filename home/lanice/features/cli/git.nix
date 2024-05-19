@@ -1,6 +1,5 @@
 {config, ...}: let
-  # light = config.stylix.polarity == "light";
-  light = true;
+  light = config.stylix.polarity == "light";
   syntax-theme =
     if light
     then "GitHub"

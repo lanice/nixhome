@@ -5,28 +5,14 @@
   pkgs,
   ...
 }: let
-  themePath = "/" + config.theme;
-
-  scheme = themePath + "/" + config.theme + ".yaml";
-  themePolarity = lib.removeSuffix "\n" (builtins.readFile (./. + themePath + "/polarity.txt"));
-
-  backgroundUrl = builtins.readFile (./. + themePath + "/backgroundurl.txt");
-  backgroundSha256 = builtins.readFile (./. + themePath + "/backgroundsha256.txt");
-
   inherit (config) fontProfiles;
 in {
   imports = [inputs.stylix.homeManagerModules.stylix];
 
   stylix = {
-    base16Scheme = ./. + scheme;
-    polarity = themePolarity;
+    polarity = lib.mkDefault "either";
 
-    image = pkgs.fetchurl {
-      url = backgroundUrl;
-      sha256 = backgroundSha256;
-    };
-
-    # image = ./background.webp;
+    image = lib.mkDefault ./background.webp;
 
     fonts = {
       monospace = {
@@ -46,17 +32,6 @@ in {
         package = fontProfiles.emoji.package;
       };
     };
-
-    cursor =
-      if themePolarity == "light"
-      then {
-        name = "Catppuccin-Latte-Light-Cursors";
-        package = pkgs.catppuccin-cursors.latteLight;
-      }
-      else {
-        name = "Catppuccin-Mocha-Dark-Cursors";
-        package = pkgs.catppuccin-cursors.mochaDark;
-      };
   };
 
   # environment.sessionVariables = {

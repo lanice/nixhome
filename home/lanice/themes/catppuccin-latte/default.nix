@@ -7,16 +7,27 @@
 
   theme = "catppuccin-latte";
 
-  stylix.targets.vscode.enable = false;
+  stylix = {
+    base16Scheme = ./base16.yaml;
+    polarity = "light";
+
+    image = pkgs.fetchurl {
+      url = "https://i.postimg.cc/TGrLzsD8/dogsplayingpoker.png";
+      sha256 = "sha256-51c5vQfcfD73BEdqfNxOcEkpgFSHC6u4eMqOVKJq9SY=";
+    };
+
+    cursor = {
+      name = "Catppuccin-Latte-Light-Cursors";
+      package = pkgs.catppuccin-cursors.latteLight;
+    };
+
+    targets.vscode.enable = false;
+    targets.rofi.enable = false;
+  };
+
   programs.vscode = {
     userSettings."workbench.colorTheme" = "Catppuccin Latte";
     userSettings."workbench.iconTheme" = "catppuccin-latte";
-
-    # Done in vscode/extensions.nix
-    # extensions = with pkgs.vscode-extensions; [
-    #   catppuccin.catppuccin-vsc
-    #   catppuccin.catppuccin-vsc-icons
-    # ];
   };
 
   programs.btop.settings = {
@@ -24,7 +35,6 @@
   };
   home.file.".config/btop/themes/catppuccin-latte.theme".source = ./btop-catppuccin-latte.theme;
 
-  stylix.targets.rofi.enable = false;
   programs.rofi.theme = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/catppuccin/rofi/main/basic/.local/share/rofi/themes/catppuccin-latte.rasi";
     sha256 = "sha256:1qkb19lpl2qpfvxyyw0rp05k92al2m7s59rpxpmmf99rblgs9313";

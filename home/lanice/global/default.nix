@@ -62,8 +62,8 @@
     # '';
   };
 
-  # home.file = {
-  #   ".colorscheme".text = config.stylix.colorscheme.slug;
-  #   ".colorscheme.json".text = builtins.toJSON config.stylix.colorscheme;
-  # };
+  home.file = {
+    ".colorscheme".text = config.theme;
+    # ".colorscheme.json".text = builtins.toJSON config.stylix.colorscheme;
+  };
 }
