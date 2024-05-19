@@ -2,13 +2,15 @@
   lib,
   pkgs,
   config,
+  inputs,
   ...
-}: rec {
+}: let
+  inherit (inputs.nix-colors.lib-contrib {inherit pkgs;}) gtkThemeFromScheme;
+in rec {
   gtk = {
     enable = true;
-    # Set via stylix now, but keeping this as default
     font = lib.mkDefault {
-      name = config.stylix.fonts.sansSerif.name;
+      name = config.fontProfiles.regular.family;
       size = 12;
     };
     # theme = {

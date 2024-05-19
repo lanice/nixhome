@@ -6,7 +6,7 @@
   programs.rofi = {
     enable = true;
 
-    font = lib.mkForce "${config.stylix.fonts.monospace.name} 12";
+    font = lib.mkForce "${config.fontProfiles.monospace.family} 12";
     terminal = "alacritty";
     location = "center";
 

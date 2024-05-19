@@ -5,10 +5,13 @@
   config,
   outputs,
   ...
-}: {
+}: let
+  inherit (inputs.nix-colors) colorSchemes;
+in {
   imports =
     [
       inputs.nix-index-database.hmModules.nix-index
+      inputs.nix-colors.homeManagerModule
       ./mimeapps.nix
       ../features/cli
       ../features/helix
@@ -62,5 +65,13 @@
     # '';
   };
 
-  home.file.".colorscheme".text = config.lib.stylix.colors.slug;
+  colorscheme = lib.mkOverride 1499 colorSchemes.catppuccin-latte;
+  specialisation = {
+    dark.configuration.colorscheme = lib.mkOverride 1498 config.colorscheme;
+    light.configuration.colorscheme = lib.mkOverride 1498 config.colorscheme;
+  };
+  home.file = {
+    ".colorscheme".text = config.colorscheme.slug;
+    ".colorscheme.json".text = builtins.toJSON config.colorscheme;
+  };
 }

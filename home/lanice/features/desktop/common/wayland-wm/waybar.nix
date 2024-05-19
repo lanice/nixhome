@@ -314,7 +314,7 @@ in {
       */
       ''
         * {
-          font-family: ${config.stylix.fonts.sansSerif.name}, ${config.stylix.fonts.monospace.name};
+          font-family: ${config.fontProfiles.regular.family}, ${config.fontProfiles.monospace.family};
           font-size: 12pt;
           padding: 0 8px;
         }

@@ -4,7 +4,9 @@
   inputs,
   outputs,
   ...
-}: {
+}: let
+  inherit (inputs.nix-colors) colorSchemes;
+in {
   imports = [
     ./global # includes features/cli,features/helix
     ./features/email
@@ -21,6 +23,11 @@
     ./features/desktop/gnome
     # ./features/desktop/hyprland
   ];
+
+  colorscheme = lib.mkDefault colorSchemes.catppuccin-latte;
+  specialisation = {
+    dark.configuration.colorscheme = colorSchemes.catppuccin-frappe;
+  };
 
   #  -------   ----------
   # | eDP-1 | | HDMI-1-0 |
