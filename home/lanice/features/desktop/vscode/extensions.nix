@@ -21,6 +21,8 @@ with pkgs.vscode-extensions;
     ms-toolsai.jupyter
     ms-vscode-remote.remote-ssh
 
+    # supermaven.supermaven
+
     github.copilot
     github.copilot-chat
     dbaeumer.vscode-eslint
@@ -87,6 +89,13 @@ with pkgs.vscode-extensions;
       publisher = "catppuccin";
       version = "1.11.0";
       sha256 = "sha256-6klrnMHAIr+loz7jf7l5EZPLBhgkJODFHL9fzl1MqFI=";
+    }
+
+    {
+      name = "supermaven";
+      publisher = "supermaven";
+      version = "0.1.50";
+      sha256 = "sha256-j1O2w54plWKMKggsaFcadWQ2ZGOPOoxpnDOTXqM91VU=";
     }
 
     # {
