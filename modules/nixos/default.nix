@@ -1,3 +1,3 @@
 {
-  theme = import ./theme.nix;
+  # module = import ./module.nix;
 }

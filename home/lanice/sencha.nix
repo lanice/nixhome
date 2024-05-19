@@ -22,6 +22,8 @@ in {
 
     ./features/desktop/gnome
     # ./features/desktop/hyprland
+
+    ./themes/catppuccin-latte
   ];
 
   colorscheme = lib.mkDefault colorSchemes.catppuccin-latte;

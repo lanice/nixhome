@@ -39,8 +39,6 @@ in {
     ../common/gnome.nix
     ../common/steam.nix
     # ../common/sunshine.nix
-
-    ../../themes/catppuccin-latte
   ];
 
   users.users.lanice.shell = lib.mkForce pkgs.bash;
