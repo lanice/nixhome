@@ -39,7 +39,6 @@
 
     hardware.url = "github:nixos/nixos-hardware";
     stylix.url = "github:danth/stylix";
-    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = {

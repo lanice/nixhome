@@ -4,9 +4,7 @@
   inputs,
   outputs,
   ...
-}: let
-  inherit (inputs.nix-colors) colorSchemes;
-in {
+}: {
   imports = [
     ./global # includes features/cli,features/helix
     ./features/email
@@ -25,11 +23,6 @@ in {
 
     ./themes/catppuccin-latte
   ];
-
-  colorscheme = lib.mkDefault colorSchemes.catppuccin-latte;
-  specialisation = {
-    dark.configuration.colorscheme = colorSchemes.catppuccin-frappe;
-  };
 
   #  -------   ----------
   # | eDP-1 | | HDMI-1-0 |
