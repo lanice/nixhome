@@ -12,6 +12,8 @@
 
   backgroundUrl = builtins.readFile (./. + themePath + "/backgroundurl.txt");
   backgroundSha256 = builtins.readFile (./. + themePath + "/backgroundsha256.txt");
+
+  inherit (config) fontProfiles;
 in {
   imports = [inputs.stylix.homeManagerModules.stylix];
 
@@ -28,20 +30,20 @@ in {
 
     fonts = {
       monospace = {
-        name = "GoMono Nerd Font Mono";
-        package = pkgs.nerdfonts.override {fonts = ["Go-Mono"];}; # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix;
+        name = fontProfiles.monospace.family;
+        package = fontProfiles.monospace.package;
       };
       serif = {
-        name = "Iosevka Etoile";
-        package = pkgs.iosevka-bin.override {variant = "Etoile";};
+        name = fontProfiles.serif.family;
+        package = fontProfiles.serif.package;
       };
       sansSerif = {
-        name = "Fira Sans";
-        package = pkgs.fira;
+        name = fontProfiles.sansSerif.family;
+        package = fontProfiles.sansSerif.package;
       };
       emoji = {
-        name = "Noto Color Emoji";
-        package = pkgs.noto-fonts-emoji-blob-bin;
+        name = fontProfiles.emoji.family;
+        package = fontProfiles.emoji.package;
       };
     };
 

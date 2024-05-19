@@ -314,7 +314,7 @@ in {
       */
       ''
         * {
-          font-family: ${config.fontProfiles.regular.family}, ${config.fontProfiles.monospace.family};
+          font-family: ${config.fontProfiles.serif.family}, ${config.fontProfiles.monospace.family};
           font-size: 12pt;
           padding: 0 8px;
         }

@@ -10,7 +10,7 @@ in rec {
   gtk = {
     enable = true;
     font = lib.mkDefault {
-      name = config.fontProfiles.regular.family;
+      name = config.fontProfiles.serif.family;
       size = 12;
     };
     # theme = {

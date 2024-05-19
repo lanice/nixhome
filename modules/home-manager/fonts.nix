@@ -22,11 +22,13 @@ in {
   options.fontProfiles = {
     enable = lib.mkEnableOption "Whether to enable font profiles";
     monospace = mkFontOption "monospace";
-    regular = mkFontOption "regular";
+    serif = mkFontOption "serif";
+    sansSerif = mkFontOption "sansSerif";
+    emoji = mkFontOption "emoji";
   };
 
   config = lib.mkIf cfg.enable {
     fonts.fontconfig.enable = true;
-    home.packages = [cfg.monospace.package cfg.regular.package];
+    home.packages = [cfg.monospace.package cfg.serif.package cfg.sansSerif.package cfg.emoji.package];
   };
 }
