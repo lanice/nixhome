@@ -21,7 +21,7 @@
     ./features/desktop/gnome
     # ./features/desktop/hyprland
 
-    ./themes/catppuccin-frappe
+    ./themes/catppuccin-latte
   ];
 
   #  -------   ----------
