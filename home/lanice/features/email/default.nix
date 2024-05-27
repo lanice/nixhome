@@ -107,22 +107,6 @@
       thunderbird.enable = true;
     };
 
-    accounts.ionos = {
-      primary = false;
-      address = "me@leanderneiss.de";
-      userName = "me@leanderneiss.de";
-      realName = "Leander Neiß";
-      imap = {
-        host = "imap.ionos.de";
-        port = 993;
-      };
-      smtp = {
-        host = "smtp.ionos.de";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
     accounts.founderbuddies = {
       primary = false;
       address = "info@founderbuddies.com";
@@ -143,6 +127,22 @@
       primary = false;
       address = "me@leanderneiss.com";
       userName = "me@leanderneiss.com";
+      realName = "Leander Neiss";
+      imap = {
+        host = "witcher.mxrouting.net";
+        port = 993;
+      };
+      smtp = {
+        host = "witcher.mxrouting.net";
+        port = 465;
+      };
+      thunderbird.enable = true;
+    };
+
+    accounts."me@leanderneiss.de" = {
+      primary = false;
+      address = "me@leanderneiss.de";
+      userName = "me@leanderneiss.de";
       realName = "Leander Neiss";
       imap = {
         host = "witcher.mxrouting.net";
