@@ -93,6 +93,11 @@ in
       dconfSettings = {};
     }
 
+    {
+      package = wiggle;
+      dconfSettings = {};
+    }
+
     # {
     #   package = gsconnect;
     #   dconfSettings = {
