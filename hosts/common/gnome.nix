@@ -7,7 +7,7 @@
     displayManager = {
       gdm.enable = true;
       gdm.autoSuspend = false;
-      gdm.wayland = false;
+      gdm.wayland = true;
     };
 
     xkb = {
