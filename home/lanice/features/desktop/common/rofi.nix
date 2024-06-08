@@ -4,7 +4,7 @@
   ...
 }: {
   programs.rofi = {
-    enable = true;
+    enable = false; # disabled manually for now since we switched to wayland
 
     font = lib.mkForce "${config.fontProfiles.monospace.family} 12";
     terminal = "alacritty";

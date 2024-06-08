@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ../common
+    ../common/wayland-wm/wofi.nix
     ./extensions
   ];
 
@@ -33,7 +34,8 @@
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-alacritty/"
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-rofi/"
+        # "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-rofi/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-wofi/"
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-alacritty" = {
@@ -45,6 +47,11 @@
       binding = "<Super>D";
       command = "rofi -show drun";
       name = "rofi-drun";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-wofi" = {
+      binding = "<Super>D";
+      command = "wofi -S drun -x 10 -y 10 -W 45% -H 40%";
+      name = "wofi-drun";
     };
   };
 }
