@@ -17,7 +17,7 @@
     };
 
     cursor = {
-      name = "Catppuccin-Frappe-Dark-Cursors";
+      name = "catppuccin-frappe-dark-cursors";
       package = pkgs.catppuccin-cursors.frappeDark;
     };
 
