@@ -10,6 +10,8 @@ in {
   imports = [inputs.stylix.homeManagerModules.stylix];
 
   stylix = {
+    enable = true;
+
     polarity = lib.mkDefault "either";
 
     image = lib.mkDefault ./background.webp;
