@@ -62,6 +62,6 @@
   {
     key = "ctrl+enter";
     command = "-github.copilot.generate";
-    when = "editorTextFocus && github.copilot.activated && !inInteractiveInput && !interactiveEditorFocused";
+    when = "editorTextFocus && github.copilot.activated && !commentEditorFocused && !inInteractiveInput && !interactiveEditorFocused";
   }
 ]
