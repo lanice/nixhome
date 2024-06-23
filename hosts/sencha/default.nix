@@ -66,10 +66,8 @@
       modesetting.enable = true;
       open = false;
     };
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
       # mesaPackage = pkgs.mesa_23;
     };
     bluetooth.enable = true;

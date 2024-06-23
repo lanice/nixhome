@@ -62,10 +62,8 @@
       modesetting.enable = true;
       powerManagement.enable = false;
     };
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
     };
   };
 

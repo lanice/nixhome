@@ -148,10 +148,8 @@ in {
 
   # security.polkit.enable = true;
   hardware = {
-    opengl.enable = true;
-    opengl.driSupport = true;
-    opengl.driSupport32Bit = true;
-    opengl.extraPackages = [pkgs.vaapiVdpau];
+    graphics.enable = true;
+    graphics.extraPackages = [pkgs.vaapiVdpau];
 
     nvidia = {
       package = nvidiaPkg;
