@@ -6,5 +6,5 @@
   };
 
   # environment.systemPackages = with pkgs; [steam-tui steamcmd];
-  environment.systemPackages = with pkgs; [gamemode];
+  programs.gamemode.enable = true;
 }
