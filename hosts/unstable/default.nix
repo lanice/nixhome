@@ -174,7 +174,7 @@ in {
   };
 
   services.xserver = {
-    displayManager.gdm.wayland = false;
+    displayManager.gdm.wayland = lib.mkForce false;
 
     videoDrivers = ["nvidia"];
     # displayManager.setupCommands = "${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode 2560x1600";

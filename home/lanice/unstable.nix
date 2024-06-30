@@ -9,6 +9,8 @@
     ./features/desktop/gnome
     ./features/desktop/alacritty
     ./features/stable-diffusion
+
+    ./themes/catppuccin-latte
   ];
 
   programs.git.lfs.enable = true;

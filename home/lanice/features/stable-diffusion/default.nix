@@ -50,7 +50,7 @@ in {
     enable = true;
 
     extraConfig = ''
-      new-session -s SD -d 
+      new-session -s SD -d
       send-keys -t SD "${sdnextLauncher}" C-m
     '';
   };
@@ -68,7 +68,7 @@ in {
 
     packages = with pkgs; [
       git
-      python310
+      # python310
       stdenv.cc.cc.lib
       stdenv.cc
       ncurses5
