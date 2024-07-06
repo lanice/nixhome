@@ -24,20 +24,20 @@
         gnome-photos
         gnome-tour
         gnome-console
+        cheese # webcam tool
+        epiphany # web browser
+        geary # email reader
+        yelp # Help view
       ])
       ++ (with pkgs.gnome; [
-        cheese # webcam tool
         gnome-maps
         gnome-music
         # gedit # text editor
-        epiphany # web browser
-        geary # email reader
         gnome-characters
         tali # poker game
         iagno # go game
         hitori # sudoku game
         atomix # puzzle game
-        yelp # Help view
         gnome-contacts
         gnome-initial-setup
 
@@ -46,8 +46,8 @@
       ]);
 
     systemPackages = with pkgs; [
-      gnome.gnome-tweaks
-      gnome.dconf-editor
+      gnome-tweaks
+      dconf-editor
       dconf2nix
     ];
   };
