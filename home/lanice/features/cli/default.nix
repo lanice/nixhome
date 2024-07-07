@@ -21,14 +21,13 @@
     ripgrep # Better grep
     duf # Better df
     dirstat-rs # Fast, cross-platform disk usage CLI
+    dust # A more intuitive version of du in rust
 
     htop
-    wtf
     lazygit
 
     # Maybe move into separate 'webdev' feature
     yarn
-    pscale
     bun
     nodejs_20
     nodejs_20.pkgs.pnpm
