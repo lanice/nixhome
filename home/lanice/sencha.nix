@@ -72,7 +72,7 @@
       gimp
       xournalpp
       zed-editor
-      gitbutler
+      # gitbutler
 
       sxiv
 

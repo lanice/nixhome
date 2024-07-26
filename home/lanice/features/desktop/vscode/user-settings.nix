@@ -141,15 +141,12 @@
   };
   "prettier.documentSelectors" = ["**/*.astro"];
   "github.copilot.enable" = {
-    "*" = true;
-    "yaml" = true;
-    "markdown" = true;
-    "plaintext" = false;
+    "*" = false;
   };
   "git.autofetch" = false;
   "telemetry.telemetryLevel" = "off";
   "update.showReleaseNotes" = false;
   "supermaven.enable" = {
-    "*" = false;
+    "*" = true;
   };
 }

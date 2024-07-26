@@ -3,12 +3,12 @@
   config,
   ...
 }: {
-  qt = {
-    enable = true;
-    platformTheme.name = "gtk";
-    style = {
-      name = "gtk2";
-      package = pkgs.qt6Packages.qt6gtk2;
-    };
-  };
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "gtk";
+  #   style = {
+  #     name = "gtk2";
+  #     package = pkgs.qt6Packages.qt6gtk2;
+  #   };
+  # };
 }

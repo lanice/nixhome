@@ -32,9 +32,13 @@ with pkgs.vscode-extensions;
     kamadorueda.alejandra
     usernamehw.errorlens
     eamodio.gitlens
+    yoavbls.pretty-ts-errors
 
     github.github-vscode-theme
     pkief.material-icon-theme
+
+    catppuccin.catppuccin-vsc
+    catppuccin.catppuccin-vsc-icons
 
     # firefox-devtools.vscode-firefox-debug
     # jnoortheen.nix-ide
@@ -60,12 +64,6 @@ with pkgs.vscode-extensions;
       sha256 = "sha256-daKMeFUPZSanrFu9J6mk3ZVmlz8ZZquZa3qaWSTbSjs=";
     }
     {
-      name = "pretty-ts-errors";
-      publisher = "yoavbls";
-      version = "0.5.2";
-      sha256 = "sha256-g6JIiXfjQKQEtdXZgsQsluKuJZO0MsD1ijy+QLYE1uY=";
-    }
-    {
       name = "vsliveshare";
       publisher = "ms-vsliveshare";
       version = "1.0.5905";
@@ -78,24 +76,31 @@ with pkgs.vscode-extensions;
     #   sha256 = "sha256-UVMFCgt082GPcPkhlMgmp5mJaoTSGpWKtQARjHQFjTo=";
     # }
 
-    {
-      name = "catppuccin-vsc";
-      publisher = "catppuccin";
-      version = "3.13.0";
-      sha256 = "sha256-z6sQhC0V6j2ws9AyQE6eaTehj+2PpDjDOplB99aTPY8=";
-    }
-    {
-      name = "catppuccin-vsc-icons";
-      publisher = "catppuccin";
-      version = "1.11.0";
-      sha256 = "sha256-6klrnMHAIr+loz7jf7l5EZPLBhgkJODFHL9fzl1MqFI=";
-    }
+    # {
+    #   name = "catppuccin-vsc";
+    #   publisher = "catppuccin";
+    #   version = "3.13.0";
+    #   sha256 = "sha256-z6sQhC0V6j2ws9AyQE6eaTehj+2PpDjDOplB99aTPY8=";
+    # }
+    # {
+    #   name = "catppuccin-vsc-icons";
+    #   publisher = "catppuccin";
+    #   version = "1.11.0";
+    #   sha256 = "sha256-6klrnMHAIr+loz7jf7l5EZPLBhgkJODFHL9fzl1MqFI=";
+    # }
 
     {
       name = "supermaven";
       publisher = "supermaven";
-      version = "0.1.50";
-      sha256 = "sha256-j1O2w54plWKMKggsaFcadWQ2ZGOPOoxpnDOTXqM91VU=";
+      version = "1.0.4";
+      sha256 = "sha256-5HCQ3Cc8ueTeKcPocz5FKV+YHIQxjFSQqL5DsbnDpQo=";
+    }
+
+    {
+      name = "dbos-ttdbg";
+      publisher = "dbos-inc";
+      version = "1.3.6";
+      sha256 = "sha256-7QJ58Zl6SAOvIjwzHDW0Z+EalkiSrU44KTPYy0+ETNc=";
     }
 
     # {
