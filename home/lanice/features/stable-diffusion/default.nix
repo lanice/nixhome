@@ -16,49 +16,61 @@
   sdLauncher = "${config.home.homeDirectory}/sd-launcher.sh";
   sdnextLauncher = "${config.home.homeDirectory}/sdnext-launcher.sh";
   comfyuiLauncher = "${config.home.homeDirectory}/comfyui-launcher.sh";
+  invokeLauncher = "${config.home.homeDirectory}/invoke-launcher.sh";
 in {
-  programs.bash = {
-    shellAliases = {
-      stable-diffusion = "${sdLauncher}";
-      stable-diffusion-admin = "SD_ADMIN=true ${sdLauncher}";
-      sdnext = "${sdnextLauncher}";
-      sdnext-admin = "SD_ADMIN=true ${sdnextLauncher}";
-      comfy = "${comfyuiLauncher}";
+  systemd.user.services = {
+    sdnext = {
+      Unit = {
+        Description = "SD.Next";
+      };
+      Service = {
+        ExecStart = "${pkgs.writeShellScript "sdnext-launch" ''
+          export COMMANDLINE_ARGS="--listen --port 9000 --insecure"
+          cd $HOME/automatic
+          . $HOME/automatic/webui.sh
+        ''}";
+      };
+      Install = {
+        WantedBy = ["default.target"];
+      };
     };
 
-    profileExtra = ''
-      ${pkgs.tmux}/bin/tmux start-server
-    '';
+    invoke = {
+      Unit = {
+        Description = "InvokeAI";
+      };
+      Service = {
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+        ExecStart = "${pkgs.writeShellScript "invoke-launch" ''
+          export INVOKEAI_PORT=9000
+          source $HOME/invokeai/.venv/bin/activate
+          invokeai-web &
+        ''}";
+      };
+      Install = {
+        WantedBy = [];
+      };
+    };
   };
 
   programs.fish = {
     shellAliases = {
-      stable-diffusion = "${sdLauncher}";
-      stable-diffusion-admin = "SD_ADMIN=true ${sdLauncher}";
-      sdnext = "${sdnextLauncher}";
-      sdnext-admin = "SD_ADMIN=true ${sdnextLauncher}";
-      comfy = "${comfyuiLauncher}";
+      sdnext-logs = "journalctl --user -u sdnext -f | ${pkgs.ccze}/bin/ccze -A";
+      sdnext-start = "systemctl --user start sdnext";
+      sdnext-stop = "systemctl --user stop sdnext";
+
+      invoke-logs = "journalctl --user -u invoke -f | ${pkgs.ccze}/bin/ccze -A";
+      invoke-start = "systemctl --user start invoke";
+      invoke-stop = "systemctl --user stop invoke";
     };
-
-    shellAbbrs = {
-      sd = "sdnext";
-      sda = "sdnext-admin";
-    };
-  };
-
-  programs.tmux = {
-    enable = true;
-
-    extraConfig = ''
-      new-session -s SD -d
-      send-keys -t SD "${sdnextLauncher}" C-m
-    '';
   };
 
   home = {
     file."sd-launcher.sh".source = ./sd-launcher.sh;
     file."sdnext-launcher.sh".source = ./sdnext-launcher.sh;
     file."comfyui-launcher.sh".source = ./comfyui-launcher.sh;
+    file."invoke-launcher.sh".source = ./invoke-launcher.sh;
 
     sessionVariables = {
       LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ldLibs;
