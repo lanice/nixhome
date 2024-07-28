@@ -68,7 +68,7 @@ in {
 
     packages = with pkgs; [
       git
-      # python310
+      python311
       stdenv.cc.cc.lib
       stdenv.cc
       ncurses5

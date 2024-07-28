@@ -32,8 +32,6 @@
     nodejs_20
     nodejs_20.pkgs.pnpm
 
-    python3
-
     alejandra # Nix formatter
   ];
 
