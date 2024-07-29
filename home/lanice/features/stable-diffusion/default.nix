@@ -21,16 +21,11 @@ in {
         After = "network.target";
       };
       Service = {
-        # ExecStart = "${pkgs.writeShellScript "sdnext-launch" ''
-        #   export COMMANDLINE_ARGS="--listen --port 9000 --insecure"
-        #   source $HOME/automatic/venv/bin/activate
-        #   python3 $HOME/automatic/launch.py
-        # ''}";
         ExecStart = "${pkgs.writeShellScript "sdnext-launch" ''
           export COMMANDLINE_ARGS="--listen --port 9000 --insecure"
-          $HOME/automatic/webui.sh
+          ${pkgs.bash}/bin/bash -lc $HOME/automatic/webui.sh
         ''}";
-        WorkingDirectory = "$HOME/automatic";
+        WorkingDirectory = "/home/lanice/automatic";
       };
       Install = {
         WantedBy = ["default.target"];
