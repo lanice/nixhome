@@ -3,7 +3,6 @@
   pkgs,
   inputs,
   config,
-  outputs,
   ...
 }: {
   imports =
@@ -13,10 +12,10 @@
       ../features/cli
       ../features/helix
     ]
-    ++ (builtins.attrValues outputs.homeManagerModules);
+    ++ (builtins.attrValues inputs.self.homeManagerModules);
 
   nixpkgs = {
-    overlays = builtins.attrValues outputs.overlays;
+    overlays = builtins.attrValues inputs.self.overlays;
     config = {
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942

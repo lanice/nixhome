@@ -1,5 +1,5 @@
 {
-  outputs,
+  inputs,
   config,
   lib,
   pkgs,
@@ -147,7 +147,7 @@ in {
           return-type = "json";
           exec = let
             inherit (builtins) concatStringsSep attrNames;
-            hosts = attrNames outputs.nixosConfigurations;
+            hosts = attrNames inputs.self.nixosConfigurations;
             homeMachine = "tofu";
             remoteMachine = "unstable";
           in

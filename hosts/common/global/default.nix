@@ -1,9 +1,5 @@
 # This file (and the global directory) holds config that i use on all hosts
-{
-  inputs,
-  outputs,
-  ...
-}: {
+{inputs, ...}: {
   imports =
     [
       inputs.home-manager.nixosModules.home-manager
@@ -13,12 +9,12 @@
       ./nix.nix
       ./systemd-boot.nix
     ]
-    ++ (builtins.attrValues outputs.nixosModules);
+    ++ (builtins.attrValues inputs.self.nixosModules);
 
-  home-manager.extraSpecialArgs = {inherit inputs outputs;};
+  home-manager.extraSpecialArgs = {inherit inputs;};
 
   nixpkgs = {
-    overlays = builtins.attrValues outputs.overlays;
+    overlays = builtins.attrValues inputs.self.overlays;
     config = {
       allowUnfree = true;
     };

@@ -7,14 +7,9 @@
   ...
 }: {
   imports = [
-    # If you want to use modules your own flake exports (from modules/nixos):
-    # outputs.nixosModules.example
-
-    # Or modules from other flakes (such as nixos-hardware):
     inputs.hardware.nixosModules.lenovo-thinkpad-p1
     inputs.hardware.nixosModules.common-gpu-nvidia
 
-    # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
 
     ./syncthing.nix

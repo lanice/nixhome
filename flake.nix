@@ -44,7 +44,6 @@
     nixgl,
     ...
   } @ inputs: let
-    inherit (self) outputs;
     lib = nixpkgs.lib // home-manager.lib;
     systems = ["x86_64-linux"];
     forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
@@ -72,15 +71,15 @@
     nixosConfigurations = {
       sencha = lib.nixosSystem {
         modules = [./hosts/sencha];
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs;};
       };
       tofu = lib.nixosSystem {
         modules = [./hosts/tofu];
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs;};
       };
       unstable = lib.nixosSystem {
         modules = [./hosts/unstable inputs.vscode-server.nixosModule];
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs;};
       };
     };
 
@@ -90,22 +89,22 @@
       "lanice@sencha" = lib.homeManagerConfiguration {
         modules = [./home/lanice/sencha.nix];
         pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {inherit inputs;};
       };
       "lanice@tofu" = lib.homeManagerConfiguration {
         modules = [./home/lanice/tofu.nix];
         pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {inherit inputs;};
       };
       "lanice@unstable" = lib.homeManagerConfiguration {
         modules = [./home/lanice/unstable.nix];
         pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {inherit inputs;};
       };
       "lanice@GreenGen5" = lib.homeManagerConfiguration {
         modules = [./home/lanice/greengen5.nix nixGlOverlay];
         pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = {inherit inputs;};
       };
     };
   };
