@@ -13,22 +13,24 @@
     libGL
     glib
   ];
-  sdLauncher = "${config.home.homeDirectory}/sd-launcher.sh";
-  sdnextLauncher = "${config.home.homeDirectory}/sdnext-launcher.sh";
-  comfyuiLauncher = "${config.home.homeDirectory}/comfyui-launcher.sh";
-  invokeLauncher = "${config.home.homeDirectory}/invoke-launcher.sh";
 in {
   systemd.user.services = {
     sdnext = {
       Unit = {
         Description = "SD.Next";
+        After = "network.target";
       };
       Service = {
+        # ExecStart = "${pkgs.writeShellScript "sdnext-launch" ''
+        #   export COMMANDLINE_ARGS="--listen --port 9000 --insecure"
+        #   source $HOME/automatic/venv/bin/activate
+        #   python3 $HOME/automatic/launch.py
+        # ''}";
         ExecStart = "${pkgs.writeShellScript "sdnext-launch" ''
           export COMMANDLINE_ARGS="--listen --port 9000 --insecure"
-          cd $HOME/automatic
-          . $HOME/automatic/webui.sh
+          $HOME/automatic/webui.sh
         ''}";
+        WorkingDirectory = "$HOME/automatic";
       };
       Install = {
         WantedBy = ["default.target"];
@@ -67,10 +69,7 @@ in {
   };
 
   home = {
-    file."sd-launcher.sh".source = ./sd-launcher.sh;
     file."sdnext-launcher.sh".source = ./sdnext-launcher.sh;
-    file."comfyui-launcher.sh".source = ./comfyui-launcher.sh;
-    file."invoke-launcher.sh".source = ./invoke-launcher.sh;
 
     sessionVariables = {
       LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath ldLibs;
