@@ -6,6 +6,18 @@
     url = "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=%s";
   }
   {
+    name = "MUI Icons Search";
+    tags = ["mui"];
+    keyword = "@mui";
+    url = "https://mui.com/material-ui/material-icons/?query=%s";
+  }
+  {
+    name = "dict.cc Search";
+    tags = ["dict"];
+    keyword = "@dict";
+    url = "https://www.dict.cc/?s=%s";
+  }
+  {
     name = "wikipedia";
     tags = ["wiki"];
     keyword = "wiki";
@@ -16,142 +28,42 @@
     url = "https://www.kernel.org";
   }
   {
-    name = "Nix sites";
+    name = "Bookmarks";
     toolbar = true;
     bookmarks = [
-      {
-        name = "homepage";
-        url = "https://nixos.org/";
-      }
       {
         name = "wiki";
         tags = ["wiki" "nix"];
         url = "https://nixos.wiki/";
       }
       {
-        name = "OT repos";
+        name = "DBOS";
         bookmarks = [
           {
-            name = "frontend";
-            url = "https://github.com/ottertune/frontend";
+            name = "console GH";
+            url = "https://github.com/dbos-inc/dbos-cloud-console";
           }
           {
-            name = "service";
-            url = "https://github.com/ottertune/service";
+            name = "cloud GH";
+            url = "https://github.com/dbos-inc/dbos-cloud";
           }
           {
-            name = "models";
-            url = "https://github.com/ottertune/models";
+            name = "transact GH";
+            url = "https://github.com/dbos-inc/dbos-transact";
+          }
+          {
+            name = "AWS";
+            url = "https://500883621673.signin.aws.amazon.com/console";
+          }
+          {
+            name = "STAGING Console";
+            url = "https://staging.console.dbos.dev";
+          }
+          {
+            name = "PROD Console";
+            url = "https://console.dbos.dev";
           }
         ];
-      }
-      {
-        name = "OT docs";
-        bookmarks = [
-          {
-            name = "Employee Handbook";
-            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/1605733/Employee+Handbook";
-          }
-          {
-            name = "Django Admin";
-            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/9666579/Django+Admin";
-          }
-          {
-            name = "OtterTune Test AWS Account";
-            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/4718593/Accessing+the+OtterTune+Test+AWS+Account";
-          }
-          {
-            name = "Customer Success";
-            url = "https://ottertune-docs.atlassian.net/wiki/spaces/Marketing/pages/161054721/Customer+Success";
-          }
-          {
-            name = "Support Runbook";
-            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/26050595/Support+Runbook";
-          }
-          {
-            name = "Releases";
-            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/1933318/Releases";
-          }
-        ];
-      }
-      {
-        name = "OT orga";
-        bookmarks = [
-          {
-            name = "Insperity";
-            url = "https://portal.insperity.com/cs/nsp/index";
-          }
-          {
-            name = "Opsgenie";
-            url = "https://ottertune.app.opsgenie.com/settings/schedule/detail/4e998f94-1827-42f4-9009-2c900d39dfe8";
-          }
-          {
-            name = "Carta";
-            url = "https://app.carta.com/";
-          }
-        ];
-      }
-      {
-        name = "OT planning";
-        bookmarks = [
-          {
-            name = "Responsibilities";
-            url = "https://docs.google.com/document/d/1tp8VPGhYFa4H_axIieAiq2Im_ndtaVu1Ts2ouHf9JwI/edit";
-          }
-          {
-            name = "Engineering Planning";
-            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/17301505/Engineering+Planning+Discussion+Meeting+Notes";
-          }
-          {
-            name = "Roadmap Planning";
-            url = "https://ottertune-docs.atlassian.net/wiki/spaces/PROD/pages/161972225/Roadmap+Planning+Meeting+Notes";
-          }
-          {
-            name = "Sprint Kickoff Meeting Notes";
-            url = "https://ottertune-docs.atlassian.net/wiki/spaces/EN/pages/32210945/Sprint+Kickoff+Meeting+Notes";
-          }
-          {
-            name = "Backend/Recommendation Raft Weekly";
-            url = "https://docs.google.com/document/d/1L_IgcHXLX4yIjcaMF54cSwon1-kZOiChUMzREwfCtu4/edit";
-          }
-        ];
-      }
-      {
-        name = "OT dev";
-        bookmarks = [
-          {
-            name = "DEV Django Admin";
-            url = "https://dev.service.ottertune.com/admin";
-          }
-          {
-            name = "PROD Django Admin";
-            url = "https://admin.service.ottertune.com/admin";
-          }
-          {
-            name = "PROD Django Admin (org roles)";
-            url = "https://admin.service.ottertune.com/admin/ot_models/organizationrole/?q=leander";
-          }
-          {
-            name = "ArgoCD";
-            url = "https://deploy.internal.ottertune.com/";
-          }
-          {
-            name = "Hotjar";
-            url = "https://insights.hotjar.com/sites/2867743/dashboard/";
-          }
-          {
-            name = "Datadog";
-            url = "https://app.datadoghq.com/apm/home?env=prod";
-          }
-          {
-            name = "Segment";
-            url = "https://app.segment.com/ottertune-prod/overview";
-          }
-        ];
-      }
-      {
-        name = "FE Active Sprint";
-        url = "https://ottertune.atlassian.net/jira/software/c/projects/FE/boards/10";
       }
     ];
   }
