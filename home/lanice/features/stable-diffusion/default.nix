@@ -42,7 +42,7 @@ in {
         ExecStart = "${pkgs.writeShellScript "invoke-launch" ''
           export INVOKEAI_PORT=9000
           source $HOME/invokeai/.venv/bin/activate
-          invokeai-web &
+          ${pkgs.nix}/bin/nix-shell $HOME/invokeai/shell.nix --run invokeai-web &
         ''}";
       };
       Install = {
