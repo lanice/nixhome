@@ -92,7 +92,7 @@ with pkgs.vscode-extensions;
     {
       name = "supermaven";
       publisher = "supermaven";
-      version = "1.0.4";
+      version = "1.0.9";
       sha256 = "sha256-5HCQ3Cc8ueTeKcPocz5FKV+YHIQxjFSQqL5DsbnDpQo=";
     }
 
