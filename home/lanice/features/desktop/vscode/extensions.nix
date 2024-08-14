@@ -103,6 +103,13 @@ with pkgs.vscode-extensions;
       sha256 = "sha256-7QJ58Zl6SAOvIjwzHDW0Z+EalkiSrU44KTPYy0+ETNc=";
     }
 
+    {
+      name = "playwright";
+      publisher = "ms-playwright";
+      version = "1.1.7";
+      sha256 = "sha256-jbMgEzogc/rZskV7WbxRYfCeIKAcZS2ZMPEdO4jAotk="; # Will complain and show actual hash
+    }
+
     # {
     #     name = "new-package";
     #     publisher = "someone";
