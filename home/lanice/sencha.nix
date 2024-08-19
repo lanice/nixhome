@@ -14,6 +14,7 @@
     ./features/desktop/alacritty
     ./features/desktop/wezterm
     ./features/desktop/office
+    ./features/desktop/matrix
 
     ./features/ottertune
 
