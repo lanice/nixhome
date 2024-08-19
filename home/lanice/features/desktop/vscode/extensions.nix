@@ -11,6 +11,7 @@ with pkgs.vscode-extensions;
     astro-build.astro-vscode
     bmalehorn.vscode-fish
     rust-lang.rust-analyzer
+    golang.go
 
     # arrterian.nix-env-selector
 
@@ -37,8 +38,8 @@ with pkgs.vscode-extensions;
     github.github-vscode-theme
     pkief.material-icon-theme
 
-    catppuccin.catppuccin-vsc
-    catppuccin.catppuccin-vsc-icons
+    # catppuccin.catppuccin-vsc
+    # catppuccin.catppuccin-vsc-icons
 
     # firefox-devtools.vscode-firefox-debug
     # jnoortheen.nix-ide
@@ -76,18 +77,18 @@ with pkgs.vscode-extensions;
     #   sha256 = "sha256-UVMFCgt082GPcPkhlMgmp5mJaoTSGpWKtQARjHQFjTo=";
     # }
 
-    # {
-    #   name = "catppuccin-vsc";
-    #   publisher = "catppuccin";
-    #   version = "3.13.0";
-    #   sha256 = "sha256-z6sQhC0V6j2ws9AyQE6eaTehj+2PpDjDOplB99aTPY8=";
-    # }
-    # {
-    #   name = "catppuccin-vsc-icons";
-    #   publisher = "catppuccin";
-    #   version = "1.11.0";
-    #   sha256 = "sha256-6klrnMHAIr+loz7jf7l5EZPLBhgkJODFHL9fzl1MqFI=";
-    # }
+    {
+      name = "catppuccin-vsc";
+      publisher = "catppuccin";
+      version = "3.15.1";
+      sha256 = "sha256-2hk4CfbUpg7H06FTB64z49GNXAlsXvnQahhjbPnBZ98=";
+    }
+    {
+      name = "catppuccin-vsc-icons";
+      publisher = "catppuccin";
+      version = "1.15.0";
+      sha256 = "sha256-voXPph8I1U0udKvlGhuLdjCwZv8dALanfTNOlsOOa4k=";
+    }
 
     {
       name = "supermaven";
