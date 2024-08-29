@@ -73,6 +73,7 @@
       xournalpp
       zed-editor
       # gitbutler
+      fabric-ai
 
       sxiv
 
