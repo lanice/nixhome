@@ -75,6 +75,8 @@
       # gitbutler
       fabric-ai
 
+      auth0-cli
+
       sxiv
 
       bitwarden
