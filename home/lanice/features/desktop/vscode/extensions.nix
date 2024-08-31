@@ -94,7 +94,7 @@ with pkgs.vscode-extensions;
       name = "supermaven";
       publisher = "supermaven";
       version = "1.0.9";
-      sha256 = "sha256-5HCQ3Cc8ueTeKcPocz5FKV+YHIQxjFSQqL5DsbnDpQo=";
+      sha256 = "sha256-2cv6dEn5af3VNAHkXAx9Yr2eqeuLh5Stv/JXLWeiRj4=";
     }
 
     {
@@ -108,7 +108,7 @@ with pkgs.vscode-extensions;
       name = "playwright";
       publisher = "ms-playwright";
       version = "1.1.7";
-      sha256 = "sha256-jbMgEzogc/rZskV7WbxRYfCeIKAcZS2ZMPEdO4jAotk="; # Will complain and show actual hash
+      sha256 = "sha256-jbMgEzogc/rZskV7WbxRYfCeIKAcZS2ZMPEdO4jAotk=";
     }
 
     # {
