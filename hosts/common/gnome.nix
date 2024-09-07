@@ -19,31 +19,28 @@
 
   environment = {
     enableAllTerminfo = true;
-    gnome.excludePackages =
-      (with pkgs; [
-        gnome-photos
-        gnome-tour
-        gnome-console
-        cheese # webcam tool
-        epiphany # web browser
-        geary # email reader
-        yelp # Help view
-      ])
-      ++ (with pkgs.gnome; [
-        gnome-maps
-        gnome-music
-        # gedit # text editor
-        gnome-characters
-        tali # poker game
-        iagno # go game
-        hitori # sudoku game
-        atomix # puzzle game
-        gnome-contacts
-        gnome-initial-setup
+    gnome.excludePackages = with pkgs; [
+      gnome-photos
+      gnome-tour
+      gnome-console
+      cheese # webcam tool
+      epiphany # web browser
+      geary # email reader
+      yelp # Help view
+      gnome-maps
+      gnome-music
+      # gedit # text editor
+      gnome-characters
+      tali # poker game
+      iagno # go game
+      hitori # sudoku game
+      atomix # puzzle game
+      gnome-contacts
+      gnome-initial-setup
 
-        gnome-shell-extensions # Superseded by gnome-extension-manager, not actually doing anything
-        gnome-software # Software store, useless in NixOS
-      ]);
+      gnome-shell-extensions # Superseded by gnome-extension-manager, not actually doing anything
+      gnome-software # Software store, useless in NixOS
+    ];
 
     systemPackages = with pkgs; [
       gnome-tweaks
