@@ -32,6 +32,8 @@
     nodejs_20
     nodejs_20.pkgs.pnpm
 
+    devenv
+
     alejandra # Nix formatter
   ];
 
