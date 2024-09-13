@@ -35,6 +35,8 @@
     devenv
 
     alejandra # Nix formatter
+
+    wl-clipboard # Command-line copy/paste utilities for Wayland
   ];
 
   programs.nix-index.enable = true;
