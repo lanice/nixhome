@@ -28,7 +28,7 @@ in {
     ../common/virtualisation.nix
     ../common/minecraft-servers.nix
     ../common/gnome.nix
-    ../common/steam.nix
+    # ../common/steam.nix
     # ../common/sunshine.nix
   ];
 
