@@ -4,7 +4,7 @@
   fetchFromGitHub,
   nix-update-script,
 }: let
-  version = "1.4.17";
+  version = "1.4.21";
 in
   buildGoModule {
     pname = "fabric-ai";
@@ -14,10 +14,10 @@ in
       owner = "danielmiessler";
       repo = "fabric";
       rev = "v${version}";
-      hash = "sha256-oH4HL2QQnX8f4w5YFP8XSQGg2tMkJex+mJHpu2Rtl8M=";
+      hash = "sha256-9rpp2UiYcFy25Vohd1+jUCRnEM9GK15Cic46x533XnI=";
     };
 
-    vendorHash = "sha256-CHgeHumWtNt8SrbzzCWqBdLxTmmyDD2bfLkriPeez2E=";
+    vendorHash = "sha256-uWq+S6J/RInAaQOO0T3LkpQ89mHq0Wj+wXw+Tioxy70=";
 
     ldflags = [
       "-s"
