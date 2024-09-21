@@ -13,6 +13,13 @@
     libGL
     glib
   ];
+  pypatchmatch = pkgs.python311Packages.callPackage ./pypatchmatch {};
+  nixShellWithPyPatchMatch = pkgs.writeText "shell.nix" ''
+    {pkgs ? import <nixpkgs> {}}:
+      pkgs.mkShell {
+        buildInputs = [${pypatchmatch}];
+      }
+  '';
 in {
   systemd.user.services = {
     sdnext = {
@@ -42,7 +49,7 @@ in {
         ExecStart = "${pkgs.writeShellScript "invoke-launch" ''
           export INVOKEAI_PORT=9000
           source $HOME/invokeai/.venv/bin/activate
-          ${pkgs.nix}/bin/nix-shell $HOME/invokeai/shell.nix --run invokeai-web &
+          ${pkgs.nix}/bin/nix-shell ${nixShellWithPyPatchMatch} --run invokeai-web &
         ''}";
       };
       Install = {
