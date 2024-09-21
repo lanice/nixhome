@@ -15,10 +15,7 @@
   ];
   pypatchmatch = pkgs.python311Packages.callPackage ./pypatchmatch {};
   nixShellWithPyPatchMatch = pkgs.writeText "shell.nix" ''
-    {pkgs ? import <nixpkgs> {}}:
-      pkgs.mkShell {
-        buildInputs = [${pypatchmatch}];
-      }
+    {pkgs ? import <nixpkgs> {}}: pkgs.mkShell { buildInputs = [${pypatchmatch}]; }
   '';
 in {
   systemd.user.services = {
