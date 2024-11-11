@@ -52,7 +52,7 @@ in
     }
 
     {
-      package = openweather;
+      package = openweather-refined;
       dconfSettings = {};
     }
 
