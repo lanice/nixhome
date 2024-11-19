@@ -111,6 +111,13 @@ with pkgs.vscode-extensions;
       sha256 = "sha256-jbMgEzogc/rZskV7WbxRYfCeIKAcZS2ZMPEdO4jAotk=";
     }
 
+    {
+      name = "claude-dev";
+      publisher = "saoudrizwan";
+      version = "2.1.5";
+      sha256 = "sha256-vlbhPGr2ntdHu/e+yw7j7zEjOhyUWZCZJvaj7gdO/WQ=";
+    }
+
     # {
     #     name = "new-package";
     #     publisher = "someone";
