@@ -1,4 +1,3 @@
-# Inspired by misterio's config as well as https://git.sr.ht/~rycee/configurations/tree/master/item/user/firefox.nix
 {
   pkgs,
   config,

@@ -1,7 +1,5 @@
 # nixhome
 
-This config is based on [Misterio77's starter config](https://github.com/Misterio77/nix-starter-configs) and their own [NixOS configuration](https://github.com/Misterio77/nix-config).
-
 ## Bootstrap
 
 ### NixOS

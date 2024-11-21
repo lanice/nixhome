@@ -1,6 +1,4 @@
 {
-  # starter config from: https://git.sr.ht/~misterio/nix-config
-
   description = "My nix config";
 
   inputs = {
