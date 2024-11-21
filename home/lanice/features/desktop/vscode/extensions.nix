@@ -21,6 +21,7 @@ with pkgs.vscode-extensions;
     ms-python.black-formatter
     ms-toolsai.jupyter
     ms-vscode-remote.remote-ssh
+    ms-vsliveshare.vsliveshare
 
     # supermaven.supermaven
 
@@ -44,6 +45,8 @@ with pkgs.vscode-extensions;
     # firefox-devtools.vscode-firefox-debug
     # jnoortheen.nix-ide
     # mkhl.direnv
+
+    jgclark.vscode-todo-highlight
   ]
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     # {
@@ -53,23 +56,17 @@ with pkgs.vscode-extensions;
     #   sha256 = "sha256-rYeZNBz6HeZ059ksChGsXbuOao9H5m5lHGXJ4ELs6xc=";
     # }
     {
-      name = "vscode-todo-highlight";
-      publisher = "jgclark";
-      version = "2.0.4";
-      sha256 = "sha256-+X/ORct/DH2EpALlrWtbFtujdkmgsSysO3Hg+AkP9aM=";
-    }
-    {
       name = "vscode-todo-plus";
       publisher = "fabiospampinato";
-      version = "4.18.4";
-      sha256 = "sha256-daKMeFUPZSanrFu9J6mk3ZVmlz8ZZquZa3qaWSTbSjs=";
+      version = "4.19.1";
+      sha256 = "sha256-3ykOShGBZ8X4ra5EtZWf8EhVYEIy2Ji5+G3k2seL+1Y=";
     }
-    {
-      name = "vsliveshare";
-      publisher = "ms-vsliveshare";
-      version = "1.0.5905";
-      sha256 = "sha256-y1MMO6fd/4a9PhdBpereEBPRk50CDgdiRc8Vwqn0PXY=";
-    }
+    # {
+    #   name = "vsliveshare";
+    #   publisher = "ms-vsliveshare";
+    #   version = "1.0.5905";
+    #   sha256 = "sha256-y1MMO6fd/4a9PhdBpereEBPRk50CDgdiRc8Vwqn0PXY=";
+    # }
     # {
     #   name = "gitlens";
     #   publisher = "eamodio";
@@ -80,28 +77,21 @@ with pkgs.vscode-extensions;
     {
       name = "catppuccin-vsc";
       publisher = "catppuccin";
-      version = "3.15.1";
-      sha256 = "sha256-2hk4CfbUpg7H06FTB64z49GNXAlsXvnQahhjbPnBZ98=";
+      version = "3.16.0";
+      sha256 = "sha256-eZwi5qONiH+XVZj7u2cjJm+Liv1q07AEd8d4nXEQgLw=";
     }
     {
       name = "catppuccin-vsc-icons";
       publisher = "catppuccin";
-      version = "1.15.0";
-      sha256 = "sha256-voXPph8I1U0udKvlGhuLdjCwZv8dALanfTNOlsOOa4k=";
-    }
-
-    {
-      name = "supermaven";
-      publisher = "supermaven";
-      version = "1.0.9";
-      sha256 = "sha256-2cv6dEn5af3VNAHkXAx9Yr2eqeuLh5Stv/JXLWeiRj4=";
+      version = "1.17.0";
+      sha256 = "sha256-CSAIDlZNrelBf891ztK4n9IaRdtXqpeXnI00hG0/nfA=";
     }
 
     {
       name = "dbos-ttdbg";
       publisher = "dbos-inc";
-      version = "1.3.6";
-      sha256 = "sha256-7QJ58Zl6SAOvIjwzHDW0Z+EalkiSrU44KTPYy0+ETNc=";
+      version = "1.4.10";
+      sha256 = "sha256-L7/v5Jh3XxaVitb1WBCTUrN11CHuSwr0NH4n7QDzj5I=";
     }
 
     {
@@ -114,8 +104,8 @@ with pkgs.vscode-extensions;
     {
       name = "claude-dev";
       publisher = "saoudrizwan";
-      version = "2.1.5";
-      sha256 = "sha256-vlbhPGr2ntdHu/e+yw7j7zEjOhyUWZCZJvaj7gdO/WQ=";
+      version = "2.1.6";
+      sha256 = "sha256-XwHNmuogQgHVObu7fhP80IMhEiSJVzgJfUi67urz7oA=";
     }
 
     # {

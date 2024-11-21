@@ -146,7 +146,4 @@
   "git.autofetch" = false;
   "telemetry.telemetryLevel" = "off";
   "update.showReleaseNotes" = false;
-  "supermaven.enable" = {
-    "*" = false;
-  };
 }
