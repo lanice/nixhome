@@ -69,6 +69,8 @@
       '';
 
       wh = "readlink -f (which $argv)";
+
+      yt = ''${pkgs.fabric-ai}/bin/fabric -y "$argv" --transcript | ${pkgs.fabric-ai}/bin/fabric -sp summarize'';
     };
 
     interactiveShellInit = ''
@@ -80,6 +82,8 @@
 
       # https://github.com/nvbn/thefuck/wiki/Shell-aliases#fish
       thefuck --alias | source
+
+      set -U fish_features qmark-noglob
 
       # Use terminal colors
       set -U fish_color_autosuggestion      brblack
