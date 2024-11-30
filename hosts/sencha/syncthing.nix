@@ -25,10 +25,6 @@
           path = "/home/lanice/Sync/sd-misc";
           devices = ["unstable"];
         };
-        "models" = {
-          path = "/home/lanice/Sync/models";
-          devices = ["unstable"];
-        };
         "stable-diffusion" = {
           path = "/home/lanice/Sync/stable-diffusion";
           devices = ["unstable" "SunsetDragon"];

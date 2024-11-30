@@ -100,24 +100,20 @@ in {
 
       folders = {
         "sd" = {
-          path = "/home/lanice/Sync/sd"; # Which folder to add to Syncthing
-          devices = ["sencha"]; # Which devices to share the folder with
+          path = "/home/lanice/Sync/sd";
+          devices = ["sencha"];
         };
         "sd-misc" = {
-          path = "/home/lanice/Sync/sd-misc"; # Which folder to add to Syncthing
-          devices = ["sencha"]; # Which devices to share the folder with
-        };
-        "models" = {
-          path = "/home/lanice/Sync/models"; # Which folder to add to Syncthing
-          devices = ["sencha"]; # Which devices to share the folder with
+          path = "/home/lanice/Sync/sd-misc";
+          devices = ["sencha"];
         };
         "stable-diffusion" = {
-          path = "/home/lanice/Sync/stable-diffusion"; # Which folder to add to Syncthing
-          devices = ["sencha" "SunsetDragon"]; # Which devices to share the folder with
+          path = "/home/lanice/Sync/stable-diffusion";
+          devices = ["sencha" "SunsetDragon"];
         };
         "photo-share" = {
-          path = "/home/lanice/Sync/photo-share"; # Which folder to add to Syncthing
-          devices = ["sencha" "SunsetDragon"]; # Which devices to share the folder with
+          path = "/home/lanice/Sync/photo-share";
+          devices = ["sencha" "SunsetDragon"];
         };
       };
     };
