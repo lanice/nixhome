@@ -24,33 +24,6 @@
     ./themes/catppuccin-latte
   ];
 
-  #  -------   ----------
-  # | eDP-1 | | HDMI-1-0 |
-  #  -------   ----------
-  monitors = [
-    {
-      name = "eDP-1";
-      width = 3840;
-      # width = 1920;
-      height = 2400;
-      # height = 1200;
-      scale = "1.5";
-      x = 0;
-      workspace = "2";
-      primary = false;
-    }
-    {
-      name = "HDMI-A-2";
-      width = 3840;
-      height = 1600;
-      # x = 3840;
-      x = 2560;
-      workspace = "1";
-      primary = true;
-      # enabled = false;
-    }
-  ];
-
   home = {
     sessionVariables = {
       EDITOR = "hx";
@@ -74,6 +47,8 @@
       zed-editor
       # gitbutler
       fabric-ai
+
+      aider-chat
 
       auth0-cli
 
