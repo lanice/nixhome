@@ -19,11 +19,8 @@ with pkgs.vscode-extensions;
     ms-python.vscode-pylance
     ms-python.isort
     ms-python.black-formatter
-    ms-toolsai.jupyter
     ms-vscode-remote.remote-ssh
     ms-vsliveshare.vsliveshare
-
-    # supermaven.supermaven
 
     github.copilot
     github.copilot-chat

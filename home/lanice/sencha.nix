@@ -59,6 +59,8 @@
       xorg.xrandr
 
       python3
+
+      terraform
     ];
 
     stateVersion = lib.mkDefault "23.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
