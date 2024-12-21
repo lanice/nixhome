@@ -53,7 +53,7 @@
               title = "Stable Diffusion";
               description = "SD.Next / InvokeAI";
               # icon = "https://i.ibb.co/cLfVCQP/dev-env.png";
-              url = "http://stable-diffusion.kangaroo-tegu.ts.net:9000/";
+              url = "https://sdnext.lanice.dev/";
               statusCheck = true;
               statusCheckAllowInsecure = true;
             }

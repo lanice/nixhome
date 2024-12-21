@@ -31,6 +31,7 @@ in {
     # ../common/steam.nix
     # ../common/sunshine.nix
 
+    ./nginx.nix
     ./dashy.nix
   ];
 
