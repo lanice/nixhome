@@ -30,6 +30,8 @@ in {
     ../common/gnome.nix
     # ../common/steam.nix
     # ../common/sunshine.nix
+
+    ./dashy.nix
   ];
 
   users.users.lanice.shell = lib.mkForce pkgs.bash;
