@@ -10,6 +10,8 @@
     inputs.hardware.nixosModules.lenovo-thinkpad-p1
     inputs.hardware.nixosModules.common-gpu-nvidia
 
+    inputs.agenix.nixosModules.default
+
     ./hardware-configuration.nix
 
     ./syncthing.nix
@@ -70,7 +72,7 @@
     bluetooth.powerOnBoot = true;
   };
 
-  environment.systemPackages = with pkgs; [nvtopPackages.full libva-utils];
+  environment.systemPackages = with pkgs; [nvtopPackages.full libva-utils inputs.agenix.packages.x86_64-linux.default];
 
   #  services.blueman.enable = true;
 

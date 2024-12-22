@@ -5,6 +5,8 @@
   ...
 }: {
   imports = [
+    inputs.agenix.homeManagerModules.age
+
     ./global # includes features/cli,features/helix
     ./features/email
     ./features/maestral
