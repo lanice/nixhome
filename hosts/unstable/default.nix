@@ -31,6 +31,7 @@ in {
     # ../common/steam.nix
     # ../common/sunshine.nix
 
+    ./secrets.nix
     ./nginx.nix
     ./dashy.nix
   ];
@@ -65,7 +66,7 @@ in {
 
   environment = {
     shells = with pkgs; [fish];
-    systemPackages = with pkgs; [];
+    systemPackages = with pkgs; [inputs.agenix.packages.x86_64-linux.default];
     enableAllTerminfo = true;
   };
 

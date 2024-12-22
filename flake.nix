@@ -31,6 +31,9 @@
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
 
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+
     hardware.url = "github:nixos/nixos-hardware";
     stylix.url = "github:danth/stylix";
   };
@@ -40,6 +43,7 @@
     nixpkgs,
     home-manager,
     nixgl,
+    agenix,
     ...
   } @ inputs: let
     lib = nixpkgs.lib // home-manager.lib;
@@ -76,7 +80,7 @@
         specialArgs = {inherit inputs;};
       };
       unstable = lib.nixosSystem {
-        modules = [./hosts/unstable inputs.vscode-server.nixosModule];
+        modules = [./hosts/unstable inputs.vscode-server.nixosModule agenix.nixosModules.default];
         specialArgs = {inherit inputs;};
       };
     };

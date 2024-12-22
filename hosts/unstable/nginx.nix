@@ -1,4 +1,4 @@
-let
+{config, ...}: let
   tailscaleIP = "100.89.240.111";
 
   # Common settings for virtual hosts
@@ -38,7 +38,7 @@ in {
     acceptTerms = true;
     defaults = {
       email = "leanderneiss@gmail.com";
-      credentialsFile = "/var/lib/secrets/porkbun.env";
+      credentialsFile = config.age.secrets.porkbun.path;
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
     };
