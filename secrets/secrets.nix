@@ -6,5 +6,5 @@ let
   unstable = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGrqPXr49t/nDW8UtCjPVkmIW8qpHCnsYLjnZWYx7vED root@unstable";
   systems = [unstable];
 in {
-  "porkbun.age".publicKeys = [unstable lanice-unstable];
+  "porkbun.age".publicKeys = [unstable lanice-unstable lanice-sencha];
 }
