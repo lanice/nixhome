@@ -38,16 +38,6 @@ in {
 
   users.users.lanice.shell = lib.mkForce pkgs.bash;
 
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
-  };
-
   networking.hostName = "unstable";
   networking.interfaces.eno1.wakeOnLan.enable = true;
 

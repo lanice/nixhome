@@ -17,6 +17,10 @@
     overlays = builtins.attrValues inputs.self.overlays;
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        # "pkgname"
+        "olm-3.2.16" # https://github.com/NixOS/nixpkgs/pull/338006
+      ];
     };
   };
 

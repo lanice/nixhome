@@ -28,7 +28,8 @@ in {
   };
 
   home-manager.users.lanice = import ../../../home/lanice/${config.networking.hostName}.nix;
-  # home-manager.useGlobalPkgs = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
 
   security.pam.services = {swaylock = {};};
 }
