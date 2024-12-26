@@ -48,9 +48,10 @@
       xournalpp
       zed-editor
       # gitbutler
-      fabric-ai
 
+      fabric-ai
       aider-chat
+      claude-desktop
 
       auth0-cli
 
