@@ -52,16 +52,14 @@
             {
               title = "SD.Next";
               # description = "SD.Next";
-              # icon = "https://i.ibb.co/cLfVCQP/dev-env.png";
+              icon = "https://raw.githubusercontent.com/vladmandic/automatic/refs/heads/master/html/logo.svg";
               url = "https://sdnext.lanice.dev/";
-              statusCheck = true;
             }
             {
               title = "InvokeAI";
               # description = "SD.Next";
-              # icon = "https://i.ibb.co/cLfVCQP/dev-env.png";
+              icon = "https://raw.githubusercontent.com/invoke-ai/InvokeAI/refs/heads/main/invokeai/frontend/web/public/assets/images/invoke-symbol-ylw-lrg.svg";
               url = "https://invoke.lanice.dev/";
-              statusCheck = true;
             }
           ];
         }
