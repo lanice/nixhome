@@ -31,6 +31,7 @@ in {
     virtualHosts = {
       "dash.lanice.dev" = mkVirtualHost 8080;
       "sdnext.lanice.dev" = mkVirtualHost 9000;
+      "invoke.lanice.dev" = mkVirtualHost 9001;
     };
   };
 
@@ -46,6 +47,7 @@ in {
     certs = {
       "dash.lanice.dev" = mkAcmeCert;
       "sdnext.lanice.dev" = mkAcmeCert;
+      "invoke.lanice.dev" = mkAcmeCert;
     };
   };
 

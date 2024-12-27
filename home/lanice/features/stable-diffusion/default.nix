@@ -39,18 +39,32 @@ in {
     invoke = {
       Unit = {
         Description = "InvokeAI";
+        After = [
+          "network.target"
+          "systemd-udev-settle.service"
+          "systemd-user-sessions.service" # Ensure user session is ready
+        ];
+        Wants = ["systemd-udev-settle.service"];
       };
       Service = {
-        Type = "oneshot";
-        RemainAfterExit = "yes";
         ExecStart = "${pkgs.writeShellScript "invoke-launch" ''
-          export INVOKEAI_PORT=9000
+          export INVOKEAI_PORT=9001
           source $HOME/invokeai/.venv/bin/activate
-          ${pkgs.nix}/bin/nix-shell ${nixShellWithPyPatchMatch} --run invokeai-web &
+          ${pkgs.nix}/bin/nix-shell ${nixShellWithPyPatchMatch} --run invokeai-web
         ''}";
+        # ExecStartPre = "${pkgs.coreutils}/bin/sleep 10";
+
+        # Restart on failure
+        Restart = "on-failure";
+        # Wait 5 seconds before restart
+        RestartSec = 5;
+        # Maximum number of restart attempts within the time window
+        StartLimitBurst = 5;
+        # Time window for restart attempts (in seconds)
+        StartLimitIntervalSec = 30;
       };
       Install = {
-        WantedBy = [];
+        WantedBy = ["default.target"];
       };
     };
   };

@@ -50,12 +50,18 @@
           };
           items = [
             {
-              title = "Stable Diffusion";
-              description = "SD.Next / InvokeAI";
+              title = "SD.Next";
+              # description = "SD.Next";
               # icon = "https://i.ibb.co/cLfVCQP/dev-env.png";
               url = "https://sdnext.lanice.dev/";
               statusCheck = true;
-              statusCheckAllowInsecure = true;
+            }
+            {
+              title = "InvokeAI";
+              # description = "SD.Next";
+              # icon = "https://i.ibb.co/cLfVCQP/dev-env.png";
+              url = "https://invoke.lanice.dev/";
+              statusCheck = true;
             }
           ];
         }
