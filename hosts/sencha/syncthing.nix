@@ -25,6 +25,10 @@
           path = "/home/lanice/Sync/sd-misc";
           devices = ["unstable"];
         };
+        "paperless" = {
+          path = "/home/lanice/Sync/paperless";
+          devices = ["unstable"];
+        };
         "stable-diffusion" = {
           path = "/home/lanice/Sync/stable-diffusion";
           devices = ["unstable" "SunsetDragon"];
