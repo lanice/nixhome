@@ -202,5 +202,37 @@
       };
       thunderbird.enable = true;
     };
+
+    accounts."hi@amandaleander.com" = {
+      primary = false;
+      address = "hi@amandaleander.com";
+      userName = "hi@amandaleander.com";
+      realName = "Amanda & Leander";
+      imap = {
+        host = "eagle.mxlogin.com";
+        port = 993;
+      };
+      smtp = {
+        host = "eagle.mxlogin.com";
+        port = 465;
+      };
+      thunderbird.enable = true;
+    };
+
+    accounts."pl@lanice.dev" = {
+      primary = false;
+      address = "pl@lanice.dev";
+      userName = "pl@lanice.dev";
+      realName = "Leander Neiss";
+      imap = {
+        host = "witcher.mxrouting.net";
+        port = 993;
+      };
+      smtp = {
+        host = "witcher.mxrouting.net";
+        port = 465;
+      };
+      thunderbird.enable = true;
+    };
   };
 }
