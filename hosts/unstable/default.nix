@@ -34,6 +34,7 @@ in {
     ./secrets.nix
     ./nginx.nix
     ./dashy.nix
+    ./paperless.nix
   ];
 
   users.users.lanice.shell = lib.mkForce pkgs.bash;
@@ -108,6 +109,10 @@ in {
         "photo-share" = {
           path = "/home/lanice/Sync/photo-share";
           devices = ["sencha" "SunsetDragon"];
+        };
+        "paperless" = {
+          path = "/var/lib/paperless/consume";
+          devices = ["sencha"];
         };
       };
     };

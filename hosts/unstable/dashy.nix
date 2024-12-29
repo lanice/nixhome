@@ -63,6 +63,20 @@
             }
           ];
         }
+        {
+          name = "Stuff";
+          displayData = {
+            itemSize = "large";
+            sortBy = "default";
+          };
+          items = [
+            {
+              title = "Paperless";
+              icon = "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/refs/heads/dev/resources/logo/web/svg/square.svg";
+              url = "https://paperless.lanice.dev/";
+            }
+          ];
+        }
       ];
     };
   };
