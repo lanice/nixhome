@@ -21,7 +21,8 @@
 in {
   home.packages = with pkgs;
     [
-      gnome-extension-manager
+      # TODO: Wait for https://github.com/NixOS/nixpkgs/issues/368664 to be resolved
+      # gnome-extension-manager
     ]
     ++ builtins.map (e: e.package) extensions;
 
