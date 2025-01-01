@@ -14,6 +14,7 @@
       devices = {
         "unstable" = {id = "ZSOKQGJ-K55JPO2-W4N75YJ-6NJI64R-HLQTT72-JENBU3L-DU44IG5-BVHIXAS";};
         "SunsetDragon" = {id = "GQWATA7-Y6EUELT-HZYCAOU-O6AMUID-YIU4AYD-O7QT3V4-ZUE4ZP7-LIITDAE";};
+        "S23Ultra" = {id = "IO377ZW-XGOPD22-O6N6B4F-WQJYEYF-2GE463X-DH7MY4M-ZZEQ5CN-T2HJTAC";};
       };
 
       folders = {
@@ -40,6 +41,10 @@
         "projects" = {
           path = "/home/lanice/Sync/projects";
           devices = ["SunsetDragon"];
+        };
+        "s23sync" = {
+          path = "/home/lanice/Sync/s23sync";
+          devices = ["S23Ultra"];
         };
       };
     };
