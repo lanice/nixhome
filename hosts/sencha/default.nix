@@ -15,6 +15,8 @@
     ./hardware-configuration.nix
 
     ./syncthing.nix
+    ./mullvad.nix
+
     ../common/global
     ../common/tailscale.nix
     ../common/pipewire.nix
