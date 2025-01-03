@@ -68,21 +68,20 @@ in
       };
     }
 
-    # TODO: Wait for https://github.com/NixOS/nixpkgs/issues/369438 to be resolved
-    # {
-    #   package = pano;
-    #   dconfSettings = {
-    #     # Remove audio and notification cues on copy
-    #     send-notification-on-copy = false;
-    #     play-audio-on-copy = false;
+    {
+      package = pano;
+      dconfSettings = {
+        # Remove audio and notification cues on copy
+        send-notification-on-copy = false;
+        play-audio-on-copy = false;
 
-    #     # Do not generate link previews for copied links
-    #     link-previews = false;
+        # Do not generate link previews for copied links
+        link-previews = false;
 
-    #     # Window title(?) based excludes
-    #     exclusion-list = ["Bitwarden" "1Password" "KeePassXC" "secrets" "org.gnome.World.Secrets" "Tor Browser"];
-    #   };
-    # }
+        # Window title(?) based excludes
+        exclusion-list = ["Bitwarden" "1Password" "KeePassXC" "secrets" "org.gnome.World.Secrets" "Tor Browser"];
+      };
+    }
 
     {
       package = removable-drive-menu;
