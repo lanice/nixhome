@@ -29,7 +29,7 @@ in {
     defaultListenAddresses = [tailscaleIP];
 
     virtualHosts = {
-      "dash.lanice.dev" = mkVirtualHost 8080;
+      "dash.lanice.dev" = mkVirtualHost 8081;
       "home.lanice.dev" = mkVirtualHost 8081;
       "sdnext.lanice.dev" = mkVirtualHost 9000;
       "invoke.lanice.dev" = mkVirtualHost 9001;

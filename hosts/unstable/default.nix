@@ -33,7 +33,7 @@ in {
 
     ./secrets.nix
     ./nginx.nix
-    ./dashy.nix
+    # ./dashy.nix
     ./paperless.nix
     ./homepage.nix
   ];
