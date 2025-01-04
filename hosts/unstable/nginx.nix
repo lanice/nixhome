@@ -35,7 +35,8 @@ in {
       "invoke.lanice.dev" = mkVirtualHost 9001;
       "paperless.lanice.dev" = mkVirtualHost 58080;
 
-      "jelly.lanice.dev" = mkVirtualHost 8096;
+      "jellyfin.lanice.dev" = mkVirtualHost 8096;
+      # "jellyseerr.lanice.dev" = mkVirtualHost 5055;
       "sonarr.lanice.dev" = mkVirtualHost 8989;
     };
   };
@@ -56,7 +57,8 @@ in {
       "invoke.lanice.dev" = mkAcmeCert;
       "paperless.lanice.dev" = mkAcmeCert;
 
-      "jelly.lanice.dev" = mkAcmeCert;
+      "jellyfin.lanice.dev" = mkAcmeCert;
+      # "jellyseerr.lanice.dev" = mkAcmeCert;
       "sonarr.lanice.dev" = mkAcmeCert;
     };
   };

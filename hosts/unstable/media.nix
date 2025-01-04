@@ -17,6 +17,11 @@ in {
     group = mediaGroup;
   };
 
+  # services.jellyseer = {
+  #   enable = true;
+  #   port = 5055;
+  # };
+
   services.sonarr = {
     enable = true;
     group = mediaGroup;

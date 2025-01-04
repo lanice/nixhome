@@ -27,8 +27,14 @@
         Media = [
           {
             Jellyfin = {
-              href = "https://jelly.lanice.dev/";
+              href = "https://jellyfin.lanice.dev/";
               icon = "jellyfin";
+            };
+          }
+          {
+            Jellyseer = {
+              href = "https://jellyseerr.lanice.dev/";
+              icon = "jellyseerr";
             };
           }
         ];
