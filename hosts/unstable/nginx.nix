@@ -34,6 +34,9 @@ in {
       "sdnext.lanice.dev" = mkVirtualHost 9000;
       "invoke.lanice.dev" = mkVirtualHost 9001;
       "paperless.lanice.dev" = mkVirtualHost 58080;
+
+      "jelly.lanice.dev" = mkVirtualHost 8096;
+      "sonarr.lanice.dev" = mkVirtualHost 8989;
     };
   };
 
@@ -52,6 +55,9 @@ in {
       "sdnext.lanice.dev" = mkAcmeCert;
       "invoke.lanice.dev" = mkAcmeCert;
       "paperless.lanice.dev" = mkAcmeCert;
+
+      "jelly.lanice.dev" = mkAcmeCert;
+      "sonarr.lanice.dev" = mkAcmeCert;
     };
   };
 

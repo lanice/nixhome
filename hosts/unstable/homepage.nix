@@ -24,6 +24,16 @@
         ];
       }
       {
+        Media = [
+          {
+            Jellyfin = {
+              href = "https://jelly.lanice.dev/";
+              icon = "jellyfin";
+            };
+          }
+        ];
+      }
+      {
         Stuff = [
           {
             Paperless = {

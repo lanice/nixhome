@@ -34,8 +34,9 @@ in {
     ./secrets.nix
     ./nginx.nix
     # ./dashy.nix
-    ./paperless.nix
     ./homepage.nix
+    ./paperless.nix
+    ./media.nix
   ];
 
   users.users.lanice.shell = lib.mkForce pkgs.bash;
