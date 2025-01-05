@@ -80,6 +80,16 @@
             };
           }
           {
+            Readarr = let
+              url = "https://readarr.lanice.dev";
+            in {
+              href = url;
+              icon = "readarr";
+              siteMonitor = url;
+              description = "Books";
+            };
+          }
+          {
             Bazarr = let
               url = "https://bazarr.lanice.dev";
             in {
@@ -97,6 +107,16 @@
               icon = "prowlarr";
               siteMonitor = url;
               description = "Indexer Aggregator";
+            };
+          }
+          {
+            "NZBHydra 2" = let
+              url = "https://nzbhydra.lanice.dev";
+            in {
+              href = url;
+              icon = "nzbhydra2";
+              siteMonitor = url;
+              description = "Usenet Meta Search";
             };
           }
           {

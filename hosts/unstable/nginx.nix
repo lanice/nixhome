@@ -40,8 +40,10 @@ in {
       # "jellyseerr.lanice.dev" = mkVirtualHost 5055;
       "sonarr.lanice.dev" = mkVirtualHost 8989;
       "radarr.lanice.dev" = mkVirtualHost 7878;
-      "prowlarr.lanice.dev" = mkVirtualHost 9696;
+      "readarr.lanice.dev" = mkVirtualHost 8787;
       "bazarr.lanice.dev" = mkVirtualHost 6767;
+      "prowlarr.lanice.dev" = mkVirtualHost 9696;
+      "nzbhydra.lanice.dev" = mkVirtualHost 5076;
       "sabnzbd.lanice.dev" = mkVirtualHost 8080;
     };
   };
@@ -67,8 +69,10 @@ in {
       # "jellyseerr.lanice.dev" = mkAcmeCert;
       "sonarr.lanice.dev" = mkAcmeCert;
       "radarr.lanice.dev" = mkAcmeCert;
-      "prowlarr.lanice.dev" = mkAcmeCert;
+      "readarr.lanice.dev" = mkAcmeCert;
       "bazarr.lanice.dev" = mkAcmeCert;
+      "prowlarr.lanice.dev" = mkAcmeCert;
+      "nzbhydra.lanice.dev" = mkAcmeCert;
       "sabnzbd.lanice.dev" = mkAcmeCert;
     };
   };
