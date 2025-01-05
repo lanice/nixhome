@@ -1,6 +1,7 @@
 let
   mediaDir = "/data/media";
   mediaGroup = "multimedia";
+  downloadDir = "/data/downloads";
 in {
   users.users.lanice.extraGroups = [mediaGroup];
 
@@ -10,6 +11,9 @@ in {
     "d ${mediaDir} 0770 root ${mediaGroup} - -"
     "d ${mediaDir}/movies 0770 - ${mediaGroup} - -"
     "d ${mediaDir}/shows 0770 - ${mediaGroup} - -"
+    "d ${downloadDir} 0770 sabnzbd ${mediaGroup} - -"
+    "d ${downloadDir}/incomplete 0770 sabnzbd ${mediaGroup} - -"
+    "d ${downloadDir}/complete 0770 sabnzbd ${mediaGroup} - -"
   ];
 
   services.jellyfin = {
@@ -23,6 +27,25 @@ in {
   # };
 
   services.sonarr = {
+    enable = true;
+    group = mediaGroup;
+  };
+
+  services.radarr = {
+    enable = true;
+    group = mediaGroup;
+  };
+
+  services.prowlarr = {
+    enable = true;
+  };
+
+  services.bazarr = {
+    enable = true;
+    group = mediaGroup;
+  };
+
+  services.sabnzbd = {
     enable = true;
     group = mediaGroup;
   };

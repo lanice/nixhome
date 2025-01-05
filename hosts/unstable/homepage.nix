@@ -27,7 +27,7 @@
         Media = [
           {
             Jellyfin = {
-              href = "https://jellyfin.lanice.dev/";
+              href = "https://watch.lanice.dev/";
               icon = "jellyfin";
             };
           }
@@ -35,6 +35,36 @@
             Jellyseer = {
               href = "https://jellyseerr.lanice.dev/";
               icon = "jellyseerr";
+            };
+          }
+          {
+            Sonarr = {
+              href = "https://sonarr.lanice.dev/";
+              icon = "sonarr";
+            };
+          }
+          {
+            Radarr = {
+              href = "https://radarr.lanice.dev/";
+              icon = "radarr";
+            };
+          }
+          {
+            Bazarr = {
+              href = "https://bazarr.lanice.dev/";
+              icon = "bazarr";
+            };
+          }
+          {
+            Prowlarr = {
+              href = "https://prowlarr.lanice.dev/";
+              icon = "prowlarr";
+            };
+          }
+          {
+            SABnzbd = {
+              href = "https://sabnzbd.lanice.dev/";
+              icon = "sabnzbd";
             };
           }
         ];
