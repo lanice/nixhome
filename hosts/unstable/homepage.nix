@@ -5,6 +5,7 @@
     settings = {
       title = "Treuenbrietzen Server";
       color = "zinc";
+      statusStyle = "dot";
     };
     services = [
       {
@@ -13,12 +14,16 @@
             "SD.Next" = {
               href = "https://sdnext.lanice.dev/";
               icon = "https://raw.githubusercontent.com/vladmandic/automatic/refs/heads/master/html/logo.svg";
+              siteMonitor = "https://sdnext.lanice.dev/";
+              description = "All-in-one for AI generative image";
             };
           }
           {
             InvokeAI = {
               href = "https://invoke.lanice.dev/";
               icon = "invoke-ai";
+              siteMonitor = "https://invoke.lanice.dev/";
+              description = "The Gen AI Platform for Pro Studios";
             };
           }
         ];
@@ -26,45 +31,82 @@
       {
         Media = [
           {
-            Jellyfin = {
-              href = "https://watch.lanice.dev/";
+            Jellyfin = let
+              url = "https://watch.lanice.dev";
+            in {
+              href = url;
               icon = "jellyfin";
+              siteMonitor = url;
+              description = "Media Library";
+              widget = {
+                type = "jellyfin";
+                url = url;
+                fields = ["movies" "series" "episodes"];
+                enableBlocks = true;
+                enableNowPlaying = true;
+                enableUser = true;
+                key = "";
+              };
             };
           }
           {
-            Jellyseer = {
-              href = "https://jellyseerr.lanice.dev/";
+            Jellyseer = let
+              url = "https://jellyseerr.lanice.dev";
+            in {
+              href = url;
               icon = "jellyseerr";
+              siteMonitor = url;
+              description = "Movie & TV Show Requests";
             };
           }
           {
-            Sonarr = {
-              href = "https://sonarr.lanice.dev/";
+            Sonarr = let
+              url = "https://sonarr.lanice.dev";
+            in {
+              href = url;
               icon = "sonarr";
+              siteMonitor = url;
+              description = "TV Shows";
             };
           }
           {
-            Radarr = {
-              href = "https://radarr.lanice.dev/";
+            Radarr = let
+              url = "https://radarr.lanice.dev";
+            in {
+              href = url;
               icon = "radarr";
+              siteMonitor = url;
+              description = "Movies";
             };
           }
           {
-            Bazarr = {
-              href = "https://bazarr.lanice.dev/";
+            Bazarr = let
+              url = "https://bazarr.lanice.dev";
+            in {
+              href = url;
               icon = "bazarr";
+              siteMonitor = url;
+              description = "Subtitles";
             };
           }
           {
-            Prowlarr = {
-              href = "https://prowlarr.lanice.dev/";
+            Prowlarr = let
+              url = "https://prowlarr.lanice.dev";
+            in {
+              href = url;
               icon = "prowlarr";
+              siteMonitor = url;
+              description = "Indexer Aggregator";
             };
           }
           {
-            SABnzbd = {
-              href = "https://sabnzbd.lanice.dev/";
+            SABnzbd = let
+              url = "https://sabnzbd.lanice.dev";
+            in {
+              href = url;
               icon = "sabnzbd";
+              siteMonitor = url;
+              description = "Usenet Downloader";
             };
           }
         ];
@@ -72,9 +114,13 @@
       {
         Stuff = [
           {
-            Paperless = {
-              href = "https://paperless.lanice.dev/";
+            Paperless = let
+              url = "https://paperless.lanice.dev";
+            in {
+              href = url;
               icon = "sh-paperless-ngx";
+              siteMonitor = url;
+              description = "Document Management";
             };
           }
         ];
