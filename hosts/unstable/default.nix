@@ -12,7 +12,7 @@
   #   if (lib.versionOlder nvBeta.version nvStable.version)
   #   then config.boot.kernelPackages.nvidiaPackages.stable
   #   else config.boot.kernelPackages.nvidiaPackages.beta;
-  nvidiaPkg = config.boot.kernelPackages.nvidiaPackages.latest;
+  nvidiaPkg = config.boot.kernelPackages.nvidiaPackages.stable;
 in {
   # You can import other NixOS modules here
   imports = [
