@@ -71,6 +71,12 @@
               icon = "sonarr";
               siteMonitor = url;
               description = "TV Shows";
+              widget = {
+                type = "sonarr";
+                url = url;
+                key = "";
+                fields = ["wanted" "queued" "series"];
+              };
             };
           }
           {
@@ -131,6 +137,12 @@
               icon = "sabnzbd";
               siteMonitor = url;
               description = "Usenet Downloader";
+              widget = {
+                type = "sabnzbd";
+                url = url;
+                key = "";
+                fields = ["rate" "queue" "timeleft"];
+              };
             };
           }
         ];
