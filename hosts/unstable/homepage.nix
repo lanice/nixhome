@@ -54,7 +54,7 @@
             };
           }
           {
-            Jellyseer = let
+            Jellyseerr = let
               url = "https://jellyseerr.lanice.dev";
             in {
               href = url;

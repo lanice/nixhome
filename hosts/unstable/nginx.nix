@@ -37,7 +37,7 @@ in {
 
       "watch.lanice.dev" = mkVirtualHost 8096;
       "jellyfin.lanice.dev" = mkVirtualHost 8096;
-      # "jellyseerr.lanice.dev" = mkVirtualHost 5055;
+      "jellyseerr.lanice.dev" = mkVirtualHost 5055;
       "sonarr.lanice.dev" = mkVirtualHost 8989;
       "radarr.lanice.dev" = mkVirtualHost 7878;
       "readarr.lanice.dev" = mkVirtualHost 8787;
@@ -66,7 +66,7 @@ in {
 
       "watch.lanice.dev" = mkAcmeCert;
       "jellyfin.lanice.dev" = mkAcmeCert;
-      # "jellyseerr.lanice.dev" = mkAcmeCert;
+      "jellyseerr.lanice.dev" = mkAcmeCert;
       "sonarr.lanice.dev" = mkAcmeCert;
       "radarr.lanice.dev" = mkAcmeCert;
       "readarr.lanice.dev" = mkAcmeCert;

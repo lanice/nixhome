@@ -22,10 +22,10 @@ in {
     group = mediaGroup;
   };
 
-  # services.jellyseer = {
-  #   enable = true;
-  #   port = 5055;
-  # };
+  services.jellyseerr = {
+    enable = true;
+    port = 5055;
+  };
 
   services.sonarr = {
     enable = true;
