@@ -6,6 +6,10 @@
       title = "Treuenbrietzen Server";
       color = "zinc";
       statusStyle = "dot";
+      background = {
+        image = "https://i.postimg.cc/HsS3HKW7/orange-alley.webp";
+        opacity = 50;
+      };
     };
     services = [
       {
