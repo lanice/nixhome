@@ -10,6 +10,26 @@
         image = "https://i.postimg.cc/HsS3HKW7/orange-alley.webp";
         opacity = 50;
       };
+      layout = [
+        {
+          "Stable Diffusion" = {
+            style = "row";
+            columns = 2;
+          };
+        }
+        {
+          Media = {
+            style = "row";
+            columns = 2;
+          };
+        }
+        {
+          "Media Management" = {
+            style = "row";
+            columns = 4;
+          };
+        }
+      ];
     };
     services = [
       {
@@ -45,7 +65,7 @@
               widget = {
                 type = "jellyfin";
                 url = url;
-                fields = ["movies" "series" "episodes"];
+                fields = ["pending" "approved" "available"];
                 enableBlocks = true;
                 enableNowPlaying = true;
                 enableUser = true;
@@ -61,8 +81,18 @@
               icon = "jellyseerr";
               siteMonitor = url;
               description = "Movie & TV Show Requests";
+              widget = {
+                type = "jellyseerr";
+                url = url;
+                fields = ["pending" "approved" "available"];
+                key = "==";
+              };
             };
           }
+        ];
+      }
+      {
+        "Media Management" = [
           {
             Sonarr = let
               url = "https://sonarr.lanice.dev";
@@ -87,16 +117,12 @@
               icon = "radarr";
               siteMonitor = url;
               description = "Movies";
-            };
-          }
-          {
-            Readarr = let
-              url = "https://readarr.lanice.dev";
-            in {
-              href = url;
-              icon = "readarr";
-              siteMonitor = url;
-              description = "Books";
+              widget = {
+                type = "radarr";
+                url = url;
+                key = "";
+                fields = ["wanted" "missing" "queued" "movies"];
+              };
             };
           }
           {
@@ -107,6 +133,38 @@
               icon = "bazarr";
               siteMonitor = url;
               description = "Subtitles";
+              widget = {
+                type = "bazarr";
+                url = url;
+                key = "";
+                fields = ["missingEpisodes" "missingMovies"];
+              };
+            };
+          }
+          {
+            SABnzbd = let
+              url = "https://sabnzbd.lanice.dev";
+            in {
+              href = url;
+              icon = "sabnzbd";
+              siteMonitor = url;
+              description = "Usenet Downloader";
+              widget = {
+                type = "sabnzbd";
+                url = url;
+                key = "";
+                fields = ["rate" "queue" "timeleft"];
+              };
+            };
+          }
+          {
+            Readarr = let
+              url = "https://readarr.lanice.dev";
+            in {
+              href = url;
+              icon = "readarr";
+              siteMonitor = url;
+              description = "Books";
             };
           }
           {
@@ -127,22 +185,6 @@
               icon = "nzbhydra2";
               siteMonitor = url;
               description = "Usenet Meta Search";
-            };
-          }
-          {
-            SABnzbd = let
-              url = "https://sabnzbd.lanice.dev";
-            in {
-              href = url;
-              icon = "sabnzbd";
-              siteMonitor = url;
-              description = "Usenet Downloader";
-              widget = {
-                type = "sabnzbd";
-                url = url;
-                key = "";
-                fields = ["rate" "queue" "timeleft"];
-              };
             };
           }
         ];
