@@ -39,6 +39,7 @@
       zoom-us
       whatsapp-for-linux
       fractal
+      gfn-electron # geforce now
 
       google-chrome
 
