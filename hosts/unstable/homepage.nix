@@ -75,7 +75,7 @@
           }
           {
             Jellyseerr = let
-              url = "https://jellyseerr.lanice.dev";
+              url = "https://browse.lanice.dev";
             in {
               href = url;
               icon = "jellyseerr";
