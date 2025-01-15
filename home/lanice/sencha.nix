@@ -3,9 +3,7 @@
   lib,
   inputs,
   ...
-}: let
-  localPkgs = inputs.self.packages.${pkgs.system};
-in {
+}: {
   imports = [
     inputs.agenix.homeManagerModules.age
 
@@ -51,7 +49,6 @@ in {
 
       fabric-ai
       aider-chat
-      localPkgs.claude-desktop
 
       auth0-cli
       awscli

@@ -2,10 +2,8 @@
   description = "My nix config";
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -32,33 +30,23 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
     agenix,
     ...
   } @ inputs: let
-    lib = nixpkgs.lib // home-manager.lib;
     systems = ["x86_64-linux"];
-    forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
-    pkgsFor = lib.genAttrs systems (system:
-      import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      });
-    # forAllSystems = function: nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
+    forAllSystems = function: nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
   in {
-    inherit lib;
     homeManagerModules = import ./modules/home-manager;
 
-    packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
-    devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
-    formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+    packages = forAllSystems (pkgs: import ./pkgs {inherit pkgs;});
+    devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
 
     nixosConfigurations = {
-      sencha = lib.nixosSystem {
+      sencha = nixpkgs.lib.nixosSystem {
         modules = [./hosts/sencha];
         specialArgs = {inherit inputs;};
       };
-      unstable = lib.nixosSystem {
+      unstable = nixpkgs.lib.nixosSystem {
         modules = [./hosts/unstable inputs.vscode-server.nixosModule agenix.nixosModules.default];
         specialArgs = {inherit inputs;};
       };

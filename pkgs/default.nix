@@ -5,5 +5,5 @@
 
   # Need to fix my setup for unfree licenses in flake inputs, then use this instead:
   # https://github.com/k3d3/claude-desktop-linux-flake
-  claude-desktop = pkgs.callPackage ./claude-desktop {};
+  # claude-desktop = pkgs.callPackage ./claude-desktop {};
 }
