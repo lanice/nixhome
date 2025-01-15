@@ -21,6 +21,9 @@ in {
     # This is covered manually now
     # inputs.hardware.nixosModules.common-gpu-nvidia
 
+    inputs.vscode-server.nixosModule
+    inputs.agenix.nixosModules.default
+
     ./hardware-configuration.nix
 
     ../common/global

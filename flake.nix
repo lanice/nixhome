@@ -30,7 +30,6 @@
   outputs = {
     self,
     nixpkgs,
-    agenix,
     ...
   } @ inputs: let
     systems = ["x86_64-linux"];
@@ -47,7 +46,7 @@
         specialArgs = {inherit inputs;};
       };
       unstable = nixpkgs.lib.nixosSystem {
-        modules = [./hosts/unstable inputs.vscode-server.nixosModule agenix.nixosModules.default];
+        modules = [./hosts/unstable];
         specialArgs = {inherit inputs;};
       };
     };
