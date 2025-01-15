@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: let
+  localPkgs = inputs.self.packages.${pkgs.system};
+in {
   imports = [
     ./neofetch
     ./zellij
@@ -19,7 +25,7 @@
     fd # Better find
     ripgrep # Better grep
     duf # Better df
-    dirstat-rs # Fast, cross-platform disk usage CLI
+    localPkgs.dirstat-rs # Fast, cross-platform disk usage CLI
     dust # A more intuitive version of du in rust
 
     htop

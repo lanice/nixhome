@@ -1,13 +1,14 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
   programs.firefox = {
     enable = true;
     profiles.lanice = {
       bookmarks = import ./bookmarks.nix {};
-      extensions = with pkgs.inputs.firefox-addons; [
+      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
         # https://gitlab.com/rycee/nur-expressions/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix
         ublock-origin
         bitwarden

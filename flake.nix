@@ -44,12 +44,11 @@
         inherit system;
         config.allowUnfree = true;
       });
+    # forAllSystems = function: nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
   in {
     inherit lib;
     homeManagerModules = import ./modules/home-manager;
     nixosModules = import ./modules/nixos;
-
-    overlays = import ./overlays {inherit inputs;};
 
     packages = forEachSystem (pkgs: import ./pkgs {inherit pkgs;});
     devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
