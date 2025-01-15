@@ -56,8 +56,6 @@
     EGL_PLATFORM = "wayland";
   };
 
-  programs.hyprland.enableNvidiaPatches = true;
-
   # Ugly hack to fix a bug in egl-wayland, see
   # https://github.com/NixOS/nixpkgs/issues/202454
   environment.etc."egl/egl_external_platform.d".source = let

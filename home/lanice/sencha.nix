@@ -21,7 +21,6 @@
     ./features/ottertune
 
     ./features/desktop/gnome
-    # ./features/desktop/hyprland
 
     ./themes/catppuccin-latte
   ];
