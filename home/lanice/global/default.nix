@@ -48,9 +48,4 @@
     #   ${pkgs.nvd}/bin/nvd diff $(ls -d1v /nix/var/nix/profiles/per-user/${config.home.username}/profile-*-link | tail -2)
     # '';
   };
-
-  home.file = {
-    ".colorscheme".text = config.theme;
-    # ".colorscheme.json".text = builtins.toJSON config.stylix.colorscheme;
-  };
 }

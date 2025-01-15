@@ -5,8 +5,6 @@
 }: {
   imports = [../stylix.nix];
 
-  theme = "catppuccin-latte";
-
   stylix = {
     base16Scheme = ./base16.yaml;
     polarity = "light";
