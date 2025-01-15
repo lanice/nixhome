@@ -55,8 +55,6 @@
     devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
     formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       sencha = lib.nixosSystem {
         modules = [./hosts/sencha];
@@ -65,21 +63,6 @@
       unstable = lib.nixosSystem {
         modules = [./hosts/unstable inputs.vscode-server.nixosModule agenix.nixosModules.default];
         specialArgs = {inherit inputs;};
-      };
-    };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "lanice@sencha" = lib.homeManagerConfiguration {
-        modules = [./home/lanice/sencha.nix];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-      };
-      "lanice@unstable" = lib.homeManagerConfiguration {
-        modules = [./home/lanice/unstable.nix];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
       };
     };
   };
