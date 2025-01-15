@@ -18,8 +18,6 @@
     ./features/desktop/office
     ./features/desktop/matrix
 
-    ./features/ottertune
-
     ./features/desktop/gnome
 
     ./themes/catppuccin-latte
@@ -54,6 +52,7 @@
       claude-desktop
 
       auth0-cli
+      awscli
 
       sxiv
 

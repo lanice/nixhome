@@ -24,7 +24,6 @@
       gauc = "git add -u && git commit";
       gcan = "git commit --amend --no-edit";
       gpr = "git pull --rebase";
-      # gprf moved to features/kialo
     };
 
     profileExtra = ''

@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    ./kubernetes
     ./neofetch
     ./zellij
     ./bash.nix

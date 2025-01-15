@@ -9,10 +9,6 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nixGL
-    nixgl.url = "github:guibou/nixGL";
-    nixgl.inputs.nixpkgs.follows = "nixpkgs";
-
     vscode-server.url = "github:msteen/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -37,7 +33,6 @@
     self,
     nixpkgs,
     home-manager,
-    nixgl,
     agenix,
     ...
   } @ inputs: let
@@ -49,7 +44,6 @@
         inherit system;
         config.allowUnfree = true;
       });
-    nixGlOverlay = {config, ...}: {nixpkgs.overlays = [nixgl.overlay];};
   in {
     inherit lib;
     homeManagerModules = import ./modules/home-manager;
@@ -61,17 +55,11 @@
     devShells = forEachSystem (pkgs: import ./shell.nix {inherit pkgs;});
     formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
 
-    wallpapers = import ./home/lanice/wallpapers;
-
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       sencha = lib.nixosSystem {
         modules = [./hosts/sencha];
-        specialArgs = {inherit inputs;};
-      };
-      tofu = lib.nixosSystem {
-        modules = [./hosts/tofu];
         specialArgs = {inherit inputs;};
       };
       unstable = lib.nixosSystem {
@@ -88,18 +76,8 @@
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs;};
       };
-      "lanice@tofu" = lib.homeManagerConfiguration {
-        modules = [./home/lanice/tofu.nix];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-      };
       "lanice@unstable" = lib.homeManagerConfiguration {
         modules = [./home/lanice/unstable.nix];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
-      };
-      "lanice@GreenGen5" = lib.homeManagerConfiguration {
-        modules = [./home/lanice/greengen5.nix nixGlOverlay];
         pkgs = pkgsFor.x86_64-linux;
         extraSpecialArgs = {inherit inputs;};
       };
