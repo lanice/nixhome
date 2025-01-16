@@ -78,7 +78,6 @@
     nvtopPackages.full
     libva-utils
     inputs.agenix.packages.x86_64-linux.default
-    inputs.claude-desktop.packages.${system}.claude-desktop
   ];
 
   #  services.blueman.enable = true;

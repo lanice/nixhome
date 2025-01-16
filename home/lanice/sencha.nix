@@ -29,40 +29,44 @@
       TERMINAL = "alacritty";
     };
 
-    packages = with pkgs; [
-      slack
-      discord
-      telegram-desktop
-      zoom-us
-      whatsapp-for-linux
-      fractal
-      gfn-electron # geforce now
+    packages = let
+      claude-desktop = inputs.claude-desktop.packages.${pkgs.system}.claude-desktop.overrideAttrs (oldAttrs: {meta = builtins.removeAttrs oldAttrs.meta ["license"];});
+    in
+      with pkgs; [
+        slack
+        discord
+        telegram-desktop
+        zoom-us
+        whatsapp-for-linux
+        fractal
+        gfn-electron # geforce now
 
-      google-chrome
+        google-chrome
 
-      obsidian
-      spotify
-      gimp
-      xournalpp
-      zed-editor
-      # gitbutler
+        obsidian
+        spotify
+        gimp
+        xournalpp
+        zed-editor
+        # gitbutler
 
-      fabric-ai
-      aider-chat
+        fabric-ai
+        aider-chat
+        claude-desktop
 
-      auth0-cli
-      awscli
+        auth0-cli
+        awscli
 
-      sxiv
+        sxiv
 
-      bitwarden
+        bitwarden
 
-      xorg.xrandr
+        xorg.xrandr
 
-      python3
+        python3
 
-      terraform
-    ];
+        terraform
+      ];
 
     stateVersion = lib.mkDefault "23.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   };
