@@ -1,5 +1,9 @@
 # This file (and the global directory) holds config that i use on all hosts
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./lanice.nix
