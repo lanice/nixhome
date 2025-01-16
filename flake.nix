@@ -42,6 +42,7 @@
 
     packages = forAllSystems (pkgs: import ./pkgs {inherit pkgs;});
     devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
+    formatter = forAllSystems (pkgs: pkgs.alejandra);
 
     nixosConfigurations = {
       sencha = nixpkgs.lib.nixosSystem {
