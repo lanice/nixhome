@@ -22,6 +22,8 @@
 
     ../common/global
     ../common/tailscale.nix
+
+    ./services
   ];
 
   boot = {
