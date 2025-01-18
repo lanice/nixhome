@@ -21,7 +21,7 @@
 
   services.qemuGuest.enable = true;
 
-  networking.hostname = "boba";
+  networking.hostName = "boba";
 
   environment.systemPackages = map lib.lowPrio [
     pkgs.curl
