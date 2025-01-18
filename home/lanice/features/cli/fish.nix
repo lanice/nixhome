@@ -19,6 +19,7 @@
       dbe = "distrobox enter";
 
       sshu = "ssh -t unstable fish";
+      sshb = "ssh -t boba";
 
       nfu = "nix flake update";
       nr = "nixos-rebuild --flake .";
