@@ -1,11 +1,12 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  users.mutableUsers = true;
+  users.mutableUsers = lib.mkDefault true;
   users.users.lanice = {
     isNormalUser = true;
     shell = pkgs.fish;

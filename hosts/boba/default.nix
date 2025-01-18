@@ -8,6 +8,11 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
+
+    inputs.srvos.nixosModules.server
+    inputs.srvos.nixosModules.mixins-terminfo
+    inputs.srvos.nixosModules.mixins-nginx
+
     inputs.disko.nixosModules.disko
     inputs.vscode-server.nixosModule
 
