@@ -6,9 +6,9 @@
   imports = [
     ./global
 
-    ./features/desktop/common/font.nix
+    #./features/desktop/common/font.nix
 
-    ./themes/catppuccin-latte
+    #./themes/catppuccin-latte
   ];
 
   home = {
