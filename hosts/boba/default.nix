@@ -1,10 +1,13 @@
 {
   inputs,
+  modulesPath,
   lib,
   pkgs,
   ...
 }: {
   imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
     inputs.disko.nixosModules.disko
     inputs.vscode-server.nixosModule
 
@@ -18,7 +21,7 @@
 
   boot = {
     loader.systemd-boot.enable = true;
-    loader.systemd-boot.configurationLimit = 30;
+    loader.systemd-boot.configurationLimit = 20;
     loader.efi.canTouchEfiVariables = true;
 
     # Since we can't manually respond to a panic, just reboot.
@@ -65,5 +68,5 @@
     };
   };
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

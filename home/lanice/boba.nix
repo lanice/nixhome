@@ -18,6 +18,6 @@
 
     packages = with pkgs; [];
 
-    stateVersion = lib.mkDefault "24.11"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+    stateVersion = lib.mkDefault "25.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   };
 }
