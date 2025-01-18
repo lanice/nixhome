@@ -21,7 +21,8 @@
 
   boot = {
     loader.systemd-boot.enable = true;
-    loader.systemd-boot.configurationLimit = 20;
+    loader.systemd-boot.configurationLimit = 10;
+    loader.timeout = 3;
     loader.efi.canTouchEfiVariables = true;
 
     # Since we can't manually respond to a panic, just reboot.
