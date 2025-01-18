@@ -62,5 +62,25 @@
         specialArgs = {inherit inputs;};
       };
     };
+
+    colmena = {
+      meta = {
+        nixpkgs = import nixpkgs {
+          system = "x86_64-linux";
+        };
+        specialArgs.inputs = inputs;
+      };
+
+      boba = {
+        deployment = {
+          targetHost = "boba";
+          targetUser = "lanice";
+          buildOnTarget = true;
+          tags = ["homelab"];
+        };
+        imports = [./hosts/boba];
+        time.timeZone = "America/New_York";
+      };
+    };
   };
 }

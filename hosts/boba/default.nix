@@ -35,6 +35,8 @@
   };
   services.vscode-server.enable = true;
 
+  security.sudo.wheelNeedsPassword = false;
+
   networking = {
     hostName = "boba";
     networkmanager.enable = true;
