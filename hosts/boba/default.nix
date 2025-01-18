@@ -1,5 +1,5 @@
 {
-  self,
+  inputs,
   modulesPath,
   lib,
   pkgs,
@@ -8,7 +8,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    self.inputs.disko.nixosModules.disko
+    inputs.disko.nixosModules.disko
     ./disk-config.nix
   ];
   boot.loader.grub = {
