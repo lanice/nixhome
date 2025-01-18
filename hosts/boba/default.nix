@@ -11,7 +11,7 @@
     inputs.disko.nixosModules.disko
     inputs.vscode-server.nixosModule
 
-    # ./hardware-configuration.nix
+    ./hardware-configuration.nix
 
     ./disk-config.nix
 
