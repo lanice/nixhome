@@ -53,6 +53,11 @@
         modules = [./hosts/unstable];
         specialArgs = {inherit inputs;};
       };
+      boba = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [./hosts/boba];
+        specialArgs = {inherit inputs;};
+      };
     };
   };
 }
