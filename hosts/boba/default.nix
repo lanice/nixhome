@@ -17,6 +17,7 @@
 
     inputs.disko.nixosModules.disko
     inputs.vscode-server.nixosModule
+    inputs.agenix.nixosModules.default
 
     ./hardware-configuration.nix
 
@@ -26,6 +27,7 @@
     ../common/tailscale.nix
 
     ./services
+    ./secrets.nix
   ];
 
   boot = {
