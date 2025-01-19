@@ -4,7 +4,8 @@ let
   users = [lanice-sencha lanice-unstable];
 
   unstable = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGrqPXr49t/nDW8UtCjPVkmIW8qpHCnsYLjnZWYx7vED root@unstable";
-  systems = [unstable];
+  boba = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGMTGnHrTZedzzB7ssfr0yjPTrIpL4g19Yzi/46dVBdt root@boba";
+  systems = [unstable boba];
 in {
-  "porkbun.age".publicKeys = [unstable lanice-unstable lanice-sencha];
+  "porkbun.age".publicKeys = [unstable boba lanice-unstable lanice-sencha];
 }
