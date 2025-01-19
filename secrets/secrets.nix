@@ -8,4 +8,5 @@ let
   systems = [unstable boba];
 in {
   "porkbun.age".publicKeys = [unstable boba lanice-unstable lanice-sencha];
+  "homepage.age".publicKeys = [boba lanice-sencha];
 }

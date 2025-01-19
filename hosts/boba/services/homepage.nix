@@ -1,7 +1,8 @@
-{
+{config, ...}: {
   services.homepage-dashboard = {
     enable = true;
     listenPort = 8081;
+    environmentFile = config.age.secrets.homepage.path;
     settings = {
       title = "Homelab";
       color = "zinc";
@@ -69,7 +70,7 @@
                 enableBlocks = true;
                 enableNowPlaying = true;
                 enableUser = true;
-                key = "";
+                key = "{{HOMEPAGE_VAR_JELLYFIN_KEY}}";
               };
             };
           }
@@ -85,7 +86,7 @@
                 type = "jellyseerr";
                 url = url;
                 fields = ["pending" "approved" "available"];
-                key = "";
+                key = "{{HOMEPAGE_VAR_JELLYSEERR_KEY}}";
               };
             };
           }
@@ -104,7 +105,7 @@
               widget = {
                 type = "sonarr";
                 url = url;
-                key = "";
+                key = "{{HOMEPAGE_VAR_SONARR_KEY}}";
                 fields = ["wanted" "queued" "series"];
               };
             };
@@ -120,7 +121,7 @@
               widget = {
                 type = "radarr";
                 url = url;
-                key = "";
+                key = "{{HOMEPAGE_VAR_RADARR_KEY}}";
                 fields = ["wanted" "missing" "queued" "movies"];
               };
             };
@@ -136,7 +137,7 @@
               widget = {
                 type = "bazarr";
                 url = url;
-                key = "";
+                key = "{{HOMEPAGE_VAR_BAZARR_KEY}}";
                 fields = ["missingEpisodes" "missingMovies"];
               };
             };
@@ -152,7 +153,7 @@
               widget = {
                 type = "sabnzbd";
                 url = url;
-                key = "";
+                key = "{{HOMEPAGE_VAR_SABNZBD_KEY}}";
                 fields = ["rate" "queue" "timeleft"];
               };
             };

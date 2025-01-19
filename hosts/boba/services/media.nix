@@ -11,6 +11,7 @@ in {
     "d ${mediaDir} 0770 root ${mediaGroup} - -"
     "d ${mediaDir}/movies 0770 - ${mediaGroup} - -"
     "d ${mediaDir}/shows 0770 - ${mediaGroup} - -"
+    "d ${mediaDir}/anime 0770 - ${mediaGroup} - -"
     "d ${mediaDir}/books 0770 - ${mediaGroup} - -"
     "d ${mediaDir}/music 0770 - ${mediaGroup} - -"
     "d ${downloadDir} 0770 sabnzbd ${mediaGroup} - -"
