@@ -75,7 +75,7 @@
 
       boba = {
         deployment = {
-          targetHost = "boba";
+          targetHost = "boba"; # Replace with local network IP if setting up the first time
           targetUser = "lanice";
           buildOnTarget = true;
           tags = ["homelab"];

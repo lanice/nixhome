@@ -6,8 +6,9 @@
   ...
 }: {
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    (modulesPath + "/profiles/qemu-guest.nix")
+    # Used for bootstrap with nixos-anywhere
+    # (modulesPath + "/installer/scan/not-detected.nix")
+    # (modulesPath + "/profiles/qemu-guest.nix")
 
     inputs.srvos.nixosModules.server
     inputs.srvos.nixosModules.mixins-terminfo
@@ -65,8 +66,8 @@
   };
 
   # For initial install. Change password using passwd after first boot, then remove this.
-  users.mutableUsers = lib.mkForce true;
-  users.users.lanice.initialPassword = "password";
+  # users.mutableUsers = lib.mkForce true;
+  # users.users.lanice.initialPassword = "password";
 
   users.users.lanice = {
     openssh.authorizedKeys.keys = [

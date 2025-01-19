@@ -19,6 +19,19 @@ let
       };
     };
   };
+
+  # Copied from https://github.com/TheRealGramdalf/nixos/blob/main/disko/zfs-hybrid.nix
+  default_rootFsOptions = {
+    # These are inherited to all child datasets as the default value
+    canmount = "off"; # ...Except for `canmount`
+    mountpoint = "none"; # Don't mount the main pool anywhere
+    atime = "off"; # atime generally sucks, only enable it when needed
+    compression = "zstd"; # Slightly more CPU heavy, but better compressratio
+    xattr = "sa"; # Store extra attributes with metadata, good for performance
+    acltype = "posix"; # Allows extra attributes i.e. SELinux
+    dnodesize = "auto"; # Requires a feature (ZFS 0.8.4+), but sizes metadata nodes more efficiently
+    normalization = "formD"; # Validate and normalize file names, good for SMB
+  };
 in {
   disko = {
     devices = {
@@ -116,14 +129,8 @@ in {
       zpool = {
         system = {
           type = "zpool";
-
-          rootFsOptions = {
-            atime = "off";
-            xattr = "sa";
-            compression = "zstd";
-          };
-
           options.ashift = "12";
+          rootFsOptions = default_rootFsOptions;
 
           datasets = {
             "root" = {
@@ -147,7 +154,8 @@ in {
 
         data = {
           type = "zpool";
-          mountpoint = "/data";
+          options.ashift = "12";
+          rootFsOptions = default_rootFsOptions;
 
           mode = {
             topology = {
@@ -161,22 +169,18 @@ in {
             };
           };
 
-          rootFsOptions = {
-            atime = "off";
-            xattr = "sa";
-            compression = "zstd";
-          };
-
-          options.ashift = "12";
-
           datasets = {
             "media" = {
               type = "zfs_fs";
               mountpoint = "/data/media";
             };
-            "backup" = {
+            "vault" = {
               type = "zfs_fs";
-              mountpoint = "/data/backup";
+              mountpoint = "/data/vault";
+            };
+            "storage" = {
+              type = "zfs_fs";
+              mountpoint = "/data/storage";
             };
           };
         };
