@@ -81,7 +81,7 @@
           tags = ["homelab"];
         };
         imports = [./hosts/boba];
-        time.timeZone = "America/New_York";
+        time.timeZone = "UTC";
       };
     };
   };
