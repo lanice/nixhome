@@ -27,7 +27,6 @@
     ../common/tailscale.nix
 
     ./services
-    ./secrets.nix
   ];
 
   boot = {

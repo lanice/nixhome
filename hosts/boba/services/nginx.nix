@@ -24,6 +24,8 @@
     webroot = null;
   };
 in {
+  age.secrets.porkbun.file = ../../../secrets/porkbun.age;
+
   services.nginx = {
     enable = true;
     defaultListenAddresses = [tailscaleIP];
