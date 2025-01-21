@@ -33,11 +33,15 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     srvos.url = "github:nix-community/srvos";
+
+    colmena.url = "github:zhaofengli/colmena";
+    colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
     self,
     nixpkgs,
+    colmena,
     ...
   } @ inputs: let
     systems = ["x86_64-linux"];
@@ -64,6 +68,8 @@
         specialArgs = {inherit inputs;};
       };
     };
+
+    colmenaHive = colmena.lib.makeHive self.outputs.colmena;
 
     colmena = {
       meta = {

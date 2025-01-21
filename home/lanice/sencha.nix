@@ -31,6 +31,7 @@
 
     packages = let
       claude-desktop = inputs.claude-desktop.packages.${pkgs.system}.claude-desktop.overrideAttrs (oldAttrs: {meta = builtins.removeAttrs oldAttrs.meta ["license"];});
+      colmena-unstable = inputs.colmena.packages.${pkgs.system}.colmena;
     in
       with pkgs; [
         slack
@@ -67,7 +68,7 @@
 
         terraform
 
-        colmena
+        colmena-unstable
       ];
 
     stateVersion = lib.mkDefault "23.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
