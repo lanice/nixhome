@@ -12,6 +12,7 @@
   ];
 
   programs.atuin.daemon.enable = true;
+  programs.atuin.settings = {enter_accept = true;};
 
   home = {
     sessionVariables = {
