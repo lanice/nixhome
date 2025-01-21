@@ -32,12 +32,8 @@ in {
     ../common/minecraft-servers.nix
     ../common/gnome.nix
 
-    ./secrets.nix
     ./nginx.nix
-    # ./dashy.nix
-    ./homepage.nix
     ./paperless.nix
-    ./media.nix
   ];
 
   users.users.lanice.shell = lib.mkForce pkgs.bash;
