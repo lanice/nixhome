@@ -55,7 +55,7 @@
   };
 
   console.keyMap = "us-acentos";
-  time.timeZone = "UTC";
+  time.timeZone = "America/New_York";
 
   environment = {
     enableAllTerminfo = true;
