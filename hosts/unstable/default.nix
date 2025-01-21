@@ -63,6 +63,8 @@ in {
   # Enable automatic login for the user.
   services.getty.autologinUser = "lanice";
 
+  security.sudo.wheelNeedsPassword = false;
+
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
   services.openssh = {

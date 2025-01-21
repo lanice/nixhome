@@ -70,7 +70,6 @@
     };
 
     colmenaHive = colmena.lib.makeHive self.outputs.colmena;
-
     colmena = {
       meta = {
         nixpkgs = import nixpkgs {
@@ -87,6 +86,17 @@
           tags = ["homelab"];
         };
         imports = [./hosts/boba];
+        time.timeZone = "America/New_York";
+      };
+
+      unstable = {
+        deployment = {
+          targetHost = "unstable"; # Replace with local network IP if setting up the first time
+          targetUser = "lanice";
+          buildOnTarget = true;
+          tags = ["homelab"];
+        };
+        imports = [./hosts/unstable];
         time.timeZone = "America/New_York";
       };
     };
