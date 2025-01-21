@@ -11,6 +11,8 @@
     #./themes/catppuccin-latte
   ];
 
+  programs.atuin.daemon.enable = true;
+
   home = {
     sessionVariables = {
       EDITOR = "hx";
