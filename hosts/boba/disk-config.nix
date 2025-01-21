@@ -57,14 +57,6 @@ in {
                   mountpoint = "/boot";
                 };
               };
-              # root = {
-              #   name = "root";
-              #   size = "100%";
-              #   content = {
-              #     type = "lvm_pv";
-              #     vg = "pool";
-              #   };
-              # };
               nix = {
                 size = "100%";
                 content = {
@@ -108,24 +100,6 @@ in {
           content = hdds_content;
         };
       };
-      # lvm_vg = {
-      #   pool = {
-      #     type = "lvm_vg";
-      #     lvs = {
-      #       root = {
-      #         size = "100%FREE";
-      #         content = {
-      #           type = "filesystem";
-      #           format = "ext4";
-      #           mountpoint = "/nix";
-      #           mountOptions = [
-      #             "defaults"
-      #           ];
-      #         };
-      #       };
-      #     };
-      #   };
-      # };
       zpool = {
         system = {
           type = "zpool";
