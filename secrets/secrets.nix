@@ -9,4 +9,5 @@ let
 in {
   "porkbun.age".publicKeys = [unstable boba lanice-unstable lanice-sencha];
   "homepage.age".publicKeys = [boba lanice-sencha];
+  "librechat.env.age".publicKeys = [boba lanice-sencha];
 }
