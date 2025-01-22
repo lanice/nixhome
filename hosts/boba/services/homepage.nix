@@ -32,6 +32,12 @@
             columns = 4;
           };
         }
+        {
+          Stuff = {
+            style = "row";
+            columns = 2;
+          };
+        }
       ];
     };
     services = [
@@ -202,6 +208,16 @@
               icon = "sh-paperless-ngx";
               siteMonitor = url;
               description = "Document Management";
+            };
+          }
+          {
+            LibreChat = let
+              url = "https://chat.lanice.dev";
+            in {
+              href = url;
+              icon = "https://raw.githubusercontent.com/danny-avila/LibreChat/main/client/public/assets/logo.svg";
+              siteMonitor = url;
+              description = "All-In-One AI Conversations";
             };
           }
         ];
