@@ -5,5 +5,6 @@
     ./nginx.nix
     ./librechat.nix
     ./uptime-kuma.nix
+    ./minecraft.nix
   ];
 }
