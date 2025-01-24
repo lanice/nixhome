@@ -47,6 +47,8 @@ in {
       "prowlarr.lanice.dev" = mkVirtualHost 9696;
       "nzbhydra.lanice.dev" = mkVirtualHost 5076;
       "sabnzbd.lanice.dev" = mkVirtualHost 8080;
+
+      "uptime.lanice.dev" = mkVirtualHost 3001;
     };
   };
 
@@ -76,6 +78,8 @@ in {
       "prowlarr.lanice.dev" = mkAcmeCert;
       "nzbhydra.lanice.dev" = mkAcmeCert;
       "sabnzbd.lanice.dev" = mkAcmeCert;
+
+      "uptime.lanice.dev" = mkAcmeCert;
     };
   };
 
