@@ -221,20 +221,6 @@
             };
           }
           {
-            "Uptime-Kuma homelab" = let
-              url = "https://uptime.lanice.dev";
-            in {
-              href = url;
-              icon = "uptime-kuma";
-              description = "Server Monitoring";
-              widget = {
-                type = "uptimekuma";
-                url = url;
-                slug = "homelab";
-              };
-            };
-          }
-          {
             "Uptime-Kuma unstable" = let
               url = "https://uptime.lanice.dev";
             in {
