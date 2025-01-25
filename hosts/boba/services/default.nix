@@ -6,5 +6,6 @@
     ./librechat.nix
     ./uptime-kuma.nix
     ./minecraft.nix
+    ./oink.nix
   ];
 }
