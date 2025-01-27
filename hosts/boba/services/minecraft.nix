@@ -11,7 +11,7 @@ in {
 
   virtualisation.oci-containers.containers = {
     minecraft-atm10 = {
-      autoStart = true;
+      autoStart = false;
       image = "itzg/minecraft-server:latest";
       volumes = ["${atm10Dir}:/data"];
       ports = ["${toString port}:${toString port}"];
@@ -25,7 +25,11 @@ in {
         MAX_MEMORY = "12G";
         USE_AIKAR_FLAGS = "true";
 
+        SERVER_NAME = "MeinKraft ATM10";
         SERVER_PORT = "${toString port}";
+        WHITELIST = "lanice,Deimops";
+        ALLOW_FLIGHT = "TRUE";
+        SPAWN_PROTECTION = "0";
       };
       extraOptions = [
         "--hostname=minecraft-atm10"
