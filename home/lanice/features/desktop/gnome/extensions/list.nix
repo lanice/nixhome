@@ -51,11 +51,6 @@ in
       dconfSettings = {};
     }
 
-    {
-      package = openweather-refined;
-      dconfSettings = {};
-    }
-
     # {
     #   package = media-controls;
     #   dconfSettings = {};
