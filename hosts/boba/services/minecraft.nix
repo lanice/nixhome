@@ -27,7 +27,7 @@ in {
 
         SERVER_NAME = "MeinKraft ATM10";
         SERVER_PORT = "${toString port}";
-        WHITELIST = "lanice,Deimops";
+        WHITELIST = "lanice,Deimops,Clyntax,FlyingPengwing,Lowista,BooNici,Kreativlabor";
         ALLOW_FLIGHT = "TRUE";
         SPAWN_PROTECTION = "0";
       };
