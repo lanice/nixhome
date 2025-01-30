@@ -4,7 +4,7 @@
   port_container = 25565;
   port_public = 25252;
 in {
-  age.secrets.curseforge.file = ../../../secrets/curseforge.age;
+  age.secrets.curseforge.file = ../../../../secrets/curseforge.age;
 
   systemd.tmpfiles.rules = [
     "d ${atm10Dir} 0770 root users -"
