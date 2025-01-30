@@ -14,7 +14,10 @@ in {
     minecraft-atm10 = {
       autoStart = true;
       image = "itzg/minecraft-server:latest";
-      volumes = ["${atm10Dir}:/data"];
+      volumes = [
+        "${atm10Dir}:/data"
+        "${toString ./patches}:/patches"
+      ];
       ports = ["${toString port_public}:${toString port_container}"];
 
       environmentFiles = [config.age.secrets.curseforge.path];
@@ -40,6 +43,8 @@ in {
 
         ALLOW_FLIGHT = "TRUE";
         SPAWN_PROTECTION = "0";
+
+        PATCH_DEFINITIONS = "/patches";
       };
       extraOptions = [
         "--hostname=minecraft-atm10"
