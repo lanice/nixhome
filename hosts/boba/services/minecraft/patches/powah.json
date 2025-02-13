@@ -1,1 +1,47 @@
-{}
+{
+  "file": "/data/config/powah.json5",
+  "ops": [
+    {
+      "$set": {
+        "path": "$.generators.thermo_generators.generation_rates.starter",
+        "value": 40
+      }
+    },
+    {
+      "$set": {
+        "path": "$.generators.thermo_generators.generation_rates.basic",
+        "value": 80
+      }
+    },
+    {
+      "$set": {
+        "path": "$.generators.thermo_generators.generation_rates.hardened",
+        "value": 150
+      }
+    },
+    {
+      "$set": {
+        "path": "$.generators.thermo_generators.generation_rates.blazing",
+        "value": 300
+      }
+    },
+    {
+      "$set": {
+        "path": "$.generators.thermo_generators.generation_rates.niotic",
+        "value": 600
+      }
+    },
+    {
+      "$set": {
+        "path": "$.generators.thermo_generators.generation_rates.spirited",
+        "value": 1500
+      }
+    },
+    {
+      "$set": {
+        "path": "$.generators.thermo_generators.generation_rates.nitro",
+        "value": 3500
+      }
+    }
+  ]
+}
