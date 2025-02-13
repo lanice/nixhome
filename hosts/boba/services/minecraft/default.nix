@@ -2,7 +2,7 @@
   atm10Dir = "/var/lib/minecraft/atm10";
 
   port_container = 25565;
-  port_public = 25252;
+  port_public = 25565;
 in {
   age.secrets.curseforge.file = ../../../../secrets/curseforge.age;
 
@@ -29,6 +29,7 @@ in {
         EULA = "TRUE";
         TYPE = "AUTO_CURSEFORGE";
         CF_SLUG = "all-the-mods-10";
+        CF_FILE_ID = "6152362";
         CF_OVERRIDES_EXCLUSIONS = "shaderpacks/**";
         WHITELIST = "lanice,Deimops,Clyntax,FlyingPengwing,Lowista,BooNici,Kreativlabor";
         # SERVER_PORT = "${toString port_container}";
@@ -41,10 +42,16 @@ in {
         MOTD = "kek";
         ICON = "https://i.postimg.cc/vZgh2sJQ/minecraft.jpg";
 
+        SEED = "-436188160836958048";
         ALLOW_FLIGHT = "TRUE";
         SPAWN_PROTECTION = "0";
 
         PATCH_DEFINITIONS = "/patches";
+
+        # ONLINE_MODE = "TRUE";
+        # ENABLE_WHITELIST = "TRUE";
+
+        JVM_OPTS = "-Dfml.readTimeout=180";
       };
       extraOptions = [
         "--hostname=minecraft-atm10"
