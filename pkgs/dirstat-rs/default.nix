@@ -17,7 +17,8 @@ in
       sha256 = "sha256-gDIUYhc+GWbQsn5DihnBJdOJ45zdwm24J2ZD2jEwGyE=";
     };
 
-    cargoSha256 = "sha256-HaLYg5Xusvp2TER+dAyphh1Bd4z2SrrzmnKC5xLvwQw=";
+    useFetchCargoVendor = true;
+    cargoHash = "sha256-SdxTiIrsK3U4mcrcilOhMkkp12yEUkWlXmlT+C75dZw=";
 
     meta = with lib; {
       description = "Fast, cross-platform disk usage CLI";

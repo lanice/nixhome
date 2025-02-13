@@ -30,7 +30,7 @@
     };
 
     packages = let
-      claude-desktop = inputs.claude-desktop.packages.${pkgs.system}.claude-desktop.overrideAttrs (oldAttrs: {meta = builtins.removeAttrs oldAttrs.meta ["license"];});
+      # claude-desktop = inputs.claude-desktop.packages.${pkgs.system}.claude-desktop.overrideAttrs (oldAttrs: {meta = builtins.removeAttrs oldAttrs.meta ["license"];});
       colmena-unstable = inputs.colmena.packages.${pkgs.system}.colmena;
     in
       with pkgs; [
@@ -53,7 +53,7 @@
 
         fabric-ai
         aider-chat
-        claude-desktop
+        # claude-desktop
 
         auth0-cli
         awscli
