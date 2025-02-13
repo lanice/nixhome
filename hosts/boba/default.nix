@@ -73,6 +73,7 @@
   users.users.lanice = {
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGwdc+uAZvNnh7OTdtIT1ei1n/S+jZdYBZlDXNkNouo2 lanice@sencha"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICgsgaiVXnUCumEl99kkvf7xYpik5jCryuo4gsrxztKn JuiceSSH"
     ];
   };
 
