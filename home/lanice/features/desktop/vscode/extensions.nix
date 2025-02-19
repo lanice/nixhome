@@ -10,7 +10,7 @@ with pkgs.vscode-extensions;
     yzhang.markdown-all-in-one
     astro-build.astro-vscode
     bmalehorn.vscode-fish
-    rust-lang.rust-analyzer
+    # rust-lang.rust-analyzer
     golang.go
 
     # arrterian.nix-env-selector

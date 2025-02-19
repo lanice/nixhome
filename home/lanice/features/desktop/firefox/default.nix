@@ -8,7 +8,7 @@
     enable = true;
     profiles.lanice = {
       bookmarks = import ./bookmarks.nix {};
-      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+      extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
         # https://gitlab.com/rycee/nur-expressions/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix
         ublock-origin
         bitwarden
@@ -18,8 +18,6 @@
         toolkit-for-ynab
         multi-account-containers
         link-cleaner
-
-        omnivore
 
         # bypass-paywalls-clean
         stylus
