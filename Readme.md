@@ -12,7 +12,6 @@ cd nixhome
 nix-shell # Enter the provided flake-enabled nix shell to bootstrap nixos and home-manager
 cp /etc/nixos/hardware-configuration.nix hosts/<hostname>/hardware-configuration.nix # Make sure you use the nixos-generated hardware config
 sudo nixos-rebuild switch --flake .#<hostname>
-home-manager switch --flake .#<username>@<hostname>
 ```
 
 Reboot, done.
@@ -33,7 +32,8 @@ home-manager switch --flake .#<username>@<hostname>
 ## Hosts
 
 - `sencha`: Lenovo ThinkPad P1 Gen5 - 32GB RAM, i7 12700H, RTX A1000 | **NixOS** | Gnome
-- `unstable`: Desktop PC - 16GB RAM, Xeon E3-1240, GTX 3060 | **NixOS** | headless
+- `boba`: ZimaCube Pro - 64GB RAM, i5 1235U | **NixOS** | headless
+- `unstable`: Desktop PC - 64GB RAM, i5 12400F, GTX 3060 | **NixOS** | headless
 
 ## Use pinned pkgs version example
 
