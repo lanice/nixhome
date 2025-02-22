@@ -27,7 +27,7 @@ in {
       Service = {
         ExecStart = "${pkgs.writeShellScript "sdnext-launch" ''
           export COMMANDLINE_ARGS="--listen --port 9000 --insecure"
-          ${pkgs.bash}/bin/bash -lc $HOME/automatic/webui.sh
+          ${pkgs.bash}/bin/bash -lc $HOME/automatic/webui-override.sh
         ''}";
         WorkingDirectory = "/home/lanice/automatic";
       };
