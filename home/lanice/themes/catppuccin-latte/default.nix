@@ -23,7 +23,7 @@
     targets.rofi.enable = false;
   };
 
-  programs.vscode = {
+  programs.vscode.profiles.default = {
     userSettings."workbench.colorTheme" = "Catppuccin Latte";
     userSettings."workbench.iconTheme" = "catppuccin-latte";
   };

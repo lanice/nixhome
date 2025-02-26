@@ -23,11 +23,14 @@
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = false;
-    enableUpdateCheck = false;
-    enableExtensionUpdateCheck = true;
 
-    keybindings = import ./keybindings.nix;
-    userSettings = import ./user-settings.nix {fontFamily = config.fontProfiles.monospace.family;};
-    extensions = import ./extensions.nix {inherit pkgs;};
+    profiles.default = {
+      enableUpdateCheck = false;
+      enableExtensionUpdateCheck = true;
+
+      keybindings = import ./keybindings.nix;
+      userSettings = import ./user-settings.nix {fontFamily = config.fontProfiles.monospace.family;};
+      extensions = import ./extensions.nix {inherit pkgs;};
+    };
   };
 }
