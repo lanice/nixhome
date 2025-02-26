@@ -39,6 +39,8 @@ in {
         "${librechatDir}/logs:/app/api/logs"
       ];
       dependsOn = ["mongodb" "rag_api"];
+
+      extraOptions = ["--pull=newer"];
     };
 
     mongodb = {
