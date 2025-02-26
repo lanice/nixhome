@@ -101,8 +101,8 @@ with pkgs.vscode-extensions;
     {
       name = "claude-dev";
       publisher = "saoudrizwan";
-      version = "3.4.5";
-      sha256 = "sha256-BR35b0/pdVAZCcdQ6LhfZo0jSNPZE8zDtLxJLOblqNg=";
+      version = "3.4.6";
+      sha256 = "sha256-m4jtpNkGM3p+yQRPnumuUGlYtB2JMf6S1p/PAgFqeC0=";
     }
 
     # {
