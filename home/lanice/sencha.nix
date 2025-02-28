@@ -54,6 +54,7 @@
         fabric-ai
         aider-chat
         # claude-desktop
+        claude-code
 
         auth0-cli
         awscli
