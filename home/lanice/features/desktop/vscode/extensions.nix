@@ -52,12 +52,6 @@ with pkgs.vscode-extensions;
     #   version = "11.7.2";
     #   sha256 = "sha256-rYeZNBz6HeZ059ksChGsXbuOao9H5m5lHGXJ4ELs6xc=";
     # }
-    {
-      name = "vscode-todo-plus";
-      publisher = "fabiospampinato";
-      version = "4.19.1";
-      sha256 = "sha256-3ykOShGBZ8X4ra5EtZWf8EhVYEIy2Ji5+G3k2seL+1Y=";
-    }
     # {
     #   name = "vsliveshare";
     #   publisher = "ms-vsliveshare";
@@ -74,14 +68,14 @@ with pkgs.vscode-extensions;
     {
       name = "catppuccin-vsc";
       publisher = "catppuccin";
-      version = "3.16.0";
-      sha256 = "sha256-eZwi5qONiH+XVZj7u2cjJm+Liv1q07AEd8d4nXEQgLw=";
+      version = "3.16.1";
+      sha256 = "sha256-qEwQ583DW17dlJbODN8SNUMbDMCR1gUH4REaFkQT65I=";
     }
     {
       name = "catppuccin-vsc-icons";
       publisher = "catppuccin";
-      version = "1.17.0";
-      sha256 = "sha256-CSAIDlZNrelBf891ztK4n9IaRdtXqpeXnI00hG0/nfA=";
+      version = "1.18.0";
+      sha256 = "sha256-R3gv6mflKe8DUry7JRK+dD7YdxS2auG4BBFDf8u55hk=";
     }
 
     {
@@ -101,8 +95,8 @@ with pkgs.vscode-extensions;
     {
       name = "claude-dev";
       publisher = "saoudrizwan";
-      version = "3.5.1";
-      sha256 = "sha256-4s4CYZXa3iImHI6F17BbeG05kqwG/nj0bkHSc1K2Sb4=";
+      version = "3.6.1";
+      sha256 = "sha256-EGIReHLwMz+1zh/I1Ui8if0u7pgaCrEMuQifZVkT1N8=";
     }
 
     # {
