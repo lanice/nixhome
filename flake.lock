@@ -743,7 +743,8 @@
         "nixpkgs": "nixpkgs_2",
         "srvos": "srvos",
         "stylix": "stylix",
-        "vscode-server": "vscode-server"
+        "vscode-server": "vscode-server",
+        "zen-browser": "zen-browser"
       }
     },
     "srvos": {
@@ -997,6 +998,26 @@
       "original": {
         "owner": "msteen",
         "repo": "nixos-vscode-server",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1741672271,
+        "narHash": "sha256-uwzPVIiJUus20WRMhN7xVcHNaniYPEkXjeWoM3I5rQ0=",
+        "owner": "youwen5",
+        "repo": "zen-browser-flake",
+        "rev": "f9ed87557cb28ba557a15bb313f9b81554e90e0a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "youwen5",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

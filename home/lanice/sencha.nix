@@ -32,6 +32,7 @@
     packages = let
       # claude-desktop = inputs.claude-desktop.packages.${pkgs.system}.claude-desktop.overrideAttrs (oldAttrs: {meta = builtins.removeAttrs oldAttrs.meta ["license"];});
       colmena-unstable = inputs.colmena.packages.${pkgs.system}.colmena;
+      zen-browser = inputs.zen-browser.packages.${pkgs.system}.zen-browser;
     in
       with pkgs; [
         slack
@@ -72,6 +73,8 @@
         colmena-unstable
 
         prismlauncher
+
+        zen-browser
       ];
 
     stateVersion = lib.mkDefault "23.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
