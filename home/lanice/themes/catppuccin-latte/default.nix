@@ -17,6 +17,7 @@
     cursor = {
       name = "catppuccin-latte-light-cursors";
       package = pkgs.catppuccin-cursors.latteLight;
+      size = 24;
     };
 
     targets.vscode.enable = false;

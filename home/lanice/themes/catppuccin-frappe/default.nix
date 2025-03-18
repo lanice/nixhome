@@ -17,6 +17,7 @@
     cursor = {
       name = "catppuccin-frappe-dark-cursors";
       package = pkgs.catppuccin-cursors.frappeDark;
+      size = 24;
     };
 
     targets.vscode.enable = false;
