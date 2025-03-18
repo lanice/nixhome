@@ -7,6 +7,6 @@
     ./uptime-kuma.nix
     ./oink.nix
 
-    ./minecraft
+    # ./minecraft
   ];
 }
