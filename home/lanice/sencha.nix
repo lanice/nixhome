@@ -31,7 +31,7 @@
     };
 
     packages = let
-      # claude-desktop = inputs.claude-desktop.packages.${pkgs.system}.claude-desktop.overrideAttrs (oldAttrs: {meta = builtins.removeAttrs oldAttrs.meta ["license"];});
+      claude-desktop = inputs.claude-desktop.packages.${pkgs.system}.claude-desktop;
       colmena-unstable = inputs.colmena.packages.${pkgs.system}.colmena;
       zen-browser = inputs.zen-browser.packages.${pkgs.system}.zen-browser;
     in
@@ -55,7 +55,7 @@
 
         fabric-ai
         aider-chat
-        # claude-desktop
+        claude-desktop
         claude-code
 
         auth0-cli
