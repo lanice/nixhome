@@ -17,6 +17,7 @@
     ./features/desktop/wezterm
     ./features/desktop/office
     ./features/desktop/matrix
+    ./features/desktop/kenku-fm
 
     ./features/desktop/gnome
 
