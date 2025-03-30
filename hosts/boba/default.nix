@@ -103,5 +103,7 @@
     ];
   };
 
+  services.tailscale.useRoutingFeatures = "server";
+
   system.stateVersion = "25.05";
 }
