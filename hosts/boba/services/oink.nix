@@ -1,6 +1,6 @@
 {
   services.oink = {
-    enable = true;
+    enable = false;
 
     settings = {
       apiKey = "";
