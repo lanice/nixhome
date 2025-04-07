@@ -23,6 +23,7 @@
 
       nfu = "nix flake update";
       nr = "nixos-rebuild --flake .";
+      nrb = "nixos-rebuild --flake . build";
       nrs = "nixos-rebuild --flake . switch";
       snr = "sudo nixos-rebuild --flake .";
       snrs = "sudo nixos-rebuild --flake . switch";
