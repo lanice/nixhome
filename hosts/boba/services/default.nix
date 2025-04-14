@@ -6,6 +6,7 @@
     ./librechat.nix
     ./uptime-kuma.nix
     ./oink.nix
+    ./stirlingpdf.nix
 
     # ./minecraft
   ];
