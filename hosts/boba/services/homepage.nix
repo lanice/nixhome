@@ -211,13 +211,13 @@
             };
           }
           {
-            LibreChat = let
-              url = "https://chat.lanice.dev";
+            StirlingPDF = let
+              url = "https://pdf.lanice.dev";
             in {
               href = url;
-              icon = "https://raw.githubusercontent.com/danny-avila/LibreChat/main/client/public/assets/logo.svg";
+              icon = "stirling-pdf";
               siteMonitor = url;
-              description = "All-In-One AI Conversations";
+              description = "PDF manipulation tool";
             };
           }
           {
@@ -232,6 +232,16 @@
                 url = url;
                 slug = "unstable";
               };
+            };
+          }
+          {
+            LibreChat = let
+              url = "https://chat.lanice.dev";
+            in {
+              href = url;
+              icon = "https://raw.githubusercontent.com/danny-avila/LibreChat/main/client/public/assets/logo.svg";
+              siteMonitor = url;
+              description = "All-In-One AI Conversations";
             };
           }
         ];
