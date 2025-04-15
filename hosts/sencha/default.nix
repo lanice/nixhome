@@ -11,6 +11,7 @@
     inputs.hardware.nixosModules.common-gpu-nvidia
 
     inputs.agenix.nixosModules.default
+    inputs.espanso-fix.nixosModules.espanso-capdacoverride
 
     ./hardware-configuration.nix
 

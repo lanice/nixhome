@@ -179,6 +179,22 @@
         "type": "github"
       }
     },
+    "espanso-fix": {
+      "locked": {
+        "lastModified": 1736868948,
+        "narHash": "sha256-MD+uHLrcvG6MaUVsZF6gbz232/6NYSizGP5VUHVJKCs=",
+        "owner": "pitkling",
+        "repo": "nixpkgs",
+        "rev": "c006215b2c8ac66586a8de974292289a8372abc4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pitkling",
+        "ref": "espanso-fix-capabilities-export",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "nixpkgs": [
@@ -719,6 +735,7 @@
         "claude-desktop": "claude-desktop",
         "colmena": "colmena",
         "disko": "disko",
+        "espanso-fix": "espanso-fix",
         "firefox-addons": "firefox-addons",
         "hardware": "hardware",
         "home-manager": "home-manager",
