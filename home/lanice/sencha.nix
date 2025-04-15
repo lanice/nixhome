@@ -21,6 +21,8 @@
 
     ./features/desktop/gnome
 
+    ./features/espanso
+
     ./themes/catppuccin-latte
   ];
 
