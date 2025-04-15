@@ -221,6 +221,28 @@
             };
           }
           {
+            "Tailscale - boba" = {
+              icon = "tailscale";
+              widget = {
+                type = "tailscale";
+                deviceid = "nafZuSQg4D21CNTRL";
+                key = "{{HOMEPAGE_VAR_TAILSCALE_KEY}}";
+                fields = ["address" "last_seen" "expires"];
+              };
+            };
+          }
+          {
+            "Tailscale - unstable" = {
+              icon = "tailscale";
+              widget = {
+                type = "tailscale";
+                deviceid = "nGjCi22CNTRL";
+                key = "{{HOMEPAGE_VAR_TAILSCALE_KEY}}";
+                fields = ["address" "last_seen" "expires"];
+              };
+            };
+          }
+          {
             "Uptime-Kuma unstable" = let
               url = "https://uptime.lanice.dev";
             in {
