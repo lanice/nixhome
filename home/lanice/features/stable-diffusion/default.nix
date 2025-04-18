@@ -50,7 +50,9 @@ in {
         ExecStart = "${pkgs.writeShellScript "invoke-launch" ''
           export INVOKEAI_PORT=9001
           source $HOME/invokeai/.venv/bin/activate
-          ${pkgs.nix}/bin/nix-shell ${nixShellWithPyPatchMatch} --run invokeai-web
+          # ${pkgs.nix}/bin/nix-shell ${nixShellWithPyPatchMatch}
+          # ${pkgs.nix}/bin/nix-shell ${nixShellWithPyPatchMatch} --run "distrobox-enter invokebox -e invokeai-web"
+          distrobox-enter invokebox -e invokeai-web
         ''}";
         # ExecStartPre = "${pkgs.coreutils}/bin/sleep 10";
 
@@ -92,7 +94,8 @@ in {
 
     packages = with pkgs; [
       git
-      python311
+      python3
+      uv
       stdenv.cc.cc.lib
       stdenv.cc
       ncurses5
