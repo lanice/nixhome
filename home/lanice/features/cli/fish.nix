@@ -67,7 +67,7 @@
             # echo
             # ${pkgs.fortune}/bin/fortune art goedel wisdom tao literature songs-poems paradoxum
             # echo
-        end | ${pkgs.lolcat}/bin/lolcat
+        end | ${pkgs.clolcat}/bin/clolcat
       '';
 
       wh = "readlink -f (which $argv)";
