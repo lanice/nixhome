@@ -11,4 +11,5 @@ in {
   "homepage.age".publicKeys = [boba lanice-sencha];
   "librechat.env.age".publicKeys = [boba lanice-sencha];
   "curseforge.age".publicKeys = [boba lanice-sencha];
+  "mailBobaPassword.age".publicKeys = [boba lanice-sencha];
 }
