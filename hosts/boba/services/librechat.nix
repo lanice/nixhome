@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -11,7 +12,7 @@
   librechatDir = "/var/lib/librechat";
   librechatNetwork = "librechat-network";
 in {
-  age.secrets.librechat-env.file = ../../../secrets/librechat.env.age;
+  age.secrets.librechat-env.file = "${inputs.self}/secrets/librechat.env.age";
 
   systemd.tmpfiles.rules = [
     "d /var/lib/containers/storage/volumes/pgdata2/_data 0700 999 999 - -"

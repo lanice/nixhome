@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  inputs,
+  config,
+  ...
+}: let
   tailscaleIP = "100.124.185.117";
 
   # Common settings for virtual hosts
@@ -24,7 +28,7 @@
     webroot = null;
   };
 in {
-  age.secrets.porkbun.file = ../../../secrets/porkbun.age;
+  age.secrets.porkbun.file = "${inputs.self}/secrets/porkbun.age";
 
   services.nginx = {
     enable = true;

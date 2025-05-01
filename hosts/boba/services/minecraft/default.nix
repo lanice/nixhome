@@ -1,10 +1,14 @@
-{config, ...}: let
+{
+  inputs,
+  config,
+  ...
+}: let
   atm10Dir = "/var/lib/minecraft/atm10";
 
   port_container = 25565;
   port_public = 25565;
 in {
-  age.secrets.curseforge.file = ../../../../secrets/curseforge.age;
+  age.secrets.curseforge.file = "${inputs.self}/secrets/curseforge.age";
 
   systemd.tmpfiles.rules = [
     "d ${atm10Dir} 0770 root users -"

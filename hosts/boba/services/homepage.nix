@@ -1,5 +1,9 @@
-{config, ...}: {
-  age.secrets.homepage.file = ../../../secrets/homepage.age;
+{
+  inputs,
+  config,
+  ...
+}: {
+  age.secrets.homepage.file = "${inputs.self}/secrets/homepage.age";
 
   services.homepage-dashboard = {
     enable = true;
