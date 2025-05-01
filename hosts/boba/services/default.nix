@@ -7,6 +7,7 @@
     ./uptime-kuma.nix
     ./oink.nix
     ./stirlingpdf.nix
+    ./zfs-zed.nix
 
     # ./minecraft
   ];
