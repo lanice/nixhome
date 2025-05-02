@@ -171,13 +171,30 @@
             };
           }
           {
-            Readarr = let
-              url = "https://readarr.lanice.dev";
+            "Calibre Web" = let
+              url = "https://books.lanice.dev";
             in {
               href = url;
-              icon = "readarr";
+              icon = "calibre-web";
               siteMonitor = url;
-              description = "Books";
+              description = "eBook Library";
+              widget = {
+                type = "calibreweb";
+                url = url;
+                username = "lanice";
+                password = "{{HOMEPAGE_VAR_CWA_PASSWORD}}";
+                fields = ["books" "authors" "categories" "series"];
+              };
+            };
+          }
+          {
+            "CWA Book Downloader" = let
+              url = "https://cwa-download.lanice.dev";
+            in {
+              href = url;
+              icon = "calibre-web-automated-book-downloader";
+              siteMonitor = url;
+              description = "eBook Downloader";
             };
           }
           {
