@@ -8,6 +8,7 @@
     ./oink.nix
     ./stirlingpdf.nix
     ./zfs-zed.nix
+    ./calibre.nix
 
     # ./minecraft
   ];
