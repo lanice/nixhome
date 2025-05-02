@@ -1,4 +1,8 @@
 {pkgs, ...}: {
-  home.packages = [pkgs.neofetch];
-  home.file.".config/neofetch/config.conf".source = ./config.conf;
+  home.packages = [pkgs.fastfetch];
+  # home.file.".config/neofetch/config.conf".source = ./config.conf;
+
+  programs.fish.shellAliases = {
+    neofetch = "${pkgs.fastfetch}/bin/fastfetch";
+  };
 }
