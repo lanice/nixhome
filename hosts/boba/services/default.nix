@@ -9,6 +9,8 @@
     ./stirlingpdf.nix
     ./zfs-zed.nix
     ./calibre.nix
+    ./paperless.nix
+    ./syncthing.nix
 
     # ./minecraft
   ];

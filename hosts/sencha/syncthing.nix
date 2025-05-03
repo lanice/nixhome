@@ -12,6 +12,7 @@
 
     settings = {
       devices = {
+        "boba" = {id = "DGY5HLA-TIKZI6X-BNMZULZ-PHPMCJH-L57RGVV-TGEKYH3-7VISX5L-W4KYOQL";};
         "unstable" = {id = "ZSOKQGJ-K55JPO2-W4N75YJ-6NJI64R-HLQTT72-JENBU3L-DU44IG5-BVHIXAS";};
         "SunsetDragon" = {id = "GQWATA7-Y6EUELT-HZYCAOU-O6AMUID-YIU4AYD-O7QT3V4-ZUE4ZP7-LIITDAE";};
         "S23Ultra" = {id = "IO377ZW-XGOPD22-O6N6B4F-WQJYEYF-2GE463X-DH7MY4M-ZZEQ5CN-T2HJTAC";};
@@ -28,7 +29,7 @@
         };
         "paperless" = {
           path = "/home/lanice/Sync/paperless";
-          devices = ["unstable"];
+          devices = ["boba"];
         };
         "stable-diffusion" = {
           path = "/home/lanice/Sync/stable-diffusion";

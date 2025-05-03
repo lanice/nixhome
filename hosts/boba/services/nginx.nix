@@ -36,7 +36,7 @@ in {
 
     virtualHosts = {
       "home.lanice.dev" = mkVirtualHost 8081;
-      # "paperless.lanice.dev" = mkVirtualHost 58080;
+      "paperless.lanice.dev" = mkVirtualHost 58080;
       "chat.lanice.dev" = mkVirtualHost 3080;
       "pdf.lanice.dev" = mkVirtualHost 8090;
 
@@ -72,7 +72,7 @@ in {
 
     certs = {
       "home.lanice.dev" = mkAcmeCert;
-      # "paperless.lanice.dev" = mkAcmeCert;
+      "paperless.lanice.dev" = mkAcmeCert;
       "chat.lanice.dev" = mkAcmeCert;
       "pdf.lanice.dev" = mkAcmeCert;
 
