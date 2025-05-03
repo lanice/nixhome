@@ -112,10 +112,6 @@ in {
           path = "/home/lanice/Sync/photo-share";
           devices = ["sencha" "SunsetDragon"];
         };
-        "paperless" = {
-          path = "/var/lib/paperless/consume";
-          devices = ["sencha" "S23Ultra"];
-        };
       };
     };
   };

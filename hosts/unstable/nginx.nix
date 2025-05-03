@@ -37,7 +37,7 @@ in {
     virtualHosts = {
       "sdnext.lanice.dev" = mkVirtualHost 9000;
       "invoke.lanice.dev" = mkVirtualHost 9001;
-      "paperless.lanice.dev" = mkVirtualHost 58080;
+      "paperlessx.lanice.dev" = mkVirtualHost 58080;
     };
   };
 
@@ -53,7 +53,7 @@ in {
     certs = {
       "sdnext.lanice.dev" = mkAcmeCert;
       "invoke.lanice.dev" = mkAcmeCert;
-      "paperless.lanice.dev" = mkAcmeCert;
+      "paperlessx.lanice.dev" = mkAcmeCert;
     };
   };
 
