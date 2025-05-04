@@ -278,6 +278,20 @@
             };
           }
           {
+            "Uptime-Kuma boba" = let
+              url = "https://uptime.lanice.dev";
+            in {
+              href = url;
+              icon = "uptime-kuma";
+              description = "Server Monitoring";
+              widget = {
+                type = "uptimekuma";
+                url = url;
+                slug = "boba";
+              };
+            };
+          }
+          {
             LibreChat = let
               url = "https://chat.lanice.dev";
             in {
