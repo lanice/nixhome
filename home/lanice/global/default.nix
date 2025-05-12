@@ -19,7 +19,8 @@
     settings = {
       experimental-features = ["nix-command" "flakes"];
       warn-dirty = false;
-      auto-optimise-store = lib.mkDefault true;
+      # Only for privileged users. Set in the nixos system config anyway
+      # auto-optimise-store = lib.mkDefault true;
     };
 
     # Add each flake input as a registry
