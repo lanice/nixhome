@@ -34,6 +34,8 @@ in {
         package = fontProfiles.emoji.package;
       };
     };
+
+    targets.firefox.profileNames = ["lanice"];
   };
 
   # environment.sessionVariables = {
