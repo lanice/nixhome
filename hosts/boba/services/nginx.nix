@@ -47,6 +47,7 @@ in {
       "jellyseerr.lanice.dev" = mkVirtualHost 5055;
       "sonarr.lanice.dev" = mkVirtualHost 8989;
       "radarr.lanice.dev" = mkVirtualHost 7878;
+      "lidarr.lanice.dev" = mkVirtualHost 8686;
       "readarr.lanice.dev" = mkVirtualHost 8787;
       "bazarr.lanice.dev" = mkVirtualHost 6767;
       "prowlarr.lanice.dev" = mkVirtualHost 9696;
@@ -83,6 +84,7 @@ in {
       "jellyseerr.lanice.dev" = mkAcmeCert;
       "sonarr.lanice.dev" = mkAcmeCert;
       "radarr.lanice.dev" = mkAcmeCert;
+      "lidarr.lanice.dev" = mkAcmeCert;
       "readarr.lanice.dev" = mkAcmeCert;
       "bazarr.lanice.dev" = mkAcmeCert;
       "prowlarr.lanice.dev" = mkAcmeCert;

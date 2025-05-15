@@ -39,6 +39,11 @@ in {
     group = mediaGroup;
   };
 
+  services.lidarr = {
+    enable = true;
+    group = mediaGroup;
+  };
+
   services.readarr = {
     enable = true;
     group = mediaGroup;
