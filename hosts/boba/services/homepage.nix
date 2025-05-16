@@ -171,6 +171,22 @@
             };
           }
           {
+            Lidarr = let
+              url = "https://lidarr.lanice.dev";
+            in {
+              href = url;
+              icon = "lidarr";
+              siteMonitor = url;
+              description = "TV Shows";
+              widget = {
+                type = "lidarr";
+                url = url;
+                key = "{{HOMEPAGE_VAR_LIDARR_KEY}}";
+                fields = ["wanted" "queued" "artists"];
+              };
+            };
+          }
+          {
             "Calibre Web" = let
               url = "https://books.lanice.dev";
             in {
