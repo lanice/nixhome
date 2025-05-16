@@ -66,4 +66,12 @@ in {
     enable = true;
     group = mediaGroup;
   };
+
+  services.navidrome = {
+    enable = true;
+    group = mediaGroup;
+    settings = {
+      MusicFolder = "${mediaDir}/music";
+    };
+  };
 }

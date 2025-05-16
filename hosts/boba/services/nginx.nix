@@ -42,6 +42,7 @@ in {
 
       "watch.lanice.dev" = mkVirtualHost 8096;
       "browse.lanice.dev" = mkVirtualHost 5055;
+      "music.lanice.dev" = mkVirtualHost 4533;
 
       "jellyfin.lanice.dev" = mkVirtualHost 8096;
       "jellyseerr.lanice.dev" = mkVirtualHost 5055;
@@ -79,6 +80,7 @@ in {
 
       "watch.lanice.dev" = mkAcmeCert;
       "browse.lanice.dev" = mkAcmeCert;
+      "music.lanice.dev" = mkAcmeCert;
 
       "jellyfin.lanice.dev" = mkAcmeCert;
       "jellyseerr.lanice.dev" = mkAcmeCert;
