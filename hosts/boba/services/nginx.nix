@@ -59,6 +59,8 @@ in {
       "books.lanice.dev" = mkVirtualHost 8083;
       "cwa-download.lanice.dev" = mkVirtualHost 8084;
 
+      "komga.lanice.dev" = mkVirtualHost 8333;
+
       "uptime.lanice.dev" = mkVirtualHost 3001;
     };
   };
@@ -96,6 +98,8 @@ in {
       "calibre.lanice.dev" = mkAcmeCert;
       "books.lanice.dev" = mkAcmeCert;
       "cwa-download.lanice.dev" = mkAcmeCert;
+
+      "komga.lanice.dev" = mkAcmeCert;
 
       "uptime.lanice.dev" = mkAcmeCert;
     };

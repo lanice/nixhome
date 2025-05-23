@@ -204,6 +204,23 @@
             };
           }
           {
+            Komga = let
+              url = "https://komga.lanice.dev";
+            in {
+              href = url;
+              icon = "komga";
+              siteMonitor = url;
+              description = "Media Server for comics, mangas, BDs, magazines and eBooks";
+              widget = {
+                type = "komga";
+                url = url;
+                username = "";
+                password = "";
+                fields = ["libraries" "series" "books"];
+              };
+            };
+          }
+          {
             "CWA Book Downloader" = let
               url = "https://cwa-download.lanice.dev";
             in {

@@ -74,4 +74,12 @@ in {
       MusicFolder = "${mediaDir}/music";
     };
   };
+
+  services.komga = {
+    enable = true;
+    group = mediaGroup;
+    settings = {
+      server.port = 8333;
+    };
+  };
 }
