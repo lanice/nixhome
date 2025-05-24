@@ -12,4 +12,5 @@ in {
   "librechat.env.age".publicKeys = [boba lanice-sencha];
   "curseforge.age".publicKeys = [boba lanice-sencha];
   "mailBobaPassword.age".publicKeys = [boba lanice-sencha];
+  "kavitakey.age".publicKeys = [boba lanice-sencha];
 }

@@ -23,6 +23,10 @@ in {
           path = "/home/paperless/consume";
           devices = ["sencha" "S23Ultra"];
         };
+        "books" = {
+          path = "/home/books";
+          devices = ["sencha"];
+        };
       };
     };
   };

@@ -204,16 +204,6 @@
             };
           }
           {
-            "CWA Book Downloader" = let
-              url = "https://cwa-download.lanice.dev";
-            in {
-              href = url;
-              icon = "calibre-web-automated-book-downloader";
-              siteMonitor = url;
-              description = "eBook Downloader";
-            };
-          }
-          {
             Komga = let
               url = "https://komga.lanice.dev";
             in {
@@ -221,6 +211,26 @@
               icon = "komga";
               siteMonitor = url;
               description = "Media Server for comics, mangas, BDs, magazines and eBooks";
+            };
+          }
+          {
+            Kavita = let
+              url = "https://kavita.lanice.dev";
+            in {
+              href = url;
+              icon = "kavita";
+              siteMonitor = url;
+              description = "Fast, feature rich, cross-platform reading server";
+            };
+          }
+          {
+            "CWA Book Downloader" = let
+              url = "https://cwa-download.lanice.dev";
+            in {
+              href = url;
+              icon = "calibre-web-automated-book-downloader";
+              siteMonitor = url;
+              description = "eBook Downloader";
             };
           }
           {

@@ -11,6 +11,7 @@
     ./calibre.nix
     ./paperless.nix
     ./syncthing.nix
+    ./books.nix
 
     # ./minecraft
   ];

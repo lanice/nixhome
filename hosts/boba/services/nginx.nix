@@ -60,6 +60,7 @@ in {
       "cwa-download.lanice.dev" = mkVirtualHost 8084;
 
       "komga.lanice.dev" = mkVirtualHost 8333;
+      "kavita.lanice.dev" = mkVirtualHost 5000;
 
       "uptime.lanice.dev" = mkVirtualHost 3001;
     };
@@ -100,6 +101,7 @@ in {
       "cwa-download.lanice.dev" = mkAcmeCert;
 
       "komga.lanice.dev" = mkAcmeCert;
+      "kavita.lanice.dev" = mkAcmeCert;
 
       "uptime.lanice.dev" = mkAcmeCert;
     };

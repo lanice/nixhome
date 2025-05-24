@@ -31,6 +31,10 @@
           path = "/home/lanice/Sync/paperless";
           devices = ["boba"];
         };
+        "books" = {
+          path = "/home/lanice/Sync/books";
+          devices = ["boba"];
+        };
         "stable-diffusion" = {
           path = "/home/lanice/Sync/stable-diffusion";
           devices = ["unstable" "SunsetDragon"];
