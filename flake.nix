@@ -35,6 +35,7 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     srvos.url = "github:nix-community/srvos";
+    srvos.inputs.nixpkgs.follows = "nixpkgs";
 
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
