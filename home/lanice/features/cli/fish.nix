@@ -82,9 +82,6 @@
         source ${config.home.homeDirectory}/.env.fish
       end
 
-      # https://github.com/nvbn/thefuck/wiki/Shell-aliases#fish
-      thefuck --alias | source
-
       set -U fish_features qmark-noglob
 
       # Use terminal colors

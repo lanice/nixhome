@@ -50,7 +50,7 @@ in {
   programs.eza.enable = true; # Adds aliases for ls,ll,la,lt,lla
   programs.zoxide.enable = true;
   programs.navi.enable = true;
-  programs.thefuck.enable = true;
+  programs.pay-respects.enable = true;
 
   programs.atuin = {
     enable = true;
