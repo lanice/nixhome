@@ -2,19 +2,19 @@
   services.xserver = {
     enable = true;
 
-    desktopManager.gnome.enable = true;
-
-    displayManager = {
-      gdm.enable = true;
-      gdm.autoSuspend = false;
-      gdm.wayland = true;
-    };
-
     xkb = {
       layout = "us";
       variant = "intl";
       # variant = "";
     };
+  };
+
+  services.desktopManager.gnome.enable = true;
+
+  services.displayManager = {
+    gdm.enable = true;
+    gdm.autoSuspend = false;
+    gdm.wayland = true;
   };
 
   environment = {
