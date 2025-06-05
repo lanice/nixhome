@@ -63,6 +63,7 @@ in {
       "kavita.lanice.dev" = mkVirtualHost 5000;
 
       "uptime.lanice.dev" = mkVirtualHost 3001;
+      "adguard.lanice.dev" = mkVirtualHost 3003;
     };
   };
 
@@ -104,6 +105,7 @@ in {
       "kavita.lanice.dev" = mkAcmeCert;
 
       "uptime.lanice.dev" = mkAcmeCert;
+      "adguard.lanice.dev" = mkAcmeCert;
     };
   };
 

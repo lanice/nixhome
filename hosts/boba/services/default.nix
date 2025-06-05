@@ -12,6 +12,7 @@
     ./paperless.nix
     ./syncthing.nix
     ./books.nix
+    ./adguard.nix
 
     # ./minecraft
   ];
