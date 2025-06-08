@@ -13,6 +13,7 @@
     ./syncthing.nix
     ./books.nix
     ./adguard.nix
+    ./n8n.nix
 
     # ./minecraft
   ];
