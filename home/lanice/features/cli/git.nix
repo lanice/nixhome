@@ -70,6 +70,13 @@ in {
       init.defaultBranch = "main";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
+
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      # Need to make sure ~/.ssh/allowed_signers exists and contains:
+      # * <content of id_ed25519.pub>
+      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
+      user.signingkey = "~/.ssh/id_ed25519.pub";
     };
   };
 
