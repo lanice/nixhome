@@ -71,8 +71,6 @@
       '';
 
       wh = "readlink -f (which $argv)";
-
-      yt = ''${pkgs.fabric-ai}/bin/fabric -y "$argv" --transcript | ${pkgs.fabric-ai}/bin/fabric -sp summarize'';
     };
 
     interactiveShellInit = ''

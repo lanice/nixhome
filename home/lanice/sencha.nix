@@ -8,9 +8,13 @@
     inputs.agenix.homeManagerModules.age
 
     ./global # includes features/cli,features/helix
+
+    ./features/cli/fabric.nix
+
     ./features/email
     ./features/maestral
     ./features/distrobox
+
     ./features/desktop/firefox
     ./features/desktop/vscode
     ./features/desktop/alacritty
@@ -54,7 +58,6 @@
         zed-editor
         # gitbutler
 
-        fabric-ai
         aider-chat
         claude-code
 
