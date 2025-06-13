@@ -1,0 +1,3 @@
+{
+  programs.lutris.enable = true;
+}
