@@ -1,5 +1,5 @@
 {config, ...}: let
-  light = true;
+  light = config.theme.polarity == "light";
   syntax-theme =
     if light
     then "GitHub"

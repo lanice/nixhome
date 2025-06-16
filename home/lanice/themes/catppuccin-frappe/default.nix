@@ -3,26 +3,9 @@
   pkgs,
   ...
 }: {
-  imports = [../stylix.nix];
+  imports = [../common.nix];
 
-  stylix = {
-    base16Scheme = ./base16.yaml;
-    polarity = "dark";
-
-    image = pkgs.fetchurl {
-      url = "https://i.postimg.cc/TGrLzsD8/dogsplayingpoker.png";
-      sha256 = "sha256-51c5vQfcfD73BEdqfNxOcEkpgFSHC6u4eMqOVKJq9SY=";
-    };
-
-    cursor = {
-      name = "catppuccin-frappe-dark-cursors";
-      package = pkgs.catppuccin-cursors.frappeDark;
-      size = 24;
-    };
-
-    targets.vscode.enable = false;
-    targets.rofi.enable = false;
-  };
+  theme.polarity = "dark";
 
   programs.vscode.profiles.default = {
     userSettings."workbench.colorTheme" = "Catppuccin Frappé";
