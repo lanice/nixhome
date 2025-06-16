@@ -8,7 +8,7 @@
   gtk = {
     enable = true;
     font = lib.mkDefault {
-      name = config.fontProfiles.serif.family;
+      name = config.fontProfiles.sansSerif.family;
       size = 12;
     };
     iconTheme = {

@@ -3,35 +3,14 @@
   pkgs,
   ...
 }: {
-  imports = [../stylix.nix];
-
-  stylix = {
-    base16Scheme = ./base16.yaml;
-    polarity = "light";
-
-    image = pkgs.fetchurl {
-      url = "https://i.postimg.cc/TGrLzsD8/dogsplayingpoker.png";
-      sha256 = "sha256-51c5vQfcfD73BEdqfNxOcEkpgFSHC6u4eMqOVKJq9SY=";
-    };
-
-    cursor = {
-      name = "catppuccin-latte-light-cursors";
-      package = pkgs.catppuccin-cursors.latteLight;
-      size = 24;
-    };
-
-    targets.vscode.enable = false;
-    targets.rofi.enable = false;
-  };
+  imports = [../common.nix];
 
   programs.vscode.profiles.default = {
     userSettings."workbench.colorTheme" = "Catppuccin Latte";
     userSettings."workbench.iconTheme" = "catppuccin-latte";
   };
 
-  programs.btop.settings = {
-    color_theme = lib.mkForce "catppuccin-latte";
-  };
+  programs.btop.settings.color_theme = lib.mkForce "catppuccin-latte";
   home.file.".config/btop/themes/catppuccin-latte.theme".source = ./btop-catppuccin-latte.theme;
 
   programs.rofi.theme = builtins.fetchurl {

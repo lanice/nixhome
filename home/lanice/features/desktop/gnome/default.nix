@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: let
+  inherit (config) fontProfiles;
+in {
   imports = [
     ../common
     ./extensions
@@ -24,6 +30,10 @@
     "org/gnome/desktop/interface" = {
       enable-hot-corners = false;
       # cursor-size = 33;
+
+      font-name = "${fontProfiles.sansSerif.family} 12";
+      document-font-name = "${fontProfiles.serif.family} 11";
+      monospace-font-name = "${fontProfiles.monospace.family} 12";
     };
 
     "org/gnome/mutter" = {
