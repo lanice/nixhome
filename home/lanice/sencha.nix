@@ -28,7 +28,7 @@
 
     ./features/espanso
 
-    ./themes/catppuccin-latte
+    ./themes/catppuccin-frappe
   ];
 
   home = {
