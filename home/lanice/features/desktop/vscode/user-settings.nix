@@ -1,4 +1,7 @@
-{fontFamily}: {
+{
+  fontFamily,
+  pkgs,
+}: {
   diffEditor = {
     renderSideBySide = true;
   };
@@ -146,4 +149,5 @@
   "git.autofetch" = false;
   "telemetry.telemetryLevel" = "off";
   "update.showReleaseNotes" = false;
+  "deno.path" = "${pkgs.deno}/bin/deno";
 }

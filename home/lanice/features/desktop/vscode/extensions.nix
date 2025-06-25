@@ -12,6 +12,7 @@ with pkgs.vscode-extensions;
     bmalehorn.vscode-fish
     # rust-lang.rust-analyzer
     golang.go
+    denoland.vscode-deno
 
     # arrterian.nix-env-selector
 

@@ -29,7 +29,10 @@
       enableExtensionUpdateCheck = true;
 
       keybindings = import ./keybindings.nix;
-      userSettings = import ./user-settings.nix {fontFamily = config.fontProfiles.monospace.family;};
+      userSettings = import ./user-settings.nix {
+        fontFamily = config.fontProfiles.monospace.family;
+        inherit pkgs;
+      };
       extensions = import ./extensions.nix {inherit pkgs;};
     };
   };
