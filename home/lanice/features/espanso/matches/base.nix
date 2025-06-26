@@ -21,5 +21,9 @@
         }
       ];
     }
+    {
+      triggers = [":tick" ":check"];
+      replace = "✓";
+    }
   ];
 }
