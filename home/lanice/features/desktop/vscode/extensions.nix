@@ -13,6 +13,7 @@ with pkgs.vscode-extensions;
     # rust-lang.rust-analyzer
     golang.go
     denoland.vscode-deno
+    bradlc.vscode-tailwindcss
 
     # arrterian.nix-env-selector
 
