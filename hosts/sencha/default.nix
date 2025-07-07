@@ -17,6 +17,7 @@
 
     ./syncthing.nix
     ./mullvad.nix
+    ./nix-ld.nix
 
     ../common/global
     ../common/tailscale.nix

@@ -36,6 +36,7 @@ in {
     bun
     nodejs_20
     nodejs_20.pkgs.pnpm
+    biome
 
     devenv
 

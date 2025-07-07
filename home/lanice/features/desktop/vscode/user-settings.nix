@@ -32,6 +32,10 @@
     wordWrap = "on";
     inlineSuggest.enabled = true;
     semanticHighlighting.enabled = true;
+
+    codeActionsOnSave = {
+      "source.organizeImports.biome" = "explicit";
+    };
   };
   emmet = {
     showSuggestionsAsSnippets = false;
@@ -150,4 +154,5 @@
   "telemetry.telemetryLevel" = "off";
   "update.showReleaseNotes" = false;
   "deno.path" = "${pkgs.deno}/bin/deno";
+  "biome.requireConfigFile" = true;
 }

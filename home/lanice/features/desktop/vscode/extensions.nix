@@ -34,6 +34,7 @@ with pkgs.vscode-extensions;
     usernamehw.errorlens
     eamodio.gitlens
     yoavbls.pretty-ts-errors
+    biomejs.biome
 
     github.github-vscode-theme
     pkief.material-icon-theme
