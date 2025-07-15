@@ -78,6 +78,7 @@
         colmena-unstable
 
         prismlauncher
+        seventeenlands
 
         zen-browser
 
