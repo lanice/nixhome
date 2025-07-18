@@ -17,6 +17,7 @@
 
     ./features/desktop/firefox
     ./features/desktop/vscode
+    ./features/desktop/zed
     ./features/desktop/alacritty
     ./features/desktop/wezterm
     ./features/desktop/office
@@ -56,7 +57,6 @@
         spotify
         gimp
         xournalpp
-        zed-editor
         # gitbutler
 
         aider-chat
