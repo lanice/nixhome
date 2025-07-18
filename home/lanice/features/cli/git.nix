@@ -77,6 +77,7 @@ in {
       # * <content of id_ed25519.pub>
       gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
       user.signingkey = "~/.ssh/id_ed25519.pub";
+      push.autoSetupRemote = true;
     };
   };
 
