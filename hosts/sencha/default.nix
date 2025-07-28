@@ -45,6 +45,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
+  boot.kernelParams = ["usbcore.autosuspend=-1"];
+
   powerManagement.powertop.enable = true;
 
   programs = {
