@@ -10,6 +10,7 @@
     ./global # includes features/cli,features/helix
 
     ./features/cli/fabric.nix
+    ./features/cli/claude-code.nix
 
     ./features/email
     ./features/maestral
@@ -60,7 +61,6 @@
         # gitbutler
 
         aider-chat
-        claude-code
 
         auth0-cli
         awscli
