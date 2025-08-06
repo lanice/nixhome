@@ -3,7 +3,8 @@
   pkgs,
   ...
 }: let
-  fabric = inputs.fabric.packages.${pkgs.system}.fabric;
+  # fabric = inputs.fabric.packages.${pkgs.system}.fabric;
+  fabric = pkgs.fabric-ai;
 in {
   home.packages = [fabric pkgs.yt-dlp];
 
