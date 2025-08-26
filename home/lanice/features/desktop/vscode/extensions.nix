@@ -47,6 +47,8 @@ with pkgs.vscode-extensions;
     # mkhl.direnv
 
     jgclark.vscode-todo-highlight
+
+    saoudrizwan.claude-dev
   ]
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
     # {
@@ -95,12 +97,12 @@ with pkgs.vscode-extensions;
       sha256 = "sha256-jbMgEzogc/rZskV7WbxRYfCeIKAcZS2ZMPEdO4jAotk=";
     }
 
-    {
-      name = "claude-dev";
-      publisher = "saoudrizwan";
-      version = "3.17.8";
-      sha256 = "sha256-ACgIIDb5y1kDz7Zm/4MzNj5DLBmpMNo+lM8h/2OyO+M=";
-    }
+    # {
+    #   name = "claude-dev";
+    #   publisher = "saoudrizwan";
+    #   version = "3.17.8";
+    #   sha256 = "sha256-ACgIIDb5y1kDz7Zm/4MzNj5DLBmpMNo+lM8h/2OyO+M=";
+    # }
 
     # {
     #     name = "new-package";
