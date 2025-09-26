@@ -154,5 +154,6 @@
   "telemetry.telemetryLevel" = "off";
   "update.showReleaseNotes" = false;
   "deno.path" = "${pkgs.deno}/bin/deno";
+  "biome.enabled" = true;
   "biome.requireConfiguration" = true;
 }
