@@ -13,6 +13,7 @@
 
     inputs.agenix.nixosModules.default
     inputs.espanso-fix.nixosModules.espanso-capdacoverride
+    inputs.solaar.nixosModules.default
 
     ./hardware-configuration.nix
 
@@ -89,6 +90,7 @@
 
   services.fwupd.enable = true;
   services.flatpak.enable = true;
+  services.solaar.enable = true;
 
   services.tailscale.useRoutingFeatures = "client";
 

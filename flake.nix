@@ -40,6 +40,9 @@
     fabric.url = "github:danielmiessler/fabric";
     fabric.inputs.nixpkgs.follows = "nixpkgs";
 
+    solaar.url = "github:Svenum/Solaar-Flake/main";
+    solaar.inputs.nixpkgs.follows = "nixpkgs";
+
     espanso-fix.url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
   };
 
