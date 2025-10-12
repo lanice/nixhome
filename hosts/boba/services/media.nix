@@ -22,6 +22,7 @@ in {
   services.jellyfin = {
     enable = true;
     group = mediaGroup;
+    openFirewall = true;
   };
 
   services.jellyseerr = {
