@@ -121,10 +121,6 @@
         src = pkgs.fishPlugins.pisces.src;
       }
       {
-        name = "forgit";
-        src = pkgs.fishPlugins.forgit.src;
-      }
-      {
         name = "puffer-fish";
         src = pkgs.fetchFromGitHub {
           owner = "nickeb96";
