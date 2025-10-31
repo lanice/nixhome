@@ -48,7 +48,7 @@
         discord
         telegram-desktop
         zoom-us
-        whatsapp-for-linux
+        wasistlos
         fractal
 
         google-chrome
@@ -66,7 +66,7 @@
 
         sxiv
 
-        bitwarden
+        bitwarden-desktop
 
         xorg.xrandr
 

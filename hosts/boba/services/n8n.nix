@@ -1,8 +1,7 @@
-{
+{lib, ...}: {
   services.n8n = {
     enable = true;
-    webhookUrl = "https://n8n.lanice.dev/";
+    environment.WEBHOOK_URL = "https://n8n.lanice.dev/";
+    environment.N8N_PORT = "5588";
   };
-
-  systemd.services.n8n.environment.N8N_PORT = "5588";
 }

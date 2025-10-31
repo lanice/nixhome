@@ -81,7 +81,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    nvtopPackages.full
+    # nvtopPackages.full
     libva-utils
     inputs.agenix.packages.x86_64-linux.default
   ];

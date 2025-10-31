@@ -3,6 +3,7 @@
   programs.helix = {
     enable = true;
     settings = {
+      theme = "catppuccin_mocha";
       editor = {
         color-modes = true;
         line-number = "relative";
