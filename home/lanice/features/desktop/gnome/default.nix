@@ -48,7 +48,7 @@ in {
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-terminal" = {
       binding = "<Super>Return";
-      command = "ghostty";
+      command = "ghostty +new-window";
       name = "open-terminal";
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-wofi" = {
