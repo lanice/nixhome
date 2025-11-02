@@ -17,7 +17,7 @@ in {
       favorite-apps = [
         "firefox.desktop"
         "code.desktop"
-        "Alacritty.desktop"
+        "com.mitchellh.ghostty.desktop"
         "slack.desktop"
         "thunderbird.desktop"
         "org.telegram.desktop.desktop"
@@ -42,13 +42,13 @@ in {
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [
-        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-alacritty/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-terminal/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-wofi/"
       ];
     };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-alacritty" = {
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-terminal" = {
       binding = "<Super>Return";
-      command = "alacritty";
+      command = "ghostty";
       name = "open-terminal";
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom-wofi" = {

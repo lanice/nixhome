@@ -20,6 +20,7 @@
     ./features/desktop/vscode
     ./features/desktop/zed
     ./features/desktop/alacritty
+    ./features/desktop/ghostty
     ./features/desktop/wezterm
     ./features/desktop/office
     ./features/desktop/matrix
@@ -36,7 +37,7 @@
   home = {
     sessionVariables = {
       EDITOR = "hx";
-      TERMINAL = "alacritty";
+      TERMINAL = "ghostty";
     };
 
     packages = let
