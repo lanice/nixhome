@@ -113,10 +113,6 @@
 
     plugins = [
       {
-        name = "foreign-env";
-        src = pkgs.fishPlugins.foreign-env.src;
-      }
-      {
         name = "pisces";
         src = pkgs.fishPlugins.pisces.src;
       }
@@ -125,8 +121,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "nickeb96";
           repo = "puffer-fish";
-          rev = "fd0a9c95da59512beffddb3df95e64221f894631";
-          sha256 = "aij48yQHeAKCoAD43rGhqW8X/qmEGGkg8B4jSeqjVU0=";
+          rev = "3cb17caa88270e1bd215d97fbd591155c976f083";
+          sha256 = "sha256-kzAFM4rYWGQiFiw4LTnWv8LYBL7VQ9VlPqOw6d9NYe4=";
         };
       }
     ];
