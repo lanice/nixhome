@@ -18,7 +18,6 @@
   };
 
   environment = {
-    enableAllTerminfo = true;
     gnome.excludePackages = with pkgs; [
       gnome-photos
       gnome-tour

@@ -80,11 +80,14 @@
     bluetooth.powerOnBoot = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    # nvtopPackages.full
-    libva-utils
-    inputs.agenix.packages.x86_64-linux.default
-  ];
+  environment = {
+    enableAllTerminfo = true;
+    systemPackages = with pkgs; [
+      # nvtopPackages.full
+      libva-utils
+      inputs.agenix.packages.x86_64-linux.default
+    ];
+  };
 
   #  services.blueman.enable = true;
 

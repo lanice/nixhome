@@ -23,6 +23,7 @@
         stylus
       ];
       settings = {
+        # "widget.gtk.libadwaita-colors.enabled" = false;
         "beacon.enabled" = false;
         "browser.contentblocking.category" = "strict";
         "browser.disableResetPrompt" = true;
