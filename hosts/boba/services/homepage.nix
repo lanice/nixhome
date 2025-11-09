@@ -27,7 +27,7 @@
         {
           Media = {
             style = "row";
-            columns = 2;
+            columns = 3;
           };
         }
         {
@@ -99,6 +99,22 @@
                 url = url;
                 fields = ["pending" "approved" "available"];
                 key = "{{HOMEPAGE_VAR_JELLYSEERR_KEY}}";
+              };
+            };
+          }
+          {
+            Audiobookshelf = let
+              url = "https://audiobookshelf.lanice.dev";
+            in {
+              href = url;
+              icon = "audiobookshelf";
+              siteMonitor = url;
+              description = "Audiobook Library";
+              widget = {
+                type = "audiobookshelf";
+                url = url;
+                fields = ["books" "booksDuration"];
+                key = "{{HOMEPAGE_VAR_AUDIOBOOKSHELF_KEY}}";
               };
             };
           }

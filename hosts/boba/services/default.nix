@@ -14,6 +14,7 @@
     ./books.nix
     ./adguard.nix
     ./n8n.nix
+    ./bookshelf.nix
 
     # ./minecraft
   ];
