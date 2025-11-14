@@ -34,8 +34,8 @@ in {
     # Maybe move into separate 'webdev' feature
     yarn
     bun
-    nodejs_20
-    nodejs_20.pkgs.pnpm
+    nodejs_24
+    pnpm
     biome
     deno
 
