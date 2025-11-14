@@ -8,6 +8,8 @@ let
   systems = [unstable boba];
 in {
   "porkbun.age".publicKeys = [unstable boba lanice-unstable lanice-sencha];
+  "porkbunApiKey.age".publicKeys = [boba lanice-sencha];
+  "porkbunSecretApiKey.age".publicKeys = [boba lanice-sencha];
   "homepage.age".publicKeys = [boba lanice-sencha];
   "librechat.env.age".publicKeys = [boba lanice-sencha];
   "curseforge.age".publicKeys = [boba lanice-sencha];
