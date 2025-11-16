@@ -24,6 +24,8 @@ in {
         "${ingestDir}:/cwa-book-ingest:rw"
         "${libraryDir}:/calibre-library:rw"
       ];
+
+      extraOptions = ["--pull=newer"];
     };
 
     calibre-web-automated-book-downloader = {
@@ -39,6 +41,8 @@ in {
         "GID" = "992";
       };
       volumes = ["${ingestDir}:/cwa-book-ingest:rw"];
+
+      extraOptions = ["--pull=newer"];
     };
   };
 }
