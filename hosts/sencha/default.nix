@@ -87,6 +87,7 @@
       libva-utils
       inputs.agenix.packages.x86_64-linux.default
     ];
+    sessionVariables.NIXOS_OZONE_WL = "1";
   };
 
   #  services.blueman.enable = true;
