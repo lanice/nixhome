@@ -74,6 +74,9 @@
     };
 
     interactiveShellInit = ''
+      # Add fish's built-in completions directory to the path
+      set -p fish_complete_path ${config.programs.fish.package}/share/fish/completions
+
       fish_add_path -g ${config.home.homeDirectory}/.cargo/bin
 
       if test -e ${config.home.homeDirectory}/.env.fish
