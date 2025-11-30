@@ -58,11 +58,13 @@
   time.timeZone = "America/New_York";
 
   environment = {
-    enableAllTerminfo = true;
+    enableAllTerminfo = false;
     shells = with pkgs; [fish];
     systemPackages = map lib.lowPrio [
       pkgs.curl
       pkgs.gitMinimal
+
+      pkgs.ghostty.terminfo
     ];
   };
 

@@ -81,7 +81,7 @@
   };
 
   environment = {
-    enableAllTerminfo = true;
+    enableAllTerminfo = false;
     systemPackages = with pkgs; [
       # nvtopPackages.full
       libva-utils
