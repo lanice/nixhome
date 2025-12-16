@@ -58,7 +58,7 @@
   time.timeZone = "America/New_York";
 
   environment = {
-    enableAllTerminfo = false;
+    enableAllTerminfo = true;
     shells = with pkgs; [fish];
     systemPackages = map lib.lowPrio [
       pkgs.curl
