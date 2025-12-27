@@ -42,8 +42,6 @@
 
     solaar.url = "github:Svenum/Solaar-Flake/main";
     # solaar.inputs.nixpkgs.follows = "nixpkgs";
-
-    espanso-fix.url = "github:pitkling/nixpkgs/espanso-fix-capabilities-export";
   };
 
   outputs = {
