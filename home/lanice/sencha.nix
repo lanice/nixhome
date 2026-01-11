@@ -41,8 +41,8 @@
     };
 
     packages = let
-      colmena-unstable = inputs.colmena.packages.${pkgs.system}.colmena;
-      # zen-browser = inputs.zen-browser.packages.${pkgs.system}.zen-browser;
+      colmena-unstable = inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena;
+      # zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser;
     in
       with pkgs; [
         slack

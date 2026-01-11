@@ -8,7 +8,7 @@
     enable = true;
     profiles.lanice = {
       bookmarks = import ./bookmarks.nix {};
-      extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+      extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
         # https://gitlab.com/rycee/nur-expressions/blob/master/pkgs/firefox-addons/generated-firefox-addons.nix
         ublock-origin
         bitwarden

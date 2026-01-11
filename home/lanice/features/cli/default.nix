@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  localPkgs = inputs.self.packages.${pkgs.system};
+  localPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
 in {
   imports = [
     ./neofetch

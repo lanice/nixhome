@@ -17,7 +17,7 @@
       }
     )
     extensions;
-  recursiveMergeAttrs = lib.fold lib.recursiveUpdate {};
+  recursiveMergeAttrs = lib.foldr lib.recursiveUpdate {};
 in {
   home.packages = with pkgs;
     [

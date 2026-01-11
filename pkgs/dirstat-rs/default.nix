@@ -17,7 +17,6 @@ in
       sha256 = "sha256-gDIUYhc+GWbQsn5DihnBJdOJ45zdwm24J2ZD2jEwGyE=";
     };
 
-    useFetchCargoVendor = true;
     cargoHash = "sha256-SdxTiIrsK3U4mcrcilOhMkkp12yEUkWlXmlT+C75dZw=";
 
     meta = with lib; {
