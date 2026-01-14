@@ -63,6 +63,9 @@ in {
   services.sabnzbd = {
     enable = true;
     group = mediaGroup;
+    settings = {
+      misc.host_whitelist = "sabnzbd.lanice.dev,localhost:8080,localhost";
+    };
   };
 
   services.navidrome = {
