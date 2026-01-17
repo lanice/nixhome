@@ -16,6 +16,7 @@
     ./n8n.nix
     ./bookshelf.nix
     ./sabnzbd.nix
+    ./soulseek.nix
 
     # ./minecraft
   ];

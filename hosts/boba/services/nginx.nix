@@ -55,6 +55,7 @@ in {
       "prowlarr.lanice.dev" = mkVirtualHost 9696;
       "nzbhydra.lanice.dev" = mkVirtualHost 5076;
       "sabnzbd.lanice.dev" = mkVirtualHost 8080;
+      "slskd.lanice.dev" = mkVirtualHost 5030;
 
       "calibre.lanice.dev" = mkVirtualHost 8083;
       "books.lanice.dev" = mkVirtualHost 8083;
@@ -99,6 +100,7 @@ in {
       "prowlarr.lanice.dev" = mkAcmeCert;
       "nzbhydra.lanice.dev" = mkAcmeCert;
       "sabnzbd.lanice.dev" = mkAcmeCert;
+      "slskd.lanice.dev" = mkAcmeCert;
 
       "calibre.lanice.dev" = mkAcmeCert;
       "books.lanice.dev" = mkAcmeCert;

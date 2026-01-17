@@ -16,4 +16,5 @@ in {
   "mailBobaPassword.age".publicKeys = [boba lanice-sencha];
   "kavitakey.age".publicKeys = [boba lanice-sencha];
   "sabnzbd.age".publicKeys = [boba lanice-sencha];
+  "slskd.age".publicKeys = [boba lanice-sencha];
 }
