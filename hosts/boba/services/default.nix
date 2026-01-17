@@ -15,6 +15,7 @@
     ./adguard.nix
     ./n8n.nix
     ./bookshelf.nix
+    ./sabnzbd.nix
 
     # ./minecraft
   ];

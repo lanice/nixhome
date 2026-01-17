@@ -15,4 +15,5 @@ in {
   "curseforge.age".publicKeys = [boba lanice-sencha];
   "mailBobaPassword.age".publicKeys = [boba lanice-sencha];
   "kavitakey.age".publicKeys = [boba lanice-sencha];
+  "sabnzbd.age".publicKeys = [boba lanice-sencha];
 }
