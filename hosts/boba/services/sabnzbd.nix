@@ -14,6 +14,13 @@ in {
     mode = "770";
   };
 
+  systemd.tmpfiles.rules = [
+    "d ${downloadDir} 0770 ${user} ${mediaGroup} - -"
+    "d ${downloadDir}/incomplete 0770 ${user} ${mediaGroup} - -"
+    "d ${downloadDir}/complete 0770 ${user} ${mediaGroup} - -"
+    "d ${downloadDir}/complete/bookshelf 0770 ${user} ${mediaGroup} - -"
+  ];
+
   services.sabnzbd = {
     enable = true;
     user = user;
