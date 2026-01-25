@@ -35,6 +35,7 @@
       gf = "git fetch";
       gp = "git pull";
       gd = "git diff";
+      gco = "git checkout";
       gauc = "git add -u && git commit";
       gcan = "git commit --amend --no-edit";
       gpr = "git pull --rebase";
