@@ -13,6 +13,8 @@ in {
     "d ${downloadDir}/complete 0770 ${user} ${mediaGroup} - -"
   ];
 
+  systemd.services.slskd.serviceConfig.UMask = "0002";
+
   age.secrets.slskd = {
     file = "${inputs.self}/secrets/slskd.age";
     owner = user;
@@ -31,6 +33,7 @@ in {
         downloads = "${downloadDir}/complete";
         incomplete = "${downloadDir}/incomplete";
       };
+      permissions.file.mode = "664";
       shares.directories = [];
     };
   };
