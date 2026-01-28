@@ -10,7 +10,7 @@
     ./global # includes features/cli,features/helix
 
     ./features/cli/fabric.nix
-    ./features/cli/claude-code.nix
+    ./features/cli/claude-code
 
     ./features/email
     ./features/maestral
