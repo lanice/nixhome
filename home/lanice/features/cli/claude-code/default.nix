@@ -3,6 +3,10 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./ralph-wiggum
+  ];
+
   programs.claude-code = {
     enable = true;
 
@@ -23,10 +27,6 @@
         type = "command";
         command = "input=$(cat); echo \"[$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.model.display_name')] 📁 $(basename \"$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.workspace.current_dir')\")\"";
         padding = 0;
-      };
-
-      enabledPlugins = {
-        "ralph-wiggum@claude-plugins-official" = false;
       };
     };
   };
