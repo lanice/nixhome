@@ -1,10 +1,7 @@
 {
-  inputs,
-  pkgs,
-  ...
-}: {
   imports = [
     ./ralph-wiggum
+    ./claude-usage
   ];
 
   programs.claude-code = {
@@ -25,7 +22,8 @@
 
       statusLine = {
         type = "command";
-        command = "input=$(cat); echo \"[$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.model.display_name')] 📁 $(basename \"$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.workspace.current_dir')\")\"";
+        # command = "input=$(cat); echo \"[$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.model.display_name')] 📁 $(basename \"$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.workspace.current_dir')\")\"";
+        command = "bunx ccstatusline@latest";
         padding = 0;
       };
     };
