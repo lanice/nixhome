@@ -57,6 +57,8 @@ in {
       "sabnzbd.lanice.dev" = mkVirtualHost 8080;
       "slskd.lanice.dev" = mkVirtualHost 5030;
 
+      "audiobookrequest.lanice.dev" = mkVirtualHost 8799;
+
       "calibre.lanice.dev" = mkVirtualHost 8083;
       "books.lanice.dev" = mkVirtualHost 8083;
       "cwa-download.lanice.dev" = mkVirtualHost 8084;
@@ -101,6 +103,8 @@ in {
       "nzbhydra.lanice.dev" = mkAcmeCert;
       "sabnzbd.lanice.dev" = mkAcmeCert;
       "slskd.lanice.dev" = mkAcmeCert;
+
+      "audiobookrequest.lanice.dev" = mkAcmeCert;
 
       "calibre.lanice.dev" = mkAcmeCert;
       "books.lanice.dev" = mkAcmeCert;
