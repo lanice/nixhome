@@ -27,7 +27,7 @@
         {
           Media = {
             style = "row";
-            columns = 3;
+            columns = 2;
           };
         }
         {
@@ -99,6 +99,23 @@
                 url = url;
                 fields = ["pending" "approved" "available"];
                 key = "{{HOMEPAGE_VAR_JELLYSEERR_KEY}}";
+              };
+            };
+          }
+          {
+            Navidrome = let
+              url = "https://music.lanice.dev";
+            in {
+              href = url;
+              icon = "navidrome";
+              siteMonitor = url;
+              description = "Music Streaming Server";
+              widget = {
+                type = "navidrome";
+                url = url;
+                user = "leander";
+                token = "{{HOMEPAGE_VAR_NAVIDROME_TOKEN}}";
+                salt = "{{HOMEPAGE_VAR_NAVIDROME_SALT}}";
               };
             };
           }
@@ -269,6 +286,16 @@
               description = "Usenet Meta Search";
             };
           }
+          {
+            "Tracearr" = let
+              url = "https://tracearr.lanice.dev";
+            in {
+              href = url;
+              icon = "tracearr";
+              siteMonitor = url;
+              description = "Media Server Analytics";
+            };
+          }
         ];
       }
       {
@@ -402,14 +429,6 @@
             timeStyle = "short";
             hour12 = true;
           };
-        };
-      }
-      {
-        openmeteo = {
-          label = "Tater Hill";
-          latitude = "41.47516093341124";
-          longitude = "-72.36077195955225";
-          units = "imperial";
         };
       }
     ];
