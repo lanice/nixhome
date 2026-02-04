@@ -16,6 +16,7 @@
     ./soulseek.nix
     ./stirlingpdf.nix
     ./syncthing.nix
+    ./tracearr.nix
     ./uptime-kuma.nix
     ./zfs-zed.nix
 
