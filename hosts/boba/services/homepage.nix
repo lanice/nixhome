@@ -27,13 +27,13 @@
         {
           Media = {
             style = "row";
-            columns = 2;
+            columns = 4;
           };
         }
         {
           "Media Management" = {
             style = "row";
-            columns = 4;
+            columns = 5;
           };
         }
         {
@@ -82,6 +82,9 @@
                 enableBlocks = true;
                 enableNowPlaying = true;
                 enableUser = true;
+                enableMediaControl = false;
+                showEpisodeNumber = true;
+                expandOneStreamToTwoRows = true;
                 key = "{{HOMEPAGE_VAR_JELLYFIN_KEY}}";
               };
             };
@@ -103,6 +106,22 @@
             };
           }
           {
+            Audiobookshelf = let
+              url = "https://audiobookshelf.lanice.dev";
+            in {
+              href = url;
+              icon = "audiobookshelf";
+              siteMonitor = url;
+              description = "Audiobook Library";
+              widget = {
+                type = "audiobookshelf";
+                url = url;
+                fields = ["books" "booksDuration"];
+                key = "{{HOMEPAGE_VAR_AUDIOBOOKSHELF_KEY}}";
+              };
+            };
+          }
+          {
             Navidrome = let
               url = "https://music.lanice.dev";
             in {
@@ -116,22 +135,6 @@
                 user = "leander";
                 token = "{{HOMEPAGE_VAR_NAVIDROME_TOKEN}}";
                 salt = "{{HOMEPAGE_VAR_NAVIDROME_SALT}}";
-              };
-            };
-          }
-          {
-            Audiobookshelf = let
-              url = "https://audiobookshelf.lanice.dev";
-            in {
-              href = url;
-              icon = "audiobookshelf";
-              siteMonitor = url;
-              description = "Audiobook Library";
-              widget = {
-                type = "audiobookshelf";
-                url = url;
-                fields = ["books" "booksDuration"];
-                key = "{{HOMEPAGE_VAR_AUDIOBOOKSHELF_KEY}}";
               };
             };
           }
@@ -172,6 +175,22 @@
             };
           }
           {
+            Lidarr = let
+              url = "https://lidarr.lanice.dev";
+            in {
+              href = url;
+              icon = "lidarr";
+              siteMonitor = url;
+              description = "TV Shows";
+              widget = {
+                type = "lidarr";
+                url = url;
+                key = "{{HOMEPAGE_VAR_LIDARR_KEY}}";
+                fields = ["wanted" "queued" "artists"];
+              };
+            };
+          }
+          {
             Bazarr = let
               url = "https://bazarr.lanice.dev";
             in {
@@ -200,22 +219,6 @@
                 url = url;
                 key = "{{HOMEPAGE_VAR_SABNZBD_KEY}}";
                 fields = ["rate" "queue" "timeleft"];
-              };
-            };
-          }
-          {
-            Lidarr = let
-              url = "https://lidarr.lanice.dev";
-            in {
-              href = url;
-              icon = "lidarr";
-              siteMonitor = url;
-              description = "TV Shows";
-              widget = {
-                type = "lidarr";
-                url = url;
-                key = "{{HOMEPAGE_VAR_LIDARR_KEY}}";
-                fields = ["wanted" "queued" "artists"];
               };
             };
           }
