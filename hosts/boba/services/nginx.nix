@@ -59,13 +59,6 @@ in {
 
       "audiobookrequest.lanice.dev" = mkVirtualHost 8799;
 
-      "calibre.lanice.dev" = mkVirtualHost 8083;
-      "books.lanice.dev" = mkVirtualHost 8083;
-      "cwa-download.lanice.dev" = mkVirtualHost 8084;
-
-      "komga.lanice.dev" = mkVirtualHost 8333;
-      "kavita.lanice.dev" = mkVirtualHost 5000;
-
       "uptime.lanice.dev" = mkVirtualHost 3001;
       "adguard.lanice.dev" = mkVirtualHost 3003;
       "n8n.lanice.dev" = mkVirtualHost 5588;
@@ -106,13 +99,6 @@ in {
       "slskd.lanice.dev" = mkAcmeCert;
 
       "audiobookrequest.lanice.dev" = mkAcmeCert;
-
-      "calibre.lanice.dev" = mkAcmeCert;
-      "books.lanice.dev" = mkAcmeCert;
-      "cwa-download.lanice.dev" = mkAcmeCert;
-
-      "komga.lanice.dev" = mkAcmeCert;
-      "kavita.lanice.dev" = mkAcmeCert;
 
       "uptime.lanice.dev" = mkAcmeCert;
       "adguard.lanice.dev" = mkAcmeCert;

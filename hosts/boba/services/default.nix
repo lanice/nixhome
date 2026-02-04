@@ -2,9 +2,7 @@
   imports = [
     ./adguard.nix
     ./audiobookrequest.nix
-    ./books.nix
     ./bookshelf.nix
-    ./calibre.nix
     ./homepage.nix
     ./librechat.nix
     ./media.nix

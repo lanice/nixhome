@@ -220,53 +220,6 @@
             };
           }
           {
-            "Calibre Web" = let
-              url = "https://books.lanice.dev";
-            in {
-              href = url;
-              icon = "calibre-web";
-              siteMonitor = url;
-              description = "eBook Library";
-              widget = {
-                type = "calibreweb";
-                url = url;
-                username = "lanice";
-                password = "{{HOMEPAGE_VAR_CWA_PASSWORD}}";
-                fields = ["books" "authors" "categories" "series"];
-              };
-            };
-          }
-          {
-            Komga = let
-              url = "https://komga.lanice.dev";
-            in {
-              href = url;
-              icon = "komga";
-              siteMonitor = url;
-              description = "Media Server for comics, mangas, BDs, magazines and eBooks";
-            };
-          }
-          {
-            Kavita = let
-              url = "https://kavita.lanice.dev";
-            in {
-              href = url;
-              icon = "kavita";
-              siteMonitor = url;
-              description = "Fast, feature rich, cross-platform reading server";
-            };
-          }
-          {
-            "CWA Book Downloader" = let
-              url = "https://cwa-download.lanice.dev";
-            in {
-              href = url;
-              icon = "calibre-web-automated-book-downloader";
-              siteMonitor = url;
-              description = "eBook Downloader";
-            };
-          }
-          {
             Prowlarr = let
               url = "https://prowlarr.lanice.dev";
             in {
