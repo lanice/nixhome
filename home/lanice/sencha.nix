@@ -26,7 +26,6 @@
     ./features/desktop/office
     ./features/desktop/matrix
     ./features/desktop/kenku-fm
-    ./features/desktop/lutris
 
     ./features/desktop/gnome
 
