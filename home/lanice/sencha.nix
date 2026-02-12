@@ -11,6 +11,7 @@
 
     ./features/cli/fabric.nix
     ./features/cli/claude-code
+    ./features/cli/typst.nix
 
     ./features/email
     ./features/maestral

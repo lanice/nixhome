@@ -14,6 +14,7 @@ with pkgs.vscode-extensions;
     golang.go
     denoland.vscode-deno
     bradlc.vscode-tailwindcss
+    myriad-dreamin.tinymist
 
     # arrterian.nix-env-selector
 
