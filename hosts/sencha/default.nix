@@ -26,7 +26,7 @@
     ../common/virtualisation.nix
     ../common/steam.nix
 
-    ../common/gnome.nix
+    ../common/cosmic.nix
     # ../common/greetd.nix
     # ../common/nvidia.nix
   ];
@@ -56,7 +56,6 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
   };
 
   hardware = {

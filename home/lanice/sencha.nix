@@ -27,7 +27,7 @@
     ./features/desktop/matrix
     ./features/desktop/kenku-fm
 
-    ./features/desktop/gnome
+    ./features/desktop/cosmic
 
     ./features/espanso
 
