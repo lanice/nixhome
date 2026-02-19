@@ -9,7 +9,12 @@
   # Managed declaratively — GUI changes won't persist across home-manager switch
   xdg.configFile."cosmic/com.system76.CosmicSettings.Shortcuts/v1/custom".text = ''
     {
-        (modifiers: [Super], key: "Return"): Spawn("ghostty"),
+        (modifiers: [Super], key: "Return"): System(Terminal),
+    }
+  '';
+  xdg.configFile."cosmic/com.system76.CosmicSettings.Shortcuts/v1/system_actions".text = ''
+    {
+        Terminal: "ghostty",
     }
   '';
 

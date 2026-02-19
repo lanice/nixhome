@@ -15,6 +15,10 @@
       window-width = 160;
       window-inherit-working-directory = false;
 
+      window-decoration = "server";
+
+      gtk-single-instance = true;
+
       font-family = config.fontProfiles.monospace.family;
     };
   };
