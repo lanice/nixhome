@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   services.xserver.xkb = {
     layout = "us";
-    variant = "intl";
+    variant = "altgr-intl";
   };
 
   services.displayManager.cosmic-greeter.enable = true;
