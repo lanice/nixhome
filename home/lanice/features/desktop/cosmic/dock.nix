@@ -1,45 +1,41 @@
-{...}: {
-  xdg.configFile = {
-    "cosmic/com.system76.CosmicPanel.Dock/v1/anchor".text = "Bottom";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/anchor_gap".text = "true";
+{cosmicLib, ...}: let
+  mkRON = cosmicLib.cosmic.mkRON;
+in {
+  wayland.desktopManager.cosmic.panels = [
+    {
+      name = "Dock";
+      anchor = mkRON "enum" "Bottom";
+      anchor_gap = true;
+      autohide = mkRON "optional" {
+        wait_time = 500;
+        transition_time = 200;
+        handle_size = 2;
+      };
+      expand_to_edges = false;
+      opacity = 0.8;
+      output = mkRON "enum" "All";
+      background = mkRON "enum" "ThemeDefault";
+      size = mkRON "enum" "L";
+      margin = 4;
+      border_radius = 8;
+      exclusive_zone = false;
+      layer = mkRON "raw" "Top";
+      keyboard_interactivity = mkRON "raw" "OnDemand";
+      padding = 0;
+      padding_overlap = 0.5;
+      spacing = 4;
+      size_center = mkRON "optional" null;
+      size_wings = mkRON "optional" null;
+      autohover_delay_ms = mkRON "optional" 500;
 
-    "cosmic/com.system76.CosmicPanel.Dock/v1/autohide".text = ''
-      Some((
-          wait_time: 500,
-          transition_time: 200,
-          handle_size: 2,
-      ))
-    '';
-
-    "cosmic/com.system76.CosmicPanel.Dock/v1/autohover_delay_ms".text = "Some(500)";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/background".text = "ThemeDefault";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/border_radius".text = "8";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/exclusive_zone".text = "false";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/expand_to_edges".text = "false";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/keyboard_interactivity".text = "OnDemand";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/layer".text = "Top";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/margin".text = "4";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/name".text = ''"Dock"'';
-    "cosmic/com.system76.CosmicPanel.Dock/v1/opacity".text = "0.8";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/output".text = "All";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/padding".text = "0";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/padding_overlap".text = "0.5";
-
-    "cosmic/com.system76.CosmicPanel.Dock/v1/plugins_center".text = ''
-      Some([
-          "com.system76.CosmicPanelLauncherButton",
-          "com.system76.CosmicPanelWorkspacesButton",
-          "com.system76.CosmicPanelAppButton",
-
-          "com.system76.CosmicAppList",
-          "com.system76.CosmicAppletMinimize",
-      ])
-    '';
-
-    "cosmic/com.system76.CosmicPanel.Dock/v1/plugins_wings".text = "None";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/size".text = "L";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/size_center".text = "None";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/size_wings".text = "None";
-    "cosmic/com.system76.CosmicPanel.Dock/v1/spacing".text = "4";
-  };
+      plugins_center = mkRON "optional" [
+        "com.system76.CosmicPanelLauncherButton"
+        "com.system76.CosmicPanelWorkspacesButton"
+        "com.system76.CosmicPanelAppButton"
+        "com.system76.CosmicAppList"
+        "com.system76.CosmicAppletMinimize"
+      ];
+      plugins_wings = mkRON "optional" null;
+    }
+  ];
 }

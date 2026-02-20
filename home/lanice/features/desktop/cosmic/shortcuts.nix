@@ -1,14 +1,20 @@
-{...}: {
-  xdg.configFile = {
-    "cosmic/com.system76.CosmicSettings.Shortcuts/v1/custom".text = ''
-      {
-          (modifiers: [Super], key: "Return"): System(Terminal),
-      }
-    '';
-    "cosmic/com.system76.CosmicSettings.Shortcuts/v1/system_actions".text = ''
-      {
-          Terminal: "ghostty",
-      }
-    '';
-  };
+{cosmicLib, ...}: let
+  mkRON = cosmicLib.cosmic.mkRON;
+in {
+  wayland.desktopManager.cosmic.shortcuts = [
+    {
+      key = "Super+Return";
+      action = mkRON "enum" {
+        variant = "System";
+        value = [(mkRON "enum" "Terminal")];
+      };
+    }
+  ];
+
+  wayland.desktopManager.cosmic.systemActions = mkRON "map" [
+    {
+      key = mkRON "enum" "Terminal";
+      value = "ghostty";
+    }
+  ];
 }

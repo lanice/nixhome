@@ -40,6 +40,10 @@
     fabric.url = "github:danielmiessler/fabric";
     fabric.inputs.nixpkgs.follows = "nixpkgs";
 
+    cosmic-manager.url = "github:HeitorAugustoLN/cosmic-manager";
+    cosmic-manager.inputs.nixpkgs.follows = "nixpkgs";
+    cosmic-manager.inputs.home-manager.follows = "home-manager";
+
     solaar.url = "github:Svenum/Solaar-Flake/main";
     # solaar.inputs.nixpkgs.follows = "nixpkgs";
   };

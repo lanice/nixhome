@@ -1,45 +1,41 @@
-{...}: {
-  xdg.configFile = {
-    "cosmic/com.system76.CosmicComp/v1/xkb_config".text = ''
-      (
-          rules: "",
-          model: "pc104",
-          layout: "us",
-          variant: "altgr-intl",
-          options: Some("terminate:ctrl_alt_bksp,compose:ralt"),
-          repeat_delay: 600,
-          repeat_rate: 25,
-      )
-    '';
+{cosmicLib, ...}: let
+  mkRON = cosmicLib.cosmic.mkRON;
+in {
+  wayland.desktopManager.cosmic.compositor = {
+    active_hint = true;
 
-    "cosmic/com.system76.CosmicComp/v1/active_hint".text = "true";
+    # autotile = true;
+    # autotile_behavior = mkRON "enum" "PerWorkspace";
 
-    # "cosmic/com.system76.CosmicComp/v1/autotile".text = "true";
-    # "cosmic/com.system76.CosmicComp/v1/autotile_behavior".text = "PerWorkspace";
+    # workspaces = {
+    #   workspace_mode = mkRON "enum" "OutputBound";
+    #   workspace_layout = mkRON "enum" "Horizontal";
+    # };
 
-    # "cosmic/com.system76.CosmicComp/v1/workspaces".text = ''
-    #   (
-    #       workspace_mode: OutputBound,
-    #       workspace_layout: Horizontal,
-    #   )
-    # '';
+    xkb_config = {
+      rules = "";
+      model = "pc104";
+      layout = "us";
+      variant = "altgr-intl";
+      options = mkRON "optional" "terminate:ctrl_alt_bksp,compose:ralt";
+      repeat_delay = 600;
+      repeat_rate = 25;
+    };
 
-    "cosmic/com.system76.CosmicComp/v1/input_touchpad".text = ''
-      (
-          state: Enabled,
-          scroll_config: Some((
-              method: None,
-              natural_scroll: Some(true),
-              scroll_button: None,
-              scroll_factor: None,
-          )),
-          tap_config: Some((
-              enabled: true,
-              button_map: Some(LeftRightMiddle),
-              drag: true,
-              drag_lock: false,
-          )),
-      )
-    '';
+    input_touchpad = {
+      state = mkRON "enum" "Enabled";
+      scroll_config = mkRON "optional" {
+        method = mkRON "optional" null;
+        natural_scroll = mkRON "optional" true;
+        scroll_button = mkRON "optional" null;
+        scroll_factor = mkRON "optional" null;
+      };
+      tap_config = mkRON "optional" {
+        enabled = true;
+        button_map = mkRON "optional" (mkRON "enum" "LeftRightMiddle");
+        drag = true;
+        drag_lock = false;
+      };
+    };
   };
 }

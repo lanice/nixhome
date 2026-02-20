@@ -1,5 +1,7 @@
-{...}: {
+{inputs, ...}: {
   imports = [
+    inputs.cosmic-manager.homeManagerModules.cosmic-manager
+
     ../common
     ./comp.nix
     ./shortcuts.nix
@@ -8,10 +10,9 @@
     ./idle.nix
   ];
 
-  services.xsettingsd.enable = false;
+  wayland.desktopManager.cosmic.enable = true;
 
-  # COSMIC config (RON format)
-  # Managed declaratively — GUI changes won't persist across home-manager switch
+  services.xsettingsd.enable = false;
 
   # Theme: catppuccin frappe (dark) / latte (light)
   # Import via COSMIC Settings > Appearance > Import using files in ./themes/
