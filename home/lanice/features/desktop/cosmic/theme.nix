@@ -38,7 +38,7 @@
   };
 in {
   wayland.desktopManager.cosmic.appearance.theme = {
-    mode = "dark";
+    mode = "light";
 
     dark = {
       palette = mkRON "enum" {

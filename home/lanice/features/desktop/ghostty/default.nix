@@ -19,7 +19,10 @@
       window-width = 160;
       window-inherit-working-directory = false;
 
-      window-decoration = "server";
+      window-decoration = "none";
+      window-padding-x = 2;
+      window-padding-y = 2;
+      window-padding-balance = true;
 
       gtk-single-instance = true;
 

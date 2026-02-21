@@ -23,8 +23,8 @@ in {
     compositor = {
       active_hint = true;
 
-      # autotile = true;
-      # autotile_behavior = mkRON "enum" "PerWorkspace";
+      autotile = true;
+      autotile_behavior = mkRON "enum" "PerWorkspace";
 
       # workspaces = {
       #   workspace_mode = mkRON "enum" "OutputBound";
@@ -115,15 +115,30 @@ in {
         autohover_delay_ms = mkRON "optional" 500;
 
         plugins_center = mkRON "optional" [
-          "com.system76.CosmicPanelLauncherButton"
-          "com.system76.CosmicPanelWorkspacesButton"
-          "com.system76.CosmicPanelAppButton"
+          # "com.system76.CosmicPanelLauncherButton"
+          # "com.system76.CosmicPanelWorkspacesButton"
+          # "com.system76.CosmicPanelAppButton"
           "com.system76.CosmicAppList"
           "com.system76.CosmicAppletMinimize"
         ];
         plugins_wings = mkRON "optional" null;
       }
     ];
+
+    applets.app-list.settings = {
+      enable_drag_source = true;
+      favorites = [
+        "firefox"
+        "code"
+        "com.mitchellh.ghostty"
+        "slack"
+        "thunderbird"
+        "org.telegram.desktop"
+        "discord"
+        "com.system76.CosmicFiles"
+      ];
+      filter_top_levels = null;
+    };
 
     # Idle: never suspend or turn off screen (docked).
     # Change via COSMIC Settings when undocked; will reset on next home-manager switch.

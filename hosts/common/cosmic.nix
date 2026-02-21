@@ -10,7 +10,7 @@
   services.desktopManager.cosmic.xwayland.enable = true;
 
   environment.cosmic.excludePackages = with pkgs; [
-    cosmic-edit
-    cosmic-term
+    # cosmic-edit
+    # cosmic-term
   ];
 }
