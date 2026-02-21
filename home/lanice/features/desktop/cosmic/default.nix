@@ -4,11 +4,11 @@
   ...
 }: let
   mkRON = cosmicLib.cosmic.mkRON;
+  importRON = cosmicLib.cosmic.importRON;
 in {
   imports = [
     inputs.cosmic-manager.homeManagerModules.cosmic-manager
     ../common
-    ./theme.nix
   ];
 
   services.xsettingsd.enable = false;
@@ -18,6 +18,12 @@ in {
 
   wayland.desktopManager.cosmic = {
     enable = true;
+
+    appearance.theme = {
+      mode = "light";
+      light = importRON ./themes/catppuccin-latte-green+slightlyround.ron;
+      dark = importRON ./themes/catppuccin-frappe-green+slightlyround.ron;
+    };
 
     # Compositor
     compositor = {
