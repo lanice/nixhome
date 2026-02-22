@@ -78,7 +78,10 @@ in {
           "com.system76.CosmicAppletTime"
         ];
         plugins_wings = mkRON "optional" (mkRON "tuple" [
-          ["com.system76.CosmicAppletWorkspaces"]
+          [
+            "com.system76.CosmicAppletWorkspaces"
+            "com.system76.CosmicAppList"
+          ]
           [
             # "com.system76.CosmicAppletInputSources"
             "com.system76.CosmicAppletStatusArea"
