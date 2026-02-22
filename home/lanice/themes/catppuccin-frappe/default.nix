@@ -3,8 +3,6 @@
   pkgs,
   ...
 }: {
-  imports = [../common.nix];
-
   theme.polarity = "dark";
 
   programs.vscode.profiles.default = {

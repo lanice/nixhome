@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   fontProfiles = {
     enable = true;
     monospace = {
@@ -16,6 +20,16 @@
     emoji = {
       family = "Noto Color Emoji";
       package = pkgs.noto-fonts-emoji-blob-bin;
+    };
+  };
+
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      monospace = [config.fontProfiles.monospace.family];
+      serif = [config.fontProfiles.serif.family];
+      sansSerif = [config.fontProfiles.sansSerif.family];
+      emoji = [config.fontProfiles.emoji.family];
     };
   };
 }
