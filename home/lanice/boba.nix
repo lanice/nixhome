@@ -8,7 +8,7 @@
 
     #./features/desktop/common/font.nix
 
-    #./themes/catppuccin-latte
+    ./themes/catppuccin-mocha
   ];
 
   programs.atuin.daemon.enable = true;
