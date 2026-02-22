@@ -10,6 +10,8 @@
     userSettings."workbench.iconTheme" = "catppuccin-frappe";
   };
 
-  programs.btop.settings = color_theme = lib.mkForce "catppuccin-frappe";
+  programs.btop.settings.color_theme = "catppuccin-frappe";
   home.file.".config/btop/themes/catppuccin-frappe.theme".source = ./btop-catppuccin-frappe.theme;
+
+  programs.ghostty.settings.theme = "Catppuccin Frappe";
 }

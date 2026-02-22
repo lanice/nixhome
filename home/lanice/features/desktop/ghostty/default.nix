@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   # GTK 4.20+ no longer handles compose/dead keys on Wayland without an IM;
   # COSMIC doesn't implement the required text-input protocol yet
   systemd.user.sessionVariables.GTK_IM_MODULE = "simple";
@@ -6,8 +10,10 @@
   programs.ghostty = {
     enable = true;
     settings = {
-      theme = "Gruvbox Material";
+      theme = lib.mkDefault "Gruvbox Material";
       # theme = "Monokai Remastered";
+
+      background-opacity = 0.8;
 
       cursor-style = "bar";
       cursor-style-blink = false;

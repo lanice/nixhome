@@ -10,6 +10,8 @@
     userSettings."workbench.iconTheme" = "catppuccin-latte";
   };
 
-  programs.btop.settings.color_theme = lib.mkForce "catppuccin-latte";
+  programs.btop.settings.color_theme = "catppuccin-latte";
   home.file.".config/btop/themes/catppuccin-latte.theme".source = ./btop-catppuccin-latte.theme;
+
+  programs.ghostty.settings.theme = "Catppuccin Latte";
 }
