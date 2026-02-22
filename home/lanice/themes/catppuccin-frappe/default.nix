@@ -4,6 +4,7 @@
   ...
 }: {
   theme.polarity = "dark";
+  theme.cosmic.ronFile = ./cosmic-catppuccin-frappe-green+slightlyround.ron;
 
   programs.vscode.profiles.default = {
     userSettings."workbench.colorTheme" = "Catppuccin Frappé";

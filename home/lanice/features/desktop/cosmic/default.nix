@@ -1,5 +1,7 @@
 {
   inputs,
+  config,
+  lib,
   cosmicLib,
   ...
 }: let
@@ -19,11 +21,10 @@ in {
   wayland.desktopManager.cosmic = {
     enable = true;
 
-    appearance.theme = {
-      mode = "light";
-      light = importRON ./themes/catppuccin-latte-green+slightlyround.ron;
-      dark = importRON ./themes/catppuccin-frappe-green+slightlyround.ron;
-    };
+    appearance.theme.mode = config.theme.polarity;
+    appearance.theme.${config.theme.polarity} =
+      lib.mkIf (config.theme.cosmic.ronFile != null)
+      (importRON config.theme.cosmic.ronFile);
 
     # Compositor
     compositor = {

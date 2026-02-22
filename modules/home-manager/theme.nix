@@ -5,5 +5,10 @@
       default = "light";
       description = "Color scheme polarity";
     };
+
+    cosmic.ronFile = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+    };
   };
 }
