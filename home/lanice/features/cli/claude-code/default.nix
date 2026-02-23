@@ -18,6 +18,7 @@
 
     skills = {
       frontend-design = ./skills/frontend-design;
+      ai-sdk = ./skills/ai-sdk;
     };
 
     settings = {
