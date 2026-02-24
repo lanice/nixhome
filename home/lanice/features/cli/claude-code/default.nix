@@ -19,6 +19,11 @@
     skills = {
       frontend-design = ./skills/frontend-design;
       ai-sdk = ./skills/ai-sdk;
+      convex = ./skills/convex;
+      convex-best-practices = ./skills/convex-best-practices;
+      convex-functions = ./skills/convex-functions;
+      convex-http-actions = ./skills/convex-http-actions;
+      convex-schema-validator = ./skills/convex-schema-validator;
     };
 
     settings = {
