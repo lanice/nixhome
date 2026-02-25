@@ -9,6 +9,8 @@
   services.desktopManager.cosmic.enable = true;
   services.desktopManager.cosmic.xwayland.enable = true;
 
+  services.system76-scheduler.enable = true;
+
   environment.cosmic.excludePackages = with pkgs; [
     # cosmic-edit
     # cosmic-term
