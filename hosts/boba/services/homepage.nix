@@ -353,16 +353,6 @@
               };
             };
           }
-          {
-            "n8n" = let
-              url = "https://n8n.lanice.dev";
-            in {
-              href = url;
-              icon = "n8n";
-              siteMonitor = url;
-              description = "AI workflow automation";
-            };
-          }
         ];
       }
     ];

@@ -6,7 +6,6 @@
     ./homepage.nix
     ./librechat.nix
     ./media.nix
-    ./n8n.nix
     ./nginx.nix
     ./oink.nix
     ./paperless.nix

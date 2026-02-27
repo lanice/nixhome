@@ -61,7 +61,6 @@ in {
 
       "uptime.lanice.dev" = mkVirtualHost 3001;
       "adguard.lanice.dev" = mkVirtualHost 3003;
-      "n8n.lanice.dev" = mkVirtualHost 5588;
       "tracearr.lanice.dev" = mkVirtualHost 3000;
     };
   };
@@ -102,7 +101,6 @@ in {
 
       "uptime.lanice.dev" = mkAcmeCert;
       "adguard.lanice.dev" = mkAcmeCert;
-      "n8n.lanice.dev" = mkAcmeCert;
       "tracearr.lanice.dev" = mkAcmeCert;
     };
   };
