@@ -26,6 +26,9 @@ in {
       lib.mkIf (config.theme.cosmic.ronFile != null)
       (importRON config.theme.cosmic.ronFile);
 
+    appearance.toolkit.icon_theme = "Papirus";
+    appearance.toolkit.apply_theme_global = true;
+
     # Compositor
     compositor = {
       active_hint = true;

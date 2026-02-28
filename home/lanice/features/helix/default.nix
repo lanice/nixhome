@@ -1,9 +1,9 @@
-{
+{lib, ...}: {
   home.sessionVariables.COLORTERM = "truecolor";
   programs.helix = {
     enable = true;
     settings = {
-      theme = "catppuccin_mocha";
+      theme = lib.mkDefault "catppuccin_mocha";
       editor = {
         color-modes = true;
         line-number = "relative";

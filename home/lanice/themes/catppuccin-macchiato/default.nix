@@ -15,4 +15,6 @@
   home.file.".config/btop/themes/catppuccin-macchiato.theme".source = ./btop-catppuccin-macchiato.theme;
 
   programs.ghostty.settings.theme = "Catppuccin Macchiato";
+
+  programs.helix.settings.theme = "catppuccin_macchiato";
 }

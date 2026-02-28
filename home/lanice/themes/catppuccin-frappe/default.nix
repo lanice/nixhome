@@ -15,4 +15,6 @@
   home.file.".config/btop/themes/catppuccin-frappe.theme".source = ./btop-catppuccin-frappe.theme;
 
   programs.ghostty.settings.theme = "Catppuccin Frappe";
+
+  programs.helix.settings.theme = "catppuccin_frappe";
 }

@@ -15,4 +15,6 @@
   home.file.".config/btop/themes/catppuccin-latte.theme".source = ./btop-catppuccin-latte.theme;
 
   programs.ghostty.settings.theme = "Catppuccin Latte";
+
+  programs.helix.settings.theme = "catppuccin_latte";
 }
