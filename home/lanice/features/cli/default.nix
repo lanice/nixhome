@@ -44,6 +44,8 @@ in {
     alejandra # Nix formatter
 
     wl-clipboard # Command-line copy/paste utilities for Wayland
+
+    bluetui # TUI for managing bluetooth on Linux
   ];
 
   programs.nix-index.enable = true;
