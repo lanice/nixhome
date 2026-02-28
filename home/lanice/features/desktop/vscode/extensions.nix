@@ -98,6 +98,13 @@ with pkgs.vscode-extensions;
       sha256 = "sha256-jbMgEzogc/rZskV7WbxRYfCeIKAcZS2ZMPEdO4jAotk=";
     }
 
+    {
+      name = "oxc-vscode";
+      publisher = "oxc";
+      version = "1.47.0";
+      sha256 = "sha256-1kryiacIqvMsyTIA0obygxAg4PHedfH9zxEUAKWpA6I=";
+    }
+
     # {
     #   name = "claude-dev";
     #   publisher = "saoudrizwan";
