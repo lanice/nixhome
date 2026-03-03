@@ -1,12 +1,22 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: let
+  llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in {
   imports = [
     ./ralph-wiggum
     ./claude-usage
   ];
 
+  home.packages = [
+    llm-agents.ccusage
+  ];
+
   programs.claude-code = {
     enable = true;
-    package = pkgs.claude-code-bin;
+    package = llm-agents.claude-code;
 
     memory.text = ''
       ## General
