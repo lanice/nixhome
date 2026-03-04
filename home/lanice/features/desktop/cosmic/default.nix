@@ -2,6 +2,7 @@
   inputs,
   config,
   lib,
+  pkgs,
   cosmicLib,
   ...
 }: let
@@ -11,6 +12,11 @@ in {
   imports = [
     inputs.cosmic-manager.homeManagerModules.cosmic-manager
     ../common
+  ];
+
+  home.packages = [
+    inputs.cosmic-applets-collection.packages.${pkgs.system}.minimon-applet
+    inputs.cosmic-applets-collection.packages.${pkgs.system}.cosmic-ext-applet-clipboard-manager
   ];
 
   services.xsettingsd.enable = false;
@@ -85,9 +91,11 @@ in {
           [
             "com.system76.CosmicAppletWorkspaces"
             "com.system76.CosmicAppList"
+            "io.github.cosmic_utils.cosmic-ext-applet-clipboard-manager"
           ]
           [
             # "com.system76.CosmicAppletInputSources"
+            "io.github.cosmic_utils.minimon-applet"
             "com.system76.CosmicAppletStatusArea"
             "com.system76.CosmicAppletNotifications"
             "com.system76.CosmicAppletTiling"

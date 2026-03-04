@@ -47,6 +47,8 @@
     cosmic-manager.inputs.nixpkgs.follows = "nixpkgs";
     cosmic-manager.inputs.home-manager.follows = "home-manager";
 
+    cosmic-applets-collection.url = "github:wingej0/ext-cosmic-applets-flake";
+
     solaar.url = "github:Svenum/Solaar-Flake/main";
     # solaar.inputs.nixpkgs.follows = "nixpkgs";
   };

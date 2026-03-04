@@ -15,4 +15,7 @@
     # cosmic-edit
     # cosmic-term
   ];
+
+  # https://wiki.nixos.org/wiki/COSMIC#Clipboard
+  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 }
