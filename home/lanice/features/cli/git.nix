@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   light = config.theme.polarity == "light";
   syntax-theme =
     if light
@@ -92,7 +96,7 @@ in {
   programs.gh-dash = {
     enable = true;
     settings = {
-      theme = gh-dash-theme;
+      theme = lib.mkDefault gh-dash-theme;
     };
   };
 }

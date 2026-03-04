@@ -1,8 +1,21 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
+  imports = [inputs.catppuccin.homeModules.catppuccin];
+  catppuccin = {
+    enable = true;
+    flavor = "latte";
+    accent = "teal";
+
+    firefox.enable = false;
+    zellij.enable = false;
+    atuin.enable = false;
+    vscode.profiles.default.enable = false;
+  };
+
   theme.polarity = "light";
   theme.cosmic.ronFile = ./cosmic-catppuccin-latte-green+slightlyround.ron;
 
@@ -11,10 +24,10 @@
     userSettings."workbench.iconTheme" = "catppuccin-latte";
   };
 
-  programs.btop.settings.color_theme = "catppuccin-latte";
-  home.file.".config/btop/themes/catppuccin-latte.theme".source = ./btop-catppuccin-latte.theme;
+  # programs.btop.settings.color_theme = "catppuccin-latte";
+  # home.file.".config/btop/themes/catppuccin-latte.theme".source = ./btop-catppuccin-latte.theme;
 
   programs.ghostty.settings.theme = "Catppuccin Latte";
 
-  programs.helix.settings.theme = "catppuccin_latte";
+  # programs.helix.settings.theme = "catppuccin_latte";
 }

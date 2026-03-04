@@ -41,6 +41,7 @@
     fabric.inputs.nixpkgs.follows = "nixpkgs";
 
     llm-agents.url = "github:numtide/llm-agents.nix";
+    catppuccin.url = "github:catppuccin/nix";
 
     cosmic-manager.url = "github:HeitorAugustoLN/cosmic-manager";
     cosmic-manager.inputs.nixpkgs.follows = "nixpkgs";

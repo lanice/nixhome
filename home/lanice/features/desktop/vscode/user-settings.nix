@@ -20,6 +20,7 @@
     insertSpaces = true;
     minimap.enabled = true;
     minimap.renderCharacters = false;
+    minimap.showSlider = "always";
     multiCursorModifier = "ctrlCmd";
     renderIndentGuides = true;
     renderWhitespace = "boundary";

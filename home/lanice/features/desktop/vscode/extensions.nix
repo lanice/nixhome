@@ -40,8 +40,8 @@ with pkgs.vscode-extensions;
     github.github-vscode-theme
     pkief.material-icon-theme
 
-    # catppuccin.catppuccin-vsc
-    # catppuccin.catppuccin-vsc-icons
+    catppuccin.catppuccin-vsc
+    catppuccin.catppuccin-vsc-icons
 
     # firefox-devtools.vscode-firefox-debug
     # jnoortheen.nix-ide
@@ -71,18 +71,18 @@ with pkgs.vscode-extensions;
     #   sha256 = "sha256-UVMFCgt082GPcPkhlMgmp5mJaoTSGpWKtQARjHQFjTo=";
     # }
 
-    {
-      name = "catppuccin-vsc";
-      publisher = "catppuccin";
-      version = "3.16.1";
-      sha256 = "sha256-qEwQ583DW17dlJbODN8SNUMbDMCR1gUH4REaFkQT65I=";
-    }
-    {
-      name = "catppuccin-vsc-icons";
-      publisher = "catppuccin";
-      version = "1.18.0";
-      sha256 = "sha256-R3gv6mflKe8DUry7JRK+dD7YdxS2auG4BBFDf8u55hk=";
-    }
+    # {
+    #   name = "catppuccin-vsc";
+    #   publisher = "catppuccin";
+    #   version = "3.16.1";
+    #   sha256 = "sha256-qEwQ583DW17dlJbODN8SNUMbDMCR1gUH4REaFkQT65I=";
+    # }
+    # {
+    #   name = "catppuccin-vsc-icons";
+    #   publisher = "catppuccin";
+    #   version = "1.18.0";
+    #   sha256 = "sha256-R3gv6mflKe8DUry7JRK+dD7YdxS2auG4BBFDf8u55hk=";
+    # }
 
     {
       name = "dbos-ttdbg";
