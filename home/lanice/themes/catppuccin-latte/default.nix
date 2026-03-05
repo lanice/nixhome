@@ -1,21 +1,13 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [inputs.catppuccin.homeModules.catppuccin];
-  catppuccin = {
-    enable = true;
-    flavor = "latte";
-    accent = "teal";
+{...}: {
+  theme = {
+    polarity = "light";
+    cosmic.ronFile = ./cosmic-catppuccin-latte-green+slightlyround.ron;
 
-    firefox.enable = false;
-    vscode.profiles.default.enable = false;
+    catppuccin = {
+      enable = true;
+      flavor = "latte";
+    };
   };
-
-  theme.polarity = "light";
-  theme.cosmic.ronFile = ./cosmic-catppuccin-latte-green+slightlyround.ron;
 
   programs.vscode.profiles.default = {
     userSettings."workbench.colorTheme" = "Catppuccin Latte";
