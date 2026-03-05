@@ -59,6 +59,10 @@ in {
     enable = true;
     # daemon.enable = true;
     flags = ["--disable-up-arrow"];
+    settings = {
+      enter_accept = true;
+      records = true;
+    };
   };
 
   programs.neovim = {

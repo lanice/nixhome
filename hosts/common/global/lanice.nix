@@ -31,6 +31,7 @@ in {
   home-manager.users.lanice = import ../../../home/lanice/${config.networking.hostName}.nix;
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  # home-manager.backupFileExtension = "bak";
 
   security.pam.services = {swaylock = {};};
 }
