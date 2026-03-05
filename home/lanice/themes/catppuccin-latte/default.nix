@@ -1,4 +1,4 @@
-{...}: {
+{
   theme = {
     polarity = "light";
     cosmic.ronFile = ./cosmic-catppuccin-latte-green+slightlyround.ron;

@@ -39,6 +39,7 @@
       accent = config.theme.catppuccin.accent;
 
       firefox.enable = false;
+      # fish.enable = false;
       vscode.profiles.default.enable = false;
     };
   };
