@@ -40,6 +40,9 @@
     fabric.url = "github:danielmiessler/fabric";
     fabric.inputs.nixpkgs.follows = "nixpkgs";
 
+    claude-desktop.url = "github:aaddrick/claude-desktop-debian";
+    claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
+
     llm-agents.url = "github:numtide/llm-agents.nix";
     catppuccin.url = "github:catppuccin/nix";
 
