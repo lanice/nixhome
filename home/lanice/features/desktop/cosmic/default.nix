@@ -32,6 +32,23 @@ in {
       lib.mkIf (config.theme.cosmic.ronFile != null)
       (importRON config.theme.cosmic.ronFile);
 
+    wallpapers =
+      lib.mkIf (config.theme.wallpaper != null)
+      [
+        {
+          output = "all";
+          source = mkRON "enum" {
+            variant = "Path";
+            value = [config.theme.wallpaper];
+          };
+          filter_by_theme = false;
+          filter_method = mkRON "enum" "Lanczos";
+          scaling_mode = mkRON "enum" "Zoom";
+          sampling_method = mkRON "enum" "Alphanumeric";
+          rotation_frequency = 0;
+        }
+      ];
+
     appearance.toolkit.icon_theme = "Papirus";
     appearance.toolkit.apply_theme_global = true;
 

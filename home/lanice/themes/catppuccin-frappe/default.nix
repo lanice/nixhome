@@ -2,6 +2,7 @@
   theme = {
     polarity = "dark";
     cosmic.ronFile = ./cosmic-catppuccin-frappe-green+slightlyround.ron;
+    wallpaper = ./spirit-fox.png;
 
     catppuccin = {
       enable = true;

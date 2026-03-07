@@ -18,6 +18,11 @@
       default = null;
     };
 
+    wallpaper = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+    };
+
     catppuccin = {
       enable = lib.mkEnableOption "catppuccin theming";
       flavor = lib.mkOption {
