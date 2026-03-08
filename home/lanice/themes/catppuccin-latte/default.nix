@@ -2,7 +2,7 @@
   theme = {
     polarity = "light";
     cosmic.ronFile = ./cosmic-catppuccin-latte-green+slightlyround.ron;
-    wallpaper = ./lone-wanderer.png;
+    wallpaper = ./sleeping-cat.png;
 
     catppuccin = {
       enable = true;
