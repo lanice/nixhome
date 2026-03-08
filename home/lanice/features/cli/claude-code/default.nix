@@ -36,6 +36,7 @@ in {
       convex-functions = ./skills/convex-functions;
       convex-http-actions = ./skills/convex-http-actions;
       convex-schema-validator = ./skills/convex-schema-validator;
+      convex-file-storage = ./skills/convex-file-storage;
     };
 
     settings = {
