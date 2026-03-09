@@ -35,8 +35,15 @@
     loader.timeout = 3;
     loader.efi.canTouchEfiVariables = true;
 
-    # Since we can't manually respond to a panic, just reboot.
-    kernelParams = ["panic=1" "boot.panic_on_fail"];
+    kernelParams = [
+      "panic=1"
+      "boot.panic_on_fail"
+      "nvme_core.default_ps_max_latency_us=0"
+    ];
+
+    kernel.sysctl = {
+      "kernel.hung_task_panic" = 1;
+    };
   };
 
   services.openssh = {
