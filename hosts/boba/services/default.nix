@@ -3,6 +3,7 @@
     ./adguard.nix
     ./audiobookrequest.nix
     ./bookshelf.nix
+    ./healthcheck.nix
     ./homepage.nix
     ./librechat.nix
     ./media.nix
