@@ -87,6 +87,15 @@
       };
     };
 
+    homeConfigurations."lanice@sencha" = inputs.home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+      extraSpecialArgs = {inherit inputs;};
+      modules = [./home/lanice/sencha.nix];
+    };
+
     colmenaHive = colmena.lib.makeHive self.outputs.colmena;
     colmena = {
       meta = {
