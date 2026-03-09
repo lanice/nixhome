@@ -51,6 +51,7 @@
         zoom-us
         wasistlos
         fractal
+        element-desktop
 
         google-chrome
 
