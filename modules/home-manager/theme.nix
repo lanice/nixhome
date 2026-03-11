@@ -44,7 +44,7 @@
       accent = config.theme.catppuccin.accent;
 
       firefox.enable = false;
-      # fish.enable = false;
+      fish.enable = false; # let fish use terminal colors so it works across SSH
       vscode.profiles.default.enable = false;
     };
   };

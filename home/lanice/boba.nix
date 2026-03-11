@@ -8,7 +8,7 @@
 
     #./features/desktop/common/font.nix
 
-    ./themes/catppuccin-mocha
+    # ./themes/catppuccin-mocha # headless server, themed by SSH terminal
   ];
 
   programs.atuin.daemon.enable = true;
