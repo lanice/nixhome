@@ -2,7 +2,12 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  autosuggestionColor =
+    if config.theme.polarity == "dark"
+    then "white"
+    else "brblack";
+in {
   programs.fish = {
     enable = true;
 
@@ -84,6 +89,7 @@
       end
 
       # Custom fish color overrides
+      set -g fish_color_autosuggestion      ${autosuggestionColor} --italics  # brblack too low-contrast on dark themes with transparency
       set -g fish_color_command             brgreen              # default: normal
       set -g fish_color_comment             brmagenta            # default: red
       set -g fish_color_end                 brmagenta            # default: green
