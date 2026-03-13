@@ -12,7 +12,7 @@
 
     inputs.srvos.nixosModules.server
     inputs.srvos.nixosModules.mixins-terminfo
-    inputs.srvos.nixosModules.mixins-nginx
+
     inputs.srvos.nixosModules.mixins-latest-zfs-kernel
 
     inputs.disko.nixosModules.disko

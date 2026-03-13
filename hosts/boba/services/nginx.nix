@@ -34,6 +34,14 @@ in {
     enable = true;
     defaultListenAddresses = [tailscaleIP];
 
+    recommendedBrotliSettings = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+
+    commonHttpConfig = "access_log syslog:server=unix:/dev/log;";
+
     virtualHosts = {
       "home.lanice.dev" = mkVirtualHost 8081;
       "paperless.lanice.dev" = mkVirtualHost 58080;
