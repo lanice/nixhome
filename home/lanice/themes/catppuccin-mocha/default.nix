@@ -2,6 +2,7 @@
   theme = {
     polarity = "dark";
     cosmic.ronFile = ./cosmic-catppuccin-mocha-green+slightlyround.ron;
+    wallpaper = ./wizard-portal.png;
 
     catppuccin = {
       enable = true;

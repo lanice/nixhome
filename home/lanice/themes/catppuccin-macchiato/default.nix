@@ -2,6 +2,7 @@
   theme = {
     polarity = "dark";
     cosmic.ronFile = ./cosmic-catppuccin-macchiato-green+slightlyround.ron;
+    wallpaper = ./sunken-galleon.png;
 
     catppuccin = {
       enable = true;
