@@ -62,7 +62,7 @@
     colmena,
     ...
   } @ inputs: let
-    systems = ["x86_64-linux"];
+    systems = ["x86_64-linux" "aarch64-linux"];
     forAllSystems = function: nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
   in {
     homeManagerModules = import ./modules/home-manager;
@@ -94,6 +94,15 @@
       };
       extraSpecialArgs = {inherit inputs;};
       modules = [./home/lanice/sencha.nix];
+    };
+
+    homeConfigurations."lanice@matcha" = inputs.home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {
+        system = "aarch64-linux";
+        config.allowUnfree = true;
+      };
+      extraSpecialArgs = {inherit inputs;};
+      modules = [./home/lanice/matcha.nix];
     };
 
     colmenaHive = colmena.lib.makeHive self.outputs.colmena;
