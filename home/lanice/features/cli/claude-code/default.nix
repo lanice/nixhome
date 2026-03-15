@@ -8,6 +8,7 @@
 in {
   imports = [
     # ./ralph-wiggum
+    ./ralph
     ./claude-usage
   ];
 
