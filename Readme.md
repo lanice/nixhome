@@ -31,9 +31,10 @@ home-manager switch --flake .#<username>@<hostname>
 
 ## Hosts
 
-- `sencha`: Lenovo ThinkPad P1 Gen5 - 32GB RAM, i7 12700H, RTX A1000 | **NixOS** | Gnome
+- `sencha`: Lenovo ThinkPad P1 Gen5 - 64GB RAM, i7 12700H, RTX A1000 | **NixOS** | Cosmic
 - `boba`: ZimaCube Pro - 64GB RAM, i5 1235U | **NixOS** | headless
 - `unstable`: Desktop PC - 64GB RAM, i5 12400F, GTX 3060 | **NixOS** | headless
+- `matcha`: MacBook M1 Pro - 16GB RAM | **Fedora Asahi Remix**
 
 ## Use pinned pkgs version example
 
