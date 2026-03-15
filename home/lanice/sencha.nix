@@ -9,9 +9,12 @@
 
     ./global # includes features/cli,features/helix
 
-    ./features/cli/fabric.nix
     ./features/cli/claude-code
+    ./features/cli/zellij
+    ./features/cli/fabric.nix
     ./features/cli/typst.nix
+    ./features/cli/webdev.nix
+    ./features/cli/zsh.nix
 
     ./features/email
     ./features/maestral

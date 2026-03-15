@@ -7,7 +7,6 @@
 in {
   imports = [
     ./neofetch
-    ./zellij
     ./bash.nix
     ./bat.nix
     ./broot.nix
@@ -15,7 +14,6 @@ in {
     ./fish.nix
     ./git.nix
     ./starship.nix
-    ./zsh.nix
   ];
 
   home.packages = with pkgs; [
@@ -30,14 +28,6 @@ in {
 
     htop
     lazygit
-
-    # Maybe move into separate 'webdev' feature
-    yarn
-    bun
-    nodejs_24
-    pnpm
-    biome
-    deno
 
     devenv
 
