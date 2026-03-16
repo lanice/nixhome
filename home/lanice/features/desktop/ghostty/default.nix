@@ -13,7 +13,7 @@
       theme = lib.mkDefault "Gruvbox Material";
       # theme = "Monokai Remastered";
 
-      background-opacity = 0.8;
+      background-opacity = lib.mkDefault 0.8;
 
       cursor-style = "bar";
       cursor-style-blink = false;
@@ -25,7 +25,7 @@
       window-width = 160;
       window-inherit-working-directory = false;
 
-      window-decoration = "none";
+      window-decoration = lib.mkDefault "none";
       window-padding-x = 2;
       window-padding-y = 2;
       window-padding-balance = true;
