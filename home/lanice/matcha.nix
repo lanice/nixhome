@@ -33,7 +33,10 @@
       TERMINAL = "ghostty";
     };
 
-    packages = with pkgs; [];
+    packages = let
+      zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser;
+    in
+      with pkgs; [zen-browser];
 
     stateVersion = lib.mkDefault "26.05";
   };
