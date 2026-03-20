@@ -45,7 +45,7 @@
 
     packages = let
       colmena-unstable = inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena;
-      # zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser;
+      zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser;
     in
       with pkgs; [
         slack
@@ -82,7 +82,7 @@
         prismlauncher
         seventeenlands
 
-        # zen-browser
+        zen-browser
 
         quickemu
 
