@@ -97,9 +97,13 @@ in {
         name = "Panel";
         anchor = mkRON "enum" "Top";
         autohide = mkRON "optional" null;
-        margin = 0;
+        anchor_gap = true;
+        margin = 8;
+        border_radius = 16;
         expand_to_edges = true;
         opacity = 0.8;
+
+        size = mkRON "enum" "XS";
 
         plugins_center = mkRON "optional" [
           "com.system76.CosmicAppletTime"

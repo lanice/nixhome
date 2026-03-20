@@ -299,5 +299,5 @@
     )),
     is_frosted: true,
     gaps: (0, 8),
-    active_hint: 3,
+    active_hint: 2,
 )
