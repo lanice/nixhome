@@ -38,6 +38,7 @@ in {
       convex-http-actions = ./skills/convex-http-actions;
       convex-schema-validator = ./skills/convex-schema-validator;
       convex-file-storage = ./skills/convex-file-storage;
+      freetime = ./skills/freetime;
     };
 
     settings = {
