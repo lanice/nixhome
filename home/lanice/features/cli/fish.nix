@@ -24,6 +24,9 @@ in {
       sshu = "ssh -t unstable fish";
       sshb = "ssh -t boba";
 
+      mcrcon = "ssh -t boba sudo podman exec -i minecraft-atm10-2026 rcon-cli";
+      mcrestart = "ssh boba sudo systemctl start minecraft-atm10-2026-restart.service";
+
       nfu = "nix flake update";
       nr = "nixos-rebuild --flake .";
       nrb = "nixos-rebuild --flake . build";

@@ -7,7 +7,7 @@
   age.secrets.porkbunSecretApiKey.file = "${inputs.self}/secrets/porkbunSecretApiKey.age";
 
   services.oink = {
-    enable = false;
+    enable = true;
 
     apiKeyFile = config.age.secrets.porkbunApiKey.path;
     secretApiKeyFile = config.age.secrets.porkbunSecretApiKey.path;

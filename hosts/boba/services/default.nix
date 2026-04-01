@@ -18,6 +18,6 @@
     ./uptime-kuma.nix
     ./zfs-zed.nix
 
-    # ./minecraft
+    ./minecraft
   ];
 }
