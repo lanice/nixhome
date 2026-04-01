@@ -15,7 +15,7 @@
   programs.atuin.settings = {enter_accept = true;};
 
   programs.fish.shellAbbrs = {
-    mcjournal = "journalctl -fu podman-minecraft-atm10.service --all | ${pkgs.ccze}/bin/ccze -A";
+    mcjournal = "journalctl -fu podman-minecraft-atm10-2026.service --all | ${pkgs.ccze}/bin/ccze -A";
   };
 
   home = {
