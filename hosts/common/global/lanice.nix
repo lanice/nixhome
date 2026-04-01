@@ -23,6 +23,7 @@ in {
         "docker"
         "podman"
         "git"
+        "gamemode"
       ];
 
     packages = [pkgs.home-manager];

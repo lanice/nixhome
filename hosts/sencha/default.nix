@@ -46,6 +46,7 @@
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   boot.kernelParams = ["usbcore.autosuspend=-1"];
+  boot.extraModprobeConfig = "options nvidia NVreg_UsePageAttributeTable=1 NVreg_EnablePCIeGen3=1";
 
   powerManagement.powertop.enable = true;
 
@@ -59,14 +60,16 @@
 
   hardware = {
     nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
       prime = {
-        offload.enable = false;
-        sync.enable = true;
+        offload.enable = true;
+        offload.enableOffloadCmd = true;
+        sync.enable = false;
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:01:0:0";
       };
       modesetting.enable = true;
+      powerManagement.enable = true;
       open = false;
     };
     graphics = {
@@ -85,6 +88,11 @@
       inputs.agenix.packages.x86_64-linux.default
     ];
     sessionVariables.NIXOS_OZONE_WL = "1";
+    variables = {
+      LIBVA_DRIVER_NAME = "nvidia";
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+      NVD_BACKEND = "direct";
+    };
   };
 
   #  services.blueman.enable = true;
