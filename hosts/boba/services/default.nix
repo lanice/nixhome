@@ -15,7 +15,6 @@
     ./stirlingpdf.nix
     ./syncthing.nix
     ./tracearr.nix
-    ./ttyd.nix
     ./uptime-kuma.nix
     ./zfs-zed.nix
 
