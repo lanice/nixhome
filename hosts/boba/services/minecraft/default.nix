@@ -11,19 +11,6 @@
   port_public = 25565;
 
   motds = [
-    "All The Mods, All The Time!"
-    "Now with 100% more Nether"
-    "Creeper? Aw man..."
-    "Powered by mass amounts of RAM"
-    "Have you tried turning it off and on again?"
-    "Don't dig straight down"
-    "Welcome to lag city"
-    "404: Diamonds Not Found"
-    "May contain traces of NeoForge"
-    "Warranty void if Wither spawned"
-  ];
-
-  motds_fun = [
     "MeinKraft: German Engineering"
     "Chunk loading intensifies"
     "Touch grass? We have Botania for that"
@@ -66,7 +53,7 @@ in {
       image = "itzg/minecraft-server:java21";
       volumes = [
         "${atm10_2026Dir}:/data"
-        # "${toString ./patches}:/patches"
+        "${toString ./patches}:/patches"
       ];
       ports = ["${toString port_public}:${toString port_container}"];
 
@@ -99,8 +86,8 @@ in {
         WHITELIST = "lanice,Deimops,Clyntax,FlyingPengwing,Lowista,BooNici,Kreativlabor";
 
         STOP_DURATION = "120";
+        PATCH_DEFINITIONS = "/patches";
         # DISABLE_HEALTHCHECK = "true";
-        # PATCH_DEFINITIONS = "/patches";
       };
       extraOptions = [
         "--tty"
