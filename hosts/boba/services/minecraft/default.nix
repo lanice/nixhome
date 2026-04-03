@@ -41,6 +41,33 @@
   ];
 in {
   age.secrets.curseforge.file = "${inputs.self}/secrets/curseforge.age";
+  age.secrets.healthcheck-minecraft-uuid.file = "${inputs.self}/secrets/healthcheck-minecraft-uuid.age";
+
+  systemd.services.minecraft-atm10-2026-healthcheck = let
+    mc-monitor = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.mc-monitor;
+  in {
+    description = "Ping healthchecks.io with Minecraft server status";
+    after = ["podman-minecraft-atm10-2026.service"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "minecraft-healthcheck" ''
+        uuid=$(cat ${config.age.secrets.healthcheck-minecraft-uuid.path})
+        if ${mc-monitor}/bin/mc-monitor status --host localhost --port ${toString port_public}; then
+          ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 "https://hc-ping.com/$uuid"
+        else
+          ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 "https://hc-ping.com/$uuid/fail"
+        fi
+      '';
+    };
+  };
+
+  systemd.timers.minecraft-atm10-2026-healthcheck = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnCalendar = "*:0/2";
+      RandomizedDelaySec = "15s";
+    };
+  };
 
   systemd.tmpfiles.rules = [
     "d ${atm10_2026Dir} 0770 root users -"
@@ -87,21 +114,12 @@ in {
 
         STOP_DURATION = "120";
         PATCH_DEFINITIONS = "/patches";
-        # DISABLE_HEALTHCHECK = "true";
+        DISABLE_HEALTHCHECK = "true";
       };
       extraOptions = [
         "--tty"
         "--stop-timeout"
         "120"
-
-        "--health-cmd"
-        "mc-health"
-        "--health-start-period"
-        "20m"
-        "--health-interval"
-        "30s"
-        "--health-retries"
-        "6"
       ];
     };
   };

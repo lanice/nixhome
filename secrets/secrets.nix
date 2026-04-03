@@ -17,4 +17,5 @@ in {
   "sabnzbd.age".publicKeys = [boba lanice-sencha];
   "slskd.age".publicKeys = [boba lanice-sencha];
   "healthcheck-uuid.age".publicKeys = [boba lanice-sencha];
+  "healthcheck-minecraft-uuid.age".publicKeys = [boba lanice-sencha];
 }
