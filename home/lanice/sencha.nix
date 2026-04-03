@@ -62,8 +62,6 @@
         xournalpp
         # gitbutler
 
-        aider-chat
-
         auth0-cli
         awscli
 
