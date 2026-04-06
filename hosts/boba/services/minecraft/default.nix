@@ -93,7 +93,7 @@ in {
         EULA = "TRUE";
         TYPE = "AUTO_CURSEFORGE";
         CF_SLUG = "all-the-mods-10";
-        CF_FILE_ID = "7852998";
+        CF_FILE_ID = "7878495";
 
         MEMORY = "12G";
         # USE_AIKAR_FLAGS = "true";
@@ -106,6 +106,7 @@ in {
         SIMULATION_DISTANCE = "10";
         SPAWN_PROTECTION = "0";
         MAX_TICK_TIME = "-1";
+        SEED = "8503551968746025496";
 
         SERVER_NAME = "MeinKraft ATM10";
         ICON = "https://i.postimg.cc/vZgh2sJQ/minecraft.jpg";
