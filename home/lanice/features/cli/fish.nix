@@ -28,6 +28,9 @@ in {
       mc_restart = "ssh boba sudo systemctl start minecraft-atm10-2026-restart.service";
       mc_journal = "ssh boba journalctl -fu podman-minecraft-atm10-2026.service --all | ${pkgs.ccze}/bin/ccze -A";
 
+      bping = ''ssh boba "journalctl -f -u 'wan-ping-*' --all"'';
+      bping_loss = ''ssh boba "journalctl --since '1 hour ago' -u 'wan-ping-*' --no-pager | grep 'no answer'"'';
+
       nfu = "nix flake update";
       nr = "nixos-rebuild --flake .";
       nrb = "nixos-rebuild --flake . build";

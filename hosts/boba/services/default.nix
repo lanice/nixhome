@@ -16,6 +16,7 @@
     ./syncthing.nix
     ./tracearr.nix
     ./uptime-kuma.nix
+    ./wan-monitor.nix
     ./zfs-zed.nix
 
     ./minecraft
