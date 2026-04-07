@@ -48,7 +48,7 @@
   boot.kernelParams = ["usbcore.autosuspend=-1"];
   boot.extraModprobeConfig = "options nvidia NVreg_UsePageAttributeTable=1 NVreg_EnablePCIeGen3=1";
 
-  powerManagement.powertop.enable = true;
+  powerManagement.powertop.enable = false;
 
   programs = {
     dconf.enable = true;
@@ -64,12 +64,12 @@
       prime = {
         offload.enable = true;
         offload.enableOffloadCmd = true;
-        sync.enable = false;
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:01:0:0";
       };
       modesetting.enable = true;
       powerManagement.enable = true;
+      powerManagement.finegrained = true;
       open = false;
     };
     graphics = {
