@@ -113,7 +113,7 @@ in {
         SERVER_NAME = "MeinKraft ATM10";
         ICON = "https://i.postimg.cc/vZgh2sJQ/minecraft.jpg";
 
-        WHITELIST = "lanice,Deimops,Clyntax,FlyingPengwing,Lowista,BooNici,Kreativlabor";
+        WHITELIST = "lanice,Deimops,Clyntax,SleepyPenguicorn,Lowista,BooNici,Kreativlabor,King_Cle";
 
         STOP_DURATION = "120";
         PATCH_DEFINITIONS = "/patches";
