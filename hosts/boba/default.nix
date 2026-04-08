@@ -114,5 +114,11 @@
 
   services.tailscale.useRoutingFeatures = "server";
 
+  # Deauthorize unused Realtek RTL8188 USB WiFi dongle (wlp0s20f0u9).
+  # NM was scanning it every ~7m, spamming networkd link UP/DOWN logs.
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", ATTR{idProduct}=="8179", ATTR{authorized}="0"
+  '';
+
   system.stateVersion = "25.05";
 }
