@@ -108,6 +108,8 @@ in {
         MAX_TICK_TIME = "-1";
         SEED = "8503551968746025496";
 
+        RCON_CMDS_STARTUP = "gamerule playersSleepingPercentage 0";
+
         SERVER_NAME = "MeinKraft ATM10";
         ICON = "https://i.postimg.cc/vZgh2sJQ/minecraft.jpg";
 
