@@ -89,9 +89,7 @@
     ];
     sessionVariables.NIXOS_OZONE_WL = "1";
     variables = {
-      LIBVA_DRIVER_NAME = "nvidia";
       MOZ_DISABLE_RDD_SANDBOX = "1";
-      NVD_BACKEND = "direct";
     };
   };
 
