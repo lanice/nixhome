@@ -50,7 +50,7 @@
           {
             "SD.Next" = {
               href = "https://sdnext.lanice.dev/";
-              icon = "https://raw.githubusercontent.com/vladmandic/automatic/refs/heads/master/html/logo.svg";
+              icon = "https://raw.githubusercontent.com/vladmandic/sdnext/refs/heads/master/html/logo-dark.svg";
               siteMonitor = "https://sdnext.lanice.dev/";
               description = "All-in-one for AI generative image";
             };
