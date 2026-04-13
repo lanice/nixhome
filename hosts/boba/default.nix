@@ -70,6 +70,7 @@
     systemPackages = map lib.lowPrio [
       pkgs.curl
       pkgs.gitMinimal
+      pkgs.mtr
 
       pkgs.ghostty.terminfo
     ];
