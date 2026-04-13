@@ -46,7 +46,7 @@
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   boot.kernelParams = ["usbcore.autosuspend=-1"];
-  boot.extraModprobeConfig = "options nvidia NVreg_UsePageAttributeTable=1 NVreg_EnablePCIeGen3=1";
+  boot.extraModprobeConfig = "options nvidia NVreg_UsePageAttributeTable=1";
 
   powerManagement.powertop.enable = false;
 
@@ -69,7 +69,7 @@
       };
       modesetting.enable = true;
       powerManagement.enable = true;
-      powerManagement.finegrained = true;
+      powerManagement.finegrained = false;
       open = false;
     };
     graphics = {
