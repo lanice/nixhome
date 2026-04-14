@@ -34,6 +34,9 @@
   networking = {
     hostName = "sencha";
     networkmanager.enable = true;
+    extraHosts = ''
+      127.0.0.1 keycloak
+    '';
   };
 
   # See https://github.com/NixOS/nixpkgs/issues/180175#issuecomment-1473408913
@@ -46,7 +49,7 @@
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   boot.kernelParams = ["usbcore.autosuspend=-1"];
-  boot.extraModprobeConfig = "options nvidia NVreg_UsePageAttributeTable=1";
+  boot.extraModprobeConfig = "options nvidia NVreg_UsePageAttributeTable=1 NVreg_DynamicPowerManagement=0x00";
 
   powerManagement.powertop.enable = false;
 
