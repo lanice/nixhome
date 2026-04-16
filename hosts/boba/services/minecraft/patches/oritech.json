@@ -1,0 +1,11 @@
+{
+  "file": "/data/config/oritech-config.json5",
+  "ops": [
+    {
+      "$set": {
+        "path": "$.boringNukes",
+        "value": false
+      }
+    }
+  ]
+}
