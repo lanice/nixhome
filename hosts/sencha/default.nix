@@ -48,7 +48,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
-  boot.kernelParams = ["usbcore.autosuspend=-1"];
+  boot.kernelParams = ["usbcore.autosuspend=-1" "pcie_aspm=off"];
   boot.extraModprobeConfig = "options nvidia NVreg_UsePageAttributeTable=1 NVreg_DynamicPowerManagement=0x00";
 
   powerManagement.powertop.enable = false;
