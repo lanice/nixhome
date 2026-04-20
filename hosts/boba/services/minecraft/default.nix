@@ -93,7 +93,7 @@ in {
         EULA = "TRUE";
         TYPE = "AUTO_CURSEFORGE";
         CF_SLUG = "all-the-mods-10";
-        CF_FILE_ID = "7878495";
+        CF_FILE_ID = "7892974";
 
         MEMORY = "12G";
         # USE_AIKAR_FLAGS = "true";
