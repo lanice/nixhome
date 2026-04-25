@@ -6,6 +6,10 @@
 }: {
   programs.firefox = {
     enable = true;
+    # HM 26.05 flipped the default to ~/.config/mozilla/firefox even on legacy
+    # stateVersion (warning is gated, value is not). Pin to legacy to keep
+    # ~/.mozilla/firefox profile data working until we migrate to XDG.
+    configPath = ".mozilla/firefox";
     profiles.lanice = {
       bookmarks = import ./bookmarks.nix {};
       extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
