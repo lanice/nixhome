@@ -77,7 +77,7 @@ in {
     acceptTerms = true;
     defaults = {
       email = "leanderneiss@gmail.com";
-      credentialsFile = config.age.secrets.porkbun.path;
+      environmentFile = config.age.secrets.porkbun.path;
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
     };
