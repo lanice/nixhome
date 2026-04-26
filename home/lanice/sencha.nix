@@ -34,7 +34,7 @@
 
     ./features/espanso
 
-    ./themes/catppuccin-frappe
+    ./themes/catppuccin-macchiato
   ];
 
   home = {
