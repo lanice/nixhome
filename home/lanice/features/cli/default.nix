@@ -65,6 +65,8 @@ in {
       vim-nix
       gruvbox
     ];
+    withRuby = false;
+    withPython3 = true;
   };
 
   programs.tealdeer = {

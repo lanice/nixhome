@@ -15,8 +15,8 @@ in {
   ];
 
   home.packages = [
-    inputs.cosmic-applets-collection.packages.${pkgs.system}.minimon-applet
-    # inputs.cosmic-applets-collection.packages.${pkgs.system}.cosmic-ext-applet-clipboard-manager
+    inputs.cosmic-applets-collection.packages.${pkgs.stdenv.hostPlatform.system}.minimon-applet
+    # inputs.cosmic-applets-collection.packages.${pkgs.stdenv.hostPlatform.system}.cosmic-ext-applet-clipboard-manager
   ];
 
   services.xsettingsd.enable = false;

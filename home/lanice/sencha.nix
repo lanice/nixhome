@@ -69,7 +69,7 @@
 
         bitwarden-desktop
 
-        xorg.xrandr
+        xrandr
 
         python3
 
