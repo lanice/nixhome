@@ -7,6 +7,14 @@
     if config.theme.polarity == "dark"
     then "white"
     else "brblack";
+
+  mcDiagnosticScript = pkgs.writeText "mc-diagnostic.sh" (builtins.readFile ./mc-diagnostic.sh);
+
+  exifImageScript = pkgs.writeShellApplication {
+    name = "exif-image-metadata";
+    runtimeInputs = [pkgs.exiftool];
+    text = builtins.readFile ./exif-image-metadata.sh;
+  };
 in {
   programs.fish = {
     enable = true;
@@ -70,6 +78,8 @@ in {
       p = "pnpm";
 
       # github-last-commit = "echo \"[$(git rev-parse --short HEAD)]($(gh browse --no-browser $(git rev-parse HEAD)))\" | ${pkgs.xclip}/bin/xclip -sel clip";
+
+      exifimg = "${exifImageScript}/bin/exif-image-metadata";
     };
 
     functions = {
@@ -83,6 +93,8 @@ in {
       '';
 
       wh = "readlink -f (which $argv)";
+
+      mc_diagnostic = "ssh boba sudo bash -s -- $argv < ${mcDiagnosticScript}";
     };
 
     interactiveShellInit = ''

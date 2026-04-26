@@ -7,11 +7,11 @@
 in {
   imports = [
     ./neofetch
+    ./fish
     ./bash.nix
     ./bat.nix
     ./broot.nix
     ./btop.nix
-    ./fish.nix
     ./git.nix
     ./starship.nix
   ];
