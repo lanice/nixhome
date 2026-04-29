@@ -35,6 +35,10 @@
   # Boot into Cosmic by default; pick the "gnome" entry in systemd-boot to switch.
   desktops.cosmic.enable = lib.mkDefault true;
 
+  # Mirror the system-side desktop flag into home-manager so per-spec HM follows.
+  home-manager.users.lanice.desktops.cosmic.enable = config.desktops.cosmic.enable;
+  home-manager.users.lanice.desktops.gnome.enable = config.desktops.gnome.enable;
+
   specialisation.gnome.configuration = {
     desktops.cosmic.enable = false;
     desktops.gnome.enable = true;
