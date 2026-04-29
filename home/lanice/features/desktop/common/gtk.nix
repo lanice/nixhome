@@ -18,7 +18,7 @@
   };
 
   services.xsettingsd = {
-    enable = lib.mkDefault true;
+    enable = lib.mkDefault false;
     settings = {
       # "Net/ThemeName" = "${gtk.theme.name}";
       "Net/IconThemeName" = "${gtk.iconTheme.name}";

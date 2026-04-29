@@ -31,6 +31,7 @@
     ./features/desktop/kenku-fm
 
     ./features/desktop/cosmic
+    ./features/desktop/gnome
 
     ./features/espanso
 

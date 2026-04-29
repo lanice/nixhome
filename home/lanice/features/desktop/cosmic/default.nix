@@ -19,8 +19,6 @@ in {
     # inputs.cosmic-applets-collection.packages.${pkgs.stdenv.hostPlatform.system}.cosmic-ext-applet-clipboard-manager
   ];
 
-  services.xsettingsd.enable = false;
-
   # NOTE: If fullscreen causes black screen on external monitor, disable adaptive sync:
   # https://github.com/pop-os/cosmic-epoch/issues/2912
 

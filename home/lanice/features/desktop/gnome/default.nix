@@ -10,8 +10,6 @@ in {
     ./extensions
   ];
 
-  services.xsettingsd.enable = false; # To overwrite the default (enable = true) from gtk.nix
-
   dconf.settings = {
     "org/gnome/shell" = {
       favorite-apps = [

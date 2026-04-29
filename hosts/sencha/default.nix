@@ -27,9 +27,18 @@
     ../common/steam.nix
 
     ../common/cosmic.nix
+    ../common/gnome.nix
     # ../common/greetd.nix
     # ../common/nvidia.nix
   ];
+
+  # Boot into Cosmic by default; pick the "gnome" entry in systemd-boot to switch.
+  desktops.cosmic.enable = lib.mkDefault true;
+
+  specialisation.gnome.configuration = {
+    desktops.cosmic.enable = false;
+    desktops.gnome.enable = true;
+  };
 
   networking = {
     hostName = "sencha";
