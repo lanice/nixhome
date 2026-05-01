@@ -9,6 +9,7 @@
     ./lanice.nix
     ./fish.nix
     ./locale.nix
+    ./nh.nix
     ./nix.nix
     ./systemd-boot.nix
   ];

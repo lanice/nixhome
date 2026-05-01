@@ -40,13 +40,8 @@ in {
       bping_loss = ''ssh boba "journalctl --since '1 hour ago' -u 'wan-ping-*' --no-pager | grep 'no answer'"'';
 
       nfu = "nix flake update";
-      nr = "nixos-rebuild --flake .";
-      nrb = "nixos-rebuild --flake . build";
-      nrs = "nixos-rebuild --flake . switch";
-      snr = "sudo nixos-rebuild --flake .";
-      snrs = "sudo nixos-rebuild --flake . switch";
-      hm = "home-manager --flake .";
-      hms = "home-manager --flake . switch";
+      nrb = "nh os build";
+      nrs = "nh os switch";
 
       # Git
       gs = "git status";
