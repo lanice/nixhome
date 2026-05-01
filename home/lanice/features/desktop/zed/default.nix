@@ -8,5 +8,7 @@
         value = theme;
       })
       themeData.themes);
+
+    extensions = ["catppuccin" "catppuccin-icons"];
   };
 }
