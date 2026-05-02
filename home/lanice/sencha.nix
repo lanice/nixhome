@@ -53,7 +53,7 @@
         discord
         telegram-desktop
         zoom-us
-        wasistlos
+        karere
 
         google-chrome
 
