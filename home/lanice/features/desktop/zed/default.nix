@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = [pkgs.nixd pkgs.alejandra];
 
   programs.zed-editor = {
@@ -12,6 +16,8 @@
     userSettings = {
       ui_font_size = 18;
       buffer_font_size = 18;
+
+      terminal.font_family = config.fontProfiles.monospace.family;
 
       autosave.after_delay.milliseconds = 1000;
 
