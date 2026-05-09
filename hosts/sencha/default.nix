@@ -114,6 +114,7 @@
   services.fwupd.enable = true;
   services.flatpak.enable = true;
   services.solaar.enable = true;
+  services.hardware.bolt.enable = true;
 
   services.tailscale.useRoutingFeatures = "client";
 
