@@ -3,19 +3,20 @@
   config,
   ...
 }: {
-  home.packages = [pkgs.nixd pkgs.alejandra];
+  home.packages = with pkgs; [nixd alejandra maple-mono.NF];
 
   programs.zed-editor = {
     enable = true;
 
-    extensions = ["nix" "catppuccin" "catppuccin-icons"];
+    extensions = ["nix" "catppuccin" "catppuccin-icons" "oxc"];
 
     mutableUserSettings = true;
     mutableUserKeymaps = true;
 
     userSettings = {
       ui_font_size = 18;
-      buffer_font_size = 18;
+      buffer_font_size = 16;
+      buffer_font_family = "Maple Mono NF";
 
       terminal.font_family = config.fontProfiles.monospace.family;
 
