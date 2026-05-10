@@ -25,6 +25,12 @@
       base_keymap = "VSCode";
       show_whitespaces = "all";
 
+      minimap = {
+        show = "always";
+        thumb = "always";
+        thumb_border = "left_open";
+      };
+
       languages.Nix = {
         language_servers = ["nixd" "!nil"];
         formatter = {
