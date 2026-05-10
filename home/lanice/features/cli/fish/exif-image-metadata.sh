@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Dump rich EXIF metadata as CSV for all JPEGs in cwd.
 exec exiftool -csv \
   -FileName -DateTimeOriginal -Model -Aperture -ExposureTime -ISO \
   -LensInfo -FocalLengthIn35mmFormat -Flash -MeteringMode -FileSize \
@@ -14,5 +13,5 @@ exec exiftool -csv \
   -ReleaseMode -RollAngle -SelfTimerShotInterval -SelfTimerTime \
   -Shadows -Vibrance -VibrationReduction -YawAngle -ImageHeight \
   -ImageWidth \
-  -ext jpg -ext JPG -ext jpeg -ext JPEG \
+  -ext jpg -ext JPG -ext jpeg -ext JPEG -ext nef -ext NEF -ext png -ext PNG \
   .
