@@ -1,4 +1,6 @@
 {
+  _module.args.tailscaleIP = "100.124.185.117";
+
   imports = [
     ./adguard.nix
     ./audiobookrequest.nix
@@ -10,6 +12,7 @@
     ./nginx.nix
     ./oink.nix
     ./paperless.nix
+    ./peertube.nix
     ./sabnzbd.nix
     ./soulseek.nix
     ./stirlingpdf.nix

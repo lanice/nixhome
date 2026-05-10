@@ -1,10 +1,9 @@
 {
   inputs,
   config,
+  tailscaleIP,
   ...
 }: let
-  tailscaleIP = "100.124.185.117";
-
   # Common settings for virtual hosts
   mkVirtualHost = port: {
     enableACME = true;

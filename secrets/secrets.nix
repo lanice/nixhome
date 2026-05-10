@@ -18,4 +18,6 @@ in {
   "slskd.age".publicKeys = [boba lanice-sencha];
   "healthcheck-uuid.age".publicKeys = [boba lanice-sencha];
   "healthcheck-minecraft-uuid.age".publicKeys = [boba lanice-sencha];
+  "peertube-secrets.age".publicKeys = [boba lanice-sencha];
+  "peertube-db-password.age".publicKeys = [boba lanice-sencha];
 }
