@@ -39,10 +39,10 @@
   home-manager.users.lanice.desktops.cosmic.enable = config.desktops.cosmic.enable;
   home-manager.users.lanice.desktops.gnome.enable = config.desktops.gnome.enable;
 
-  specialisation.gnome.configuration = {
-    desktops.cosmic.enable = false;
-    desktops.gnome.enable = true;
-  };
+  # specialisation.gnome.configuration = {
+  #   desktops.cosmic.enable = false;
+  #   desktops.gnome.enable = true;
+  # };
 
   networking = {
     hostName = "sencha";
