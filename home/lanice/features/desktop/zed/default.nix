@@ -8,7 +8,7 @@
   programs.zed-editor = {
     enable = true;
 
-    extensions = ["nix" "catppuccin" "catppuccin-icons" "oxc"];
+    extensions = ["nix" "catppuccin" "catppuccin-icons" "oxc" "astro"];
 
     mutableUserSettings = true;
     mutableUserKeymaps = true;
