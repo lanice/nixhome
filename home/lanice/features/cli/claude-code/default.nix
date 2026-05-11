@@ -41,6 +41,10 @@ in {
       includeCoAuthoredBy = false;
       cleanupPeriodDays = 700;
 
+      permissions = {
+        defaultMode = "auto";
+      };
+
       statusLine = {
         type = "command";
         # command = "input=$(cat); echo \"[$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.model.display_name')] 📁 $(basename \"$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.workspace.current_dir')\")\"";
