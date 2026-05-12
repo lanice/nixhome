@@ -17,7 +17,6 @@
     ./hardware-configuration.nix
 
     ./syncthing.nix
-    ./mullvad.nix
     ./nix-ld.nix
 
     ../common/global
