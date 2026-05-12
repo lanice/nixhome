@@ -18,6 +18,7 @@
 
     ./syncthing.nix
     ./nix-ld.nix
+    ./undock.nix
 
     ../common/global
     ../common/tailscale.nix
