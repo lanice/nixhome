@@ -8,6 +8,10 @@ in {
     "d ${dataDir}/data 0750 - - -"
   ];
 
+  # The Jellyfin server URL is configured in Tracearr's web UI (stored in
+  # its postgres DB, not here). Set it to http://host.containers.internal:8096
+  # — pointing at the public hostname routes via Tailscale, which the podman
+  # bridge can't reach (Tailscale's ts-input chain drops !tailscale0 → CGNAT).
   virtualisation.oci-containers.containers.tracearr = {
     image = "ghcr.io/connorgallopo/tracearr:supervised";
     autoStart = true;
