@@ -11,7 +11,6 @@
     # (modulesPath + "/profiles/qemu-guest.nix")
 
     inputs.srvos.nixosModules.server
-    inputs.srvos.nixosModules.mixins-terminfo
 
     inputs.srvos.nixosModules.mixins-latest-zfs-kernel
 
@@ -65,7 +64,7 @@
   time.timeZone = "America/New_York";
 
   environment = {
-    enableAllTerminfo = true;
+    enableAllTerminfo = false;
     shells = with pkgs; [fish];
     systemPackages = map lib.lowPrio [
       pkgs.curl
@@ -73,6 +72,10 @@
       pkgs.mtr
 
       pkgs.ghostty.terminfo
+      pkgs.foot.terminfo
+      pkgs.kitty.terminfo
+      pkgs.wezterm.terminfo
+      pkgs.alacritty.terminfo
     ];
   };
 
