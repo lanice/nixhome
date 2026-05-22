@@ -15,7 +15,6 @@
     inputs.srvos.nixosModules.mixins-latest-zfs-kernel
 
     inputs.disko.nixosModules.disko
-    inputs.vscode-server.nixosModule
     inputs.agenix.nixosModules.default
 
     ./hardware-configuration.nix
@@ -50,7 +49,6 @@
     settings.PermitRootLogin = "no";
     settings.PasswordAuthentication = false;
   };
-  services.vscode-server.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 

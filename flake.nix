@@ -7,9 +7,6 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    vscode-server.url = "github:msteen/nixos-vscode-server";
-    vscode-server.inputs.nixpkgs.follows = "nixpkgs";
-
     minecraft-servers.url = "github:mkaito/nixos-modded-minecraft-servers";
     minecraft-servers.inputs.nixpkgs.follows = "nixpkgs";
 

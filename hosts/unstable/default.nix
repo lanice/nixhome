@@ -21,7 +21,6 @@ in {
     # This is covered manually now
     # inputs.hardware.nixosModules.common-gpu-nvidia
 
-    inputs.vscode-server.nixosModule
     inputs.agenix.nixosModules.default
 
     ./hardware-configuration.nix
@@ -74,8 +73,6 @@ in {
     # Use keys only. Remove if you want to SSH using password (not recommended)
     settings.PasswordAuthentication = false;
   };
-
-  services.vscode-server.enable = true;
 
   services.syncthing = {
     enable = true;
