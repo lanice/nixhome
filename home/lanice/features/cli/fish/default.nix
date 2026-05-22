@@ -39,6 +39,12 @@ in {
       bping = ''ssh boba "journalctl -f -u 'wan-ping-*' --all"'';
       bping_loss = ''ssh boba "journalctl --since '1 hour ago' -u 'wan-ping-*' --no-pager | grep 'no answer'"'';
 
+      # MX Master 4 scroll-mode toggle. See hosts/sencha/default.nix history for
+      # why this is manual: BT path needs hi-res scroll enabled, Bolt receiver
+      # needs it disabled, and Solaar persists a single per-device setting.
+      scroll_bt = ''solaar config "MX Master 4" hires-smooth-resolution true'';
+      scroll_dock = ''solaar config "MX Master 4" hires-smooth-resolution false'';
+
       nfu = "nix flake update";
       nrb = "nh os build";
       nrs = "nh os switch";
