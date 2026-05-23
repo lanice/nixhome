@@ -165,20 +165,4 @@ in {
       RandomizedDelaySec = "5m";
     };
   };
-
-  systemd.services.minecraft-atm10-2026-player-log = {
-    description = "Log Minecraft player join/leave events";
-    after = ["podman-minecraft-atm10-2026.service"];
-    wantedBy = ["multi-user.target"];
-    serviceConfig = {
-      Type = "simple";
-      Restart = "always";
-      RestartSec = "30";
-      ExecStart = pkgs.writeShellScript "minecraft-player-log" ''
-        ${pkgs.podman}/bin/podman logs -f --since 0s minecraft-atm10-2026 2>&1 \
-          | ${pkgs.gnugrep}/bin/grep --line-buffered -E "joined the game|left the game" \
-          >> /var/lib/minecraft/atm10_2026_players.log
-      '';
-    };
-  };
 }
