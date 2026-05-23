@@ -90,17 +90,17 @@
             };
           }
           {
-            Jellyseerr = let
+            Seerr = let
               url = "https://browse.lanice.dev";
             in {
               href = url;
-              icon = "jellyseerr";
+              icon = "seerr";
               siteMonitor = url;
               description = "Movie & TV Show Requests";
               widget = {
-                type = "jellyseerr";
+                type = "seerr";
                 url = url;
-                fields = ["pending" "approved" "available"];
+                fields = ["pending" "approved" "issues"];
                 key = "{{HOMEPAGE_VAR_JELLYSEERR_KEY}}";
               };
             };
@@ -181,28 +181,12 @@
               href = url;
               icon = "lidarr";
               siteMonitor = url;
-              description = "TV Shows";
+              description = "Music";
               widget = {
                 type = "lidarr";
                 url = url;
                 key = "{{HOMEPAGE_VAR_LIDARR_KEY}}";
                 fields = ["wanted" "queued" "artists"];
-              };
-            };
-          }
-          {
-            Bazarr = let
-              url = "https://bazarr.lanice.dev";
-            in {
-              href = url;
-              icon = "bazarr";
-              siteMonitor = url;
-              description = "Subtitles";
-              widget = {
-                type = "bazarr";
-                url = url;
-                key = "{{HOMEPAGE_VAR_BAZARR_KEY}}";
-                fields = ["missingEpisodes" "missingMovies"];
               };
             };
           }
@@ -223,6 +207,22 @@
             };
           }
           {
+            slskd = let
+              url = "https://slskd.lanice.dev";
+            in {
+              href = url;
+              icon = "slskd";
+              siteMonitor = url;
+              description = "Soulseek";
+              widget = {
+                type = "slskd";
+                url = url;
+                key = "{{HOMEPAGE_VAR_SLSKD_KEY}}";
+                fields = ["slskStatus" "downloads" "sharedFiles"];
+              };
+            };
+          }
+          {
             Prowlarr = let
               url = "https://prowlarr.lanice.dev";
             in {
@@ -230,6 +230,16 @@
               icon = "prowlarr";
               siteMonitor = url;
               description = "Indexer Aggregator";
+            };
+          }
+          {
+            Bazarr = let
+              url = "https://bazarr.lanice.dev";
+            in {
+              href = url;
+              icon = "bazarr";
+              siteMonitor = url;
+              description = "Subtitles";
             };
           }
           {
@@ -243,7 +253,27 @@
             };
           }
           {
-            "Tracearr" = let
+            Aurral = let
+              url = "https://aurral.lanice.dev";
+            in {
+              href = url;
+              icon = "aurral";
+              siteMonitor = url;
+              description = "Music Discovery";
+            };
+          }
+          {
+            Explo = let
+              url = "https://explo.lanice.dev";
+            in {
+              href = url;
+              icon = "explo";
+              siteMonitor = url;
+              description = "Music Discovery";
+            };
+          }
+          {
+            Tracearr = let
               url = "https://tracearr.lanice.dev";
             in {
               href = url;
