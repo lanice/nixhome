@@ -16,6 +16,7 @@
     ./paperless.nix
     ./peertube.nix
     ./sabnzbd.nix
+    ./scrutiny.nix
     ./soulseek.nix
     ./stirlingpdf.nix
     ./syncthing.nix

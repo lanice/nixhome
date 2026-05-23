@@ -345,6 +345,16 @@
             };
           }
           {
+            Scrutiny = let
+              url = "https://scrutiny.lanice.dev";
+            in {
+              href = url;
+              icon = "scrutiny";
+              siteMonitor = url;
+              description = "Hard Drive S.M.A.R.T Monitoring";
+            };
+          }
+          {
             "Adguard Home" = let
               url = "https://adguard.lanice.dev";
             in {

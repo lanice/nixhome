@@ -69,6 +69,7 @@ in {
       "aurral.lanice.dev" = mkVirtualHost 3002;
       "explo.lanice.dev" = mkVirtualHost 7288;
 
+      "scrutiny.lanice.dev" = mkVirtualHost 8082;
       "uptime.lanice.dev" = mkVirtualHost 3001;
       "adguard.lanice.dev" = mkVirtualHost 3003;
       "tracearr.lanice.dev" = mkVirtualHost 3000;
@@ -112,6 +113,7 @@ in {
       "aurral.lanice.dev" = mkAcmeCert;
       "explo.lanice.dev" = mkAcmeCert;
 
+      "scrutiny.lanice.dev" = mkAcmeCert;
       "uptime.lanice.dev" = mkAcmeCert;
       "adguard.lanice.dev" = mkAcmeCert;
       "tracearr.lanice.dev" = mkAcmeCert;
