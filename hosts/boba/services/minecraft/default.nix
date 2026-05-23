@@ -80,7 +80,7 @@ in {
       image = "itzg/minecraft-server:java21";
       volumes = [
         "${atm10_2026Dir}:/data"
-        "${toString ./patches}:/patches"
+        "${./patches}:/patches"
       ];
       ports = ["${toString port_public}:${toString port_container}"];
 
