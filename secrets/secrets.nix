@@ -20,4 +20,5 @@ in {
   "healthcheck-minecraft-uuid.age".publicKeys = [boba lanice-sencha];
   "peertube-secrets.age".publicKeys = [boba lanice-sencha];
   "peertube-db-password.age".publicKeys = [boba lanice-sencha];
+  "explo.age".publicKeys = [boba lanice-sencha];
 }

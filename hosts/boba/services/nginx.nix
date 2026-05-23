@@ -57,6 +57,7 @@ in {
       "sonarr.lanice.dev" = mkVirtualHost 8989;
       "radarr.lanice.dev" = mkVirtualHost 7878;
       "lidarr.lanice.dev" = mkVirtualHost 8686;
+      "lidarr-old.lanice.dev" = mkVirtualHost 8687;
       "bookshelf.lanice.dev" = mkVirtualHost 8787;
       "bazarr.lanice.dev" = mkVirtualHost 6767;
       "prowlarr.lanice.dev" = mkVirtualHost 9696;
@@ -65,6 +66,8 @@ in {
       "slskd.lanice.dev" = mkVirtualHost 5030;
 
       "audiobookrequest.lanice.dev" = mkVirtualHost 8799;
+      "aurral.lanice.dev" = mkVirtualHost 3002;
+      "explo.lanice.dev" = mkVirtualHost 7288;
 
       "uptime.lanice.dev" = mkVirtualHost 3001;
       "adguard.lanice.dev" = mkVirtualHost 3003;
@@ -97,6 +100,7 @@ in {
       "sonarr.lanice.dev" = mkAcmeCert;
       "radarr.lanice.dev" = mkAcmeCert;
       "lidarr.lanice.dev" = mkAcmeCert;
+      "lidarr-old.lanice.dev" = mkAcmeCert;
       "bookshelf.lanice.dev" = mkAcmeCert;
       "bazarr.lanice.dev" = mkAcmeCert;
       "prowlarr.lanice.dev" = mkAcmeCert;
@@ -105,6 +109,8 @@ in {
       "slskd.lanice.dev" = mkAcmeCert;
 
       "audiobookrequest.lanice.dev" = mkAcmeCert;
+      "aurral.lanice.dev" = mkAcmeCert;
+      "explo.lanice.dev" = mkAcmeCert;
 
       "uptime.lanice.dev" = mkAcmeCert;
       "adguard.lanice.dev" = mkAcmeCert;

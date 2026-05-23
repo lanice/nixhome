@@ -25,11 +25,20 @@ in {
     enable = true;
     user = user;
     group = mediaGroup;
+    # Pre-26.05 stateVersion defaults configFile to the runtime ini, which
+    # makes the module merge read the same file twice and silently drop the
+    # `settings` block. Explicitly null'ing it activates the generated
+    # public-settings.ini and lets `settings` take effect.
+    configFile = null;
     allowConfigWrite = true;
     secretFiles = [config.age.secrets.sabnzbd.path];
     settings = {
       misc = {
-        host_whitelist = "sabnzbd.lanice.dev";
+        # Bind on all interfaces so containers can reach via the podman bridge.
+        # LAN exposure is gated by the firewall (port 8080 only opened on podman0).
+        host = "0.0.0.0";
+        # Container traffic arrives with Host: host.containers.internal.
+        host_whitelist = "sabnzbd.lanice.dev,host.containers.internal";
         port = 8080;
         download_dir = "${downloadDir}/incomplete";
         complete_dir = "${downloadDir}/complete";
@@ -135,6 +144,15 @@ in {
         "bookshelf" = {
           name = "bookshelf";
           order = 6;
+          pp = "";
+          script = "Default";
+          dir = "";
+          newzbin = "";
+          priority = -100;
+        };
+        "music" = {
+          name = "music";
+          order = 7;
           pp = "";
           script = "Default";
           dir = "";

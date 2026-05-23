@@ -4,7 +4,9 @@
   imports = [
     ./adguard.nix
     ./audiobookrequest.nix
+    ./aurral.nix
     ./bookshelf.nix
+    ./explo.nix
     ./healthcheck.nix
     ./homepage.nix
     ./librechat.nix

@@ -99,6 +99,15 @@
     oci-containers.backend = "podman";
   };
 
+  # Allow containers to reach specific host-native services via the podman
+  # bridge. Add ports here as new container ↔ host integrations are wired up.
+  networking.firewall.interfaces."podman0".allowedTCPPorts = [
+    9696 # prowlarr — for lidarr container
+    8080 # sabnzbd - for lidarr container
+    5030 # slskd    — for lidarr, explo containers
+    4533 # navidrome — for explo container
+  ];
+
   # For Jellyfin transcode hardware acceleration
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
