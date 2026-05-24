@@ -70,7 +70,7 @@ in {
   };
 
   systemd.tmpfiles.rules = [
-    "d ${atm10_2026Dir} 0770 root users -"
+    "d ${atm10_2026Dir} 0775 root users -"
     "f ${motdFile} 0644 root root - MOTD=kek"
   ];
 
