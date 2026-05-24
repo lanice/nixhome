@@ -18,6 +18,7 @@
     ./sabnzbd.nix
     ./scrutiny.nix
     ./soulseek.nix
+    ./speedtest-tracker.nix
     ./stirlingpdf.nix
     ./syncthing.nix
     ./tracearr.nix

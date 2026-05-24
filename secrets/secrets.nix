@@ -21,4 +21,5 @@ in {
   "peertube-secrets.age".publicKeys = [boba lanice-sencha];
   "peertube-db-password.age".publicKeys = [boba lanice-sencha];
   "explo.age".publicKeys = [boba lanice-sencha];
+  "speedtest-tracker-app-key.age".publicKeys = [boba lanice-sencha];
 }

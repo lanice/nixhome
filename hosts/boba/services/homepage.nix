@@ -371,6 +371,23 @@
               };
             };
           }
+          {
+            "Speedtest" = let
+              url = "https://speedtest.lanice.dev";
+            in {
+              href = url;
+              icon = "speedtest-tracker";
+              siteMonitor = url;
+              description = "Speedtest Tracker";
+              widget = {
+                type = "speedtest";
+                url = url;
+                version = 2;
+                key = "{{HOMEPAGE_VAR_SPEEDTEST_KEY}}";
+                fields = ["download" "upload" "ping"];
+              };
+            };
+          }
         ];
       }
     ];
