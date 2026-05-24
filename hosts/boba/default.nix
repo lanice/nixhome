@@ -106,6 +106,7 @@
     8080 # sabnzbd - for lidarr container
     5030 # slskd    — for lidarr, explo containers
     4533 # navidrome — for explo container
+    4416 # bgutil-provider — for lidarr container (yt-dlp POT tokens)
   ];
 
   # For Jellyfin transcode hardware acceleration
