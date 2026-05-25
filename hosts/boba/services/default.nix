@@ -10,6 +10,7 @@
     ./healthcheck.nix
     ./homepage.nix
     ./librechat.nix
+    ./lidarr.nix
     ./media.nix
     ./nginx.nix
     ./oink.nix
