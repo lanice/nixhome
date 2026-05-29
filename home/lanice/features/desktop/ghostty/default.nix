@@ -7,6 +7,11 @@
   # COSMIC doesn't implement the required text-input protocol yet
   systemd.user.sessionVariables.GTK_IM_MODULE = "simple";
 
+  # Ghostty 1.3.0+ honors this GTK setting for middle-click primary-selection
+  # paste; it's unset by default here, so paste went silent. (COSMIC Terminal /
+  # Alacritty ignore the setting, which is why they still work.)
+  dconf.settings."org/gnome/desktop/interface".gtk-enable-primary-paste = true;
+
   programs.ghostty = {
     enable = true;
     settings = {
