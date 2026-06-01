@@ -22,7 +22,6 @@
     services.displayManager = {
       gdm.enable = true;
       gdm.autoSuspend = false;
-      gdm.wayland = true;
     };
 
     environment = {
