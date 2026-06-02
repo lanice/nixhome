@@ -23,6 +23,7 @@
         # "pkgname"
         "dotnet-sdk-6.0.428" # Sonarr
         "aspnetcore-runtime-6.0.36" # Sonarr
+        "electron-39.8.10" # bitwarden-desktop
       ];
     };
   };
