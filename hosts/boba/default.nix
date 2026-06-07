@@ -132,5 +132,21 @@
     ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", ATTR{idProduct}=="8179", ATTR{authorized}="0"
   '';
 
+  # atlantic (Aquantia AQC107) NIC workaround.
+  # The driver emits incorrect UDP checksums with TX checksum offload on,
+  # corrupting WireGuard/Tailscale packets — receivers drop ~2.5% as checksum
+  # errors (visible as climbing UdpInErrors on the peer), which collapses
+  # tunneled throughput to ~2 Mbit/s while raw LAN traffic is unaffected.
+  # Surfaced 2026-06-07 when a power outage forced the first reboot since the
+  # linux 7.0.9 → 7.0.10 bump. Disabling TX checksum offload makes the kernel
+  # compute correct checksums in software (negligible CPU at this 1 Gbit link);
+  # RX offload is left enabled. A .link unit is honored by udev regardless of
+  # whether systemd-networkd or NetworkManager manages the interface.
+  # Re-test removing it after future kernel bumps fix the driver upstream.
+  systemd.network.links."10-enp95s0-no-tx-csum-offload" = {
+    matchConfig.OriginalName = "enp95s0";
+    linkConfig.TransmitChecksumOffload = false;
+  };
+
   system.stateVersion = "25.05";
 }
