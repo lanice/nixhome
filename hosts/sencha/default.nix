@@ -18,7 +18,6 @@
 
     ./syncthing.nix
     ./nix-ld.nix
-    ./undock.nix
     ./gpu-stress-monitor.nix
 
     ../common/global
