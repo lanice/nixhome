@@ -19,6 +19,7 @@
     ./syncthing.nix
     ./nix-ld.nix
     ./gpu-stress-monitor.nix
+    ./sunshine.nix
 
     ../common/global
     ../common/tailscale.nix
