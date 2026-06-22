@@ -11,6 +11,30 @@
 
   librechatDir = "/var/lib/librechat";
   librechatNetwork = "librechat-network";
+
+  # LibreChat app config. Mounted read-only at /app/librechat.yaml.
+  # See https://www.librechat.ai/docs/configuration/librechat_yaml
+  librechatConfig = pkgs.writeText "librechat.yaml" ''
+    version: 1.2.8
+    cache: true
+
+    endpoints:
+      custom:
+        - name: "OpenRouter"
+          # ''${OPENROUTER_KEY} is interpolated from the container environment.
+          # Use OPENROUTER_KEY (not OPENROUTER_API_KEY) so OpenAI requests
+          # are not accidentally routed through OpenRouter.
+          apiKey: "''${OPENROUTER_KEY}"
+          baseURL: "https://openrouter.ai/api/v1"
+          models:
+            default: ["openrouter/free"]
+            fetch: true
+          titleConvo: true
+          titleModel: "openrouter/free"
+          # OpenRouter models use varied stop tokens.
+          dropParams: ["stop"]
+          modelDisplayLabel: "OpenRouter"
+  '';
 in {
   age.secrets.librechat-env.file = "${inputs.self}/secrets/librechat.env.age";
 
@@ -33,11 +57,13 @@ in {
         MEILI_HOST = "http://meilisearch:${meilisearchPort}";
         RAG_PORT = "${ragPort}";
         RAG_API_URL = "http://rag_api:${ragPort}";
+        CONFIG_PATH = "/app/librechat.yaml";
       };
       environmentFiles = [config.age.secrets.librechat-env.path];
       volumes = [
         "${librechatDir}/images:/app/client/public/images"
         "${librechatDir}/logs:/app/api/logs"
+        "${librechatConfig}:/app/librechat.yaml:ro"
       ];
       dependsOn = ["mongodb" "rag_api"];
 
