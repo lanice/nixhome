@@ -11,6 +11,10 @@ in {
     ./claude-usage
   ];
 
+  programs.fish.shellAbbrs = {
+    cld = "CLAUDE_CODE_NO_FLICKER=1 claude";
+  };
+
   home.packages = [
     llm-agents.ccusage
     claude-desktop
