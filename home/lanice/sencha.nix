@@ -28,7 +28,6 @@
     ./features/desktop/wezterm
     ./features/desktop/office
     ./features/desktop/matrix
-    ./features/desktop/kenku-fm
 
     ./features/desktop/cosmic
     ./features/desktop/gnome
@@ -47,6 +46,7 @@
     packages = let
       colmena-unstable = inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena;
       zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser;
+      kenku-fm = inputs.kenku-fm.packages.${pkgs.stdenv.hostPlatform.system}.kenku-fm-experimental;
     in
       with pkgs; [
         slack
@@ -93,6 +93,8 @@
         kooha
 
         ryubing
+
+        kenku-fm
       ];
 
     stateVersion = lib.mkDefault "23.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
