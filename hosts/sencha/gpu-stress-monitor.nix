@@ -59,6 +59,33 @@
           sleep 5
         done &
 
+        # 5s system-side telemetry: CPU package temp + both chassis fans, to
+        # tell a saturated heatsink (fans maxed, temps pinned) from a lazy fan
+        # curve (fans never ramp). hwmon numbering varies per boot, so resolve
+        # the coretemp/thinkpad devices by name once at startup.
+        cputemp=""
+        fandir=""
+        for h in /sys/class/hwmon/hwmon*; do
+          case "$(cat "$h/name" 2>/dev/null)" in
+            coretemp)
+              for l in "$h"/temp*_label; do
+                [ -e "$l" ] || continue
+                [ "$(cat "$l")" = "Package id 0" ] && cputemp="''${l%_label}_input"
+              done
+              ;;
+            thinkpad) fandir="$h" ;;
+          esac
+        done
+        echo "# time, cpu_pkg_C, fan1_rpm, fan2_rpm" >> system.log
+        while true; do
+          cpu="?"; f1="?"; f2="?"
+          [ -n "$cputemp" ] && cpu=$(( $(cat "$cputemp") / 1000 ))
+          [ -e "$fandir/fan1_input" ] && f1=$(cat "$fandir/fan1_input")
+          [ -e "$fandir/fan2_input" ] && f2=$(cat "$fandir/fan2_input")
+          echo "$(date "+%F %T"), $cpu, $f1, $f2" >> system.log
+          sleep 5
+        done &
+
         # Live kernel watch for the fatal signatures.
         stdbuf -oL journalctl -kf -n0 2>/dev/null | stdbuf -oL grep -iE "Xid|fallen off|NVRM|nvidia-modeset.*ERROR|drm.*ERROR" >> kernel.log 2>&1 &
 
