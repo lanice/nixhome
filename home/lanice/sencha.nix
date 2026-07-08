@@ -67,33 +67,20 @@
         awscli
 
         sxiv
-
         bitwarden-desktop
-
         xrandr
-
         python3
-
         terraform
-
         colmena-unstable
-
         prismlauncher
         seventeenlands
-
         zen-browser
-
         quickemu
-
         filezilla
-
         jellyfin-desktop
         feishin
-
         kooha
-
         ryubing
-
         kenku-fm
       ];
 
