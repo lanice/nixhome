@@ -62,6 +62,7 @@
         gimp
         xournalpp
         # gitbutler
+        lumen
 
         auth0-cli
         awscli
