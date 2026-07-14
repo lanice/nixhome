@@ -116,7 +116,7 @@ in {
   # security.polkit.enable = true;
   hardware = {
     graphics.enable = true;
-    graphics.extraPackages = [pkgs.vaapiVdpau];
+    graphics.extraPackages = [pkgs.libva-vdpau-driver];
 
     nvidia = {
       package = nvidiaPkg;
@@ -141,8 +141,6 @@ in {
   };
 
   services.xserver = {
-    displayManager.gdm.wayland = lib.mkForce false;
-
     videoDrivers = ["nvidia"];
     # displayManager.setupCommands = "${pkgs.xorg.xrandr}/bin/xrandr --output HDMI-0 --mode 2560x1600";
     displayManager.setupCommands = "xrandr --output HDMI-0 --mode 2560x1440";

@@ -1,39 +1,12 @@
 {
-  lib,
   buildPythonPackage,
   pkg-config,
-  fetchPypi,
   stdenv,
   fetchzip,
   setuptools,
-  writeText,
-  isPy27,
-  pytestCheckHook,
-  pytest-mpl,
   numpy,
-  scipy,
-  scikit-learn,
-  pandas,
-  transformers,
   opencv4,
-  lightgbm,
-  catboost,
-  pyspark,
-  sentencepiece,
-  tqdm,
-  slicer,
-  numba,
-  matplotlib,
-  nose,
-  lime,
-  cloudpickle,
-  ipython,
-  packaging,
   pillow,
-  requests,
-  regex,
-  importlib-metadata,
-  huggingface-hub,
   symlinkJoin,
 }: let
   # https://github.com/invoke-ai/InvokeAI/blob/34f8117241dc961e78929bda30ce3b4f19e707cf/docs/installation/060_INSTALL_PATCHMATCH.md
@@ -65,8 +38,8 @@ in
   buildPythonPackage {
     pname = "pypatchmatch";
     version = "129863937a8ab37f6bbcec327c994c0f932abdbc";
-
-    disabled = isPy27;
+    pyproject = true;
+    build-system = [setuptools];
 
     src = fetchzip {
       url = "https://github.com/invoke-ai/PyPatchMatch/archive/129863937a8ab37f6bbcec327c994c0f932abdbc.zip";
@@ -74,7 +47,6 @@ in
     };
 
     propagatedBuildInputs = [
-      setuptools
       numpy
       pillow
     ];

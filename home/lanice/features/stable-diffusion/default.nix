@@ -1,10 +1,6 @@
 # Dependencies to launch AUTOMATIC1111's stable-diffusion-webui, taken from: https://github.com/virchau13/automatic1111-webui-nix
 # plus some extra config and helper script
-{
-  pkgs,
-  config,
-  ...
-}: let
+{pkgs, ...}: let
   ldLibs = with pkgs; [
     stdenv.cc.cc.lib
     stdenv.cc
@@ -13,7 +9,7 @@
     libGL
     glib
   ];
-  pypatchmatch = pkgs.python311Packages.callPackage ./pypatchmatch {};
+  pypatchmatch = pkgs.python3Packages.callPackage ./pypatchmatch {};
   nixShellWithPyPatchMatch = pkgs.writeText "shell.nix" ''
     {pkgs ? import <nixpkgs> {}}: pkgs.mkShell { buildInputs = [${pypatchmatch}]; }
   '';
@@ -114,13 +110,13 @@ in {
       linuxPackages.nvidia_x11
       libGLU
       libGL
-      xorg.libXi
-      xorg.libXmu
+      libxi
+      libxmu
       freeglut
-      xorg.libXext
-      xorg.libX11
-      xorg.libXv
-      xorg.libXrandr
+      libxext
+      libx11
+      libxv
+      libxrandr
       zlib
       glib
       mariadb-embedded # for the Unprompted extension
