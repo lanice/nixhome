@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+_: {
   # qt = {
   #   enable = true;
   #   platformTheme.name = "gtk";

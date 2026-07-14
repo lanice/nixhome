@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
   programs.alacritty = {
     enable = true;
     settings = {

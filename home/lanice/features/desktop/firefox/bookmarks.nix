@@ -1,4 +1,4 @@
-{}: {
+_: {
   force = true;
   settings = [
     {

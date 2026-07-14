@@ -10,9 +10,7 @@
     (
       e: let
         dconfSlug =
-          if e ? dconfSlug
-          then e.dconfSlug
-          else e.package.extensionPortalSlug;
+          e.dconfSlug or e.package.extensionPortalSlug;
       in {
         "org/gnome/shell/extensions/${dconfSlug}" = e.dconfSettings;
       }
@@ -22,11 +20,7 @@
 in {
   config = lib.mkIf config.desktops.gnome.enable {
     home.packages = with pkgs;
-      [
-        # TODO: Wait for https://github.com/NixOS/nixpkgs/issues/368664 to be resolved
-        # gnome-extension-manager
-      ]
-      ++ builtins.map (e: e.package) extensions;
+      builtins.map (e: e.package) extensions;
 
     # Use dconf watch / to record changes
     # Use dconf2nix to get an idea of how to format the changes

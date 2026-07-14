@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+_: {
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {

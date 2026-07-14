@@ -24,7 +24,7 @@ in {
   services.slskd = {
     enable = true;
     domain = null;
-    user = user;
+    inherit user;
     group = mediaGroup;
     environmentFile = config.age.secrets.slskd.path;
     settings = {

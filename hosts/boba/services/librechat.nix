@@ -2,7 +2,6 @@
   inputs,
   config,
   pkgs,
-  lib,
   ...
 }: let
   librechatPort = "3080";
@@ -10,7 +9,6 @@
   meilisearchPort = "7700";
 
   librechatDir = "/var/lib/librechat";
-  librechatNetwork = "librechat-network";
 
   # LibreChat app config. Mounted read-only at /app/librechat.yaml.
   # See https://www.librechat.ai/docs/configuration/librechat_yaml

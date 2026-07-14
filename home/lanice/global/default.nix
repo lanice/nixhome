@@ -1,10 +1,4 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  config,
-  ...
-}: {
+{...}: {
   imports = [
     ./mimeapps.nix
     ./home.nix

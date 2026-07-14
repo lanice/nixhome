@@ -1,11 +1,10 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   configDir = "/var/lib/lidarr-nightly";
   mediaDir = "/data/media";
   ytDlp = pkgs.buildEnv {
     name = "lidarr-ytdlp";
-    paths = [ pkgs.yt-dlp pkgs.ffmpeg ];
-    pathsToLink = [ "/bin" ];
+    paths = [pkgs.yt-dlp pkgs.ffmpeg];
+    pathsToLink = ["/bin"];
   };
   bgutilPlugin = pkgs.fetchzip {
     url = "https://github.com/Brainicism/bgutil-ytdlp-pot-provider/releases/download/1.3.1/bgutil-ytdlp-pot-provider.zip";

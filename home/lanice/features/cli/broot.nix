@@ -1,4 +1,4 @@
-{lib, ...}: {
+_: {
   programs.broot = {
     enable = true;
 

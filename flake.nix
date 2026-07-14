@@ -73,6 +73,37 @@
     devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
     formatter = forAllSystems (pkgs: pkgs.alejandra);
 
+    checks = forAllSystems (pkgs: let
+      system = pkgs.stdenv.hostPlatform.system;
+      mkLintCheck = name: package: command:
+        pkgs.runCommand name {nativeBuildInputs = [package];} ''
+          ${command} ${self}
+          touch $out
+        '';
+      hostPolicy = let
+        boba = self.nixosConfigurations.boba.config;
+        unstable = self.nixosConfigurations.unstable.config;
+        sshIsTailscaleOnly = host:
+          !(builtins.elem 22 host.networking.firewall.allowedTCPPorts)
+          && builtins.elem "tailscale0" host.networking.firewall.trustedInterfaces;
+      in
+        assert sshIsTailscaleOnly boba;
+        assert sshIsTailscaleOnly unstable;
+        assert boba.services.jellyfin.openFirewall;
+        assert !boba.boot.zfs.forceImportRoot; true;
+    in {
+      formatting = mkLintCheck "alejandra-check" pkgs.alejandra "alejandra --check";
+      statix = mkLintCheck "statix-check" pkgs.statix "statix check --config ${self}";
+      deadnix = mkLintCheck "deadnix-check" pkgs.deadnix "deadnix --fail";
+
+      packages = pkgs.linkFarm "package-checks" (
+        pkgs.lib.mapAttrsToList (name: path: {inherit name path;}) self.packages.${system}
+      );
+
+      host-policy = assert hostPolicy;
+        pkgs.runCommand "host-policy-check" {} "touch $out";
+    });
+
     nixosConfigurations = {
       sencha = nixpkgs.lib.nixosSystem {
         modules = [./hosts/sencha];

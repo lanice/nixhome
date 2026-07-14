@@ -10,7 +10,7 @@
     accessibilitySupport = "off";
     detectIndentation = true;
     find.seedSearchStringFromSelection = "always";
-    fontFamily = fontFamily;
+    inherit fontFamily;
     fontLigatures = false;
     fontSize = 13;
     formatOnSave = true;

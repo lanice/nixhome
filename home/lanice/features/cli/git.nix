@@ -89,8 +89,8 @@ in {
       navigate = true;
       line-numbers = true;
       side-by-side = false;
-      syntax-theme = syntax-theme;
-      light = light;
+      inherit syntax-theme;
+      inherit light;
     };
   };
 

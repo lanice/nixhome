@@ -1,8 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   # fabric = inputs.fabric.packages.${pkgs.stdenv.hostPlatform.system}.fabric;
   fabric = pkgs.fabric-ai;
 in {

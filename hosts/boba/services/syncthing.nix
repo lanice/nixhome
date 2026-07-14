@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+_: let
   baseDir = "/home/syncthing";
 in {
   services.syncthing = {

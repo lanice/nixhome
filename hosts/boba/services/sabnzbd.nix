@@ -23,7 +23,7 @@ in {
 
   services.sabnzbd = {
     enable = true;
-    user = user;
+    inherit user;
     group = mediaGroup;
     # Pre-26.05 stateVersion defaults configFile to the runtime ini, which
     # makes the module merge read the same file twice and silently drop the
