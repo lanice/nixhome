@@ -21,6 +21,7 @@
     agenix.inputs.home-manager.follows = "home-manager";
 
     hardware.url = "github:nixos/nixos-hardware";
+    hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -37,20 +38,19 @@
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
-    fabric.url = "github:danielmiessler/fabric";
-    fabric.inputs.nixpkgs.follows = "nixpkgs";
-
     claude-desktop.url = "github:aaddrick/claude-desktop-debian";
     claude-desktop.inputs.nixpkgs.follows = "nixpkgs";
 
     llm-agents.url = "github:numtide/llm-agents.nix";
     catppuccin.url = "github:catppuccin/nix";
+    catppuccin.inputs.nixpkgs.follows = "nixpkgs";
 
     cosmic-manager.url = "github:HeitorAugustoLN/cosmic-manager";
     cosmic-manager.inputs.nixpkgs.follows = "nixpkgs";
     cosmic-manager.inputs.home-manager.follows = "home-manager";
 
     cosmic-applets-collection.url = "github:wingej0/ext-cosmic-applets-flake";
+    cosmic-applets-collection.inputs.nixpkgs.follows = "nixpkgs";
 
     solaar.url = "github:Svenum/Solaar-Flake/main";
     # solaar.inputs.nixpkgs.follows = "nixpkgs";
