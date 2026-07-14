@@ -47,6 +47,7 @@
       colmena-unstable = inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena;
       zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser;
       kenku-fm = inputs.kenku-fm.packages.${pkgs.stdenv.hostPlatform.system}.kenku-fm-experimental;
+      llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
     in
       with pkgs; [
         slack
@@ -63,6 +64,7 @@
         xournalpp
         # gitbutler
         lumen
+        llm-agents.omp
 
         auth0-cli
         awscli
