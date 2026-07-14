@@ -119,8 +119,6 @@
 
   services.tailscale.useRoutingFeatures = "client";
 
-  security.lsm = lib.mkForce []; # https://discourse.nixos.org/t/distrobox-selinux-oci-permission-error/64943/15
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
 }
