@@ -8,7 +8,7 @@
   services.homepage-dashboard = {
     enable = true;
     listenPort = 8081;
-    environmentFile = config.age.secrets.homepage.path;
+    environmentFiles = [config.age.secrets.homepage.path];
     settings = {
       title = "Homelab";
       color = "zinc";
@@ -77,7 +77,7 @@
               description = "Media Library";
               widget = {
                 type = "jellyfin";
-                url = url;
+                inherit url;
                 fields = ["pending" "approved" "available"];
                 enableBlocks = true;
                 enableNowPlaying = true;
@@ -99,7 +99,7 @@
               description = "Movie & TV Show Requests";
               widget = {
                 type = "seerr";
-                url = url;
+                inherit url;
                 fields = ["pending" "approved" "issues"];
                 key = "{{HOMEPAGE_VAR_JELLYSEERR_KEY}}";
               };
@@ -115,7 +115,7 @@
               description = "Audiobook Library";
               widget = {
                 type = "audiobookshelf";
-                url = url;
+                inherit url;
                 fields = ["books" "booksDuration"];
                 key = "{{HOMEPAGE_VAR_AUDIOBOOKSHELF_KEY}}";
               };
@@ -131,7 +131,7 @@
               description = "Music Streaming Server";
               widget = {
                 type = "navidrome";
-                url = url;
+                inherit url;
                 user = "leander";
                 token = "{{HOMEPAGE_VAR_NAVIDROME_TOKEN}}";
                 salt = "{{HOMEPAGE_VAR_NAVIDROME_SALT}}";
@@ -152,7 +152,7 @@
               description = "TV Shows";
               widget = {
                 type = "sonarr";
-                url = url;
+                inherit url;
                 key = "{{HOMEPAGE_VAR_SONARR_KEY}}";
                 fields = ["wanted" "queued" "series"];
               };
@@ -168,7 +168,7 @@
               description = "Movies";
               widget = {
                 type = "radarr";
-                url = url;
+                inherit url;
                 key = "{{HOMEPAGE_VAR_RADARR_KEY}}";
                 fields = ["wanted" "missing" "queued" "movies"];
               };
@@ -184,7 +184,7 @@
               description = "Music";
               widget = {
                 type = "lidarr";
-                url = url;
+                inherit url;
                 key = "{{HOMEPAGE_VAR_LIDARR_KEY}}";
                 fields = ["wanted" "queued" "artists"];
               };
@@ -200,7 +200,7 @@
               description = "Usenet Downloader";
               widget = {
                 type = "sabnzbd";
-                url = url;
+                inherit url;
                 key = "{{HOMEPAGE_VAR_SABNZBD_KEY}}";
                 fields = ["rate" "queue" "timeleft"];
               };
@@ -216,7 +216,7 @@
               description = "Soulseek";
               widget = {
                 type = "slskd";
-                url = url;
+                inherit url;
                 key = "{{HOMEPAGE_VAR_SLSKD_KEY}}";
                 fields = ["slskStatus" "downloads" "sharedFiles"];
               };
@@ -315,7 +315,7 @@
               description = "Server Monitoring";
               widget = {
                 type = "uptimekuma";
-                url = url;
+                inherit url;
                 slug = "unstable";
               };
             };
@@ -329,7 +329,7 @@
               description = "Server Monitoring";
               widget = {
                 type = "uptimekuma";
-                url = url;
+                inherit url;
                 slug = "boba";
               };
             };
@@ -364,7 +364,7 @@
               description = "Network-wide ads & trackers blocking DNS server";
               widget = {
                 type = "adguard";
-                url = url;
+                inherit url;
                 username = "admin";
                 password = "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}";
                 fields = ["queries" "blocked" "filtered" "latency"];
@@ -381,7 +381,7 @@
               description = "Speedtest Tracker";
               widget = {
                 type = "speedtest";
-                url = url;
+                inherit url;
                 version = 2;
                 key = "{{HOMEPAGE_VAR_SPEEDTEST_KEY}}";
                 fields = ["download" "upload" "ping"];

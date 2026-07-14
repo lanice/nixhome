@@ -37,15 +37,22 @@
     };
   };
 
-  config = lib.mkIf config.theme.catppuccin.enable {
-    catppuccin = {
-      enable = true;
-      flavor = config.theme.catppuccin.flavor;
-      accent = config.theme.catppuccin.accent;
+  config = lib.mkMerge [
+    {
+      catppuccin = {
+        enable = true;
+        autoEnable = config.theme.catppuccin.enable;
+      };
+    }
+    (lib.mkIf config.theme.catppuccin.enable {
+      catppuccin = {
+        flavor = config.theme.catppuccin.flavor;
+        accent = config.theme.catppuccin.accent;
 
-      firefox.enable = false;
-      fish.enable = false; # let fish use terminal colors so it works across SSH
-      vscode.profiles.default.enable = false;
-    };
-  };
+        firefox.enable = false;
+        fish.enable = false; # let fish use terminal colors so it works across SSH
+        vscode.profiles.default.enable = false;
+      };
+    })
+  ];
 }

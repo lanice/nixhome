@@ -1,6 +1,5 @@
 {
   inputs,
-  modulesPath,
   lib,
   pkgs,
   ...
@@ -32,6 +31,8 @@
     loader.systemd-boot.configurationLimit = 10;
     loader.timeout = 3;
     loader.efi.canTouchEfiVariables = true;
+
+    zfs.forceImportRoot = false;
 
     kernelParams = [
       "panic=1"
