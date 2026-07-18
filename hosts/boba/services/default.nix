@@ -18,6 +18,7 @@
     ./peertube.nix
     ./sabnzbd.nix
     ./scrutiny.nix
+    ./sillytavern.nix
     ./soulseek.nix
     ./speedtest-tracker.nix
     ./stirlingpdf.nix
