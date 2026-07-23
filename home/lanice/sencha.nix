@@ -69,7 +69,7 @@
         awscli
 
         sxiv
-        bitwarden-desktop
+        # bitwarden-desktop
         xrandr
         python3
         terraform
