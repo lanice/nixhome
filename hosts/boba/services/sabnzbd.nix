@@ -7,6 +7,26 @@
   mediaGroup = "multimedia";
   downloadDir = "/downloads/usenet";
 in {
+  # cheetah3 (a SABnzbd dependency) fails to build since the 2026-07-23 nixpkgs
+  # bump: upstream renamed the published distribution from `cheetah3` to `ct3`,
+  # so buildPythonPackage's metadata check looks up `cheetah3` via
+  # importlib.metadata and dies with `PackageNotFoundError: No package metadata
+  # was found for cheetah3`. The `Cheetah` module import itself is fine, and
+  # `dontCheckRuntimeDeps` does not disable this particular check — only
+  # aligning pname with the real dist name makes the lookup succeed.
+  # Remove once nixpkgs ships the upstream fix.
+  nixpkgs.overlays = [
+    (final: prev: {
+      python3 = prev.python3.override (old: {
+        packageOverrides =
+          final.lib.composeExtensions (old.packageOverrides or (_: _: {}))
+          (pyfinal: pyprev: {
+            cheetah3 = pyprev.cheetah3.overridePythonAttrs (_: {pname = "ct3";});
+          });
+      });
+    })
+  ];
+
   age.secrets.sabnzbd = {
     file = "${inputs.self}/secrets/sabnzbd.age";
     owner = user;
