@@ -145,7 +145,7 @@
           targetHost = "unstable"; # Replace with local network IP if setting up the first time
           targetUser = "lanice";
           buildOnTarget = true;
-          tags = ["homelab"];
+          tags = [];
         };
         imports = [./hosts/unstable];
         time.timeZone = "America/New_York";
