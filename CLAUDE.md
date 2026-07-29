@@ -2,19 +2,19 @@
 
 ## What This Is
 
-NixOS + home-manager flake managing 3 hosts: **sencha** (ThinkPad laptop, COSMIC desktop), **boba** (ZimaCube homelab server), **unstable** (desktop PC homelab server). Boba & unstable deployed via Colmena from sencha.
+NixOS + home-manager flake managing 4 hosts: **sencha** (ThinkPad laptop, COSMIC desktop), **boba** (ZimaCube homelab server), **unstable** (desktop PC homelab server), **taro** (ZimaBoard 2 homelab server). Boba, taro & unstable deployed via Colmena from sencha.
 
 ## Commands
 
 ```bash
 # Update flake inputs
-nix flake update                  # or: nfu
+nix flake update
 
 # Build (current host, no switch)
-nh os build                       # or: nrb
+nh os build
 
 # Build + switch (current host)
-nh os switch                      # or: snrs
+nh os switch
 
 # Format
 nix fmt
