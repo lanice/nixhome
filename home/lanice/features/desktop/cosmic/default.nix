@@ -8,6 +8,12 @@
 }: let
   mkRON = cosmicLib.cosmic.mkRON;
   importRON = cosmicLib.cosmic.importRON;
+  dockAutohideBehavior = {
+    wait_time = 500;
+    transition_time = 200;
+    handle_size = 2;
+    unhide_delay = 200;
+  };
 in {
   imports = [
     inputs.cosmic-manager.homeManagerModules.cosmic-manager
@@ -135,11 +141,8 @@ in {
           name = "Dock";
           anchor = mkRON "enum" "Bottom";
           anchor_gap = true;
-          autohide = mkRON "optional" {
-            wait_time = 500;
-            transition_time = 200;
-            handle_size = 2;
-          };
+          autohide = mkRON "optional" dockAutohideBehavior;
+          autohide_behavior = dockAutohideBehavior;
           expand_to_edges = false;
           opacity = 0.8;
           output = mkRON "enum" "All";
@@ -167,6 +170,10 @@ in {
           plugins_wings = mkRON "optional" null;
         }
       ];
+
+      # cosmic-manager still emits COSMIC's pre-1.4 optional autohide value.
+      configFile."com.system76.CosmicPanel.Dock".entries.autohide =
+        lib.mkForce (mkRON "raw" "OnOverlap");
 
       applets.app-list.settings = {
         enable_drag_source = true;
