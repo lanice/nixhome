@@ -14,6 +14,31 @@
     handle_size = 2;
     unhide_delay = 200;
   };
+  # COSMIC 1.3 moved frosted-glass settings to theme schema v2.
+  # cosmic-manager and its bundled cosmic-ctl still build the custom theme as
+  # schema v1, so write both the v2 builder inputs and active theme outputs.
+  frostedGlassConfig = (pkgs.formats.json {}).generate "cosmic-frosted-glass.json" {
+    "$schema" = "https://raw.githubusercontent.com/cosmic-utils/cosmic-ctl/refs/heads/main/schema.json";
+    operations =
+      lib.concatMap
+      (theme:
+        map
+        (componentSuffix: {
+          component = "com.system76.CosmicTheme.${theme}${componentSuffix}";
+          xdg_directory = "config";
+          version = 2;
+          operation = "write";
+          entries = {
+            frosted = "Medium";
+            frosted_applets = "true";
+            frosted_panel = "true";
+            frosted_system_interface = "true";
+            frosted_windows = "true";
+          };
+        })
+        [".Builder" ""])
+      ["Dark" "Light"];
+  };
 in {
   imports = [
     inputs.cosmic-manager.homeManagerModules.cosmic-manager
@@ -27,6 +52,10 @@ in {
       inputs.cosmic-applets-collection.packages.${pkgs.stdenv.hostPlatform.system}.minimon-applet
       # inputs.cosmic-applets-collection.packages.${pkgs.stdenv.hostPlatform.system}.cosmic-ext-applet-clipboard-manager
     ];
+
+    home.activation.configureCosmicFrostedGlass = lib.hm.dag.entryAfter ["configureCosmic"] ''
+      run ${lib.getExe config.programs.cosmic-ext-ctl.package} apply ${frostedGlassConfig}
+    '';
 
     # NOTE: If fullscreen causes black screen on external monitor, disable adaptive sync:
     # https://github.com/pop-os/cosmic-epoch/issues/2912
