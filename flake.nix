@@ -104,6 +104,11 @@
         modules = [./hosts/boba];
         specialArgs = {inherit inputs;};
       };
+      taro = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [./hosts/taro];
+        specialArgs = {inherit inputs;};
+      };
     };
 
     homeConfigurations."lanice@matcha" = inputs.home-manager.lib.homeManagerConfiguration {
@@ -143,6 +148,18 @@
           tags = ["homelab"];
         };
         imports = [./hosts/unstable];
+        time.timeZone = "America/New_York";
+      };
+
+      taro = {
+        deployment = {
+          targetHost = "taro"; # Replace with local network IP if setting up the first time
+          targetUser = "lanice";
+          # N150 with soldered RAM — let sencha build and push the closure.
+          buildOnTarget = false;
+          tags = ["homelab"];
+        };
+        imports = [./hosts/taro];
         time.timeZone = "America/New_York";
       };
     };
