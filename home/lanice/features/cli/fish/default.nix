@@ -31,6 +31,7 @@ in {
 
       sshu = "ssh -t unstable fish";
       sshb = "ssh -t boba";
+      ssht = "ssh -t taro";
 
       mc_rcon = "ssh -t boba sudo podman exec -i minecraft-atm10-2026 rcon-cli";
       mc_restart = "ssh boba sudo systemctl start minecraft-atm10-2026-restart.service";
