@@ -27,3 +27,15 @@ _Avoid_: redirect, CNAME
 **Dashboard**:
 The single homepage that links to services across the whole fleet. It is a curated view, not a generated index: it may link to services the homelab does not publish, and may omit ones it does.
 _Avoid_: homepage (ambiguous with the `homepage-dashboard` package), index, portal
+
+**Media estate**:
+The directories holding media, and media in transit, that the homelab's services hold in common. Membership is about being shared: a service's own state directory has a single writer and is not part of the estate, however much media flows through it.
+_Avoid_: storage, library (Jellyfin's and Navidrome's word for a collection), media pool
+
+**Share**:
+A directory in the media estate that more than one service reads or writes. Being touched by two services is what makes a directory a share; where it sits and who owns it are details.
+_Avoid_: mount, export, network share — nothing in the estate is served over the network
+
+**Media group**:
+The single group identity that makes every share co-accessible. Services reach a share by being in this group, not by owning it.
+_Avoid_: media user, permissions group

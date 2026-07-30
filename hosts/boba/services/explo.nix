@@ -3,13 +3,18 @@
   config,
   ...
 }: let
+  media = config.homelab.media;
   configDir = "/var/lib/explo";
-  mediaDir = "/data/media";
+  libraryDir = media.shares."music/explo".path;
 in {
   systemd.tmpfiles.rules = [
-    "d ${configDir} 0770 1000 992 - -"
-    "d ${mediaDir}/music/explo 0770 1000 992 - -"
+    "d ${configDir} 0770 ${media.owner} ${media.group} - -"
   ];
+
+  homelab.media.shares."music/explo" = {
+    under = "media";
+    inherit (media) owner;
+  };
 
   # Secrets required: SYSTEM_PASSWORD (Navidrome user password),
   # SLSKD_API_KEY, UI_USERNAME, UI_PASSWORD. Add an entry for explo.age
@@ -44,9 +49,9 @@ in {
     volumes = [
       "${configDir}:/opt/explo/config:rw"
       # Mounted at /data inside container — same root as Navidrome's library.
-      "${mediaDir}/music/explo:/data:rw"
+      "${libraryDir}:/data:rw"
       # slskd's download dir, exposed at the path explo expects.
-      "/downloads/soulseek/complete:/slskd:rw"
+      "${media.shares."soulseek/complete".path}:/slskd:rw"
     ];
     extraOptions = ["--pull=newer"];
   };

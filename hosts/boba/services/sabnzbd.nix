@@ -4,8 +4,8 @@
   ...
 }: let
   user = "sabnzbd";
-  mediaGroup = "multimedia";
-  downloadDir = "/downloads/usenet";
+  mediaGroup = config.homelab.media.group;
+  downloadDir = config.homelab.media.shares.usenet.path;
 in {
   # cheetah3 (a SABnzbd dependency) fails to build since the 2026-07-23 nixpkgs
   # bump: upstream renamed the published distribution from `cheetah3` to `ct3`,
@@ -34,12 +34,20 @@ in {
     mode = "770";
   };
 
-  systemd.tmpfiles.rules = [
-    "d ${downloadDir} 0770 ${user} ${mediaGroup} - -"
-    "d ${downloadDir}/incomplete 0770 ${user} ${mediaGroup} - -"
-    "d ${downloadDir}/complete 0770 ${user} ${mediaGroup} - -"
-    "d ${downloadDir}/complete/bookshelf 0770 ${user} ${mediaGroup} - -"
-  ];
+  homelab.media.shares = {
+    "usenet" = {
+      under = "downloads";
+      owner = user;
+    };
+    "usenet/incomplete" = {
+      under = "downloads";
+      owner = user;
+    };
+    "usenet/complete" = {
+      under = "downloads";
+      owner = user;
+    };
+  };
 
   services.sabnzbd = {
     enable = true;

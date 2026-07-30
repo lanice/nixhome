@@ -1,11 +1,16 @@
 {config, ...}: let
+  media = config.homelab.media;
   configDir = "/var/lib/aurral";
-  mediaDir = "/data/media";
+  downloadDir = media.shares."music/aurral".path;
 in {
   systemd.tmpfiles.rules = [
-    "d ${configDir} 0770 1000 992 - -"
-    "d ${mediaDir}/music/aurral 0770 1000 992 - -"
+    "d ${configDir} 0770 ${media.owner} ${media.group} - -"
   ];
+
+  homelab.media.shares."music/aurral" = {
+    under = "media";
+    inherit (media) owner;
+  };
 
   # Music request frontend (Jellyseerr-equivalent). Orchestrates Lidarr + slskd
   # and surfaces a request UI. Connections to Lidarr/Navidrome/slskd are wired
@@ -16,13 +21,13 @@ in {
     # Host port shifted off 3001 (uptime-kuma) — container still listens on 3001 internally.
     ports = ["${toString config.homelab.published.aurral.proxyTo}:3001"];
     environment = {
-      PUID = "1000";
-      PGID = "992";
+      PUID = toString media.uid;
+      PGID = toString media.gid;
       TZ = "America/New_York";
     };
     volumes = [
       "${configDir}:/app/backend/data:rw"
-      "${mediaDir}/music/aurral:/app/downloads:rw"
+      "${downloadDir}:/app/downloads:rw"
     ];
     extraOptions = ["--pull=newer"];
   };

@@ -9,6 +9,10 @@ in {
   users.mutableUsers = lib.mkDefault true;
   users.users.lanice = {
     isNormalUser = true;
+    # Pinned: the allocation lives only in /var/lib/nixos/uid-map, so a rebuild
+    # from scratch would not reproduce it, and it is not knowable at evaluation
+    # time while unset. All hosts already allocated 1000.
+    uid = 1000;
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [];
     extraGroups =

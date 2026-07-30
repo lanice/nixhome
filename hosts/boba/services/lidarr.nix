@@ -3,8 +3,8 @@
   pkgs,
   ...
 }: let
+  media = config.homelab.media;
   configDir = "/var/lib/lidarr-nightly";
-  mediaDir = "/data/media";
   ytDlp = pkgs.buildEnv {
     name = "lidarr-ytdlp";
     paths = [pkgs.yt-dlp pkgs.ffmpeg];
@@ -17,9 +17,13 @@
   };
 in {
   systemd.tmpfiles.rules = [
-    "d ${configDir} 0770 1000 992 - -"
-    "d /downloads/youtube 0770 1000 992 - -"
+    "d ${configDir} 0770 ${media.owner} ${media.group} - -"
   ];
+
+  homelab.media.shares.youtube = {
+    under = "downloads";
+    inherit (media) owner;
+  };
 
   # Lidarr's plugin system (required by Tubifarry for slskd, lyrics, etc.) lives
   # only in the "nightly" / plugins branch — nixpkgs ships the legacy v3 main
@@ -29,18 +33,18 @@ in {
     autoStart = true;
     ports = ["${toString config.homelab.published.lidarr.proxyTo}:8686"];
     environment = {
-      PUID = "1000";
-      PGID = "992"; # multimedia group
+      PUID = toString media.uid;
+      PGID = toString media.gid;
       TZ = "America/New_York";
       PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${ytDlp}/bin";
       YTDLP_PLUGIN_DIRS = "${bgutilPlugin}";
     };
     volumes = [
       "${configDir}:/config:rw"
-      "${mediaDir}/music:/music:rw"
-      "/downloads/soulseek:/downloads/soulseek:rw"
-      "/downloads/usenet:/downloads/usenet:rw"
-      "/downloads/youtube:/downloads/youtube:rw"
+      "${media.shares.music.path}:/music:rw"
+      "${media.shares.soulseek.path}:${media.shares.soulseek.path}:rw"
+      "${media.shares.usenet.path}:${media.shares.usenet.path}:rw"
+      "${media.shares.youtube.path}:${media.shares.youtube.path}:rw"
       "/nix/store:/nix/store:ro"
       "${ytDlp}/bin/ffmpeg:/usr/local/bin/ffmpeg:ro"
     ];

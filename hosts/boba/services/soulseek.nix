@@ -4,14 +4,23 @@
   ...
 }: let
   user = "slskd";
-  mediaGroup = "multimedia";
-  downloadDir = "/downloads/soulseek";
+  mediaGroup = config.homelab.media.group;
+  downloadDir = config.homelab.media.shares.soulseek.path;
 in {
-  systemd.tmpfiles.rules = [
-    "d ${downloadDir} 0770 ${user} ${mediaGroup} - -"
-    "d ${downloadDir}/incomplete 0770 ${user} ${mediaGroup} - -"
-    "d ${downloadDir}/complete 0770 ${user} ${mediaGroup} - -"
-  ];
+  homelab.media.shares = {
+    "soulseek" = {
+      under = "downloads";
+      owner = user;
+    };
+    "soulseek/incomplete" = {
+      under = "downloads";
+      owner = user;
+    };
+    "soulseek/complete" = {
+      under = "downloads";
+      owner = user;
+    };
+  };
 
   systemd.services.slskd.serviceConfig.UMask = "0002";
 

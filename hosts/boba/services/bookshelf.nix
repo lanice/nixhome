@@ -1,11 +1,20 @@
 {config, ...}: let
+  media = config.homelab.media;
   configDir = "/var/lib/bookshelf";
-  bookDir = "/data/media/books";
-  audiobookDir = "/data/media/audiobooks";
+  bookDir = media.shares.books.path;
+  audiobookDir = media.shares.audiobooks.path;
+  dropDir = media.shares."usenet/complete/bookshelf".path;
 in {
   systemd.tmpfiles.rules = [
-    "d ${configDir} 0770 1000 1000 - -"
+    "d ${configDir} 0770 ${media.owner} ${media.group} - -"
   ];
+
+  # Bookshelf's drop directory inside sabnzbd's completed tree. Declared here
+  # rather than by sabnzbd, which has no reason to know this service exists.
+  homelab.media.shares."usenet/complete/bookshelf" = {
+    under = "downloads";
+    owner = "sabnzbd";
+  };
 
   virtualisation.oci-containers.containers = {
     bookshelf = {
@@ -13,13 +22,13 @@ in {
       ports = ["${toString config.homelab.published.bookshelf.proxyTo}:8787"];
       autoStart = true;
       environment = {
-        "PUID" = "1000";
-        "PGID" = "992"; # group ID for multimedia group
+        "PUID" = toString media.uid;
+        "PGID" = toString media.gid;
         "TZ" = "America/New_York";
       };
       volumes = [
         "${configDir}:/config:rw"
-        "/downloads/usenet/complete/bookshelf:/downloads/usenet/complete/bookshelf:rw"
+        "${dropDir}:${dropDir}:rw"
         "${bookDir}:/books:rw"
         "${audiobookDir}:/audiobooks:rw"
       ];

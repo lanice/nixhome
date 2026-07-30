@@ -1,8 +1,9 @@
 {config, ...}: let
+  media = config.homelab.media;
   configDir = "/var/lib/audiobookrequest";
 in {
   systemd.tmpfiles.rules = [
-    "d ${configDir} 0770 1000 1000 - -"
+    "d ${configDir} 0770 ${media.owner} ${media.group} - -"
   ];
 
   virtualisation.oci-containers.containers = {
@@ -11,8 +12,8 @@ in {
       ports = ["${toString config.homelab.published.audiobookrequest.proxyTo}:8000"];
       autoStart = true;
       environment = {
-        "PUID" = "1000";
-        "PGID" = "992"; # group ID for multimedia group
+        "PUID" = toString media.uid;
+        "PGID" = toString media.gid;
         "TZ" = "America/New_York";
       };
       volumes = [

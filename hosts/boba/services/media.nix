@@ -1,21 +1,7 @@
 {config, ...}: let
-  mediaGroup = "multimedia";
-  mediaDir = "/data/media";
+  media = config.homelab.media;
+  mediaGroup = media.group;
 in {
-  users.users.lanice.extraGroups = [mediaGroup];
-
-  users.groups.${mediaGroup} = {};
-
-  systemd.tmpfiles.rules = [
-    "d ${mediaDir} 0770 root ${mediaGroup} - -"
-    "d ${mediaDir}/movies 0770 - ${mediaGroup} - -"
-    "d ${mediaDir}/shows 0770 - ${mediaGroup} - -"
-    "d ${mediaDir}/anime 0770 - ${mediaGroup} - -"
-    "d ${mediaDir}/books 0770 - ${mediaGroup} - -"
-    "d ${mediaDir}/music 0770 - ${mediaGroup} - -"
-    "d ${mediaDir}/audiobooks 0770 - ${mediaGroup} - -"
-  ];
-
   services.jellyfin = {
     enable = true;
     group = mediaGroup;
@@ -63,7 +49,7 @@ in {
     enable = true;
     group = mediaGroup;
     settings = {
-      MusicFolder = "${mediaDir}/music";
+      MusicFolder = media.shares.music.path;
       # Bind on all interfaces so containers can reach it via the podman bridge.
       # LAN exposure is gated by the firewall (port 4533 only opened on podman0).
       Address = "0.0.0.0";
