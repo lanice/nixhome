@@ -15,6 +15,8 @@
 
     ../common/global
     ../common/tailscale.nix
+
+    ./services
   ];
 
   networking = {

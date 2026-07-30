@@ -12,6 +12,7 @@
     ./aurral.nix
     ./bookshelf.nix
     ./explo.nix
+    ./forgejo-runner.nix
     ./healthcheck.nix
     ./homepage.nix
     ./librechat.nix

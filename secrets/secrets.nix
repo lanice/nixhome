@@ -4,8 +4,9 @@ let
 
   unstable = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGrqPXr49t/nDW8UtCjPVkmIW8qpHCnsYLjnZWYx7vED root@unstable";
   boba = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGMTGnHrTZedzzB7ssfr0yjPTrIpL4g19Yzi/46dVBdt root@boba";
+  taro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPO3sR4EqTuRnLGqntiXcwQrMboukQB/1kEUrz2yBdM7 root@taro";
 in {
-  "porkbun.age".publicKeys = [unstable boba lanice-unstable lanice-sencha];
+  "porkbun.age".publicKeys = [unstable boba taro lanice-unstable lanice-sencha];
   "porkbunApiKey.age".publicKeys = [boba lanice-sencha];
   "porkbunSecretApiKey.age".publicKeys = [boba lanice-sencha];
   "homepage.age".publicKeys = [boba lanice-sencha];
@@ -20,4 +21,6 @@ in {
   "peertube-db-password.age".publicKeys = [boba lanice-sencha];
   "explo.age".publicKeys = [boba lanice-sencha];
   "speedtest-tracker-app-key.age".publicKeys = [boba lanice-sencha];
+  "forgejo-runner-token.age".publicKeys = [boba lanice-sencha];
+  "forgejo-dump-key.age".publicKeys = [taro lanice-sencha];
 }
