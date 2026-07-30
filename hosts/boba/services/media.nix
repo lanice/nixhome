@@ -1,4 +1,4 @@
-let
+{config, ...}: let
   mediaGroup = "multimedia";
   mediaDir = "/data/media";
 in {
@@ -74,5 +74,37 @@ in {
     enable = true;
     group = mediaGroup;
     port = 8588;
+  };
+
+  homelab.published = {
+    jellyfin = {
+      subdomain = "watch";
+      aliases = ["jellyfin"];
+      # nixpkgs' jellyfin module exposes no port option — 8096 is fixed by the
+      # upstream package, so this is the only place it can be written.
+      proxyTo = 8096;
+    };
+
+    seerr = {
+      subdomain = "browse";
+      aliases = ["jellyseerr"];
+      proxyTo = config.services.seerr.port;
+    };
+
+    navidrome = {
+      subdomain = "music";
+      proxyTo = config.services.navidrome.settings.Port;
+    };
+
+    audiobookshelf.proxyTo = config.services.audiobookshelf.port;
+    sonarr.proxyTo = config.services.sonarr.settings.server.port;
+    radarr.proxyTo = config.services.radarr.settings.server.port;
+    bazarr.proxyTo = config.services.bazarr.listenPort;
+    prowlarr.proxyTo = config.services.prowlarr.settings.server.port;
+    # As with jellyfin, nixpkgs' nzbhydra2 module exposes no port option.
+    nzbhydra.proxyTo = 5076;
+
+    # Old v3 Lidarr, see the services.lidarr comment above.
+    lidarr-old.proxyTo = config.services.lidarr.settings.server.port;
   };
 }

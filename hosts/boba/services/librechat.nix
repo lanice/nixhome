@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  librechatPort = "3080";
+  librechatPort = toString config.homelab.published.librechat.proxyTo;
   ragPort = "8000";
   meilisearchPort = "7700";
 
@@ -109,5 +109,10 @@ in {
       environmentFiles = [config.age.secrets.librechat-env.path];
       dependsOn = ["vectordb"];
     };
+  };
+
+  homelab.published.librechat = {
+    subdomain = "chat";
+    proxyTo = 3080;
   };
 }

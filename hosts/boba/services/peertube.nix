@@ -1,10 +1,9 @@
 {
   inputs,
   config,
-  tailscaleIP,
   ...
 }: let
-  domain = "peertube.lanice.dev";
+  domain = config.homelab.published.peertube.fqdn;
   bulkDir = "/data/storage/peertube";
 in {
   age.secrets.peertube-secrets = {
@@ -57,22 +56,8 @@ in {
     configureNginx = true;
   };
 
-  # Override the auto-generated vhost to listen on the Tailscale IP, matching
-  # the pattern used by every other vhost on boba.
-  services.nginx.virtualHosts.${domain} = {
-    enableACME = true;
-    forceSSL = true;
-    listen = [
-      {
-        addr = tailscaleIP;
-        port = 443;
-        ssl = true;
-      }
-    ];
-  };
-
-  security.acme.certs.${domain} = {
-    dnsProvider = "porkbun";
-    webroot = null;
-  };
+  # configureNginx above generates ~20 location blocks (resumable uploads, HLS
+  # streaming paths, client assets), so publishing contributes only reachability
+  # and the certificate. Flip reachable to "public" here to federate.
+  homelab.published.peertube.proxyTo = null;
 }

@@ -20,7 +20,7 @@ in {
       python3 = prev.python3.override (old: {
         packageOverrides =
           final.lib.composeExtensions (old.packageOverrides or (_: _: {}))
-          (pyfinal: pyprev: {
+          (_: pyprev: {
             cheetah3 = pyprev.cheetah3.overridePythonAttrs (_: {pname = "ct3";});
           });
       });
@@ -58,7 +58,7 @@ in {
         # LAN exposure is gated by the firewall (port 8080 only opened on podman0).
         host = "0.0.0.0";
         # Container traffic arrives with Host: host.containers.internal.
-        host_whitelist = "sabnzbd.lanice.dev,host.containers.internal";
+        host_whitelist = "${config.homelab.published.sabnzbd.fqdn},host.containers.internal";
         port = 8080;
         download_dir = "${downloadDir}/incomplete";
         complete_dir = "${downloadDir}/complete";
@@ -182,4 +182,6 @@ in {
       };
     };
   };
+
+  homelab.published.sabnzbd.proxyTo = config.services.sabnzbd.settings.misc.port;
 }

@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   # LLM chat frontend for roleplay/character cards. State (characters, chats,
   # per-user settings) lives in /var/lib/SillyTavern/data.
   services.sillytavern = {
@@ -30,4 +34,9 @@
       rm /var/lib/SillyTavern/config.yaml
     fi
   '';
+
+  homelab.published.sillytavern = {
+    subdomain = "tavern";
+    proxyTo = config.services.sillytavern.port;
+  };
 }

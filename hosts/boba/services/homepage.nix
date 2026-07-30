@@ -2,7 +2,9 @@
   inputs,
   config,
   ...
-}: {
+}: let
+  pub = config.homelab.published;
+in {
   age.secrets.homepage.file = "${inputs.self}/secrets/homepage.age";
 
   services.homepage-dashboard = {
@@ -69,7 +71,7 @@
         Media = [
           {
             Jellyfin = let
-              url = "https://watch.lanice.dev";
+              url = pub.jellyfin.url;
             in {
               href = url;
               icon = "jellyfin";
@@ -91,7 +93,7 @@
           }
           {
             Seerr = let
-              url = "https://browse.lanice.dev";
+              url = pub.seerr.url;
             in {
               href = url;
               icon = "seerr";
@@ -107,7 +109,7 @@
           }
           {
             Audiobookshelf = let
-              url = "https://audiobookshelf.lanice.dev";
+              url = pub.audiobookshelf.url;
             in {
               href = url;
               icon = "audiobookshelf";
@@ -123,7 +125,7 @@
           }
           {
             Navidrome = let
-              url = "https://music.lanice.dev";
+              url = pub.navidrome.url;
             in {
               href = url;
               icon = "navidrome";
@@ -144,7 +146,7 @@
         "Media Management" = [
           {
             Sonarr = let
-              url = "https://sonarr.lanice.dev";
+              url = pub.sonarr.url;
             in {
               href = url;
               icon = "sonarr";
@@ -160,7 +162,7 @@
           }
           {
             Radarr = let
-              url = "https://radarr.lanice.dev";
+              url = pub.radarr.url;
             in {
               href = url;
               icon = "radarr";
@@ -176,7 +178,7 @@
           }
           {
             Lidarr = let
-              url = "https://lidarr.lanice.dev";
+              url = pub.lidarr.url;
             in {
               href = url;
               icon = "lidarr";
@@ -192,7 +194,7 @@
           }
           {
             SABnzbd = let
-              url = "https://sabnzbd.lanice.dev";
+              url = pub.sabnzbd.url;
             in {
               href = url;
               icon = "sabnzbd";
@@ -208,7 +210,7 @@
           }
           {
             slskd = let
-              url = "https://slskd.lanice.dev";
+              url = pub.slskd.url;
             in {
               href = url;
               icon = "slskd";
@@ -224,7 +226,7 @@
           }
           {
             Prowlarr = let
-              url = "https://prowlarr.lanice.dev";
+              url = pub.prowlarr.url;
             in {
               href = url;
               icon = "prowlarr";
@@ -234,7 +236,7 @@
           }
           {
             Bazarr = let
-              url = "https://bazarr.lanice.dev";
+              url = pub.bazarr.url;
             in {
               href = url;
               icon = "bazarr";
@@ -244,7 +246,7 @@
           }
           {
             "NZBHydra 2" = let
-              url = "https://nzbhydra.lanice.dev";
+              url = pub.nzbhydra.url;
             in {
               href = url;
               icon = "nzbhydra2";
@@ -254,7 +256,7 @@
           }
           {
             Aurral = let
-              url = "https://aurral.lanice.dev";
+              url = pub.aurral.url;
             in {
               href = url;
               icon = "aurral";
@@ -264,7 +266,7 @@
           }
           {
             Explo = let
-              url = "https://explo.lanice.dev";
+              url = pub.explo.url;
             in {
               href = url;
               icon = "explo";
@@ -274,7 +276,7 @@
           }
           {
             Tracearr = let
-              url = "https://tracearr.lanice.dev";
+              url = pub.tracearr.url;
             in {
               href = url;
               icon = "tracearr";
@@ -288,7 +290,7 @@
         Stuff = [
           {
             Paperless = let
-              url = "https://paperless.lanice.dev";
+              url = pub.paperless.url;
             in {
               href = url;
               icon = "sh-paperless-ngx";
@@ -298,7 +300,7 @@
           }
           {
             StirlingPDF = let
-              url = "https://pdf.lanice.dev";
+              url = pub.stirlingpdf.url;
             in {
               href = url;
               icon = "stirling-pdf";
@@ -308,7 +310,7 @@
           }
           {
             "Uptime-Kuma unstable" = let
-              url = "https://uptime.lanice.dev";
+              url = pub.uptime-kuma.url;
             in {
               href = url;
               icon = "uptime-kuma";
@@ -322,7 +324,7 @@
           }
           {
             "Uptime-Kuma boba" = let
-              url = "https://uptime.lanice.dev";
+              url = pub.uptime-kuma.url;
             in {
               href = url;
               icon = "uptime-kuma";
@@ -336,7 +338,7 @@
           }
           {
             LibreChat = let
-              url = "https://chat.lanice.dev";
+              url = pub.librechat.url;
             in {
               href = url;
               icon = "https://raw.githubusercontent.com/danny-avila/LibreChat/main/client/public/assets/logo.svg";
@@ -346,7 +348,7 @@
           }
           {
             Scrutiny = let
-              url = "https://scrutiny.lanice.dev";
+              url = pub.scrutiny.url;
             in {
               href = url;
               icon = "scrutiny";
@@ -356,7 +358,7 @@
           }
           {
             "Adguard Home" = let
-              url = "https://adguard.lanice.dev";
+              url = pub.adguard.url;
             in {
               href = url;
               icon = "adguard-home";
@@ -373,7 +375,7 @@
           }
           {
             "Speedtest" = let
-              url = "https://speedtest.lanice.dev";
+              url = pub.speedtest.url;
             in {
               href = url;
               icon = "speedtest-tracker";
@@ -413,5 +415,10 @@
         };
       }
     ];
+  };
+
+  homelab.published.dashboard = {
+    subdomain = "home";
+    proxyTo = config.services.homepage-dashboard.listenPort;
   };
 }

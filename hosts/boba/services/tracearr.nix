@@ -1,4 +1,4 @@
-let
+{config, ...}: let
   dataDir = "/var/lib/tracearr";
 in {
   systemd.tmpfiles.rules = [
@@ -15,7 +15,7 @@ in {
   virtualisation.oci-containers.containers.tracearr = {
     image = "ghcr.io/connorgallopo/tracearr:supervised";
     autoStart = true;
-    ports = ["3000:3000"];
+    ports = ["${toString config.homelab.published.tracearr.proxyTo}:3000"];
 
     environment = {
       TZ = "America/New_York";
@@ -35,4 +35,6 @@ in {
       "--ulimit=nofile=65536:65536"
     ];
   };
+
+  homelab.published.tracearr.proxyTo = 3000;
 }

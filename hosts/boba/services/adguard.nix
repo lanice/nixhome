@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   services.adguardhome = {
     enable = true;
     mutableSettings = true;
@@ -16,4 +16,6 @@
       };
     };
   };
+
+  homelab.published.adguard.proxyTo = config.services.adguardhome.port;
 }

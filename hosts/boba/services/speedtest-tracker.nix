@@ -1,10 +1,9 @@
 {
   inputs,
   config,
-  tailscaleIP,
   ...
 }: let
-  domain = "speedtest.lanice.dev";
+  domain = config.homelab.published.speedtest.fqdn;
 in {
   age.secrets.speedtest-tracker-app-key = {
     file = "${inputs.self}/secrets/speedtest-tracker-app-key.age";
@@ -27,20 +26,7 @@ in {
     };
   };
 
-  services.nginx.virtualHosts.${domain} = {
-    enableACME = true;
-    forceSSL = true;
-    listen = [
-      {
-        addr = tailscaleIP;
-        port = 443;
-        ssl = true;
-      }
-    ];
-  };
-
-  security.acme.certs.${domain} = {
-    dnsProvider = "porkbun";
-    webroot = null;
-  };
+  # enableNginx above generates the vhost body (php-fpm locations), so publishing
+  # contributes only reachability and the certificate.
+  homelab.published.speedtest.proxyTo = null;
 }

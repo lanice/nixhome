@@ -1,7 +1,12 @@
 {
-  _module.args.tailscaleIP = "100.124.185.117";
+  homelab = {
+    domain = "lanice.dev";
+    tailscaleIP = "100.124.185.117";
+  };
 
   imports = [
+    ../../common/publishing.nix
+
     ./adguard.nix
     ./audiobookrequest.nix
     ./aurral.nix
@@ -12,7 +17,6 @@
     ./librechat.nix
     ./lidarr.nix
     ./media.nix
-    ./nginx.nix
     ./oink.nix
     ./paperless.nix
     ./peertube.nix

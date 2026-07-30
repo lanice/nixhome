@@ -25,7 +25,7 @@ in {
   virtualisation.oci-containers.containers.explo = {
     image = "ghcr.io/lumepart/explo:latest";
     autoStart = true;
-    ports = ["7288:7288"];
+    ports = ["${toString config.homelab.published.explo.proxyTo}:7288"];
     environmentFiles = [config.age.secrets.explo.path];
     environment = {
       TZ = "America/New_York";
@@ -34,11 +34,11 @@ in {
       LISTENBRAINZ_USER = "lanice"; # ListenBrainz username
 
       EXPLO_SYSTEM = "subsonic";
-      SYSTEM_URL = "http://host.containers.internal:4533";
+      SYSTEM_URL = "http://host.containers.internal:${toString config.homelab.published.navidrome.proxyTo}";
       SYSTEM_USERNAME = "leander"; # Navidrome username
 
       DOWNLOAD_SERVICES = "slskd";
-      SLSKD_URL = "http://host.containers.internal:5030";
+      SLSKD_URL = "http://host.containers.internal:${toString config.homelab.published.slskd.proxyTo}";
       MIGRATE_DOWNLOADS = "true";
     };
     volumes = [
@@ -50,4 +50,6 @@ in {
     ];
     extraOptions = ["--pull=newer"];
   };
+
+  homelab.published.explo.proxyTo = 7288;
 }

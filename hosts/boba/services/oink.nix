@@ -12,9 +12,11 @@
     apiKeyFile = config.age.secrets.porkbunApiKey.path;
     secretApiKeyFile = config.age.secrets.porkbunSecretApiKey.path;
 
+    # Minecraft is reached over a raw public port, not published as a subdomain,
+    # so it needs its own DNS record here rather than an nginx vhost.
     domains = [
       {
-        domain = "lanice.dev";
+        domain = config.homelab.domain;
         subdomain = "minecraft";
       }
     ];

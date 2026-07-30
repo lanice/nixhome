@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   configDir = "/var/lib/lidarr-nightly";
   mediaDir = "/data/media";
   ytDlp = pkgs.buildEnv {
@@ -23,7 +27,7 @@ in {
   virtualisation.oci-containers.containers.lidarr = {
     image = "lscr.io/linuxserver/lidarr:nightly";
     autoStart = true;
-    ports = ["8686:8686"];
+    ports = ["${toString config.homelab.published.lidarr.proxyTo}:8686"];
     environment = {
       PUID = "1000";
       PGID = "992"; # multimedia group
@@ -48,4 +52,6 @@ in {
     ports = ["4416:4416"];
     extraOptions = ["--pull=newer"];
   };
+
+  homelab.published.lidarr.proxyTo = 8686;
 }

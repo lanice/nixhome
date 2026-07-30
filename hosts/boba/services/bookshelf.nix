@@ -1,4 +1,4 @@
-let
+{config, ...}: let
   configDir = "/var/lib/bookshelf";
   bookDir = "/data/media/books";
   audiobookDir = "/data/media/audiobooks";
@@ -10,7 +10,7 @@ in {
   virtualisation.oci-containers.containers = {
     bookshelf = {
       image = "ghcr.io/pennydreadful/bookshelf:hardcover";
-      ports = ["8787:8787"];
+      ports = ["${toString config.homelab.published.bookshelf.proxyTo}:8787"];
       autoStart = true;
       environment = {
         "PUID" = "1000";
@@ -26,4 +26,6 @@ in {
       networks = ["host"];
     };
   };
+
+  homelab.published.bookshelf.proxyTo = 8787;
 }

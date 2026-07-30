@@ -1,4 +1,4 @@
-let
+{config, ...}: let
   configDir = "/var/lib/aurral";
   mediaDir = "/data/media";
 in {
@@ -14,7 +14,7 @@ in {
     image = "ghcr.io/lklynet/aurral:latest";
     autoStart = true;
     # Host port shifted off 3001 (uptime-kuma) — container still listens on 3001 internally.
-    ports = ["3002:3001"];
+    ports = ["${toString config.homelab.published.aurral.proxyTo}:3001"];
     environment = {
       PUID = "1000";
       PGID = "992";
@@ -26,4 +26,6 @@ in {
     ];
     extraOptions = ["--pull=newer"];
   };
+
+  homelab.published.aurral.proxyTo = 3002;
 }

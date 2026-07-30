@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   services.paperless = {
     enable = true;
     address = "0.0.0.0";
@@ -12,7 +12,9 @@
     settings = {
       PAPERLESS_DEBUG = false;
       PAPERLESS_OCR_LANGUAGE = "eng+deu";
-      PAPERLESS_CSRF_TRUSTED_ORIGINS = "https://paperless.lanice.dev";
+      PAPERLESS_CSRF_TRUSTED_ORIGINS = config.homelab.published.paperless.url;
     };
   };
+
+  homelab.published.paperless.proxyTo = config.services.paperless.port;
 }

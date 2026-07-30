@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   services.scrutiny = {
     enable = true;
     settings.web = {
@@ -13,4 +13,6 @@
       schedule = "*-*-* 06:00:00";
     };
   };
+
+  homelab.published.scrutiny.proxyTo = config.services.scrutiny.settings.web.listen.port;
 }

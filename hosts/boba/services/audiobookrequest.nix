@@ -1,4 +1,4 @@
-let
+{config, ...}: let
   configDir = "/var/lib/audiobookrequest";
 in {
   systemd.tmpfiles.rules = [
@@ -8,7 +8,7 @@ in {
   virtualisation.oci-containers.containers = {
     audiobookrequest = {
       image = "markbeep/audiobookrequest:latest";
-      ports = ["8799:8000"];
+      ports = ["${toString config.homelab.published.audiobookrequest.proxyTo}:8000"];
       autoStart = true;
       environment = {
         "PUID" = "1000";
@@ -20,4 +20,6 @@ in {
       ];
     };
   };
+
+  homelab.published.audiobookrequest.proxyTo = 8799;
 }

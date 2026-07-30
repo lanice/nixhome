@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   lib,
   pkgs,
   ...
@@ -102,12 +103,13 @@
 
   # Allow containers to reach specific host-native services via the podman
   # bridge. Add ports here as new container ↔ host integrations are wired up.
-  networking.firewall.interfaces."podman0".allowedTCPPorts = [
-    9696 # prowlarr — for lidarr container
-    8080 # sabnzbd - for lidarr container
-    5030 # slskd    — for lidarr, explo containers
-    4533 # navidrome — for explo container
-    4416 # bgutil-provider — for lidarr container (yt-dlp POT tokens)
+  # Ports come from the publishing registry so they cannot drift from the vhosts.
+  networking.firewall.interfaces."podman0".allowedTCPPorts = with config.homelab.published; [
+    prowlarr.proxyTo # for lidarr container
+    sabnzbd.proxyTo # for lidarr container
+    slskd.proxyTo # for lidarr, explo containers
+    navidrome.proxyTo # for explo container
+    4416 # bgutil-provider — for lidarr container (yt-dlp POT tokens); not published
   ];
 
   # For Jellyfin transcode hardware acceleration

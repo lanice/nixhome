@@ -37,4 +37,6 @@ in {
       shares.directories = [];
     };
   };
+
+  homelab.published.slskd.proxyTo = config.services.slskd.settings.web.port;
 }
