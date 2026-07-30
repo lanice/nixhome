@@ -33,7 +33,10 @@ in {
         downloads = "${downloadDir}/complete";
         incomplete = "${downloadDir}/incomplete";
       };
-      permissions.file.mode = "664";
+      # 664 so lidarr/explo can write completed downloads via the multimedia
+      # group. slskd 0.25 moved these keys out of a top-level `permissions`
+      # block (slskd/slskd#1756) — 0.26 refuses to start on the old path.
+      transfers.download.destination.permissions.mode = "664";
       shares.directories = [];
     };
   };
