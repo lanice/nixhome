@@ -10,7 +10,7 @@
     ./adguard.nix
     ./audiobookrequest.nix
     ./aurral.nix
-    ./bookshelf.nix
+    ./bookorbit
     ./explo.nix
     ./forgejo-runner.nix
     ./healthcheck.nix

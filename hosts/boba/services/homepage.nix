@@ -29,7 +29,7 @@ in {
         {
           Media = {
             style = "row";
-            columns = 4;
+            columns = 5;
           };
         }
         {
@@ -121,6 +121,16 @@ in {
                 fields = ["books" "booksDuration"];
                 key = "{{HOMEPAGE_VAR_AUDIOBOOKSHELF_KEY}}";
               };
+            };
+          }
+          {
+            BookOrbit = let
+              url = pub.bookorbit.url;
+            in {
+              href = url;
+              icon = "bookorbit";
+              siteMonitor = url;
+              description = "Book Library & Reader";
             };
           }
           {

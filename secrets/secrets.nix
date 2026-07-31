@@ -14,6 +14,7 @@ in {
   "curseforge.age".publicKeys = [boba lanice-sencha];
   "mailBobaPassword.age".publicKeys = [boba lanice-sencha];
   "sabnzbd.age".publicKeys = [boba lanice-sencha];
+  "bookorbit.age".publicKeys = [boba lanice-sencha];
   "slskd.age".publicKeys = [boba lanice-sencha];
   "healthcheck-uuid.age".publicKeys = [boba lanice-sencha];
   "healthcheck-minecraft-uuid.age".publicKeys = [boba lanice-sencha];

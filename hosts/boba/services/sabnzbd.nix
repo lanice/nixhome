@@ -169,15 +169,6 @@ in {
           newzbin = "";
           priority = -100;
         };
-        "bookshelf" = {
-          name = "bookshelf";
-          order = 6;
-          pp = "";
-          script = "Default";
-          dir = "";
-          newzbin = "";
-          priority = -100;
-        };
         "music" = {
           name = "music";
           order = 7;
