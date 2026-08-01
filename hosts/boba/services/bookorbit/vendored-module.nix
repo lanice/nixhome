@@ -1,19 +1,18 @@
 # Vendored from nixpkgs pull request 531375 (nixos/bookorbit: init module),
-# unmerged as of 2026-07-31. Deliberately not a URL or repo#number reference:
-# either would surface this public repo on the PR's GitHub timeline.
-# Delete this file (and pkgs/bookorbit/) once the PR lands, switching to the
-# upstream module. Two deliberate deviations from the PR, both for the media
-# estate (see ./default.nix):
+# unmerged, last synced with the PR 2026-07-31. Deliberately not a URL or
+# repo#number reference: either would surface this public repo on the PR's
+# GitHub timeline. Delete this file (and pkgs/bookorbit/) once the PR lands,
+# switching to the upstream module. Two deliberate deviations from the PR:
 #
-#   1. `bookPath` is gone. Upstream it only creates the library directory via a
-#      tmpfiles rule chowning it 0750 bookorbit:bookorbit — here the estate's
-#      share declaration owns the books directory and its permissions.
-#   2. `package` defaults to this flake's vendored package instead of
+#   1. `package` defaults to this flake's vendored package instead of
 #      `pkgs.bookorbit`, which does not exist upstream yet.
-#   3. bookorbit-migrate orders after postgresql-setup.service, not just
+#   2. bookorbit-migrate orders after postgresql-setup.service, not just
 #      postgresql.service — upstream races ensureUsers/ensureDatabases on
 #      first activation and fails with a nonexistent role (seen live on
 #      boba's first deploy). Worth reporting on the PR.
+#
+# (An earlier deviation — dropping the `bookPath` option in favor of the
+# estate's share declaration — was adopted upstream on 2026-07-31.)
 {
   lib,
   config,

@@ -1,6 +1,7 @@
 # Vendored from nixpkgs pull request 531375 (bookorbit: init at 2.3.0),
-# unmerged as of 2026-07-31. Deliberately not a URL or repo#number reference:
-# either would surface this public repo on the PR's GitHub timeline.
+# unmerged, last synced with the PR 2026-07-31. Deliberately not a URL or
+# repo#number reference: either would surface this public repo on the PR's
+# GitHub timeline.
 # Delete this package (and hosts/boba/services/bookorbit/vendored-module.nix)
 # once the PR lands and pkgs.bookorbit exists upstream.
 {
@@ -55,16 +56,6 @@ in
       ffmpeg
       makeWrapper
     ];
-
-    # This workaround turns the `pnpmWorkspaces` array into a space-separated
-    # string. This format is supported by both `pnpmConfigHook` and `pnpmBuildHook`.
-    # TODO: remove this when`pnpmConfigHook` supports `___structuredAttrs = true;`
-    # (nixpkgs issue 528547 — plain text to avoid a GitHub backlink)
-    preConfigure = ''
-      __pnpmWorkspaces="''${pnpmWorkspaces[@]}"
-      unset pnpmWorkspaces
-      declare -g pnpmWorkspaces="$__pnpmWorkspaces"
-    '';
 
     postPatch =
       ''
