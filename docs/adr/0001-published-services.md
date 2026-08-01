@@ -59,3 +59,7 @@ lists it, where previously it was spread across listen addresses and
 
 Aliases remain separate certificates rather than one certificate with SANs, so
 that migrating 28 domains caused zero ACME re-issuance.
+
+> Note (2026-08-01): aliases were removed entirely — the two that existed
+> (jellyfin, jellyseerr) were never used in practice. The paragraph above is
+> historical.

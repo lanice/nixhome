@@ -31,12 +31,13 @@
         description = "Canonical subdomain this service answers on.";
       };
 
-      aliases = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [];
+      domain = lib.mkOption {
+        type = lib.types.str;
+        default = cfg.defaultDomain;
+        defaultText = "config.homelab.defaultDomain";
         description = ''
-          Additional subdomains resolving to the same service. Each gets its own
-          vhost and its own certificate.
+          Base domain this service is published under. Must be a zone in the
+          same porkbun account, or the DNS-01 challenge cannot issue its cert.
         '';
       };
 
@@ -76,15 +77,16 @@
     };
 
     config = {
-      fqdn = "${config.subdomain}.${cfg.domain}";
+      fqdn = "${config.subdomain}.${config.domain}";
       url = "https://${config.fqdn}";
     };
   };
 in {
   options.homelab = {
-    domain = lib.mkOption {
+    defaultDomain = lib.mkOption {
       type = lib.types.str;
-      description = "Base domain that published services are subdomains of.";
+      default = "lanice.dev";
+      description = "Base domain services are published under unless they set their own.";
     };
 
     tailscaleIP = lib.mkOption {
@@ -141,32 +143,20 @@ in {
         };
       };
 
-    domainsOf = svc: [svc.fqdn] ++ map (alias: "${alias}.${cfg.domain}") svc.aliases;
-
-    allDomains = lib.concatMap domainsOf services;
+    allDomains = map (svc: svc.fqdn) services;
 
     proxiedPorts = lib.filter (port: port != null) (map (svc: svc.proxyTo) services);
   in {
-    assertions =
-      [
-        {
-          assertion = duplicates allDomains == [];
-          message = "homelab.published: domain declared more than once: ${lib.concatStringsSep ", " (duplicates allDomains)}";
-        }
-        {
-          assertion = duplicates proxiedPorts == [];
-          message = "homelab.published: proxyTo port used by more than one service: ${lib.concatStringsSep ", " (map toString (duplicates proxiedPorts))}";
-        }
-      ]
-      ++ lib.mapAttrsToList (name: svc: {
-        assertion = svc.proxyTo != null || svc.aliases == [];
-        message = ''
-          homelab.published.${name} has proxyTo = null, so its own module owns the
-          vhost body. An alias vhost would inherit no locations and serve nothing —
-          drop the aliases, or give it a proxyTo.
-        '';
-      })
-      cfg.published;
+    assertions = [
+      {
+        assertion = duplicates allDomains == [];
+        message = "homelab.published: domain declared more than once: ${lib.concatStringsSep ", " (duplicates allDomains)}";
+      }
+      {
+        assertion = duplicates proxiedPorts == [];
+        message = "homelab.published: proxyTo port used by more than one service: ${lib.concatStringsSep ", " (map toString (duplicates proxiedPorts))}";
+      }
+    ];
 
     age.secrets.porkbun.file = "${inputs.self}/secrets/porkbun.age";
 
@@ -195,9 +185,7 @@ in {
         proxy_headers_hash_bucket_size 128;
       '';
 
-      virtualHosts = lib.listToAttrs (lib.concatMap (svc:
-        map (domain: lib.nameValuePair domain (mkVirtualHost svc)) (domainsOf svc))
-      services);
+      virtualHosts = lib.listToAttrs (map (svc: lib.nameValuePair svc.fqdn (mkVirtualHost svc)) services);
     };
 
     security.acme = {

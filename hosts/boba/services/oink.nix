@@ -16,7 +16,7 @@
     # so it needs its own DNS record here rather than an nginx vhost.
     domains = [
       {
-        domain = config.homelab.domain;
+        domain = config.homelab.defaultDomain;
         subdomain = "minecraft";
       }
     ];

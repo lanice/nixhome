@@ -20,10 +20,6 @@ _Avoid_: exposed service, proxied service, vhost
 Whether a published service answers only on the tailnet, or also from the public internet. Every published service has one or the other; tailnet-only is the default and the overwhelming majority.
 _Avoid_: visibility, exposure, scope
 
-**Alias**:
-An additional subdomain that resolves to an already-published service. The service keeps one canonical subdomain; aliases are alternative names for the same thing.
-_Avoid_: redirect, CNAME
-
 **Dashboard**:
 The single homepage that links to services across the whole fleet. It is a curated view, not a generated index: it may link to services the homelab does not publish, and may omit ones it does.
 _Avoid_: homepage (ambiguous with the `homepage-dashboard` package), index, portal

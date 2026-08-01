@@ -65,7 +65,6 @@ in {
   homelab.published = {
     jellyfin = {
       subdomain = "watch";
-      aliases = ["jellyfin"];
       # nixpkgs' jellyfin module exposes no port option — 8096 is fixed by the
       # upstream package, so this is the only place it can be written.
       proxyTo = 8096;
@@ -73,7 +72,6 @@ in {
 
     seerr = {
       subdomain = "browse";
-      aliases = ["jellyseerr"];
       proxyTo = config.services.seerr.port;
     };
 
