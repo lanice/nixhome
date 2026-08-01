@@ -6,9 +6,8 @@
 }: let
   pub = config.homelab.published.git;
 
-  # boba's tailnet address (homelab.tailscaleIP in hosts/boba/services/default.nix).
-  # Referenced by literal because each host evaluates its own homelab registry.
-  bobaTailscaleIP = "100.124.185.117";
+  # Each host evaluates only its own config; cross-host facts come from the fleet registry.
+  boba = (import ../../fleet.nix).hosts.boba;
 in {
   services.forgejo = {
     enable = true;
@@ -59,7 +58,7 @@ in {
     mode = "400";
   };
 
-  programs.ssh.knownHosts.${bobaTailscaleIP}.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGMTGnHrTZedzzB7ssfr0yjPTrIpL4g19Yzi/46dVBdt";
+  programs.ssh.knownHosts.${boba.tailscaleIP}.publicKey = boba.hostKey;
 
   # taro is a single unbacked-up SSD; boba's raidz1 pool holds the durable
   # copy (landing side in hosts/boba/services/forgejo-runner.nix). Runs 44
@@ -70,7 +69,7 @@ in {
       Type = "oneshot";
       User = config.services.forgejo.user;
       Group = config.services.forgejo.group;
-      ExecStart = ''${pkgs.rsync}/bin/rsync -a --delete -e "${pkgs.openssh}/bin/ssh -i ${config.age.secrets.forgejo-dump-key.path}" ${config.services.forgejo.dump.backupDir}/ forgejo-dumps@${bobaTailscaleIP}:/data/storage/forgejo-dumps/'';
+      ExecStart = ''${pkgs.rsync}/bin/rsync -a --delete -e "${pkgs.openssh}/bin/ssh -i ${config.age.secrets.forgejo-dump-key.path}" ${config.services.forgejo.dump.backupDir}/ forgejo-dumps@${boba.tailscaleIP}:/data/storage/forgejo-dumps/'';
     };
   };
 

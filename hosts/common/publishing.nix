@@ -12,6 +12,8 @@
 }: let
   cfg = config.homelab;
 
+  fleet = import ../fleet.nix;
+
   acmeEmail = "leanderneiss@gmail.com";
 
   # Values repeated in an assertion message are more useful than a bare count.
@@ -87,6 +89,8 @@ in {
 
     tailscaleIP = lib.mkOption {
       type = lib.types.str;
+      default = fleet.hosts.${config.networking.hostName}.tailscaleIP;
+      defaultText = "this host's fleet registry entry";
       description = "This host's tailnet address. Tailnet-reachable services bind here.";
     };
 

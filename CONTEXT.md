@@ -39,3 +39,11 @@ _Avoid_: mount, export, network share — nothing in the estate is served over t
 **Media group**:
 The single group identity that makes every share co-accessible. Services reach a share by being in this group, not by owning it.
 _Avoid_: media user, permissions group
+
+**Fleet**:
+Every host this flake manages — the workstations and the homelab together. The fleet is the widest circle; the homelab is a subset of it.
+_Avoid_: all hosts, machines, infra
+
+**Fleet registry**:
+The one record of fleet identity facts: each host's tailnet address and SSH host key, and each person's or device's public key. A fact belongs here once more than nothing consumes it; everything that reaches or trusts a host reads the registry instead of restating the fact. Entries may be sparse — a host appears with only the facts something actually uses.
+_Avoid_: inventory (Ansible's word), address book, hosts file

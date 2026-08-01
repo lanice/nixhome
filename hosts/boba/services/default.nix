@@ -1,8 +1,5 @@
 {
-  homelab = {
-    domain = "lanice.dev";
-    tailscaleIP = "100.124.185.117";
-  };
+  homelab.domain = "lanice.dev";
 
   imports = [
     ../../common/publishing.nix
