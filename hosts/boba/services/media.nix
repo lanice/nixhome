@@ -56,6 +56,19 @@ in {
     };
   };
 
+  # Navidrome's sandbox bind-mounts MusicFolder at unit start, and a bind mount
+  # is a snapshot: start before /data/media is mounted and it captures the empty
+  # stub under the mountpoint for good, then scans an empty library and marks
+  # every track missing — which hides them from the Subsonic API. `zfs mount -a`
+  # is a service, not a generated .mount unit, so RequiresMountsFor= has nothing
+  # to attach to and the ordering has to be named. Bites on rebuilds too, not
+  # just boots: switch-to-configuration restarts navidrome and the ZFS units
+  # together.
+  systemd.services.navidrome = {
+    after = ["zfs-mount.service"];
+    requires = ["zfs-mount.service"];
+  };
+
   services.audiobookshelf = {
     enable = true;
     group = mediaGroup;
