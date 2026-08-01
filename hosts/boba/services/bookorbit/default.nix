@@ -40,6 +40,15 @@ in {
 
   homelab.published.bookorbit.proxyTo = config.services.bookorbit.environment.PORT;
 
+  # The KOReader plugin on the Kindle (home WiFi, no Tailscale) can't reach
+  # the tailnet-only published URL, so it gets the raw port on the LAN
+  # interface instead — not a published service: no subdomain, no TLS. The
+  # published HTTPS URL stays canonical for everything else; the Kindle is
+  # configured with http://<boba's reserved LAN IP>:<port> directly.
+  networking.firewall.interfaces."enp95s0".allowedTCPPorts = [
+    config.services.bookorbit.environment.PORT
+  ];
+
   # The vendored module's UMask=0077 would make everything BookOrbit writes to
   # the books share 0600 bookorbit — invisible to the rest of the media group.
   # Group-rw keeps its writes co-accessible, which is the whole point of a share.

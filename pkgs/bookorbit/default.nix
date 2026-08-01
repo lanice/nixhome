@@ -104,6 +104,12 @@ in
       cp -r client/dist $out/lib/public
       cp -r server/src/db/migrations $out/lib/migrations
 
+      # Deviation from the PR, which omits the KOReader plugin entirely: the
+      # server zips and serves it from <cwd>/koreader-plugin/ (the wrapper
+      # below cd's to $out/lib), powering the web UI's "Download Plugin"
+      # button. Without this copy that endpoint 500s.
+      cp -r koreader-plugin $out/lib/koreader-plugin
+
       makeWrapper ${nodejs}/bin/node $out/bin/bookorbit \
         --run "cd $out/lib" \
         --set NODE_ENV production \
