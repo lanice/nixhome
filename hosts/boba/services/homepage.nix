@@ -235,6 +235,16 @@ in {
             };
           }
           {
+            Shelfmark = let
+              url = pub.shelfmark.url;
+            in {
+              href = url;
+              icon = "shelfmark";
+              siteMonitor = url;
+              description = "Book Downloader";
+            };
+          }
+          {
             Prowlarr = let
               url = pub.prowlarr.url;
             in {

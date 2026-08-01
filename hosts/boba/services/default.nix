@@ -19,6 +19,7 @@
     ./peertube.nix
     ./sabnzbd.nix
     ./scrutiny.nix
+    ./shelfmark.nix
     ./sillytavern.nix
     ./soulseek.nix
     ./speedtest-tracker.nix

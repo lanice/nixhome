@@ -1,7 +1,7 @@
 # BookOrbit: the library layer for books — browse, curate metadata, read in
-# the web reader, and sync to the KOReader Kindle. Downstream of nothing for
-# now: books enter the estate's `books` share by hand (or via BookOrbit's web
-# upload); audiobooks remain Audiobookshelf's alone.
+# the web reader, and sync to the KOReader Kindle. Downstream of shelfmark:
+# downloads land in the Book Dock share and wait there for curation;
+# audiobooks remain Audiobookshelf's alone.
 #
 # Runs from a module vendored out of an unmerged nixpkgs PR — see
 # ./vendored-module.nix for provenance and the deviations taken.
@@ -18,6 +18,13 @@ in {
 
   age.secrets.bookorbit.file = "${inputs.self}/secrets/bookorbit.age";
 
+  # The Book Dock, moved out of the state directory when shelfmark became a
+  # second writer — two writers make it a share.
+  homelab.media.shares."book-dock" = {
+    under = "downloads";
+    owner = "bookorbit";
+  };
+
   services.bookorbit = {
     enable = true;
 
@@ -32,6 +39,7 @@ in {
       APP_URL = pub.bookorbit.url;
       # Start the in-app library folder picker at the estate's books share.
       LIBRARY_BROWSE_ROOT = media.shares.books.path;
+      BOOK_DOCK_PATH = media.shares."book-dock".path;
     };
 
     # JWT_SECRET and SETUP_BOOTSTRAP_TOKEN.
@@ -49,8 +57,17 @@ in {
     config.services.bookorbit.environment.PORT
   ];
 
-  # The vendored module's UMask=0077 would make everything BookOrbit writes to
-  # the books share 0600 bookorbit — invisible to the rest of the media group.
-  # Group-rw keeps its writes co-accessible, which is the whole point of a share.
-  systemd.services.bookorbit.serviceConfig.UMask = lib.mkForce "0007";
+  systemd.services.bookorbit = {
+    # The dock watcher inotifies /downloads (non-legacy ZFS) at bootstrap;
+    # started pre-mount it would watch the stub's inode and stay blind once
+    # the real dataset arrives over it (see navidrome in media.nix).
+    after = ["zfs-mount.service"];
+    requires = ["zfs-mount.service"];
+
+    # The vendored module's UMask=0077 would make everything BookOrbit writes
+    # to the books share 0600 bookorbit — invisible to the rest of the media
+    # group. Group-rw keeps its writes co-accessible, which is the whole
+    # point of a share.
+    serviceConfig.UMask = lib.mkForce "0007";
+  };
 }
