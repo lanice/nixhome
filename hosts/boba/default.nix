@@ -26,6 +26,7 @@ in {
     ../common/global
     ../common/tailscale.nix
 
+    ./netconsole.nix
     ./services
   ];
 
