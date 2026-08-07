@@ -8,8 +8,6 @@
     then "white"
     else "brblack";
 
-  mcDiagnosticScript = pkgs.writeText "mc-diagnostic.sh" (builtins.readFile ./mc-diagnostic.sh);
-
   exifImageScript = pkgs.writeShellApplication {
     name = "exif-image-metadata";
     runtimeInputs = [pkgs.exiftool];
@@ -32,10 +30,6 @@ in {
       sshu = "ssh -t unstable fish";
       sshb = "ssh -t boba";
       ssht = "ssh -t taro";
-
-      mc_rcon = "ssh -t boba sudo podman exec -i minecraft-atm10-2026 rcon-cli";
-      mc_restart = "ssh boba sudo systemctl start minecraft-atm10-2026-restart.service";
-      mc_journal = "ssh boba journalctl -fu podman-minecraft-atm10-2026.service --all | ${pkgs.ccze}/bin/ccze -A";
 
       bping = ''ssh boba "journalctl -f -u 'wan-ping-*' --all"'';
       bping_loss = ''ssh boba "journalctl --since '1 hour ago' -u 'wan-ping-*' --no-pager | grep 'no answer'"'';
@@ -95,8 +89,6 @@ in {
       '';
 
       wh = "readlink -f (which $argv)";
-
-      mc_diagnostic = "ssh boba sudo bash -s -- $argv < ${mcDiagnosticScript}";
     };
 
     interactiveShellInit = ''

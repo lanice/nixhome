@@ -11,14 +11,12 @@ in {
   "porkbunSecretApiKey.age".publicKeys = [boba lanice-sencha];
   "homepage.age".publicKeys = [boba lanice-sencha];
   "librechat.env.age".publicKeys = [boba lanice-sencha];
-  "curseforge.age".publicKeys = [boba lanice-sencha];
   "mailBobaPassword.age".publicKeys = [boba lanice-sencha];
   "sabnzbd.age".publicKeys = [boba lanice-sencha];
   "shelfmark.age".publicKeys = [boba lanice-sencha];
   "bookorbit.age".publicKeys = [boba lanice-sencha];
   "slskd.age".publicKeys = [boba lanice-sencha];
   "healthcheck-uuid.age".publicKeys = [boba lanice-sencha];
-  "healthcheck-minecraft-uuid.age".publicKeys = [boba lanice-sencha];
   "peertube-secrets.age".publicKeys = [boba lanice-sencha];
   "peertube-db-password.age".publicKeys = [boba lanice-sencha];
   "explo.age".publicKeys = [boba lanice-sencha];

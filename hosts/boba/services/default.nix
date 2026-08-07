@@ -14,7 +14,6 @@
     ./lidarr.nix
     ./media-estate.nix
     ./media.nix
-    ./oink.nix
     ./paperless.nix
     ./peertube.nix
     ./sabnzbd.nix
@@ -29,7 +28,5 @@
     ./uptime-kuma.nix
     ./wan-monitor.nix
     ./zfs-zed.nix
-
-    ./minecraft
   ];
 }
