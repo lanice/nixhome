@@ -31,9 +31,6 @@ in {
       sshb = "ssh -t boba";
       ssht = "ssh -t taro";
 
-      bping = ''ssh boba "journalctl -f -u 'wan-ping-*' --all"'';
-      bping_loss = ''ssh boba "journalctl --since '1 hour ago' -u 'wan-ping-*' --no-pager | grep 'no answer'"'';
-
       # MX Master 4 scroll-mode toggle. See hosts/sencha/default.nix history for
       # why this is manual: BT path needs hi-res scroll enabled, Bolt receiver
       # needs it disabled, and Solaar persists a single per-device setting.
