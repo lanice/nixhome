@@ -40,11 +40,12 @@ in {
     };
 
     # GitHub push mirrors only carry git data — issues, PRs, releases and
-    # config need these dumps. Pruned after 4 weeks by the module's tmpfiles
+    # config need these dumps. Pruned after 7 days by the module's tmpfiles
     # rule; the ship unit mirrors that retention to boba with --delete.
     dump = {
       enable = true;
       type = "tar.zst";
+      age = "7d";
     };
   };
 
