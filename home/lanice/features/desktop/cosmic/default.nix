@@ -6,6 +6,7 @@
   cosmicLib,
   ...
 }: let
+  localPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
   mkRON = cosmicLib.cosmic.mkRON;
   importRON = cosmicLib.cosmic.importRON;
   dockAutohideBehavior = {
@@ -51,6 +52,8 @@ in {
     home.packages = [
       inputs.cosmic-applets-collection.packages.${pkgs.stdenv.hostPlatform.system}.minimon-applet
       # inputs.cosmic-applets-collection.packages.${pkgs.stdenv.hostPlatform.system}.cosmic-ext-applet-clipboard-manager
+      localPkgs.cosmic-ext-applet-codexbar
+      localPkgs.codexbar-cli # CLI the applet shells out to for usage data
     ];
 
     home.activation.configureCosmicFrostedGlass = lib.hm.dag.entryAfter ["configureCosmic"] ''
@@ -152,6 +155,7 @@ in {
             ]
             [
               # "com.system76.CosmicAppletInputSources"
+              "io.github.andrew_verde.cosmic-ext-applet-codexbar"
               "io.github.cosmic_utils.minimon-applet"
               "com.system76.CosmicAppletStatusArea"
               "com.system76.CosmicAppletNotifications"

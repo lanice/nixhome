@@ -9,8 +9,7 @@
 
     ./global # includes features/cli,features/helix
 
-    ./features/cli/claude-code
-    ./features/cli/omp
+    ./features/cli/agents.nix
     ./features/cli/zellij
     ./features/cli/fabric.nix
     ./features/cli/typst.nix
