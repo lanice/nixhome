@@ -353,7 +353,7 @@ in {
     };
 
     # The same pass at the end of every night's chain (ordering lives in
-    # mail-archive-nightly.nix). Folders born from a mirror pass carry the
+    # nightly.nix). Folders born from a mirror pass carry the
     # *source's* subscription state, which never includes INBOX — clients treat
     # it as implicitly subscribed — so without this catch-up a fresh account's
     # INBOX sits grayed out in Roundcube until the next deploy.

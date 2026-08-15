@@ -6,7 +6,7 @@
   config,
   ...
 }: let
-  boba = (import ../../fleet.nix).hosts.boba;
+  boba = (import ../../../fleet.nix).hosts.boba;
 in {
   age.secrets.mailArchiveResticPassword.file = "${inputs.self}/secrets/mailArchiveResticPassword.age";
   age.secrets.mailArchiveBackupKey.file = "${inputs.self}/secrets/mailArchiveBackupKey.age";

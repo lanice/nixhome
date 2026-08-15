@@ -5,7 +5,7 @@
 # imapsync compares message headers and skips what is already there.
 #
 # One template instance per source account, chained by the nightly timer
-# (mail-archive-nightly.nix). By hand:
+# (nightly.nix). By hand:
 #
 #   systemctl start "mail-archive-mirror@$(systemd-escape hi@example.com)"
 #

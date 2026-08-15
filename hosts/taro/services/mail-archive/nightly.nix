@@ -25,7 +25,7 @@
   cfg = config.homelab.mailArchive;
 
   # systemd-escape at eval time: After= between template instances needs each
-  # instance's unit name, which is the escaped address (mail-archive-mirror.nix
+  # instance's unit name, which is the escaped address (mirror.nix
   # explains why the '@' cannot survive). systemd keeps alphanumerics, ':', '_'
   # and a non-leading '.', and turns every other byte — including '-' and '+' —
   # into lowercase \xNN; checked against `systemd-escape`.
@@ -67,7 +67,7 @@ in {
       # (mail-archive.nix).
       mail-archive-trees-refresh.after = map mirrorUnit addresses;
 
-      # Snapshots what the night wrote (mail-archive-backup.nix).
+      # Snapshots what the night wrote (backup.nix).
       restic-backups-mail-archive.after = chainUnits;
 
       mail-archive-nightly = {
