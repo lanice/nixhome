@@ -1,20 +1,13 @@
-# The nightly chain, started by a 02:30 timer:
-# mirrors (one per source account, sequentially) → tree refresh → restic backup
-# → anchor.
+# The nightly chain, 02:30 timer: mirrors (sequential — mxroute is a small
+# operator) → tree refresh → restic backup → anchor. Dependency-ordered, not
+# wall-clock offsets (spec § Schedule); After= is ordering only, so a failed
+# pass costs its own OnFailure email and nothing else.
 #
-# Ordering is dependency-based, not wall-clock offsets (spec § Schedule), and
-# After= is ordering only — a failed pass neither delays nor cancels anything
-# behind it, so one bad account costs its own OnFailure email and nothing else.
-# Sequential because mxroute is a small operator; one connection at a time.
-#
-# The anchor is a oneshot service rather than a target so it ends the night
-# inactive: a target stays active once reached, and a timer firing at an
-# already-active unit is a no-op — the second night would silently do nothing.
-#
-# It also owns the healthchecks.io dead-man ping: success only when every chain
-# unit reports Result=success (Wants= means it runs even on a failed night),
-# /fail otherwise. A chain that never ran pings nothing and trips the check's
-# deadline instead.
+# The anchor is a oneshot, not a target: a target stays active once reached,
+# and a timer firing at an active unit is a no-op — night two would silently
+# skip. It also owns the healthchecks.io dead-man ping: success only when
+# every chain unit has Result=success, /fail otherwise; a chain that never
+# ran pings nothing and trips the check's deadline.
 {
   config,
   inputs,
@@ -64,7 +57,7 @@ in {
     ordering
     // {
       # Subscribes and re-grants whatever the night's mirrors created
-      # (mail-archive.nix).
+      # (store.nix).
       mail-archive-trees-refresh.after = map mirrorUnit addresses;
 
       # Snapshots what the night wrote (backup.nix).

@@ -1,5 +1,5 @@
 # Landing area for taro's nightly mail-archive restic repo (sender in
-# hosts/taro/services/mail-archive-backup.nix).
+# hosts/taro/services/mail-archive/backup.nix).
 _: {
   users.users.mail-archive-backup = {
     isSystemUser = true;

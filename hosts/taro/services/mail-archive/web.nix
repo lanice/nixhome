@@ -1,7 +1,7 @@
 # The archive's only access channel: Roundcube at archive.lanice.dev, over the
 # tailnet (Dovecot listens on localhost only).
 #
-# Read-only is enforced by the ACL in mail-archive.nix; disabled_actions below
+# Read-only is enforced by the ACL in store.nix; disabled_actions below
 # just stops the UI offering writes the server would refuse.
 {
   config,
@@ -52,14 +52,11 @@ in {
       $config['imap_host'] = 'localhost:143';
       $config['imap_delimiter'] = '/';
 
-      // Dovecot's ACL plugin taxes IMAP LIST at ~25 ms per visible folder
-      // (5.3 s for 209), and Roundcube LISTs the full namespace on every
-      // click. Cache the folder list; on the db backend the TTL is not
-      // enforced on read, so the cache lives until the next login clears
-      // it — new nightly folders appear on re-login, accepted for an
-      // archive. LSUB skips the ACL tax (105 ms for the same 209), which
-      // covers the uncached LIST each login still pays; Roundcube adds
-      // INBOX to the pane itself, so its unsubscribed state is harmless.
+      // The ACL plugin taxes LIST ~25 ms/folder and Roundcube LISTs the full
+      // namespace every click, so cache the folder list (db backend ignores
+      // the TTL on read; new nightly folders appear on re-login — fine for
+      // an archive). LSUB skips the ACL tax, covering the uncached LIST at
+      // login; Roundcube adds INBOX to the pane itself.
       $config['imap_cache'] = 'db';
       $config['imap_force_lsub'] = true;
 

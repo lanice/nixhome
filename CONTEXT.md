@@ -78,6 +78,10 @@ _Avoid_: enabled, live
 The assignment of a source account's archive tree to the household members who may read it. An account granted to both members is how mail is shared; there is no other sharing mechanism.
 _Avoid_: share (a media-estate term), permission, ACL (the mechanism, not the concept)
 
+**Curation**:
+The flip-switch that temporarily widens every grant from read-only to read-write so mail can be pruned from the archive by hand. Never a steady state: set, deploy, prune, unset, deploy. Distinct from a reclaim pass, which deletes from source accounts — curation is the only sanctioned way anything leaves the archive.
+_Avoid_: edit mode, write access, maintenance mode
+
 **Private input**:
 The non-flake flake input `nixhome-private` — a private GitHub repo holding data that must not appear in this public repo, starting with the source-account addresses, their hosts, and grants. It carries dumb data only; all module logic stays public. Distinct from agenix: the private input holds identifying data, agenix holds secrets.
 _Avoid_: secrets repo, private flake (it is not a flake)

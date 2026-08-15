@@ -1,14 +1,11 @@
-# The mail archive's store: one Dovecot instance holding one tree per source
-# account, readable by the people it is granted to and writable by nobody.
-# Spec: .scratch/mail-archive/spec.md. Vocabulary: CONTEXT.md § Mail archive.
+# The mail archive's store: one Dovecot tree per source account, named by flat
+# full address (hi@example.com/INBOX), readable by the people it is granted to
+# and writable by nobody. Spec: .scratch/mail-archive/spec.md. Vocabulary:
+# CONTEXT.md § Mail archive.
 #
-#   hi@example.com/INBOX      <- one top-level tree per source account,
-#   hi@example.com/Sent          named by flat full address
-#
-# Everything lives in a single *public* namespace, and that is load-bearing: in
-# a private namespace the logged-in user owns the mailbox and owners bypass
-# ACLs, so read-only could not be enforced. A public namespace has no owner, so
-# the ACL below is the whole truth for every login.
+# One *public* namespace, load-bearing: a private namespace's owner bypasses
+# ACLs, so read-only could not be enforced; public has no owner, so the ACL is
+# the whole truth for every login.
 {
   inputs,
   config,
@@ -53,21 +50,13 @@
     then rights.curation
     else rights.read;
 
-  # One account's grant in the vfile backend's format, written by treesPass
-  # into every mailbox of the account's tree.
-  #
-  # Not in dovecot.conf, which 2.4 also supports, for two reasons:
-  #
-  #  * Creating a folder tests its *parent's* rights, and probing whether the
-  #    parent exists leaves an empty rights entry in the ACL cache. Reloading
-  #    that entry means stat()ing an ACL file; with no file the empty entry
-  #    stands and every mirror pass is told "Permission denied".
-  #  * A mailbox does not inherit its parent's ACL at read time — Dovecot
-  #    copies the parent's rights in at creation — so every folder needs its
-  #    own file regardless.
-  #
-  # That copy is why treesPass rewrites whole trees: a folder created last week
-  # holds last week's grant, and a revoked grant has to reach it.
+  # One account's grant in the vfile backend's format; treesPass writes it into
+  # every mailbox of the tree. Files rather than dovecot.conf: folder creation
+  # probes the parent and caches an empty rights entry only a stat()able ACL
+  # file can refresh — conf-only ends every mirror pass in "Permission denied".
+  # And ACLs don't inherit at read time (Dovecot copies the parent's at
+  # creation), which is also why treesPass rewrites whole trees: a revoked
+  # grant has to reach folders created under the old one.
   aclFile = address: account:
     pkgs.writeText "dovecot-acl-${address}" (
       lib.concatMapStrings (person: "user=${person} ${personRights}\n") account.grantedTo
@@ -86,22 +75,13 @@
   };
 
   # One pass over the store, shared by mail-archive-trees (each deploy) and
-  # mail-archive-trees-refresh (each night, behind the mirrors). Per account:
-  #
-  # 1. `mailbox status` forces the tree into existence: `auto` is lazy and a
-  #    folder listing does not count as opening the mailbox.
-  # 2. Grant onto the tree root, before any listing — `mailbox list` is
-  #    ACL-filtered even for the sync identity and a just-born tree has no ACL
-  #    file yet, so this file is what makes the tree visible at all. `mailbox
-  #    path` computes the path rather than looking the mailbox up, which is why
-  #    it works on a mailbox nobody can see.
-  # 3. Grant into every folder below, so the attrset above is the only thing
-  #    deciding who reads what — reaching folders that already exist.
-  # 4. Subscribe everything, so folders a mirror pass created since the last
-  #    run show up in Roundcube.
-  #
-  # Paths come from `doveadm mailbox path` rather than the store root plus the
-  # name: on disk a non-ASCII name is mUTF-7 (`Gel&APY-scht`).
+  # mail-archive-trees-refresh (each night). Per account: force the tree into
+  # existence via `mailbox status` (`auto` is lazy; a listing doesn't open the
+  # mailbox), grant the tree root before any listing (`mailbox list` is
+  # ACL-filtered even for the sync identity and a just-born tree has no ACL
+  # file; `mailbox path` computes the path without a lookup), grant every
+  # folder below, subscribe everything for Roundcube. Paths via `doveadm
+  # mailbox path`: on disk a non-ASCII name is mUTF-7 (`Gel&APY-scht`).
   treesPass = let
     doveadm = lib.getExe' config.services.dovecot2.package "doveadm";
   in
