@@ -1,10 +1,10 @@
 {
   imports = [
+    ../../common/mail.nix
     ../../common/publishing.nix
 
     ./forgejo.nix
     ./mail-archive
-    ./mail.nix
     ./netconsole-receiver.nix
   ];
 }

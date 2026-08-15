@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../common/mail.nix
     ../../common/publishing.nix
 
     ./adguard.nix

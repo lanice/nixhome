@@ -1,15 +1,24 @@
-# Outbound mail from taro, and the failure notifier every other unit hangs off.
+# Outbound mail: this host sends as its own mxroute mailbox, so the From
+# address names the machine that had the problem. Importing this module is the
+# whole cost — sender (contacts.<host>Sender) and password secret
+# (mail<Host>Password.age) are derived from the hostname.
 #
-# Same shape as boba's ZED mail path (hosts/boba/services/zfs-zed.nix): each
-# host that sends mail authenticates as its own mxroute mailbox, so the From
-# address names the machine that had the problem.
+# Also provides the failure notifier every unit can hang off:
+#   systemd.services.foo.unitConfig.OnFailure = "notify-failure@%n.service";
+# %n hands the failing unit's full name to the instance, which the script
+# then reads back as $1.
 {
   inputs,
   pkgs,
   config,
+  lib,
   ...
 }: let
   contacts = import (inputs.nixhome-private + "/contacts.nix");
+
+  hostName = config.networking.hostName;
+  sender = contacts."${hostName}Sender";
+  secretName = "mail${lib.toSentenceCase hostName}Password";
 
   # Local recipient; /etc/aliases below is what turns it into a real address.
   recipient = "root";
@@ -19,7 +28,7 @@
 
     {
       printf 'To: %s\n' ${recipient}
-      printf 'Subject: [taro] %s failed\n' "$unit"
+      printf 'Subject: [${hostName}] %s failed\n' "$unit"
       printf 'MIME-Version: 1.0\n'
       printf 'Content-Type: text/plain; charset=UTF-8\n'
       printf '\n'
@@ -33,7 +42,7 @@
     } | ${pkgs.msmtp}/bin/msmtp --read-recipients
   '';
 in {
-  age.secrets.mailTaroPassword.file = "${inputs.self}/secrets/mailTaroPassword.age";
+  age.secrets.${secretName}.file = "${inputs.self}/secrets/${secretName}.age";
 
   programs.msmtp = {
     enable = true;
@@ -48,9 +57,9 @@ in {
     };
     accounts.default = {
       host = "witcher.mxrouting.net";
-      user = contacts.taroSender;
-      from = contacts.taroSender;
-      passwordeval = "${pkgs.coreutils}/bin/cat ${config.age.secrets.mailTaroPassword.path}";
+      user = sender;
+      from = sender;
+      passwordeval = "${pkgs.coreutils}/bin/cat ${config.age.secrets.${secretName}.path}";
     };
   };
 
@@ -58,10 +67,6 @@ in {
     root: ${contacts.admin}
   '';
 
-  # Attaching this to a unit is one line:
-  #   systemd.services.foo.unitConfig.OnFailure = "notify-failure@%n.service";
-  # %n hands the failing unit's full name to the instance, which the script
-  # then reads back as $1.
   systemd.services."notify-failure@" = {
     description = "Email notification for failed unit %i";
     after = ["network-online.target"];
