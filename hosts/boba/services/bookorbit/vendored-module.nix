@@ -133,7 +133,7 @@ in {
 
     users.users = mkIf (cfg.user == "bookorbit") {
       bookorbit = {
-        group = cfg.group;
+        inherit (cfg) group;
         description = "bookorbit Daemon user";
         isSystemUser = true;
       };

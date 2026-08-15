@@ -32,7 +32,7 @@ in {
     # supplementary group would not survive the unit's PrivateUsers=true —
     # unmapped ids appear as nobody inside the user namespace — but the unit's
     # own group is mapped, so hardening and share access coexist.
-    group = media.group;
+    inherit (media) group;
 
     environment = {
       PORT = 3004;

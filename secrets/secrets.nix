@@ -23,4 +23,11 @@ in {
   "speedtest-tracker-app-key.age".publicKeys = [boba lanice-sencha];
   "forgejo-runner-token.age".publicKeys = [boba lanice-sencha];
   "forgejo-dump-key.age".publicKeys = [taro lanice-sencha];
+  "mailTaroPassword.age".publicKeys = [taro lanice-sencha];
+  "mailArchiveUsers.age".publicKeys = [taro lanice-sencha];
+  "mailArchiveSyncPassword.age".publicKeys = [taro lanice-sencha];
+  "mailSourcePasswords.age".publicKeys = [taro lanice-sencha];
+  "mailArchiveResticPassword.age".publicKeys = [taro lanice-sencha];
+  "mailArchiveBackupKey.age".publicKeys = [taro lanice-sencha];
+  "mailArchiveHealthcheckUuid.age".publicKeys = [taro lanice-sencha];
 }

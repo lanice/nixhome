@@ -56,6 +56,14 @@
     # solaar.inputs.nixpkgs.follows = "nixpkgs";
 
     kenku-fm.url = "github:lanice/kenku-fm.nix";
+
+    # Identifying data (mail-archive source accounts) that must not live in
+    # this public repo. Dumb data, not a flake. Only evals that force it
+    # (taro's) fetch it; everything else hits the by-rev cache and works offline.
+    nixhome-private = {
+      url = "git+ssh://git@github.com/lanice/nixhome-private";
+      flake = false;
+    };
   };
 
   outputs = {
