@@ -1,4 +1,88 @@
-_: {
+{
+  inputs,
+  lib,
+  ...
+}: let
+  # Server presets, keyed by the `provider` field of the private records.
+  providers = {
+    gmail = {
+      flavor = "gmail.com";
+      thunderbird.settings = id: {
+        "mail.smtpserver.smtp_${id}.authMethod" = 10; # oauth
+      };
+    };
+    posteo = {
+      imap = {
+        host = "posteo.de";
+        port = 993;
+      };
+      smtp = {
+        host = "posteo.de";
+        port = 465;
+      };
+    };
+    gmx = {
+      imap = {
+        host = "imap.gmx.net";
+        port = 993;
+      };
+      smtp = {
+        host = "mail.gmx.net";
+        port = 465;
+      };
+    };
+    "web.de" = {
+      imap = {
+        host = "imap.web.de";
+        port = 993;
+      };
+      smtp = {
+        host = "smtp.web.de";
+        port = 465;
+      };
+    };
+    yahoo = {
+      imap = {
+        host = "imap.mail.yahoo.com";
+        port = 993;
+      };
+      smtp = {
+        host = "smtp.mail.yahoo.com";
+        port = 465;
+      };
+    };
+    mxlogin = {
+      imap = {
+        host = "eagle.mxlogin.com";
+        port = 993;
+      };
+      smtp = {
+        host = "eagle.mxlogin.com";
+        port = 465;
+      };
+    };
+    mxroute = {
+      imap = {
+        host = "witcher.mxrouting.net";
+        port = 993;
+      };
+      smtp = {
+        host = "witcher.mxrouting.net";
+        port = 465;
+      };
+    };
+  };
+
+  # recursiveUpdate, not //: a shallow merge of thunderbird.enable would
+  # clobber the gmail preset's thunderbird.settings.
+  mkAccount = _name: acct:
+    lib.recursiveUpdate providers.${acct.provider} {
+      inherit (acct) address realName;
+      userName = acct.userName or acct.address;
+      primary = acct.primary or false;
+      thunderbird.enable = true;
+    };
+in {
   # programs.mbsync.enable = true;
   # programs.msmtp.enable = true;
   # programs.notmuch = {
@@ -26,213 +110,8 @@ _: {
   accounts.email = {
     maildirBasePath = "mail"; # not used by thunderbird
 
-    accounts.gmail = {
-      primary = true;
-      address = "leanderneiss@gmail.com";
-      flavor = "gmail.com";
-      userName = "leanderneiss@gmail.com";
-      realName = "Leander Neiß";
-      # passwordCommand = "${pkgs.rbw}/bin/rbw get gmail-apppassword-leanderneiss";
-      thunderbird.enable = true;
-      thunderbird.settings = id: {
-        "mail.smtpserver.smtp_${id}.authMethod" = 10; # oauth
-      };
-    };
-
-    accounts.posteo = {
-      primary = false;
-      address = "neiss@posteo.de";
-      userName = "neiss@posteo.de";
-      realName = "Leander Neiß";
-      # passwordCommand = "${pkgs.rbw}/bin/rbw get posteo.de";
-      imap = {
-        host = "posteo.de";
-        port = 993;
-      };
-      smtp = {
-        host = "posteo.de";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts.gmx = {
-      primary = false;
-      address = "leander.neiss@gmx.de";
-      userName = "leander.neiss@gmx.de";
-      realName = "Leander Neiß";
-      # passwordCommand = "${pkgs.rbw}/bin/rbw get 'GMX Email'";
-      imap = {
-        host = "imap.gmx.net";
-        port = 993;
-      };
-      smtp = {
-        host = "mail.gmx.net";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts."web.de" = {
-      primary = false;
-      address = "leander_neiss@web.de";
-      userName = "leander_neiss";
-      realName = "Leander Neiß";
-      # passwordCommand = "${pkgs.rbw}/bin/rbw get web.de";
-      imap = {
-        host = "imap.web.de";
-        port = 993;
-      };
-      smtp = {
-        host = "smtp.web.de";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts.yahoo = {
-      primary = false;
-      address = "l.neiss@yahoo.de";
-      userName = "l.neiss@yahoo.de";
-      realName = "Leander Neiß";
-      # passwordCommand = "${pkgs.rbw}/bin/rbw get yahoo-apppassword";
-      imap = {
-        host = "imap.mail.yahoo.com";
-        port = 993;
-      };
-      smtp = {
-        host = "smtp.mail.yahoo.com";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts.founderbuddies = {
-      primary = false;
-      address = "info@founderbuddies.com";
-      userName = "info@founderbuddies.com";
-      realName = "Founder Buddies";
-      imap = {
-        host = "eagle.mxlogin.com";
-        port = 993;
-      };
-      smtp = {
-        host = "eagle.mxlogin.com";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts."me@leanderneiss.com" = {
-      primary = false;
-      address = "me@leanderneiss.com";
-      userName = "me@leanderneiss.com";
-      realName = "Leander Neiss";
-      imap = {
-        host = "witcher.mxrouting.net";
-        port = 993;
-      };
-      smtp = {
-        host = "witcher.mxrouting.net";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts."me@leanderneiss.de" = {
-      primary = false;
-      address = "me@leanderneiss.de";
-      userName = "me@leanderneiss.de";
-      realName = "Leander Neiss";
-      imap = {
-        host = "witcher.mxrouting.net";
-        port = 993;
-      };
-      smtp = {
-        host = "witcher.mxrouting.net";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts."me@lndr.io" = {
-      primary = false;
-      address = "me@lndr.io";
-      userName = "me@lndr.io";
-      realName = "Leander Neiss";
-      imap = {
-        host = "witcher.mxrouting.net";
-        port = 993;
-      };
-      smtp = {
-        host = "witcher.mxrouting.net";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts."tech@orangesfm.com" = {
-      primary = false;
-      address = "tech@orangesfm.com";
-      userName = "tech@orangesfm.com";
-      realName = "Orange SFM";
-      imap = {
-        host = "eagle.mxlogin.com";
-        port = 993;
-      };
-      smtp = {
-        host = "eagle.mxlogin.com";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts."leander@crowdedorangebus.com" = {
-      primary = false;
-      address = "leander@crowdedorangebus.com";
-      userName = "leander@crowdedorangebus.com";
-      realName = "Leander at Crowded Orange Bus";
-      imap = {
-        host = "eagle.mxlogin.com";
-        port = 993;
-      };
-      smtp = {
-        host = "eagle.mxlogin.com";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts."hi@amandaleander.com" = {
-      primary = false;
-      address = "hi@amandaleander.com";
-      userName = "hi@amandaleander.com";
-      realName = "Amanda & Leander";
-      imap = {
-        host = "eagle.mxlogin.com";
-        port = 993;
-      };
-      smtp = {
-        host = "eagle.mxlogin.com";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
-
-    accounts."pl@lanice.dev" = {
-      primary = false;
-      address = "pl@lanice.dev";
-      userName = "pl@lanice.dev";
-      realName = "Leander Neiss";
-      imap = {
-        host = "witcher.mxrouting.net";
-        port = 993;
-      };
-      smtp = {
-        host = "witcher.mxrouting.net";
-        port = 465;
-      };
-      thunderbird.enable = true;
-    };
+    # Addresses, names, and account keys live in the private input; this
+    # module only contributes the structure above.
+    accounts = lib.mapAttrs mkAccount (import (inputs.nixhome-private + "/workstation-email.nix"));
   };
 }

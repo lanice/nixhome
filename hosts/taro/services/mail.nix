@@ -9,6 +9,8 @@
   config,
   ...
 }: let
+  contacts = import (inputs.nixhome-private + "/contacts.nix");
+
   # Local recipient; /etc/aliases below is what turns it into a real address.
   recipient = "root";
 
@@ -46,14 +48,14 @@ in {
     };
     accounts.default = {
       host = "witcher.mxrouting.net";
-      user = "taro@lanice.dev";
-      from = "taro@lanice.dev";
+      user = contacts.taroSender;
+      from = contacts.taroSender;
       passwordeval = "${pkgs.coreutils}/bin/cat ${config.age.secrets.mailTaroPassword.path}";
     };
   };
 
   environment.etc.aliases.text = ''
-    root: leanderneiss@gmail.com
+    root: ${contacts.admin}
   '';
 
   # Attaching this to a unit is one line:

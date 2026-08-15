@@ -4,7 +4,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  contacts = import (inputs.nixhome-private + "/contacts.nix");
+in {
   age.secrets.mailBobaPassword.file = "${inputs.self}/secrets/mailBobaPassword.age";
 
   programs.msmtp = {
@@ -21,15 +23,15 @@
     accounts = {
       default = {
         host = "witcher.mxrouting.net";
-        user = "boba@lanice.dev";
-        from = "boba@lanice.dev";
+        user = contacts.bobaSender;
+        from = contacts.bobaSender;
         passwordeval = "${pkgs.coreutils}/bin/cat ${config.age.secrets.mailBobaPassword.path}";
       };
     };
   };
 
   environment.etc.aliases.text = ''
-    root: leanderneiss@gmail.com
+    root: ${contacts.admin}
   '';
 
   services.zfs.zed.settings = {

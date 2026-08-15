@@ -57,9 +57,10 @@
 
     kenku-fm.url = "github:lanice/kenku-fm.nix";
 
-    # Identifying data (mail-archive source accounts) that must not live in
-    # this public repo. Dumb data, not a flake. Only evals that force it
-    # (taro's) fetch it; everything else hits the by-rev cache and works offline.
+    # Identifying data (email addresses, mail-archive source accounts) that
+    # must not live in this public repo. Dumb data, not a flake. Every host's
+    # eval forces it; fetches hit the by-rev cache and work offline, but a
+    # fresh machine needs the GitHub SSH key before its first build.
     nixhome-private = {
       url = "git+ssh://git@github.com/lanice/nixhome-private";
       flake = false;

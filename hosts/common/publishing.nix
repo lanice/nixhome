@@ -14,7 +14,7 @@
 
   fleet = import ../fleet.nix;
 
-  acmeEmail = "leanderneiss@gmail.com";
+  acmeEmail = (import (inputs.nixhome-private + "/contacts.nix")).admin;
 
   # Values repeated in an assertion message are more useful than a bare count.
   duplicates = list: lib.unique (lib.filter (x: lib.count (y: y == x) list > 1) list);

@@ -82,7 +82,7 @@ in {
 
   programs.rbw = {
     enable = true;
-    settings.email = "leanderneiss+bitwarden@gmail.com";
+    settings.email = (import (inputs.nixhome-private + "/contacts.nix")).bitwarden;
     settings.pinentry = pkgs.pinentry-tty;
   };
 

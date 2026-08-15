@@ -44,7 +44,7 @@ in {
   security.acme = {
     acceptTerms = true;
     defaults = {
-      email = "leanderneiss@gmail.com";
+      email = (import (inputs.nixhome-private + "/contacts.nix")).admin;
       environmentFile = config.age.secrets.porkbun.path;
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;

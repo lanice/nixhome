@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   ...
 }: let
@@ -57,7 +58,7 @@ in {
     settings = {
       user = {
         name = "Leander Neiss";
-        email = "1871704+lanice@users.noreply.github.com";
+        email = (import (inputs.nixhome-private + "/contacts.nix")).github;
       };
 
       alias = {
