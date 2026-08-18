@@ -12,7 +12,7 @@
       "video/mpv" = "mpv.desktop";
       "video/mpeg" = "mpv.desktop";
 
-      "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
+      "application/pdf" = "com.system76.CosmicReader.desktop";
 
       "x-scheme-handler/mailto" = "thunderbird.desktop";
     };
