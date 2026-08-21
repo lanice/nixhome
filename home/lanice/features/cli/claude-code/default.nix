@@ -40,6 +40,7 @@ in {
 
     skills = {
       frontend-design = ./skills/frontend-design;
+      unslop = ./skills/unslop;
       # freetime = ./skills/freetime;
     };
 
