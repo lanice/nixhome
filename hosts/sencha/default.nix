@@ -12,7 +12,6 @@
     inputs.hardware.nixosModules.common-gpu-nvidia
 
     inputs.agenix.nixosModules.default
-    inputs.solaar.nixosModules.default
 
     ./hardware-configuration.nix
 
@@ -70,6 +69,10 @@
 
   programs = {
     dconf.enable = true;
+    solaar = {
+      enable = true;
+      userService.enable = true;
+    };
   };
 
   xdg.portal = {
@@ -115,7 +118,6 @@
 
   services.fwupd.enable = true;
   services.flatpak.enable = true;
-  services.solaar.enable = true;
   services.hardware.bolt.enable = true;
 
   services.tailscale.useRoutingFeatures = "client";

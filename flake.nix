@@ -52,9 +52,6 @@
     cosmic-applets-collection.url = "github:wingej0/ext-cosmic-applets-flake";
     cosmic-applets-collection.inputs.nixpkgs.follows = "nixpkgs";
 
-    solaar.url = "github:Svenum/Solaar-Flake/main";
-    # solaar.inputs.nixpkgs.follows = "nixpkgs";
-
     kenku-fm.url = "github:lanice/kenku-fm.nix";
 
     # Identifying data (email addresses, mail-archive source accounts) that
