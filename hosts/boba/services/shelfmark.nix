@@ -5,6 +5,7 @@
   inputs,
   config,
   lib,
+  pkgs,
   ...
 }: let
   media = config.homelab.media;
@@ -25,6 +26,11 @@ in {
 
   services.shelfmark = {
     enable = true;
+    # Shelfmark 1.3.9 imports httpx unconditionally, but nixpkgs omitted its
+    # declared httpx[http2] dependency. Remove once nixpkgs includes it.
+    package = pkgs.shelfmark.overrideAttrs (old: {
+      pythonPath = old.pythonPath ++ (with pkgs.python314Packages; [httpx h2]);
+    });
     environment = {
       FLASK_PORT = port;
       AUTH_METHOD = "none";
