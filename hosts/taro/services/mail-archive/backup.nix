@@ -9,23 +9,25 @@
   boba = (import ../../../fleet.nix).hosts.boba;
 in {
   age.secrets.mailArchiveResticPassword.file = "${inputs.self}/secrets/mailArchiveResticPassword.age";
-  age.secrets.mailArchiveBackupKey.file = "${inputs.self}/secrets/mailArchiveBackupKey.age";
 
   services.restic.backups.mail-archive = {
-    repository = "sftp:mail-archive-backup@${boba.tailscaleIP}:/data/storage/mail-archive-backup";
+    repository = "rest:http://${boba.tailscaleIP}:8000/mail-archive";
+    environmentFile = config.age.secrets.resticMailArchiveTransport.path;
     # Whole store, no excludes: uidlist/uidvalidity aren't cleanly rebuildable,
-    # ACL files should ride along, index churn dedups away.
-    paths = ["/var/lib/mail-archive"];
+    # ACL files should ride along, index churn dedups away. Host keys include
+    # taro's agenix identity.
+    paths = [
+      "/var/lib/mail-archive"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+    ];
     passwordFile = config.age.secrets.mailArchiveResticPassword.path;
-    initialize = true;
-    extraOptions = [
-      "sftp.command='ssh mail-archive-backup@${boba.tailscaleIP} -i ${config.age.secrets.mailArchiveBackupKey.path} -s sftp'"
-    ];
-    pruneOpts = [
-      "--keep-daily 7"
-      "--keep-weekly 4"
-      "--keep-monthly 12"
-    ];
+    # The repository was migrated from boba's old SFTP landing. Never turn
+    # this on: a bad URL must fail rather than create an empty repository.
+    initialize = false;
+    extraBackupArgs = ["--retry-lock=1h"];
     timerConfig = null;
   };
 

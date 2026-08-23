@@ -4,6 +4,7 @@
     ../../common/publishing.nix
 
     ./adguard.nix
+    ./backup-landing.nix
     ./audiobookrequest.nix
     ./aurral.nix
     ./bookorbit
@@ -13,7 +14,6 @@
     ./homepage.nix
     ./librechat.nix
     ./lidarr.nix
-    ./mail-archive-backup.nix
     ./media-estate.nix
     ./media.nix
     ./paperless.nix

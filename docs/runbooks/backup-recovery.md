@@ -10,6 +10,23 @@ one duplicate full upload plus roughly `440 GB` of locked garbage before the
 cap stops further growth. Class A, B and C transactions are free, so transaction
 caps do not bound this threat.
 
+## Landing quota
+
+boba's rest-server 0.14.0 starts with `--max-size 343597383680` (320 GiB).
+This is a shared limit for the entire `/data/backups/restic` path, not a
+per-repository limit. In that release, `mux.go` constructs one quota manager
+from `server.Path`, and `quota/quota.go` tallies that path recursively,
+including every subrepository. The four expected landing repositories total
+about 160 GiB (sencha 100 GiB, boba 50 GiB, mail archive 6.5 GiB, Forgejo
+3 GiB), so the limit allows roughly one duplicate full set while bounding a
+hostile sender far below the 20 TiB available on the dataset.
+
+Because the quota is shared, a hostile sender can exhaust the landing
+allowance and temporarily deny writes to the other senders; rest-server cannot
+provide per-user quotas in one process. The service must be restarted after a
+boba-side prune or other local deletion so its in-memory usage counter is
+re-tallied.
+
 ## Bootstrap sencha's agenix identity
 
 sencha does not run sshd, so NixOS does not generate its host key. After a

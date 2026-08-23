@@ -1,4 +1,4 @@
-# The nightly chain, 02:30 timer: mirrors (sequential — mxroute is a small
+# The nightly chain, 01:30 timer: mirrors (sequential — mxroute is a small
 # operator) → tree refresh → restic backup → anchor. Dependency-ordered, not
 # wall-clock offsets (spec § Schedule); After= is ordering only, so a failed
 # pass costs its own OnFailure email and nothing else.
@@ -97,9 +97,9 @@ in {
   systemd.timers.mail-archive-nightly = {
     wantedBy = ["timers.target"];
     timerConfig = {
-      # 02:30 keeps the restic leg clear of boba's ~00:00–00:15 I/O storm
-      # and leaves room before taro's 04:31 Forgejo dump.
-      OnCalendar = "*-*-* 02:30:00";
+      # 01:30 exists exactly once across both DST transitions and leaves room
+      # before taro's 04:31 Forgejo dump.
+      OnCalendar = "*-*-* 01:30:00";
       # A missed night is made up at boot, outside the chosen window — safe,
       # since mirror passes only add.
       Persistent = true;

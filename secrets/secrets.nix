@@ -45,6 +45,5 @@ in {
   "mailArchiveSyncPassword.age".publicKeys = [taro lanice-sencha];
   "mailSourcePasswords.age".publicKeys = [taro lanice-sencha];
   "mailArchiveResticPassword.age".publicKeys = [taro boba lanice-sencha];
-  "mailArchiveBackupKey.age".publicKeys = [taro lanice-sencha];
   "mailArchiveHealthcheckUuid.age".publicKeys = [taro lanice-sencha];
 }
