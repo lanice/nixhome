@@ -73,6 +73,8 @@ in {
       # runtime metadata a stable named volume so container recreation does
       # not leak anonymous volumes. Deliberately excluded from backups;
       # MongoDB data is the bind mount below and is covered by the boba set.
+      # MongoDB is backed up crash-consistently from the atomic boba ZFS
+      # snapshot. It deliberately has no separate logical dump.
       image = "mongo";
       volumes = [
         "librechat-mongodb-configdb:/data/configdb"
@@ -88,6 +90,8 @@ in {
         MEILI_NO_ANALYTICS = "true";
       };
       environmentFiles = [config.age.secrets.librechat-env.path];
+      # Meilisearch is likewise backed up crash-consistently from that ZFS
+      # snapshot; its on-disk recovery contract is the same as a power cut.
       volumes = [
         "${librechatDir}/meili_data_v1.12:/meili_data"
       ];

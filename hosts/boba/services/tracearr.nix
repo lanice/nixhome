@@ -26,6 +26,8 @@ in {
     # stable named volume so container recreation does not leak anonymous
     # volumes. Deliberately excluded; authoritative state is in the bind
     # mounts below and is covered by the boba set.
+    # Postgres and Redis are backed up crash-consistently from the atomic boba
+    # ZFS snapshot. They deliberately have no separate logical dumps.
     volumes = [
       "tracearr-backup:/data/backup"
       "${dataDir}/postgres:/data/postgres:rw"

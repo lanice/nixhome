@@ -27,6 +27,22 @@ provide per-user quotas in one process. The service must be restarted after a
 boba-side prune or other local deletion so its in-memory usage counter is
 re-tallied.
 
+## Observed boba backup performance
+
+Measured on boba on 2026-08-23 through the local rest-server:
+
+- Initial snapshot: 184,281 files and 57.693 GiB scanned in 6m43s; 44.535 GiB
+  added, 39.694 GiB stored. The service wall time was 6m46s and the landing
+  repository occupied 42 GiB.
+- Immediate repeat, including stale-snapshot recovery: 184,283 files and
+  57.701 GiB scanned in 9s; 3 new, 383 changed, 183,897 unmodified. The fresh
+  database dump and other live-state churn added 123.309 MiB logically and
+  22.161 MiB stored. Service wall time was 11.957s.
+- `/var/cache/restic-backups-boba` occupied 43 MiB after the runs.
+
+These are observations, not alert thresholds. A large departure should be
+traced against the configured includes and excludes before changing the set.
+
 ## Bootstrap sencha's agenix identity
 
 sencha does not run sshd, so NixOS does not generate its host key. After a
