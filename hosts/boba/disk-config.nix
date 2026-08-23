@@ -118,6 +118,7 @@ in {
             "home" = {
               type = "zfs_fs";
               mountpoint = "/home";
+              options."com.sun:auto-snapshot" = "true";
             };
             "downloads" = {
               type = "zfs_fs";
@@ -147,14 +148,26 @@ in {
             "media" = {
               type = "zfs_fs";
               mountpoint = "/data/media";
+              options = {
+                "com.sun:auto-snapshot" = "false";
+                "com.sun:auto-snapshot:frequent" = "false";
+                "com.sun:auto-snapshot:hourly" = "false";
+                "com.sun:auto-snapshot:daily" = "true";
+                "com.sun:auto-snapshot:weekly" = "true";
+              };
             };
-            "vault" = {
+            "backups" = {
               type = "zfs_fs";
-              mountpoint = "/data/vault";
+              mountpoint = "/data/backups";
+              options = {
+                "com.sun:auto-snapshot" = "false";
+                recordsize = "1M";
+              };
             };
             "storage" = {
               type = "zfs_fs";
               mountpoint = "/data/storage";
+              options."com.sun:auto-snapshot" = "true";
             };
           };
         };

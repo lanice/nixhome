@@ -55,6 +55,8 @@ in {
     settings.PasswordAuthentication = false;
   };
 
+  services.zfs.autoSnapshot.monthly = 0;
+
   security.sudo.wheelNeedsPassword = false;
 
   networking = {
