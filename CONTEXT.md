@@ -85,3 +85,17 @@ _Avoid_: edit mode, write access, maintenance mode
 **Private input**:
 The non-flake flake input `nixhome-private` — a private GitHub repo holding data that must not appear in this public repo, starting with the source-account addresses, their hosts, and grants. It carries dumb data only; all module logic stays public. Distinct from agenix: the private input holds identifying data, agenix holds secrets.
 _Avoid_: secrets repo, private flake (it is not a flake)
+
+### Backup
+
+**Backup set**:
+The paths on one host that restic captures as one job — the unit of "what is protected" for that host. What is left out of a set is a decision recorded in the spec, not an accident.
+_Avoid_: backup job (the systemd unit), paths, includes
+
+**Landing repo**:
+A restic repository on boba that receives a host's backup set over the tailnet through rest-server in append-only mode: the sender can add snapshots, only boba can prune. It is the first copy off the host and the source for the offsite copy; for sencha and taro it is never the only copy (boba's own landing repo shares boba's failure domain).
+_Avoid_: remote, target, mirror
+
+**Offsite copy**:
+The B2 repository that boba populates from a landing repo (or its own set) by `restic copy`. Fully independent: restorable with no host in the fleet alive.
+_Avoid_: cloud backup, second backup, replica
