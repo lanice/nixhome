@@ -1,5 +1,35 @@
 # Backup recovery runbook
 
+## B2 capacity guardrail
+
+The production bucket's storage cap is `$0.24/day`. Backblaze exposes only
+fixed alerts at 75% and 100% of the cap, with no custom storage threshold: the
+first fires at `$0.18/day` (about `785 GB`) and the cap represents `1.046 TB`.
+The expected steady footprint is about `300 GB`; the remaining `740 GB` covers
+one duplicate full upload plus roughly `440 GB` of locked garbage before the
+cap stops further growth. Class A, B and C transactions are free, so transaction
+caps do not bound this threat.
+
+## Bootstrap sencha's agenix identity
+
+sencha does not run sshd, so NixOS does not generate its host key. After a
+reinstall, restore the identity in this order:
+
+```fish
+sudo install -d -m 0755 /etc/ssh
+sudo ssh-keygen -q -t ed25519 -N "" -C root@sencha \
+  -f /etc/ssh/ssh_host_ed25519_key
+cat /etc/ssh/ssh_host_ed25519_key.pub
+```
+
+Add the printed public key as `fleet.hosts.sencha.hostKey` in
+`hosts/fleet.nix`, retain
+`age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"]` in sencha's
+configuration, add the new host key to every sencha-readable secret in
+`secrets/secrets.nix`, then re-key those secrets from the operator identity.
+Apply the sencha configuration only after the private key and recipient rules
+exist. Nothing else regenerates this key.
+
 ## Observed Podman volume inventory
 
 Inventory taken on boba on 2026-08-23 immediately before moving the rootful

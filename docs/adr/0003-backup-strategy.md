@@ -60,12 +60,16 @@ place of an ssh key, and plain HTTP over the tailnet.
 files, so a write-only B2 key breaks every run. Instead: bucket versioning +
 Object Lock in **governance** mode with 30-day default retention + one
 lifecycle rule (`daysFromHidingToDeleting=30`, unfinished large files
-cancelled after 7 days, never upload-age), a key with an explicit capability
-list that omits `bypassGovernance` and every retention/lifecycle/bucket-admin
-capability (this ADR is the canonical record of the final list, filled in
-once the key is proven against a disposable prefix: _pending_), and a daily
-account cap on storage — the one quantity that bounds a runaway uploader
-now that B2 bills no class A/B/C transactions. Compliance mode was
+cancelled after 7 days, never upload-age), and a bucket-scoped key with the
+exact capabilities `listFiles`, `readFiles`, `writeFiles`, `deleteFiles`,
+`listBuckets`, and `listAllBucketNames`. The four file capabilities alone
+failed restic's initial S3 `Stat(<config/>)` with `Access Denied`; adding only
+the two documented bucket-listing capabilities passed repository creation,
+backup, listing, check, restore, hide/delete and prune against a disposable
+prefix. The key omits `bypassGovernance` and every retention, lifecycle and
+bucket-administration capability. A daily account cap on storage is the one
+quantity that bounds a runaway uploader now that B2 bills no class A/B/C
+transactions. Compliance mode was
 considered and rejected: the threat is a hostile boba, boba's key cannot
 bypass governance, and the console login that can is kept out of agenix
 entirely (Bitwarden and the recovery packet only), so the two modes are

@@ -26,6 +26,7 @@ in {
     ./hardware-configuration.nix
 
     ./disk-config.nix
+    ./backup-secrets.nix
 
     ../common/global
     ../common/tailscale.nix

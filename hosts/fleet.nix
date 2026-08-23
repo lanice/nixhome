@@ -3,6 +3,9 @@
 # module system, so no module args here.
 {
   hosts = {
+    sencha = {
+      hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAv3szAVxIFqWKFoF7z+97k/nRCN/1VW0nD75EHGzbKQ root@sencha";
+    };
     boba = {
       tailscaleIP = "100.124.185.117";
       hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGMTGnHrTZedzzB7ssfr0yjPTrIpL4g19Yzi/46dVBdt root@boba";

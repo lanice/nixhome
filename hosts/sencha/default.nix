@@ -33,6 +33,14 @@
     # ../common/nvidia.nix
   ];
 
+  # sencha has no sshd, so its agenix machine identity is generated explicitly.
+  age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+  age.secrets = {
+    resticSenchaTransport.file = "${inputs.self}/secrets/resticSenchaTransport.age";
+    resticSenchaPassword.file = "${inputs.self}/secrets/resticSenchaPassword.age";
+    resticSenchaHealthcheckUuid.file = "${inputs.self}/secrets/resticSenchaHealthcheckUuid.age";
+  };
+
   # Boot into Cosmic by default; pick the "gnome" entry in systemd-boot to switch.
   desktops.cosmic.enable = lib.mkDefault true;
 
