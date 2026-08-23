@@ -6,6 +6,10 @@
   ...
 }: let
   fleet = import ../fleet.nix;
+  zfsMountDependency = {
+    after = ["zfs-mount.service"];
+    requires = ["zfs-mount.service"];
+  };
 in {
   imports = [
     # Used for bootstrap with nixos-anywhere
@@ -105,6 +109,19 @@ in {
     };
     oci-containers.backend = "podman";
   };
+
+  # Rootful Podman state is a separate ZFS dataset. zfs-mount.service creates
+  # no generated .mount unit, so every possible storage user must order
+  # directly after it; otherwise an early unit can write into the empty stub.
+  systemd.services =
+    lib.mapAttrs'
+    (name: _: lib.nameValuePair "podman-${name}" zfsMountDependency)
+    config.virtualisation.oci-containers.containers
+    // {
+      podman = zfsMountDependency;
+      gitea-runner-boba = zfsMountDependency;
+    };
+  systemd.sockets.podman = zfsMountDependency;
 
   # Allow containers to reach specific host-native services via the podman
   # bridge. Add ports here as new container ↔ host integrations are wired up.

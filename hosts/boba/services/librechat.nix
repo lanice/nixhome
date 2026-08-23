@@ -69,8 +69,13 @@ in {
     };
 
     mongodb = {
+      # The image declares /data/configdb. Give its empty, non-authoritative
+      # runtime metadata a stable named volume so container recreation does
+      # not leak anonymous volumes. Deliberately excluded from backups;
+      # MongoDB data is the bind mount below and is covered by the boba set.
       image = "mongo";
       volumes = [
+        "librechat-mongodb-configdb:/data/configdb"
         "${librechatDir}/data-node:/data/db"
       ];
       cmd = ["mongod" "--noauth"];
@@ -96,6 +101,9 @@ in {
         POSTGRES_PASSWORD = "mypassword";
       };
       volumes = [
+        # Deliberately excluded from recurring backups: LibreChat's vector
+        # state is disposable. Ticket 02 took and load-tested a one-off
+        # pg_dumpall before migrating the underlying container dataset.
         "pgdata2:/var/lib/postgresql/data"
       ];
     };

@@ -114,6 +114,12 @@ in {
             "var" = {
               type = "zfs_fs";
               mountpoint = "/var";
+              options."com.sun:auto-snapshot" = "true";
+            };
+            "containers" = {
+              type = "zfs_fs";
+              mountpoint = "/var/lib/containers";
+              options."com.sun:auto-snapshot" = "false";
             };
             "home" = {
               type = "zfs_fs";

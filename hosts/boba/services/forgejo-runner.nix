@@ -38,6 +38,9 @@
           # job containers need host networking to route via tailscale0.
           network = "host";
 
+          # The runner creates anonymous workspace and environment volumes for
+          # jobs. They are disposable execution state and deliberately excluded
+          # from backups; durable build cache uses the host bind mount below.
           # Allowlist for volumes workflows may request via their
           # `jobs.*.container.volumes` (theorangeexplorer mounts this as a
           # persistent build cache). Requests outside this list are silently

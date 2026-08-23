@@ -91,6 +91,15 @@ established this pattern.
   nix store, package caches, `Sync/photo-share` (the other household laptop's
   responsibility), `Sync/sd*`/`stable-diffusion`, Games ROMs. RAID plus ZFS
   snapshots are the only protection for media, and that is the intended level.
+- The Podman volumes observed during the `system/containers` migration are
+  deliberately excluded: LibreChat `pgdata2` vector state (disposable;
+  one-off migration dump only), Forgejo Actions workspace/environment volumes
+  (disposable job state), MongoDB's non-authoritative
+  `librechat-mongodb-configdb`, Tracearr's non-authoritative
+  `tracearr-backup`, and one empty orphan with no
+  current owner. MongoDB and Tracearr's authoritative state is in bind mounts
+  under `/var/lib` and remains in boba's backup set. Exact runtime-generated
+  volume IDs and observed owners live in the recovery runbook.
 - Pruned packs linger 30 days offsite under Object Lock — a few GB, accepted.
   Restic never multiparts a pack (200 MiB part size, 128 MiB max pack), so
   the unfinished-large-file lifecycle rule is a safety net, not a cost

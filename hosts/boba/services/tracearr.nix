@@ -22,7 +22,12 @@ in {
       LOG_LEVEL = "info";
     };
 
+    # The image declares /data/backup. Give its non-authoritative exports a
+    # stable named volume so container recreation does not leak anonymous
+    # volumes. Deliberately excluded; authoritative state is in the bind
+    # mounts below and is covered by the boba set.
     volumes = [
+      "tracearr-backup:/data/backup"
       "${dataDir}/postgres:/data/postgres:rw"
       "${dataDir}/redis:/data/redis:rw"
       "${dataDir}/data:/data/tracearr:rw"
