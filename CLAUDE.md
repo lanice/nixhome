@@ -28,6 +28,15 @@ colmena apply --on <hostname> [--verbose]
 
 Formatter is **alejandra**.
 
+### Known BookOrbit build failure
+
+A clean build of `nixosConfigurations.boba` currently fails in the
+`bookorbit-2.3.0` fixed-output source derivation with a hash mismatch. The
+target-side Colmena build can still succeed when boba has that closure cached.
+This is a deferred BookOrbit/reproducibility issue. During unrelated tickets,
+treat that exact failure as known, validate through the cached target build
+when available, and leave the BookOrbit package unchanged.
+
 ## Agent skills
 
 ### Issue tracker
