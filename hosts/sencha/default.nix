@@ -15,6 +15,7 @@
 
     ./hardware-configuration.nix
 
+    ./backup.nix
     ./syncthing.nix
     ./nix-ld.nix
     ./gpu-stress-monitor.nix

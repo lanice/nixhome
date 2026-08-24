@@ -16,10 +16,11 @@ boba's rest-server 0.14.0 starts with `--max-size 343597383680` (320 GiB).
 This is a shared limit for the entire `/data/backups/restic` path, not a
 per-repository limit. In that release, `mux.go` constructs one quota manager
 from `server.Path`, and `quota/quota.go` tallies that path recursively,
-including every subrepository. The four expected landing repositories total
-about 160 GiB (sencha 100 GiB, boba 50 GiB, mail archive 6.5 GiB, Forgejo
-3 GiB), so the limit allows roughly one duplicate full set while bounding a
-hostile sender far below the 20 TiB available on the dataset.
+including every subrepository. The four expected landing repositories currently
+total about 180 GiB (sencha 119 GiB, boba 50 GiB, mail archive 6.5 GiB,
+Forgejo 3 GiB), so the limit leaves about 140 GiB for churn and temporarily
+duplicated packs while bounding a hostile sender far below the 20 TiB available
+on the dataset.
 
 Because the quota is shared, a hostile sender can exhaust the landing
 allowance and temporarily deny writes to the other senders; rest-server cannot
@@ -42,6 +43,43 @@ Measured on boba on 2026-08-23 through the local rest-server:
 
 These are observations, not alert thresholds. A large departure should be
 traced against the configured includes and excludes before changing the set.
+
+## Observed sencha backup performance
+
+Measured on sencha and its boba landing on 2026-08-23:
+
+- The initial broad snapshot processed 1,558,244 files and 179.664 GiB in
+  26m09s, adding 125.017 GiB stored. A top-level snapshot inventory traced the
+  excess to 23.2 GiB of regenerable pnpm, Go, UMU, Whisper and Bun data; those
+  paths were added to the denylist. Steam Link's 2.4 MiB of Flatpak
+  paired-device state remains included.
+- The corrected warm run processed 723,062 files and 156.482 GiB in 19s,
+  adding 23.486 MiB stored. Service wall time was 20.998s.
+- During a local boba prune, the next backup logged `repo already locked,
+  waiting up to 30m0s`, then saved its snapshot. Service wall time was 25.592s.
+- After removing the superseded broad snapshot and pruning with
+  `--max-unused=0`, the latest snapshot held 117.993 GiB of compressed raw data
+  and the landing occupied 119 GiB. rest-server was restarted afterward so its
+  shared in-memory quota counter was re-tallied.
+
+The 20:00 hourly elapse on battery skipped the service, and reconnecting AC did
+not start it; the 21:00 elapse remained the fallback. An active backup exposed
+a systemd `sleep` inhibitor in `block` mode. The operator declined the
+hour-long suspend/wake exercise, so `Persistent=true` is configured but that
+wake path was not exercised.
+
+The NixOS restic module's stock initialization probe treats any
+`restic cat config` failure as a missing repository. That misclassified an
+active prune lock and attempted `restic init`. sencha therefore uses an
+equivalent custom initialization probe: lockless read-only config detection,
+initialization only for restic's missing-repository exit code, and a 30-second
+bound when boba is unreachable. The actual backup retains
+`--retry-lock=30m`.
+
+The bounded unreachable-boba run failed in 30.051s. The unit had no
+`OnFailure`, sent no mail and did not run its success-only healthcheck hook.
+The dashboard's last-ping timestamp remained unchanged; its one-day period and
+six-hour grace produce the 30-hour deadline.
 
 ## Bootstrap sencha's agenix identity
 
