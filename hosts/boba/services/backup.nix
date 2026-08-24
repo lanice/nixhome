@@ -7,17 +7,49 @@
   dumpDir = "/var/lib/postgresql/backup";
   dumpFile = "${dumpDir}/pg_dumpall.sql";
 
+  # Each inner list is one atomic ZFS snapshot operation, so it must contain
+  # datasets from exactly one pool. Every source lifecycle operation below is
+  # derived from these records.
+  snapshotGroups = [
+    [
+      {
+        dataset = "system/home";
+        mountPoint = "/run/backup/home";
+        bindSource = "/run/backup/home";
+        bindTarget = "/home";
+      }
+      {
+        dataset = "system/var";
+        mountPoint = "/run/backup/var";
+        bindSource = "/run/backup/var/lib";
+        bindTarget = "/var/lib";
+      }
+    ]
+    [
+      {
+        dataset = "data/storage";
+        mountPoint = "/run/backup/storage";
+        bindSource = "/run/backup/storage";
+        bindTarget = "/data/storage";
+      }
+      {
+        dataset = "data/media";
+        mountPoint = "/run/backup/media";
+        bindSource = "/run/backup/media";
+        bindTarget = "/data/media";
+      }
+    ]
+  ];
+  snapshotSources = lib.concatLists snapshotGroups;
+  cleanupSources = lib.reverseList snapshotSources;
+  snapshotName = source: "${source.dataset}@backup";
+
   unmountSnapshots = pkgs.writeShellScript "boba-backup-unmount" ''
     set -u
 
     status=0
 
-    for mountpoint in \
-      /run/backup/media \
-      /run/backup/storage \
-      /run/backup/var \
-      /run/backup/home
-    do
+    for mountpoint in ${lib.escapeShellArgs (map (source: source.mountPoint) cleanupSources)}; do
       if ${pkgs.util-linux}/bin/mountpoint --quiet "$mountpoint"; then
         ${pkgs.util-linux}/bin/umount --recursive "$mountpoint" || status=1
       fi
@@ -32,12 +64,7 @@
     status=0
     ${unmountSnapshots} || status=1
 
-    for snapshot in \
-      data/media@backup \
-      data/storage@backup \
-      system/var@backup \
-      system/home@backup
-    do
+    for snapshot in ${lib.escapeShellArgs (map snapshotName cleanupSources)}; do
       if ${pkgs.zfs}/bin/zfs list -H -o name -t snapshot "$snapshot" >/dev/null 2>&1; then
         ${pkgs.zfs}/bin/zfs destroy "$snapshot" || status=1
       fi
@@ -49,11 +76,7 @@
   prepare = pkgs.writeShellScript "boba-backup-prepare" ''
     set -eu
 
-    ${pkgs.coreutils}/bin/install -d -m 0700 \
-      /run/backup/home \
-      /run/backup/var \
-      /run/backup/storage \
-      /run/backup/media
+    ${pkgs.coreutils}/bin/install -d -m 0700 ${lib.escapeShellArgs (map (source: source.mountPoint) snapshotSources)}
 
     # This is the only logical database dump. Container databases below are
     # deliberately covered only by the crash-consistent ZFS snapshots.
@@ -67,19 +90,17 @@
 
     # TXGs are pool-local. Take one atomic snapshot set per pool; OpenZFS
     # rejects a single multi-pool invocation with EXDEV.
-    ${pkgs.zfs}/bin/zfs snapshot \
-      system/home@backup \
-      system/var@backup
-    ${pkgs.zfs}/bin/zfs snapshot \
-      data/storage@backup \
-      data/media@backup
+    ${lib.concatMapStringsSep "\n" (
+        group: "${pkgs.zfs}/bin/zfs snapshot ${lib.escapeShellArgs (map snapshotName group)}"
+      )
+      snapshotGroups}
 
     # Explicit mounts are stable bind sources. Do not use lazy .zfs/snapshot
     # automounts: they are created in the init namespace and can expire.
-    ${pkgs.util-linux}/bin/mount -t zfs -o ro system/home@backup /run/backup/home
-    ${pkgs.util-linux}/bin/mount -t zfs -o ro system/var@backup /run/backup/var
-    ${pkgs.util-linux}/bin/mount -t zfs -o ro data/storage@backup /run/backup/storage
-    ${pkgs.util-linux}/bin/mount -t zfs -o ro data/media@backup /run/backup/media
+    ${lib.concatMapStringsSep "\n" (
+        source: "${pkgs.util-linux}/bin/mount -t zfs -o ro ${lib.escapeShellArg (snapshotName source)} ${lib.escapeShellArg source.mountPoint}"
+      )
+      snapshotSources}
   '';
 
   hostUnmount = pkgs.writeShellScript "boba-backup-host-unmount" ''
@@ -169,12 +190,8 @@ in {
       ExecStopPost = lib.mkBefore ["+${hostCleanup}"];
       # `-` permits missing sources while the privileged hooks start. Prepare
       # mounts every source before the module-generated preStart and ExecStart.
-      BindReadOnlyPaths = [
-        "-/run/backup/home:/home"
-        "-/run/backup/var/lib:/var/lib"
-        "-/run/backup/storage:/data/storage"
-        "-/run/backup/media:/data/media"
-      ];
+      BindReadOnlyPaths =
+        map (source: "-${source.bindSource}:${source.bindTarget}") snapshotSources;
     };
   };
 }
