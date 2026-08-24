@@ -5,6 +5,7 @@
 
     ./adguard.nix
     ./backup-landing.nix
+    ./backup-offsite.nix
     ./backup.nix
     ./audiobookrequest.nix
     ./aurral.nix

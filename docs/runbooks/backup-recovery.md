@@ -28,6 +28,32 @@ provide per-user quotas in one process. The service must be restarted after a
 boba-side prune or other local deletion so its in-memory usage counter is
 re-tallied.
 
+## Offsite upload limit
+
+Measured from boba on 2026-08-23 with `speedtest-cli`: 175.71 Mbit/s
+upstream. The offsite chain passes `--limit-upload=10240`, equivalent to
+80 Mbit/s (46% of that measurement), leaving roughly half the uplink available
+to Jellyfin and game peers. During the first production copy, the B2 object-size
+delta was 258,003,084 bytes over 26.55 seconds: 9,489.9 KiB/s (77.74 Mbit/s),
+93% of the configured ceiling after request and object-commit overhead.
+
+## Observed offsite performance
+
+The initial four-repository copy on 2026-08-23/24 completed in 5h01m45s,
+sent 177.2 GiB, and successfully copied and pruned sencha, Forgejo, mail
+archive and boba. The next scheduled 05:30 run copied only new packs and
+finished in 1m31s. A scheduled sencha prune under B2 Object Lock produced a
+current delete marker over a retained 11,008,430-byte object version; ticket 11
+records the exact key, version IDs, hidden timestamp and 2026-09-24 observation
+date.
+
+The manual monthly check on 2026-08-24 used rotation group `8/12`, read 14.2
+GiB from B2, and finished in 4m26s. It read 556 sencha, 54 Forgejo, 38 mail
+archive and 196 boba data packs; metadata checks passed on all four landing
+repositories. The four canaries restored the same file from the newest offsite
+snapshot and its landing `original`; all SHA-256 comparisons passed and the
+monthly healthcheck accepted the success ping.
+
 ## Observed boba backup performance
 
 Measured on boba on 2026-08-23 through the local rest-server:

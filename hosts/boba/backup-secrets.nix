@@ -2,7 +2,14 @@
   config,
   inputs,
   ...
-}: {
+}: let
+  resticOwnedSecret = file: {
+    inherit file;
+    owner = "restic";
+    group = "restic";
+    mode = "0400";
+  };
+in {
   # Match services.restic.server's account so ticket 03 can enable the service
   # without changing secret ownership or the landing directory identity.
   users.users.restic = {
@@ -14,26 +21,21 @@
   users.groups.restic.gid = config.ids.uids.restic;
 
   age.secrets = {
-    resticHtpasswd = {
-      file = "${inputs.self}/secrets/resticHtpasswd.age";
-      owner = "restic";
-      group = "restic";
-      mode = "400";
-    };
+    resticHtpasswd = resticOwnedSecret "${inputs.self}/secrets/resticHtpasswd.age";
 
-    resticB2Credentials.file = "${inputs.self}/secrets/resticB2Credentials.age";
-    resticOffsiteHealthcheckUuid.file = "${inputs.self}/secrets/resticOffsiteHealthcheckUuid.age";
-    resticMonthlyHealthcheckUuid.file = "${inputs.self}/secrets/resticMonthlyHealthcheckUuid.age";
+    resticB2Credentials = resticOwnedSecret "${inputs.self}/secrets/resticB2Credentials.age";
+    resticOffsiteHealthcheckUuid = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteHealthcheckUuid.age";
+    resticMonthlyHealthcheckUuid = resticOwnedSecret "${inputs.self}/secrets/resticMonthlyHealthcheckUuid.age";
     resticBobaTransport.file = "${inputs.self}/secrets/resticBobaTransport.age";
 
-    resticSenchaPassword.file = "${inputs.self}/secrets/resticSenchaPassword.age";
-    resticForgejoPassword.file = "${inputs.self}/secrets/resticForgejoPassword.age";
-    mailArchiveResticPassword.file = "${inputs.self}/secrets/mailArchiveResticPassword.age";
-    resticBobaPassword.file = "${inputs.self}/secrets/resticBobaPassword.age";
+    resticSenchaPassword = resticOwnedSecret "${inputs.self}/secrets/resticSenchaPassword.age";
+    resticForgejoPassword = resticOwnedSecret "${inputs.self}/secrets/resticForgejoPassword.age";
+    mailArchiveResticPassword = resticOwnedSecret "${inputs.self}/secrets/mailArchiveResticPassword.age";
+    resticBobaPassword = resticOwnedSecret "${inputs.self}/secrets/resticBobaPassword.age";
 
-    resticOffsiteSenchaPassword.file = "${inputs.self}/secrets/resticOffsiteSenchaPassword.age";
-    resticOffsiteForgejoPassword.file = "${inputs.self}/secrets/resticOffsiteForgejoPassword.age";
-    resticOffsiteMailArchivePassword.file = "${inputs.self}/secrets/resticOffsiteMailArchivePassword.age";
-    resticOffsiteBobaPassword.file = "${inputs.self}/secrets/resticOffsiteBobaPassword.age";
+    resticOffsiteSenchaPassword = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteSenchaPassword.age";
+    resticOffsiteForgejoPassword = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteForgejoPassword.age";
+    resticOffsiteMailArchivePassword = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteMailArchivePassword.age";
+    resticOffsiteBobaPassword = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteBobaPassword.age";
   };
 }
