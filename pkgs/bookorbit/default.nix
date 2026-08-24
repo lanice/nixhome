@@ -1,7 +1,7 @@
-# Vendored from nixpkgs pull request 531375 (bookorbit: init at 2.3.0),
-# unmerged, last synced with the PR 2026-07-31. Deliberately not a URL or
-# repo#number reference: either would surface this public repo on the PR's
-# GitHub timeline.
+# Vendored from the unmerged nixpkgs BookOrbit package/module PR, last synced
+# 2026-08-24, then advanced locally from the PR's 2.6.0 to 2.7.0. Deliberately
+# not a URL or repo#number reference: either would surface this public repo on
+# the PR's GitHub timeline.
 # Delete this package (and hosts/boba/services/bookorbit/vendored-module.nix)
 # once the PR lands and pkgs.bookorbit exists upstream.
 {
@@ -10,27 +10,28 @@
   fetchFromGitHub,
   nix-update-script,
   nodejs,
-  pnpm_10,
+  pnpm_11,
   fetchPnpmDeps,
   pnpmConfigHook,
   ffmpeg,
   makeWrapper,
 }: let
-  pnpm = pnpm_10;
+  pnpm = pnpm_11;
 in
   stdenv.mkDerivation (finalAttrs: {
     pname = "bookorbit";
-    version = "2.3.0";
+    version = "2.7.0";
     __structuredAttrs = true;
     strictDeps = true;
 
     src = fetchFromGitHub {
       owner = "bookorbit";
       repo = "bookorbit";
-      tag = "v${finalAttrs.version}";
-      hash = "sha256-vJNIYffdDvCnIw/jiJC+/6g6RcwrT0bIxAkOxLIzlh4=";
+      # Upstream repointed every v2.3.0-v2.7.0 tag to this commit. Pin the
+      # object, not the mutable tag, so the fixed-output source stays stable.
+      rev = "7668f46c42bba6d9f91fd8fada2774e50b5ff876";
+      hash = "sha256-p75+BQVBm4zi/yeF73B/NSoG9+8wwjxNPumYI7mRFZE=";
     };
-
     pnpmWorkspaces = [
       "client..."
       "server..."
@@ -45,8 +46,8 @@ in
         pnpmWorkspaces
         ;
       inherit pnpm;
-      fetcherVersion = 3;
-      hash = "sha256-c5F9ppiUB5nw+HJZXrksXutminQ47ZBvvdAjpKSGk7Q=";
+      fetcherVersion = 4;
+      hash = "sha256-3jPKAZFMu8eC4IAakQ/6f6tAxJJ3Ar/4yhZhShL4MeE=";
     };
 
     nativeBuildInputs = [
@@ -76,34 +77,27 @@ in
     buildPhase = ''
       runHook preBuild
 
-      pnpm config set inject-workspace-packages true
-
       pnpm --filter client run build-only
       pnpm --filter server run build
 
-      mkdir ./deploy
-      pnpm --filter server deploy --prod ./deploy
-
       runHook postBuild
     '';
-
     installPhase = ''
       runHook preInstall
 
       mkdir -p $out/lib
-      cp -r deploy/* $out/lib/
+      pnpm --filter server \
+        --config.inject-workspace-packages=true \
+        --prod \
+        deploy $out/lib
       cp -r client/dist $out/lib/public
       cp -r server/src/db/migrations $out/lib/migrations
-
-      # Deviation from the PR, which omits the KOReader plugin entirely: the
-      # server zips and serves it from <cwd>/koreader-plugin/ (the wrapper
-      # below cd's to $out/lib), powering the web UI's "Download Plugin"
-      # button. Without this copy that endpoint 500s.
       cp -r koreader-plugin $out/lib/koreader-plugin
 
       makeWrapper ${nodejs}/bin/node $out/bin/bookorbit \
         --run "cd $out/lib" \
         --set NODE_ENV production \
+        --set APP_VERSION ${finalAttrs.version} \
         --add-flags "$out/lib/dist/main.js"
 
       makeWrapper ${nodejs}/bin/node $out/bin/bookorbit-migrate \
@@ -120,7 +114,7 @@ in
     meta = {
       description = "BookOrbit, self-hosted library management and reading platform for ebooks, PDFs, audiobooks, and comics.";
       homepage = "https://github.com/bookorbit/bookorbit";
-      changelog = "https://github.com/bookorbit/bookorbit/releases/tag/${finalAttrs.src.tag}";
+      changelog = "https://github.com/bookorbit/bookorbit/releases/tag/v${finalAttrs.version}";
       license = lib.licenses.agpl3Only;
       mainProgram = "bookorbit";
       platforms = lib.platforms.all;
