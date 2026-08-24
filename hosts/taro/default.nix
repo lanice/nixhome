@@ -15,6 +15,7 @@ in {
     ./hardware-configuration.nix
     ./disk-config.nix
     ./backup-secrets.nix
+    ./backup.nix
 
     ../common/global
     ../common/tailscale.nix
