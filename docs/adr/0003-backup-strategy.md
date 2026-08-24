@@ -113,24 +113,19 @@ established this pattern.
   under 7d/4w/12m while its garbage accumulates. A week of dailies is the
   detection window; the monthlies survive a year. It can still fill the
   repo, which rest-server's `--max-size` caps.
-- Object Lock is set on the bucket at creation; verifying restic's behaviour
-  under it is part of the mandatory restore drill, not assumed.
-- The lock changes what "restore" means when boba was *hostile* rather than
-  dead: every object can be hidden and overwritten, the data survives as
-  prior versions, and recovery is containment (isolate the host, revoke its
-  key) followed by **reconstruction elsewhere — the production bucket is
-  never mutated**. A script walks every key's versions under the repo
-  prefix and copies, into a fresh bucket or directory, the exact version
-  that was current just before the attack cutoff; keys whose last
-  pre-cutoff event was a hide marker (restic had pruned them) or that the
-  attacker created are skipped. One case, idempotent by construction, no
-  privileged write against production. The attacker's versions are left to
-  expire; early `bypassGovernance` deletion is cleanup, not recovery.
-  In-place promotion (copy old versions over the attacker's, place fresh
-  delete markers) was rejected: three cases, delete-marker bookkeeping, and
-  a privileged script one prefix bug away from taking all four repos
-  offline. Drilled read-only against a small versioned bucket with forced
-  pagination — not assumed.
+- Object Lock is set on the bucket at creation. An offsite prune has verified
+  that restic can remove current keys without errors and that B2 retains hidden
+  prior versions. Lifecycle expiry is observed separately.
+- A hostile boba can hide or overwrite every current object. Object Lock keeps
+  the prior versions, but the current prefix would no longer be a valid restic
+  repository. Recovery from that state is an untested emergency operation:
+  isolate boba, revoke its B2 key, use B2 version tooling to reconstruct the
+  pre-attack repository in a fresh bucket or local directory, then run
+  `restic check` and restore. Do not mutate the production bucket while
+  recovering. No reconstruction script or hostile rehearsal is maintained.
+  The normal clean-room drill proves recovery when boba is unavailable and the
+  current B2 repository is intact; it does not claim tested recovery from a
+  mass hostile overwrite.
 - The lock protects availability, not confidentiality. boba holds every
   landing and offsite password because it must open a repo to copy it, so a
   hostile boba can read everything backed up — sencha's `.ssh`, keyrings and
@@ -180,9 +175,9 @@ established this pattern.
   adds 24h. (`--keep-hourly 24` on a nightly repo keeps 24 nights.) Only
   boba prunes, landing and offsite alike, in the nightly chain after each
   repo's copy.
-- Operational procedures — clean-room restore, B2 reconstruction after a
-  hostile overwrite, drill rotation, Forgejo import, credential retrieval
-  order, measured timings, and the observed podman volume inventory — live in
+- Operational procedures such as clean-room restore, the annual human drill,
+  Forgejo import, credential retrieval order, measured timings, and the
+  observed podman volume inventory live in
   `docs/runbooks/backup-recovery.md`, not in the gitignored spec. Deliberate
   inclusion and exclusion decisions stay in this ADR; any excluded or
   specially dumped volume also carries a comment beside its Nix declaration.
