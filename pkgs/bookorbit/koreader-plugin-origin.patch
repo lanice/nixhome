@@ -1,0 +1,37 @@
+--- a/server/src/config/config.ts
++++ b/server/src/config/config.ts
+@@ -13,0 +14 @@
++  koreaderPluginOrigin: process.env.KOREADER_PLUGIN_ORIGIN?.trim() || undefined,
+--- a/server/src/config/config.test.ts
++++ b/server/src/config/config.test.ts
+@@ -15,0 +16 @@
++  delete process.env.KOREADER_PLUGIN_ORIGIN;
+@@ -55,0 +57 @@
++      koreaderPluginOrigin: undefined,
+@@ -66,0 +69 @@
++    process.env.KOREADER_PLUGIN_ORIGIN = 'http://192.168.4.41:3004';
+@@ -79,0 +83 @@
++      koreaderPluginOrigin: 'http://192.168.4.41:3004',
+--- a/server/src/modules/koreader/koreader-package.service.ts
++++ b/server/src/modules/koreader/koreader-package.service.ts
+@@ -40 +40 @@
+-      const serverUrl = this.normalizeOrigin(origin);
++      const serverUrl = this.normalizeOrigin(this.config.koreaderPluginOrigin ?? origin);
+--- a/server/src/modules/koreader/koreader-package.service.test.ts
++++ b/server/src/modules/koreader/koreader-package.service.test.ts
+@@ -28 +28 @@
+-  function makeService(sourcePath?: string, version = 'test-server-version') {
++  function makeService(sourcePath?: string, version = 'test-server-version', koreaderPluginOrigin?: string) {
+@@ -33,0 +34 @@
++        koreaderPluginOrigin,
+@@ -125,0 +127,10 @@
++  it('uses the configured plugin origin instead of the browser origin', async () => {
++    mockRepo.findKoreaderUser.mockResolvedValue(makeCredentialsRow());
++    service = makeService(undefined, 'test-server-version', 'http://192.168.4.41:3004');
++
++    const zip = await service.buildPluginPackage(7, 'https://books.example.com');
++    const entries = await readZipEntries(zip);
++
++    expect(entries.get('bookorbit.koplugin/bookorbit_provision.lua')).toContain('server_url = "http://192.168.4.41:3004"');
++  });
++

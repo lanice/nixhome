@@ -2,7 +2,7 @@
 # unmerged, last synced with the PR 2026-08-24. Deliberately not a URL or
 # repo#number reference: either would surface this public repo on the PR's
 # GitHub timeline. Delete this file (and pkgs/bookorbit/) once the PR lands,
-# switching to the upstream module. Three deliberate deviations from the PR:
+# switching to the upstream module. Four deliberate deviations from the PR:
 #
 #   1. `package` defaults to this flake's vendored package instead of
 #      `pkgs.bookorbit`, which does not exist upstream yet.
@@ -13,6 +13,10 @@
 #
 #   3. PostgreSQL setup explicitly provisions `unaccent`, which current
 #      BookOrbit installation requirements include and migration 0047 uses.
+#
+#   4. `koreaderPluginOrigin` declaratively embeds a device-reachable origin
+#      when browser and KOReader network paths differ.
+#
 # (An earlier deviation — dropping the `bookPath` option in favor of the
 # estate's share declaration — was adopted upstream on 2026-07-31.)
 {
@@ -42,7 +46,12 @@
       then toString v
       else v
     }") (
-      lib.filterAttrs (_: v: v != null) cfg.environment
+      lib.filterAttrs (_: v: v != null) (
+        cfg.environment
+        // lib.optionalAttrs (cfg.koreaderPluginOrigin != null) {
+          KOREADER_PLUGIN_ORIGIN = cfg.koreaderPluginOrigin;
+        }
+      )
     );
 in {
   options.services.bookorbit = {
@@ -77,6 +86,16 @@ in {
       type = types.bool;
       default = true;
       description = "Create the database locally.";
+    };
+
+    koreaderPluginOrigin = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      example = "http://192.168.1.10:3000";
+      description = ''
+        Origin embedded in preconfigured KOReader plugin downloads. Use this
+        when readers reach BookOrbit through a different origin than browsers.
+      '';
     };
 
     environment = mkOption {

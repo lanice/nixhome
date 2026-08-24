@@ -33,6 +33,9 @@ in {
     # unmapped ids appear as nobody inside the user namespace — but the unit's
     # own group is mapped, so hardening and share access coexist.
     inherit (media) group;
+    # Preconfigured plugin downloads must use the Kindle-reachable LAN origin,
+    # not the browser's tailnet-only published origin.
+    koreaderPluginOrigin = "http://192.168.4.41:${toString config.services.bookorbit.environment.PORT}";
 
     environment = {
       PORT = 3004;

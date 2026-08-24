@@ -32,6 +32,8 @@ in
       rev = "7668f46c42bba6d9f91fd8fada2774e50b5ff876";
       hash = "sha256-p75+BQVBm4zi/yeF73B/NSoG9+8wwjxNPumYI7mRFZE=";
     };
+    patches = [./koreader-plugin-origin.patch];
+
     pnpmWorkspaces = [
       "client..."
       "server..."
@@ -82,6 +84,16 @@ in
 
       runHook postBuild
     '';
+    doCheck = true;
+    checkPhase = ''
+      runHook preCheck
+
+      pnpm --filter server exec vitest run \
+        src/config/config.test.ts \
+        src/modules/koreader/koreader-package.service.test.ts
+      runHook postCheck
+    '';
+
     installPhase = ''
       runHook preInstall
 
