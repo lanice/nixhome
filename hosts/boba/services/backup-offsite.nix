@@ -116,12 +116,14 @@
         return 1
       fi
 
+      # One writer per repo. Default grouping (host,paths) freezes the old
+      # path set's last 7/4/12 snapshots forever whenever a sender's paths change.
       echo "[$name] pruning offsite repository"
       if ! ${pkgs.restic}/bin/restic \
         --repo "$offsite_repo" \
         --password-file "$offsite_password" \
         --retry-lock=2h \
-        forget --prune --keep-daily 7 --keep-weekly 4 --keep-monthly 12; then
+        forget --prune --group-by host --keep-daily 7 --keep-weekly 4 --keep-monthly 12; then
         echo "[$name] offsite prune failed; landing prune skipped" >&2
         return 1
       fi
@@ -132,7 +134,7 @@
           --repo "$landing_repo" \
           --password-file "$landing_password" \
           --retry-lock=2h \
-          forget --prune --keep-hourly 24 --keep-daily 7 --keep-weekly 4 --keep-monthly 12; then
+          forget --prune --group-by host --keep-hourly 24 --keep-daily 7 --keep-weekly 4 --keep-monthly 12; then
           echo "[$name] landing prune failed" >&2
           return 1
         fi
@@ -140,7 +142,7 @@
         --repo "$landing_repo" \
         --password-file "$landing_password" \
         --retry-lock=2h \
-        forget --prune --keep-daily 7 --keep-weekly 4 --keep-monthly 12; then
+        forget --prune --group-by host --keep-daily 7 --keep-weekly 4 --keep-monthly 12; then
         echo "[$name] landing prune failed" >&2
         return 1
       fi

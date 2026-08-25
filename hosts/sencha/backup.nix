@@ -16,11 +16,13 @@ in {
     # The module's initializer mistakes an active prune lock for a missing
     # repository. Probe read-only without a lock, bound backend retries when
     # boba is unreachable, and initialize only for restic's missing-repo code.
+    # 180s: the Persistent catch-up fires ~8s after boot, before the tailnet
+    # is usable; a boot on 2026-08-25 needed 96s for the path to boba.
     initialize = false;
     backupPrepareCommand = ''
       #!${pkgs.runtimeShell}
       set +e
-      ${pkgs.coreutils}/bin/timeout --signal=TERM --kill-after=5s 30s \
+      ${pkgs.coreutils}/bin/timeout --signal=TERM --kill-after=5s 180s \
         ${pkgs.restic}/bin/restic --no-lock cat config >/dev/null
       status=$?
       set -e

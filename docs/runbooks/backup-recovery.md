@@ -28,6 +28,29 @@ provide per-user quotas in one process. The service must be restarted after a
 boba-side prune or other local deletion so its in-memory usage counter is
 re-tallied.
 
+## Retention grouping
+
+Every `forget` in the offsite chain runs with `--group-by host`. restic applies
+the keep policy per group, and its default grouping is `host,paths`; the
+`--keep-*` counts are relative to the snapshots in a group, not the calendar.
+A group that stops receiving snapshots therefore keeps its last 7 daily /
+4 weekly / 12 monthly forever. That happened on 2026-08-23 when ssh host keys
+joined the mail-archive set: the nine pre-cutover snapshots
+(`/var/lib/mail-archive` only) survived two prunes as a frozen second group.
+Grouping by host only lets old path sets compete with new ones for the same
+slots and age out normally.
+
+Implications:
+
+- Each repo must keep exactly one writer and one logical set. Two jobs from the
+  same host sharing a repo would evict each other's snapshots.
+- A sender whose hostname changes (reinstall under a new name) forms a new
+  group and freezes the old one the same way. Either keep the name, or forget
+  the old group by hand once: `restic forget --host <old> --keep-last 0`.
+- Watch the prune output on the 05:30 chain: each repo should print one
+  `keep N snapshots:` block per prune. Two blocks means a second group exists
+  and something about the sender's identity changed.
+
 ## Offsite upload limit
 
 Measured from boba on 2026-08-23 with `speedtest-cli`: 175.71 Mbit/s
@@ -98,9 +121,19 @@ The NixOS restic module's stock initialization probe treats any
 `restic cat config` failure as a missing repository. That misclassified an
 active prune lock and attempted `restic init`. sencha therefore uses an
 equivalent custom initialization probe: lockless read-only config detection,
-initialization only for restic's missing-repository exit code, and a 30-second
+initialization only for restic's missing-repository exit code, and a 180-second
 bound when boba is unreachable. The actual backup retains
 `--retry-lock=30m`.
+
+The bound was 30 seconds until 2026-08-25. `Persistent=true` fires the
+catch-up about 8 seconds after boot, and `network-online.target` is reached
+before the tailnet is usable; on that boot outbound internet took 57 seconds
+and the path to boba 96 seconds, so the probe timed out and the unit sat in
+`failed` until the next hour. Two earlier boots had the tailnet up within
+13 seconds. A probe failure at boot is harmless (the hourly timer retries, no
+mail by design) but shows up in `systemctl --failed` on sencha; if that recurs
+with 180 seconds, check `journalctl -b -u tailscaled` for `open-conn-track`
+timeouts before touching the bound.
 
 The bounded unreachable-boba run failed in 30.051s. The unit had no
 `OnFailure`, sent no mail and did not run its success-only healthcheck hook.
