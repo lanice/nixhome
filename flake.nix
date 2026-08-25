@@ -52,6 +52,9 @@
     cosmic-applets-collection.url = "github:wingej0/ext-cosmic-applets-flake";
     cosmic-applets-collection.inputs.nixpkgs.follows = "nixpkgs";
 
+    dbosctl.url = "github:dbos-inc/dbos-ctl/v0.9.0";
+    dbosctl.inputs.nixpkgs.follows = "nixpkgs";
+
     kenku-fm.url = "github:lanice/kenku-fm.nix";
 
     # Identifying data (email addresses, mail-archive source accounts) that

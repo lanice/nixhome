@@ -45,6 +45,7 @@
 
     packages = let
       colmena-unstable = inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena;
+      dbosctl = inputs.dbosctl.packages.${pkgs.stdenv.hostPlatform.system}.default;
       zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser;
       kenku-fm = inputs.kenku-fm.packages.${pkgs.stdenv.hostPlatform.system}.kenku-fm-experimental;
     in
@@ -66,6 +67,7 @@
 
         auth0-cli
         awscli
+        dbosctl
 
         sxiv
         # bitwarden-desktop

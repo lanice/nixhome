@@ -189,6 +189,27 @@
         "type": "github"
       }
     },
+    "dbosctl": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787093667,
+        "narHash": "sha256-ZMkSp9y3h0rid8ina1eyl9DBKagEK5V9n1y1b1hS7Zk=",
+        "owner": "dbos-inc",
+        "repo": "dbos-ctl",
+        "rev": "145d36884026ef8294c9aec0eb6debbb46858b6c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dbos-inc",
+        "ref": "v0.9.0",
+        "repo": "dbos-ctl",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -694,6 +715,7 @@
         "colmena": "colmena",
         "cosmic-applets-collection": "cosmic-applets-collection",
         "cosmic-manager": "cosmic-manager",
+        "dbosctl": "dbosctl",
         "disko": "disko",
         "firefox-addons": "firefox-addons",
         "hardware": "hardware",
