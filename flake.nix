@@ -118,6 +118,10 @@
         modules = [./hosts/taro];
         specialArgs = {inherit inputs;};
       };
+      longjing = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/longjing];
+        specialArgs = {inherit inputs;};
+      };
     };
 
     homeConfigurations."lanice@matcha" = inputs.home-manager.lib.homeManagerConfiguration {
