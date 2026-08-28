@@ -32,7 +32,7 @@
     ./features/desktop/cosmic
     ./features/desktop/gnome
 
-    ./features/espanso
+    # ./features/espanso
 
     ./themes/catppuccin-macchiato
   ];
