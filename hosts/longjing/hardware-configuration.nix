@@ -20,6 +20,11 @@
 
   boot.initrd.luks.devices."luks-e6d7fb62-5eac-4357-9199-3b17ae957ee0".device = "/dev/disk/by-uuid/e6d7fb62-5eac-4357-9199-3b17ae957ee0";
 
+  # nixos-generate-config only emits luks entries for mounted filesystems, so
+  # the LUKS-backed swap partition (nvme0n1p3) has to be added by hand or
+  # systemd waits 90s for a mapper device nothing ever creates.
+  boot.initrd.luks.devices."luks-bc166f57-f7df-4c32-ba12-58ced1be01f4".device = "/dev/disk/by-uuid/bc166f57-f7df-4c32-ba12-58ced1be01f4";
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/1F8C-4548";
       fsType = "vfat";
