@@ -24,7 +24,7 @@
 
     ./features/desktop/cosmic
 
-    ./themes/catppuccin-latte
+    ./themes/catppuccin-mocha
   ];
 
   home = {
