@@ -18,6 +18,7 @@
     ./features/distrobox
 
     ./features/desktop/firefox
+    ./features/desktop/zen
     ./features/desktop/zed
     ./features/desktop/ghostty
     ./features/desktop/office
@@ -26,6 +27,8 @@
 
     ./themes/catppuccin-mocha
   ];
+
+  browser.default = "zen";
 
   home = {
     sessionVariables = {
@@ -36,7 +39,6 @@
     packages = let
       colmena-unstable = inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena;
       dbosctl = inputs.dbosctl.packages.${pkgs.stdenv.hostPlatform.system}.default;
-      zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser;
       kenku-fm = inputs.kenku-fm.packages.${pkgs.stdenv.hostPlatform.system}.kenku-fm-experimental;
     in
       with pkgs; [
@@ -61,7 +63,6 @@
         colmena-unstable
         prismlauncher
         seventeenlands
-        zen-browser
         filezilla
         jellyfin-desktop
         feishin

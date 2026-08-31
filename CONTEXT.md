@@ -1,6 +1,6 @@
 # nixhome
 
-A NixOS + home-manager flake managing a personal fleet: two workstations and the homelab. This glossary pins the terms that the configuration is organised around.
+A NixOS + home-manager flake managing a personal fleet: the workstations and the homelab. This glossary pins the terms that the configuration is organised around.
 
 ## Language
 
@@ -43,6 +43,10 @@ _Avoid_: all hosts, machines, infra
 **Fleet registry**:
 The one record of fleet identity facts: each host's tailnet address and SSH host key, and each person's or device's public key. A fact belongs here once more than nothing consumes it; everything that reaches or trusts a host reads the registry instead of restating the fact. Entries may be sparse — a host appears with only the facts something actually uses.
 _Avoid_: inventory (Ansible's word), address book, hosts file
+
+**Default browser**:
+The browser on a workstation that owns web links: it is what URL and HTML handlers resolve to and what `$BROWSER` names. One per workstation, chosen deliberately; the other installed browsers stay available (dock, launcher) but nothing hands them links.
+_Avoid_: primary browser, main browser
 
 ### Mail archive
 

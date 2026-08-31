@@ -212,6 +212,7 @@ in {
         enable_drag_source = true;
         favorites = [
           "firefox"
+          "zen-beta"
           "com.mitchellh.ghostty"
           "slack"
           "thunderbird"

@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   config,
   inputs,
   ...
@@ -38,7 +39,6 @@
         "browser.shell.defaultBrowserCheckCount" = 1;
         "browser.startup.homepage" = "https://kagi.com/";
         "browser.startup.page" = 3; # Resume last session.
-        "browser.download.dir" = "${config.home.homeDirectory}/download";
         "browser.newtabpage.enabled" = false; # Blank new tab page.
         "browser.ctrlTab.sortByRecentlyUsed" = true;
         "browser.toolbars.bookmarks.visibility" = "never";
@@ -71,7 +71,7 @@
     };
   };
 
-  xdg.mimeApps.defaultApplications = {
+  xdg.mimeApps.defaultApplications = lib.mkIf (config.browser.default == "firefox") {
     "text/html" = ["firefox.desktop"];
     "text/xml" = ["firefox.desktop"];
     "x-scheme-handler/http" = ["firefox.desktop"];

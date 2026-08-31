@@ -17,6 +17,7 @@ in {
       "org/gnome/shell" = {
         favorite-apps = [
           "firefox.desktop"
+          "zen-beta.desktop"
           "code.desktop"
           "com.mitchellh.ghostty.desktop"
           "slack.desktop"
