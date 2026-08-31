@@ -11,8 +11,8 @@
       flake-registry = ""; # Disable global flake registry
 
       trusted-substituters = ["https://devenv.cachix.org/"];
-      extra-substituters = ["https://devenv.cachix.org/" "https://cache.numtide.com" "https://cache.nixos-cuda.org"];
-      extra-trusted-public-keys = ["devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=" "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="];
+      extra-substituters = ["https://devenv.cachix.org/" "https://cache.numtide.com" "https://cache.nixos-cuda.org" "https://colmena.cachix.org"];
+      extra-trusted-public-keys = ["devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=" "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="];
     };
     # GC handled by programs.nh.clean (see ./nh.nix)
 

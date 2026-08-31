@@ -2,6 +2,7 @@
   lib,
   config,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [inputs.catppuccin.homeModules.catppuccin];
@@ -42,6 +43,10 @@
       catppuccin = {
         enable = true;
         autoEnable = config.theme.catppuccin.enable;
+        # nixpkgs' whiskers is on cache.nixos.org; the flake's own gets rebuilt on every nixpkgs bump
+        sources = inputs.catppuccin.packages.${pkgs.stdenv.hostPlatform.system}.overrideScope (_: _: {
+          whiskers = pkgs.catppuccin-whiskers;
+        });
       };
     }
     (lib.mkIf config.theme.catppuccin.enable {
