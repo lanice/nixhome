@@ -194,16 +194,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1787093667,
-        "narHash": "sha256-ZMkSp9y3h0rid8ina1eyl9DBKagEK5V9n1y1b1hS7Zk=",
+        "lastModified": 1787859731,
+        "narHash": "sha256-sVvfLhVAGR1DYoDontfPpFgd5VRsmvMyFQg53ECh47s=",
         "owner": "dbos-inc",
         "repo": "dbos-ctl",
-        "rev": "145d36884026ef8294c9aec0eb6debbb46858b6c",
+        "rev": "17879522360ced42ea9a2a7778e0a2d0973d7901",
         "type": "github"
       },
       "original": {
         "owner": "dbos-inc",
-        "ref": "v0.9.0",
+        "ref": "v0.10.1",
         "repo": "dbos-ctl",
         "type": "github"
       }
