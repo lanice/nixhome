@@ -12,45 +12,29 @@
 
     settings = {
       devices = {
+        "sencha" = {id = "4BN4A3S-EUA2SVD-QNEJHI6-LJKBVWW-7FV4YRE-5YOIQBR-A4CWZLB-OQLGBA6";};
         "boba" = {id = "DGY5HLA-TIKZI6X-BNMZULZ-PHPMCJH-L57RGVV-TGEKYH3-7VISX5L-W4KYOQL";};
         "unstable" = {id = "ZSOKQGJ-K55JPO2-W4N75YJ-6NJI64R-HLQTT72-JENBU3L-DU44IG5-BVHIXAS";};
         "SunsetDragon" = {id = "GQWATA7-Y6EUELT-HZYCAOU-O6AMUID-YIU4AYD-O7QT3V4-ZUE4ZP7-LIITDAE";};
         "S23Ultra" = {id = "IO377ZW-XGOPD22-O6N6B4F-WQJYEYF-2GE463X-DH7MY4M-ZZEQ5CN-T2HJTAC";};
-        "longjing" = {id = "5JEE5H6-VNV7EFN-OFUK3YC-ID2B4W2-KDVP4O7-DDUI6GJ-D7STGCF-BT6VKA3";};
       };
 
       folders = {
-        "sd" = {
-          path = "/home/lanice/Sync/sd";
-          devices = ["unstable"];
-        };
-        "sd-misc" = {
-          path = "/home/lanice/Sync/sd-misc";
-          devices = ["unstable"];
-        };
         "paperless" = {
           path = "/home/lanice/Sync/paperless";
-          devices = ["boba" "longjing"];
-        };
-        "books" = {
-          path = "/home/lanice/Sync/books";
-          devices = ["boba"];
-        };
-        "stable-diffusion" = {
-          path = "/home/lanice/Sync/stable-diffusion";
-          devices = ["unstable" "SunsetDragon"];
+          devices = ["sencha" "boba"];
         };
         "photo-share" = {
           path = "/home/lanice/Sync/photo-share";
-          devices = ["unstable" "SunsetDragon" "longjing"];
+          devices = ["sencha" "unstable" "SunsetDragon"];
         };
         "projects" = {
           path = "/home/lanice/Sync/projects";
-          devices = ["SunsetDragon" "longjing"];
+          devices = ["sencha" "SunsetDragon"];
         };
         "s23sync" = {
           path = "/home/lanice/Sync/s23sync";
-          devices = ["S23Ultra" "longjing"];
+          devices = ["sencha" "S23Ultra"];
         };
       };
     };

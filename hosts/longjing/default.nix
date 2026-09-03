@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
 
     ./nix-ld.nix
+    ./syncthing.nix
 
     ../common/global
     ../common/tailscale.nix

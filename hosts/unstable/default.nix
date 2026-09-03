@@ -90,6 +90,7 @@ in {
         "sencha" = {id = "4BN4A3S-EUA2SVD-QNEJHI6-LJKBVWW-7FV4YRE-5YOIQBR-A4CWZLB-OQLGBA6";};
         "SunsetDragon" = {id = "GQWATA7-Y6EUELT-HZYCAOU-O6AMUID-YIU4AYD-O7QT3V4-ZUE4ZP7-LIITDAE";};
         "S23Ultra" = {id = "IO377ZW-XGOPD22-O6N6B4F-WQJYEYF-2GE463X-DH7MY4M-ZZEQ5CN-T2HJTAC";};
+        "longjing" = {id = "5JEE5H6-VNV7EFN-OFUK3YC-ID2B4W2-KDVP4O7-DDUI6GJ-D7STGCF-BT6VKA3";};
       };
 
       folders = {
@@ -107,7 +108,7 @@ in {
         };
         "photo-share" = {
           path = "/home/lanice/Sync/photo-share";
-          devices = ["sencha" "SunsetDragon"];
+          devices = ["sencha" "SunsetDragon" "longjing"];
         };
       };
     };
