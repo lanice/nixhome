@@ -1,5 +1,6 @@
 _: let
   baseDir = "/home/syncthing";
+  fleet = import ../../fleet.nix;
 in {
   services.syncthing = {
     enable = true;
@@ -14,9 +15,9 @@ in {
 
     settings = {
       devices = {
-        "sencha" = {id = "4BN4A3S-EUA2SVD-QNEJHI6-LJKBVWW-7FV4YRE-5YOIQBR-A4CWZLB-OQLGBA6";};
-        "S23Ultra" = {id = "IO377ZW-XGOPD22-O6N6B4F-WQJYEYF-2GE463X-DH7MY4M-ZZEQ5CN-T2HJTAC";};
-        "longjing" = {id = "5JEE5H6-VNV7EFN-OFUK3YC-ID2B4W2-KDVP4O7-DDUI6GJ-D7STGCF-BT6VKA3";};
+        sencha.id = fleet.hosts.sencha.syncthingId;
+        longjing.id = fleet.hosts.longjing.syncthingId;
+        S23Ultra.id = fleet.devices.S23Ultra.syncthingId;
       };
 
       folders = {

@@ -33,6 +33,7 @@ in {
 
     ./nginx.nix
     ./paperless.nix
+    ./syncthing.nix
   ];
 
   users.users.lanice.shell = lib.mkForce pkgs.bash;
@@ -72,46 +73,6 @@ in {
     settings.PermitRootLogin = "no";
     # Use keys only. Remove if you want to SSH using password (not recommended)
     settings.PasswordAuthentication = false;
-  };
-
-  services.syncthing = {
-    enable = true;
-    user = "lanice";
-    dataDir = "/home/lanice/Sync"; # Default folder for new synced folders
-    configDir = "/home/lanice/.config/syncthing"; # Folder for Syncthing's settings and keys
-
-    overrideDevices = true; # overrides any devices added or deleted through the WebUI
-    overrideFolders = true; # overrides any folders added or deleted through the WebUI
-
-    guiAddress = "0.0.0.0:8384";
-
-    settings = {
-      devices = {
-        "sencha" = {id = "4BN4A3S-EUA2SVD-QNEJHI6-LJKBVWW-7FV4YRE-5YOIQBR-A4CWZLB-OQLGBA6";};
-        "SunsetDragon" = {id = "GQWATA7-Y6EUELT-HZYCAOU-O6AMUID-YIU4AYD-O7QT3V4-ZUE4ZP7-LIITDAE";};
-        "S23Ultra" = {id = "IO377ZW-XGOPD22-O6N6B4F-WQJYEYF-2GE463X-DH7MY4M-ZZEQ5CN-T2HJTAC";};
-        "longjing" = {id = "5JEE5H6-VNV7EFN-OFUK3YC-ID2B4W2-KDVP4O7-DDUI6GJ-D7STGCF-BT6VKA3";};
-      };
-
-      folders = {
-        "sd" = {
-          path = "/home/lanice/Sync/sd";
-          devices = ["sencha"];
-        };
-        "sd-misc" = {
-          path = "/home/lanice/Sync/sd-misc";
-          devices = ["sencha"];
-        };
-        "stable-diffusion" = {
-          path = "/home/lanice/Sync/stable-diffusion";
-          devices = ["sencha" "SunsetDragon"];
-        };
-        "photo-share" = {
-          path = "/home/lanice/Sync/photo-share";
-          devices = ["sencha" "SunsetDragon" "longjing"];
-        };
-      };
-    };
   };
 
   # security.polkit.enable = true;

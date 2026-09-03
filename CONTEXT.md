@@ -41,7 +41,7 @@ Every host this flake manages — the workstations and the homelab together. The
 _Avoid_: all hosts, machines, infra
 
 **Fleet registry**:
-The one record of fleet identity facts: each host's tailnet address and SSH host key, and each person's or device's public key. A fact belongs here once more than nothing consumes it; everything that reaches or trusts a host reads the registry instead of restating the fact. Entries may be sparse — a host appears with only the facts something actually uses.
+The one record of fleet identity facts: each host's tailnet address, SSH host key and Syncthing device ID, and each person's or device's public key. Syncthing peers outside the fleet appear too, since fleet hosts trust them by ID. A fact belongs here once more than nothing consumes it; everything that reaches or trusts a host reads the registry instead of restating the fact. Entries may be sparse — a host appears with only the facts something actually uses.
 _Avoid_: inventory (Ansible's word), address book, hosts file
 
 **Default browser**:
