@@ -49,6 +49,12 @@ in {
       includeCoAuthoredBy = false;
       cleanupPeriodDays = 700;
 
+      attribution = {
+        commit = "";
+        pr = "";
+        sessionUrl = false;
+      };
+
       permissions = {
         defaultMode = "auto";
       };
