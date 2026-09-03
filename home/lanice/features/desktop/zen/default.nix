@@ -218,36 +218,36 @@ in {
           position = 1000;
           icon = "🏠";
           pins = {
-            "YNAB US" = {
-              id = "f4f08500-dc20-4fd7-8a0e-a36374818c55";
-              url = "https://app.ynab.com/6ca81d32-b850-4e47-9ad0-7dd42e5ada08/accounts/67440e2d-9c1a-412d-81af-807c91089b29";
-              position = 101;
-              editedTitle = true;
-            };
             "YNAB DE" = {
               id = "1342d3a6-8998-4097-9c7f-8dea632e0d3c";
               url = "https://app.ynab.com/03debbfd-396e-41cf-b9c2-e18199e0d012/budget/202608";
+              position = 101;
+              editedTitle = true;
+            };
+            "YNAB US" = {
+              id = "f4f08500-dc20-4fd7-8a0e-a36374818c55";
+              url = "https://app.ynab.com/6ca81d32-b850-4e47-9ad0-7dd42e5ada08/accounts/67440e2d-9c1a-412d-81af-807c91089b29";
               position = 102;
-              editedTitle = true;
-            };
-            "Gmail" = {
-              id = "7cc0275b-2bdf-4b19-847c-9b8396542e39";
-              url = "https://mail.google.com/";
-              container = ctr.my;
-              position = 103;
-              editedTitle = true;
-            };
-            "Calendar" = {
-              id = "c9cc8dc2-24ae-4495-9997-4cb58e6db8cb";
-              url = "https://calendar.google.com/";
-              container = ctr.my;
-              position = 104;
               editedTitle = true;
             };
             "Gmail (lemanda)" = {
               id = "037db2bf-7442-4df1-88fc-a5121a21dd79";
               url = "https://mail.google.com/";
               container = ctr.lemanda;
+              position = 103;
+              editedTitle = true;
+            };
+            "Gmail" = {
+              id = "7cc0275b-2bdf-4b19-847c-9b8396542e39";
+              url = "https://mail.google.com/";
+              container = ctr.my;
+              position = 104;
+              editedTitle = true;
+            };
+            "Calendar" = {
+              id = "c9cc8dc2-24ae-4495-9997-4cb58e6db8cb";
+              url = "https://calendar.google.com/";
+              container = ctr.my;
               position = 105;
               editedTitle = true;
             };
@@ -293,13 +293,7 @@ in {
       # demoted to normal tabs on the next switch — declare them here instead.
       pinsForce = true;
       pinsForceAction = "demote";
-      pins."Kagi News" = {
-        id = "22a5be71-ad91-4da5-9835-01f2230fbeeb";
-        url = "https://news.kagi.com/";
-        position = 1;
-        isEssential = true;
-        editedTitle = true;
-      };
+      pins = {};
 
       spaceRouting = {
         defaultExternalRoute = "most-recent-space";
