@@ -20,6 +20,7 @@
     ../common/pipewire.nix
     ../common/virtualisation.nix
     ../common/steam.nix
+    ../common/fleet-ssh.nix
 
     ../common/cosmic.nix
   ];

@@ -23,6 +23,7 @@
   users = {
     lanice-sencha = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGwdc+uAZvNnh7OTdtIT1ei1n/S+jZdYBZlDXNkNouo2 lanice@sencha";
     lanice-unstable = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHr1ModaOEBmMoP4IhJim4Uorgg8KIz7pfSPEWzVk1aq lanice@unstable";
+    lanice-longjing = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEt3cdjFpGUfLo47pun2HmJo9zGeOjGD+1fBXOJciMXN lanice@longjing";
     juicessh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICgsgaiVXnUCumEl99kkvf7xYpik5jCryuo4gsrxztKn JuiceSSH";
   };
 }

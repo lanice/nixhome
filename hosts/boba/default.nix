@@ -96,6 +96,7 @@ in {
   users.users.lanice = {
     openssh.authorizedKeys.keys = [
       fleet.users.lanice-sencha
+      fleet.users.lanice-longjing
       fleet.users.juicessh
     ];
   };

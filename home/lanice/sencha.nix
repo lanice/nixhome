@@ -10,6 +10,7 @@
     ./global # includes features/cli,features/helix
 
     ./features/cli/agents.nix
+    ./features/cli/ssh.nix
     ./features/cli/zellij
     ./features/cli/fabric.nix
     ./features/cli/typst.nix
