@@ -11,8 +11,11 @@
 
   fleet = import ../fleet.nix;
 
-  home = config.users.users.lanice.home;
-  syncDir = "${home}/Sync";
+  # A literal name: the syncthing module defines users.users from it, so
+  # reading the user record back into services.syncthing.user would recurse.
+  userName = "lanice";
+  user = config.users.users.${userName};
+  syncDir = "${user.home}/Sync";
 
   # Every Syncthing identity the registry knows, fleet hosts and outside
   # devices alike, keyed by the name folders refer to.
@@ -47,9 +50,9 @@ in {
 
     services.syncthing = {
       enable = true;
-      user = "lanice";
+      user = userName;
       dataDir = syncDir; # Default folder for new synced folders
-      configDir = "${home}/.config/syncthing"; # Folder for Syncthing's settings and keys
+      configDir = "${user.home}/.config/syncthing"; # Folder for Syncthing's settings and keys
 
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
@@ -66,6 +69,9 @@ in {
           cfg.folders;
       };
     };
+
+    # The syncthing module leaves dataDir alone when the user already exists.
+    systemd.tmpfiles.rules = ["d ${syncDir} 0755 ${user.name} ${user.group} -"];
 
     environment.systemPackages = [pkgs.syncthingtray];
   };
