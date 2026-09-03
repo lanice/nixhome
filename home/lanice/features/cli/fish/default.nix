@@ -110,10 +110,6 @@ in {
 
     plugins = [
       {
-        name = "pisces";
-        src = pkgs.fishPlugins.pisces.src;
-      }
-      {
         name = "puffer-fish";
         src = pkgs.fetchFromGitHub {
           owner = "nickeb96";
