@@ -4,5 +4,6 @@
   codexbar-cli = pkgs.callPackage ./codexbar-cli {};
   cosmic-ext-applet-codexbar = pkgs.callPackage ./cosmic-ext-applet-codexbar {};
   dirstat-rs = pkgs.callPackage ./dirstat-rs {};
+  t3code = pkgs.callPackage ./t3code {};
   # fabric-ai = pkgs.callPackage ./fabric-ai {};
 }

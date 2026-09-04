@@ -31,6 +31,7 @@
     ./features/desktop/wezterm
     ./features/desktop/office
     ./features/desktop/matrix
+    ./features/desktop/t3code
 
     ./features/desktop/cosmic
     ./features/desktop/gnome

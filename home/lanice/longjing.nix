@@ -24,6 +24,7 @@
     ./features/desktop/zed
     ./features/desktop/ghostty
     ./features/desktop/office
+    ./features/desktop/t3code
 
     ./features/desktop/cosmic
 
