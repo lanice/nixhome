@@ -5,7 +5,16 @@
 }: let
   llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in {
-  home.packages = [llm-agents.omp];
-  home.file.".omp/agent/RULES.md".source = ./RULES.md;
-  home.file.".omp/agent/AGENTS.md".source = ./AGENTS.md;
+  programs.omp = {
+    enable = true;
+    package = llm-agents.omp;
+
+    context = ./AGENTS.md;
+    rules = ./RULES.md;
+
+    skills = {
+      frontend-design = ../common/skills/frontend-design;
+      unslop = ../common/skills/unslop;
+    };
+  };
 }
