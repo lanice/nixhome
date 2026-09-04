@@ -12,7 +12,7 @@ in {
   ];
 
   programs.fish.shellAbbrs = {
-    cld = "CLAUDE_CODE_NO_FLICKER=1 claude";
+    cld = "claude";
   };
 
   home.packages = [
@@ -48,6 +48,11 @@ in {
       alwaysThinkingEnabled = true;
       includeCoAuthoredBy = false;
       cleanupPeriodDays = 700;
+
+      autoMemoryEnabled = false;
+      tui = "fullscreen";
+
+      model = "fable";
 
       attribution = {
         commit = "";
