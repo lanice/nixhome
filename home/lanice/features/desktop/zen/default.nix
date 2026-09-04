@@ -17,6 +17,7 @@
     amzn = 3;
     lemanda = 4;
   };
+  containerOrder = ["my" "DBOS" "amzn" "lemanda"];
 
   personalSpace = "3a04984a-a80f-49ec-b935-792d422bf815";
   dbosSpace = "ecb9807d-11ca-4939-96e6-2b6c2f4cda03";
@@ -27,6 +28,16 @@ in {
   # (with a warning) while it runs. Extension buttons also need one
   # launch-and-quit of a fresh profile before they apply.
   imports = [inputs.zen-browser.homeModules.beta];
+
+  assertions = [
+    {
+      assertion =
+        map (container: container.name)
+        (lib.attrValues config.programs.zen-browser.profiles.lanice.containers)
+        == containerOrder;
+      message = "Zen container keys must sort as: ${lib.concatStringsSep ", " containerOrder}";
+    }
+  ];
 
   programs.zen-browser = {
     enable = true;
@@ -185,22 +196,26 @@ in {
 
       containersForce = true;
       containers = {
-        my = {
+        "1-my" = {
+          name = "my";
           id = ctr.my;
           color = "blue";
           icon = "fingerprint";
         };
-        DBOS = {
+        "2-DBOS" = {
+          name = "DBOS";
           id = ctr.dbos;
           color = "orange";
           icon = "briefcase";
         };
-        amzn = {
+        "3-amzn" = {
+          name = "amzn";
           id = ctr.amzn;
           color = "purple";
           icon = "cart";
         };
-        lemanda = {
+        "4-lemanda" = {
+          name = "lemanda";
           id = ctr.lemanda;
           color = "red";
           icon = "pet";
