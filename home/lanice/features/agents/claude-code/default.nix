@@ -49,6 +49,7 @@ in {
 
       autoMemoryEnabled = false;
       tui = "fullscreen";
+      theme = "auto";
 
       model = "fable";
 
