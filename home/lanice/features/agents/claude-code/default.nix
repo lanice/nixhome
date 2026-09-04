@@ -39,8 +39,6 @@ in {
     '';
 
     skills = {
-      frontend-design = ../common/skills/frontend-design;
-      unslop = ../common/skills/unslop;
       # freetime = ./skills/freetime;
     };
 

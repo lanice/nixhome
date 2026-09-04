@@ -11,10 +11,5 @@ in {
 
     context = ./AGENTS.md;
     rules = ./RULES.md;
-
-    skills = {
-      frontend-design = ../common/skills/frontend-design;
-      unslop = ../common/skills/unslop;
-    };
   };
 }
