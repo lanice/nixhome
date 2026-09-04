@@ -1,5 +1,9 @@
 # nixhome
 
+<p align="center">
+  <img src="img/flake-paper-512.png" alt="nixhome logo" width="256">
+</p>
+
 ## Bootstrap
 
 ### NixOS
@@ -61,4 +65,3 @@ in {
   home.packages = with pkgs; [ examplePkgPinned ];
 }
 ```
-
