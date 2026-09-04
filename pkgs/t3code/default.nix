@@ -1,5 +1,6 @@
 {
   appimageTools,
+  coreutils,
   fetchurl,
   lib,
 }: let
@@ -20,7 +21,23 @@ in
 
     extraPreBwrapCmds = ''
       export T3CODE_DISABLE_AUTO_UPDATE=1
+
+      t3codeSshConfigTarget="$(
+        ${coreutils}/bin/readlink -f "$HOME/.ssh/config"
+      )"
+      t3codeSshConfigCopy="''${XDG_RUNTIME_DIR:-/tmp}/t3code-ssh-config"
+
+      ${coreutils}/bin/install \
+        -m 600 \
+        "$t3codeSshConfigTarget" \
+        "$t3codeSshConfigCopy"
     '';
+
+    extraBwrapArgs = [
+      "--ro-bind"
+      ''"$t3codeSshConfigCopy"''
+      ''"$t3codeSshConfigTarget"''
+    ];
 
     extraInstallCommands = ''
       install -Dm444 ${appimageContents}/t3code.desktop $out/share/applications/t3code.desktop
