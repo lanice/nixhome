@@ -9,7 +9,8 @@
 
     ./global # includes features/cli,features/helix
 
-    ./features/cli/agents.nix
+    ./features/agents
+
     ./features/cli/ssh.nix
     ./features/cli/forgejo.nix
     ./features/cli/fabric.nix
@@ -24,7 +25,6 @@
     ./features/desktop/zed
     ./features/desktop/ghostty
     ./features/desktop/office
-    ./features/desktop/t3code
 
     ./features/desktop/cosmic
 

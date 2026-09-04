@@ -9,7 +9,8 @@
 
     ./global # includes features/cli,features/helix
 
-    ./features/cli/agents.nix
+    ./features/agents
+
     ./features/cli/ssh.nix
     ./features/cli/zellij
     ./features/cli/fabric.nix
@@ -31,7 +32,6 @@
     ./features/desktop/wezterm
     ./features/desktop/office
     ./features/desktop/matrix
-    ./features/desktop/t3code
 
     ./features/desktop/cosmic
     ./features/desktop/gnome
