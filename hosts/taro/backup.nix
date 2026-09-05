@@ -10,7 +10,7 @@
   # credentials, and recovery material all use "forgejo".
   boba = (import ../fleet.nix).hosts.boba;
   roundcubeDump = "/var/lib/roundcube/roundcube.sql";
-  t3codeHome = "/home/t3code";
+  t3codeHome = config.users.users.t3code.home;
   # Disposable databases; exclude SQLite sidecars too.
   sqliteSources = [
     "${t3codeHome}/.t3/userdata/state.sqlite"

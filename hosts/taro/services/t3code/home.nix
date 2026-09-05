@@ -1,5 +1,6 @@
 {
   inputs,
+  osConfig,
   pkgs,
   ...
 }: {
@@ -9,8 +10,8 @@
   ];
 
   home = {
-    username = "t3code";
-    homeDirectory = "/home/t3code";
+    username = osConfig.users.users.t3code.name;
+    homeDirectory = osConfig.users.users.t3code.home;
     stateVersion = "26.05";
 
     packages = with pkgs; [
