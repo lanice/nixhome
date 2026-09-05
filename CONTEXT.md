@@ -103,3 +103,9 @@ _Avoid_: remote, target, mirror
 **Offsite copy**:
 The B2 repository that boba populates from a landing repo (or its own set) by `restic copy`. Fully independent: restorable with no host in the fleet alive.
 _Avoid_: cloud backup, second backup, replica
+
+### Remote coding
+
+**Remote coding environment**:
+The shared coding environment on taro, with its own working repositories, tools, credentials, and conversation state. Both workstations connect to the same environment; their local projects and conversations remain separate.
+_Avoid_: synced workspace, transferred session, laptop mirror

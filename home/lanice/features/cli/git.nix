@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   ...
 }: let
@@ -50,38 +49,7 @@
       };
     };
 in {
-  programs.git = {
-    enable = true;
-
-    signing.format = "openpgp";
-
-    settings = {
-      user = {
-        name = "Leander Neiss";
-        email = (import (inputs.nixhome-private + "/contacts.nix")).github;
-      };
-
-      alias = {
-        lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-
-        co = "checkout";
-
-        file-history = "!f() { git lg --full-history -- $1; }; f";
-      };
-
-      init.defaultBranch = "main";
-      merge.conflictstyle = "diff3";
-      diff.colorMoved = "default";
-
-      commit.gpgsign = true;
-      gpg.format = "ssh";
-      # Need to make sure ~/.ssh/allowed_signers exists and contains:
-      # * <content of id_ed25519.pub>
-      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
-      user.signingkey = "~/.ssh/id_ed25519.pub";
-      push.autoSetupRemote = true;
-    };
-  };
+  imports = [./git-core.nix];
 
   programs.delta = {
     enable = true;

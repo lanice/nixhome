@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir=$(CDPATH='' cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+repo=$(CDPATH='' cd -- "$script_dir/../.." && pwd -P)
+
+exec nix shell --inputs-from "$repo" \
+  nixpkgs#python3 nixpkgs#nodejs nixpkgs#jq nixpkgs#prefetch-npm-deps \
+  -c python3 "$script_dir/update.py" "$@"

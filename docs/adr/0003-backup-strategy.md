@@ -162,6 +162,22 @@ established this pattern.
   forgotten include is silent data loss, a forgotten exclude is repo size.
 - `/etc/ssh/ssh_host_*` is in every host's set: it is that host's agenix
   identity.
+- taro's nightly `forgejo` backup set includes `/home/t3code`, including
+  `workspaces`, `.t3/worktrees`, Git history and uncommitted files,
+  non-database T3/Codex state, authentication, and `.ssh` credentials and configuration.
+  The denylist removes package caches and known generated working-tree
+  directories such as `node_modules`, `.next`, `.venv` and Python caches.
+  Generic `dist`, `build` and `target` names remain included because they can
+  contain source. The exact exclusions live in `hosts/taro/backup.nix`.
+- T3's `.t3/userdata/state.sqlite` and Codex's root `.codex/*.sqlite`
+  databases are disposable and deliberately excluded, along with their WAL,
+  SHM and rollback-journal sidecars. No database capture or staging is needed.
+  Losing their contents after host failure is accepted.
+- Coding session JSONL and working files are live-read, not an atomic snapshot.
+  In-flight processes and unflushed memory are not restored. Backups never stop
+  T3 and no pre-upgrade snapshot is taken. Changes to the database layout require
+  updating the exclusions.
+  Restore steps live in [the recovery runbook](../runbooks/backup-recovery.md#restore-taros-remote-coding-environment).
 - boba's consistency contract is crash-consistent: one multi-dataset
   `@backup` ZFS snapshot (a single point in time) bind-mounted over the live
   paths inside the backup unit, plus one atomic logical dump of the host

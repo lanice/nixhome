@@ -58,3 +58,103 @@ re-sync the resolution multiplier when Solaar flips the mode. libinput has no
 transport is always wrong. Fish abbrs `scroll_bt` / `scroll_dock` in
 `home/lanice/features/cli/fish/default.nix` toggle it by hand. Do not chase
 hwdb or libinput quirks; they were investigated and do not apply.
+
+## T3 remote coding on taro
+
+These steps also apply to longjing. NixOS owns the system service and packages.
+Do not use the desktop SSH launcher, `t3 service install`, `npx`, or T3's runtime
+updater for this environment. Pair with the existing HTTPS server instead.
+Upgrade the desktop and taro packages together through this flake after active
+agent work finishes.
+
+Update the pinned packages from the repository root:
+
+```sh
+./pkgs/t3code/update
+./pkgs/t3code/update v0.0.38
+./pkgs/t3code/update nightly
+./pkgs/t3code/update v0.0.39-nightly.20260905.1289
+```
+
+No argument selects the latest stable release, even when a nightly is currently
+pinned. Explicit versions also work without the leading `v`. `nightly` resolves
+to one exact version; subsequent builds never follow a moving channel.
+
+The updater uses tools from the flake's locked nixpkgs and regenerates
+`pkgs/t3code/release.nix` and `package-lock.json`. Both desktop and server
+artifacts must exist for the selected version. It does not deploy, restart T3,
+or install an npm-managed runtime.
+
+Review the generated changes and build both packages before deploying:
+
+```sh
+nix build .#t3code .#t3code-server
+```
+
+Create a DNS A record for `t3code.lanice.dev` pointing to taro's tailnet address,
+`100.103.16.7`. Publishing supplies the nginx proxy and ACME certificate. Clients
+must join the tailnet; do not expose port 3773 or add public forwarding.
+
+Both laptops' fleet SSH keys can log in directly:
+
+```sh
+ssh t3code@taro
+```
+
+Run the following commands in that remote Bash session. They need no sudo.
+Authenticate Codex using device login, after enabling device code login in
+ChatGPT's security settings or workspace permissions:
+
+```sh
+codex login --device-auth
+codex login status
+```
+
+If device login is unavailable, reconnect with
+`ssh -L 1455:localhost:1455 t3code@taro`, run `codex login`, and open its printed
+address in the laptop's browser. Authentication belongs to `/home/t3code/.codex`,
+not lanice's account. Keep login codes and credentials out of chat and logs.
+
+Create a dedicated SSH key manually on taro before cloning private repositories
+or signing commits. For unattended service use, the key must work without a
+laptop's forwarded agent. A key without a passphrase gives unattended access but
+is readable by every coding process running as `t3code`; limit repository
+permissions accordingly.
+
+```sh
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C t3code@taro
+printf '* %s\n' "$(cat ~/.ssh/id_ed25519.pub)" > ~/.ssh/allowed_signers
+chmod 600 ~/.ssh/allowed_signers
+```
+
+Register only `~/.ssh/id_ed25519.pub` with the relevant forge for repository
+access and SSH commit signing. Keep the private key on taro. Git uses the same
+author identity and settings as lanice; commits will fail to sign until the
+key is available.
+
+Mint a separate one-time pairing link for each laptop:
+
+```sh
+t3 auth pairing create --base-dir /home/t3code/.t3 --base-url https://t3code.lanice.dev --label longjing
+t3 auth pairing create --base-dir /home/t3code/.t3 --base-url https://t3code.lanice.dev --label sencha
+```
+
+Paste each generated pairing URL into that laptop's T3 remote-environment
+connection flow. Do not paste tokens or URLs into chat, issues, or committed
+files. Use `t3 auth --help` to inspect or revoke access later. The nginx endpoint
+already supplies HTTPS; do not use `t3 pair --tailscale`, which would configure
+an additional Tailscale Serve proxy.
+
+Clone projects under `/home/t3code/workspaces`, then add those remote paths in
+T3. `nix develop` works as the unprivileged account through the system Nix
+daemon. T3's upstream Full access default is intentional: agents can run
+commands and read or modify all state and credentials owned by `t3code`.
+The account has no sudo or administrative groups.
+
+The system service owns agent processes independently of SSH sessions and
+desktop connections. From lanice's administrative login, use
+`sudo systemctl status t3code` and `sudo journalctl -u t3code` for diagnostics.
+Startup logs may contain pairing credentials; redact them before sharing.
+
+References: [T3 remote access at v0.0.38](https://github.com/pingdotgg/t3code/blob/v0.0.38/docs/user/remote-access.md)
+and [Codex headless authentication](https://developers.openai.com/codex/auth#login-on-headless-devices).

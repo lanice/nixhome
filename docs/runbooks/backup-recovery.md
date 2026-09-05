@@ -140,6 +140,25 @@ The bounded unreachable-boba run failed in 30.051s. The unit had no
 The dashboard's last-ping timestamp remained unchanged; its one-day period and
 six-hour grace produce the 30-hour deadline.
 
+## Restore taro's remote coding environment
+
+The nightly `forgejo` backup set contains `/home/t3code`, excluding caches and
+the disposable T3/Codex SQLite databases and their sidecars. Database contents
+are not recovered.
+
+1. Stop `t3code.service` and close coding-account shells before restoring.
+2. Restore `/home/t3code`, including the retained `.t3` and `.codex` files,
+   `.ssh`, workspaces and Git metadata.
+3. Set the restored home tree's owner to the current `t3code:t3code` account,
+   keep the home and `.ssh` private, and set private keys to mode `0600`.
+4. Start `t3code.service` and pair the laptops again if needed. Re-add workspace
+   paths in T3; do not expect its old project or thread records to return.
+   Run `codex login status` as `t3code`; reauthenticate if necessary.
+
+Workspaces and session JSONL are live-read, not an atomic snapshot. Restore does
+not resume in-flight agent processes. If the host was compromised, revoke and replace its
+Git key and provider credentials rather than reusing the backed-up credentials.
+
 ## Bootstrap sencha's agenix identity
 
 sencha does not run sshd, so NixOS does not generate its host key. After a
