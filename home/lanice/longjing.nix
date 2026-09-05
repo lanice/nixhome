@@ -28,10 +28,12 @@
 
     ./features/desktop/cosmic
 
-    ./themes/catppuccin-mocha
+    ./themes/catppuccin-latte
   ];
 
   browser.default = "zen";
+
+  programs.fish.shellAbbrs.sshs = ''ghostty --theme="Catppuccin Macchiato" -e ssh sencha'';
 
   home = {
     sessionVariables = {
