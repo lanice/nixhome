@@ -4,8 +4,8 @@
   ...
 }: {
   imports = [
-    ../lanice/features/agents/codex
-    ../lanice/features/cli/git-core.nix
+    ../../../../home/lanice/features/agents/codex
+    ../../../../home/lanice/features/cli/git-core.nix
   ];
 
   home = {

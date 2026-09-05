@@ -6,6 +6,6 @@
     ./forgejo.nix
     ./mail-archive
     ./netconsole-receiver.nix
-    ./t3code.nix
+    ./t3code
   ];
 }

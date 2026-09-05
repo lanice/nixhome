@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  fleet = import ../../fleet.nix;
+  fleet = import ../../../fleet.nix;
   package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.t3code-server;
   home = "/home/t3code";
   pub = config.homelab.published.t3code;
@@ -32,7 +32,7 @@ in {
     Match all
   '';
 
-  home-manager.users.t3code = import ../../../home/t3code;
+  home-manager.users.t3code = import ./home.nix;
 
   systemd.tmpfiles.rules = [
     "d ${home} 0700 t3code t3code -"
