@@ -598,11 +598,11 @@
     "nixhome-private": {
       "flake": false,
       "locked": {
-        "lastModified": 1786819888,
-        "narHash": "sha256-fTGqMpqaPVtGkl+gUlT9zdfWqpaRxuWhPPaXDTzMQwY=",
+        "lastModified": 1788580767,
+        "narHash": "sha256-jCo56+J2ldGzIiSxj/hvxISaf/infxH2iKWSuCEGRgU=",
         "ref": "refs/heads/main",
-        "rev": "021ea61132046f1c23fe32dcb158a87f17842841",
-        "revCount": 4,
+        "rev": "909c5f834831e6f2045d55c143070accea035784",
+        "revCount": 6,
         "type": "git",
         "url": "ssh://git@github.com/lanice/nixhome-private"
       },
