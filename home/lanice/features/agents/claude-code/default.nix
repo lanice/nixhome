@@ -4,7 +4,6 @@
   ...
 }: let
   llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
-  claude-desktop = inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in {
   imports = [
     # ./ralph-wiggum
@@ -17,7 +16,6 @@ in {
 
   home.packages = [
     llm-agents.ccusage
-    claude-desktop
   ];
 
   programs.claude-code = {
