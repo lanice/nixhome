@@ -32,6 +32,8 @@ in {
     exclude =
       lib.concatMap (path: [path "${path}-wal" "${path}-shm" "${path}-journal"]) sqliteSources
       ++ [
+        "${t3codeHome}/workspaces"
+        "${t3codeHome}/.t3/worktrees"
         "${t3codeHome}/.cache"
         "${t3codeHome}/.npm"
         "${t3codeHome}/.local/share/pnpm/store"
@@ -41,25 +43,7 @@ in {
         "${t3codeHome}/.t3/caches"
         "${t3codeHome}/.codex/tmp"
         "${t3codeHome}/.codex/models_cache.json"
-      ]
-      # Scope generated outputs to working trees; retain .git and dirty files.
-      # Generic dist/build/target names can contain source, so keep them.
-      ++ lib.concatMap (
-        root:
-          map (name: "${root}/**/${name}") [
-            "node_modules"
-            ".venv"
-            ".next"
-            ".nuxt"
-            ".svelte-kit"
-            ".turbo"
-            ".direnv"
-            "__pycache__"
-            ".mypy_cache"
-            ".pytest_cache"
-            ".ruff_cache"
-          ]
-      ) ["${t3codeHome}/workspaces" "${t3codeHome}/.t3/worktrees"];
+      ];
     passwordFile = config.age.secrets.resticForgejoPassword.path;
     initialize = true;
     extraBackupArgs = ["--retry-lock=1h"];

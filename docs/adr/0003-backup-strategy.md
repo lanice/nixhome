@@ -162,18 +162,17 @@ established this pattern.
   forgotten include is silent data loss, a forgotten exclude is repo size.
 - `/etc/ssh/ssh_host_*` is in every host's set: it is that host's agenix
   identity.
-- taro's nightly `forgejo` backup set includes `/home/t3code`, including
-  `workspaces`, `.t3/worktrees`, Git history and uncommitted files,
+- taro's nightly `forgejo` backup set includes `/home/t3code`, retaining
   non-database T3/Codex state, authentication, and `.ssh` credentials and configuration.
-  The denylist removes package caches and known generated working-tree
-  directories such as `node_modules`, `.next`, `.venv` and Python caches.
-  Generic `dist`, `build` and `target` names remain included because they can
-  contain source. The exact exclusions live in `hosts/taro/backup.nix`.
+  `workspaces` and `.t3/worktrees` are disposable checkouts and excluded entirely,
+  including local Git history and uncommitted files. Projects must be recoverable
+  from their Git remotes; losing unpushed work is accepted.
+  Package caches are also excluded. The exact exclusions live in `hosts/taro/backup.nix`.
 - T3's `.t3/userdata/state.sqlite` and Codex's root `.codex/*.sqlite`
   databases are disposable and deliberately excluded, along with their WAL,
   SHM and rollback-journal sidecars. No database capture or staging is needed.
   Losing their contents after host failure is accepted.
-- Coding session JSONL and working files are live-read, not an atomic snapshot.
+- Coding session JSONL and retained files are live-read, not an atomic snapshot.
   In-flight processes and unflushed memory are not restored. Backups never stop
   T3 and no pre-upgrade snapshot is taken. Changes to the database layout require
   updating the exclusions.
