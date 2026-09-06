@@ -1,7 +1,9 @@
 # Mail when t3code hits MemoryMax (oom_kill) or TasksMax (pids max).
 # OOMPolicy=continue keeps the unit healthy, so OnFailure never fires;
-# watch the cgroup event counters instead. MemoryHigh throttling is
-# deliberately not reported: it is noisy and self-correcting.
+# poll the cgroup event counters instead. A path unit on memory.events
+# is unusable: the `high` counter churns under MemoryHigh throttling and
+# would trip the start rate limit. MemoryHigh is not reported; it is
+# noisy and self-correcting.
 {
   config,
   pkgs,
@@ -46,13 +48,17 @@
     } | ${pkgs.msmtp}/bin/msmtp --read-recipients
   '';
 in {
-  systemd.paths.t3code-limit-alert = {
-    wantedBy = ["multi-user.target"];
-    pathConfig.PathModified = ["${cg}/memory.events" "${cg}/pids.events"];
+  systemd.timers.t3code-limit-alert = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnBootSec = "2min";
+      OnUnitActiveSec = "1min";
+      AccuracySec = "10s";
+    };
   };
 
   systemd.services.t3code-limit-alert = {
-    description = "Mail on t3code cgroup limit events";
+    description = "Mail on t3code cgroup limit counters";
     after = ["network-online.target"];
     wants = ["network-online.target"];
     serviceConfig = {
