@@ -31,6 +31,7 @@ in {
     ../common/steam.nix
 
     ../common/fleet-ssh.nix
+    ../common/workspace-secrets.nix
     ../common/cosmic.nix
     ../common/gnome.nix
     # ../common/greetd.nix
@@ -44,6 +45,8 @@ in {
     resticSenchaPassword.file = "${inputs.self}/secrets/resticSenchaPassword.age";
     resticSenchaHealthcheckUuid.file = "${inputs.self}/secrets/resticSenchaHealthcheckUuid.age";
   };
+
+  fleet.workspaceSecrets.account = "lanice";
 
   # Reachable over the tailnet only (common/tailscale.nix keeps port 22 closed).
   services.openssh = {

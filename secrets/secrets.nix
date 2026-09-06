@@ -7,6 +7,8 @@ let
   boba = fleet.hosts.boba.hostKey;
   taro = fleet.hosts.taro.hostKey;
 in {
+  "workspaceAgeSencha.age".publicKeys = [sencha lanice-sencha];
+  "workspaceAgeTaro.age".publicKeys = [taro lanice-sencha];
   "porkbun.age".publicKeys = [unstable boba taro lanice-unstable lanice-sencha];
   "porkbunApiKey.age".publicKeys = [boba lanice-sencha];
   "porkbunSecretApiKey.age".publicKeys = [boba lanice-sencha];

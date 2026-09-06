@@ -1,10 +1,13 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
   ...
 }: let
   fleet = import ../fleet.nix;
+  # Legacy agenix runs during activation, without a systemd unit.
+  agenixServices = lib.optional (config.systemd.sysusers.enable || config.services.userborn.enable) "agenix-install-secrets.service";
 in {
   imports = [
     inputs.srvos.nixosModules.server
@@ -19,9 +22,17 @@ in {
 
     ../common/global
     ../common/tailscale.nix
+    ../common/workspace-secrets.nix
 
     ./services
   ];
+
+  fleet.workspaceSecrets.account = "t3code";
+
+  systemd.services.t3code = {
+    after = agenixServices;
+    requires = agenixServices;
+  };
 
   networking = {
     hostName = "taro";
