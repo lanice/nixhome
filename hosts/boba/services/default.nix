@@ -3,7 +3,6 @@
     ../../common/mail.nix
     ../../common/publishing.nix
 
-    ./adguard.nix
     ./backup-landing.nix
     ./backup-offsite.nix
     ./backup.nix

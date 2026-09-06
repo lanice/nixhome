@@ -377,23 +377,6 @@ in {
             };
           }
           {
-            "Adguard Home" = let
-              url = pub.adguard.url;
-            in {
-              href = url;
-              icon = "adguard-home";
-              siteMonitor = url;
-              description = "Network-wide ads & trackers blocking DNS server";
-              widget = {
-                type = "adguard";
-                inherit url;
-                username = "admin";
-                password = "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}";
-                fields = ["queries" "blocked" "filtered" "latency"];
-              };
-            };
-          }
-          {
             "Speedtest" = let
               url = pub.speedtest.url;
             in {
