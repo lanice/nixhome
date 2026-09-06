@@ -19,6 +19,10 @@
 #
 # (An earlier deviation — dropping the `bookPath` option in favor of the
 # estate's share declaration — was adopted upstream on 2026-07-31.)
+#
+# The module merged upstream in the 2026-09 nixpkgs bump, but `pkgs.bookorbit`
+# has not, so this copy stays and masks the upstream declaration until the
+# package lands and the deviations above are re-checked against it.
 {
   lib,
   config,
@@ -54,6 +58,8 @@
       )
     );
 in {
+  disabledModules = ["services/web-apps/bookorbit.nix"];
+
   options.services.bookorbit = {
     enable = mkEnableOption "BookOrbit";
 
