@@ -24,6 +24,7 @@
     # No sshd yet, so no hostKey (hosts/longjing/default.nix).
     longjing = {
       syncthingId = "5JEE5H6-VNV7EFN-OFUK3YC-ID2B4W2-KDVP4O7-DDUI6GJ-D7STGCF-BT6VKA3";
+      hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK0q2xGxqqxIAF7anXPZiltyt5EdVO+QzaGXPug5IjIq root@longjing";
     };
   };
 

@@ -6,9 +6,11 @@ let
   sencha = fleet.hosts.sencha.hostKey;
   boba = fleet.hosts.boba.hostKey;
   taro = fleet.hosts.taro.hostKey;
+  longjing = fleet.hosts.longjing.hostKey;
 in {
   "workspaceAgeSencha.age".publicKeys = [sencha lanice-sencha];
   "workspaceAgeTaro.age".publicKeys = [taro lanice-sencha];
+  "workspaceAgeLongjing.age".publicKeys = [longjing lanice-sencha];
   "porkbun.age".publicKeys = [unstable boba taro lanice-unstable lanice-sencha];
   "porkbunApiKey.age".publicKeys = [boba lanice-sencha];
   "porkbunSecretApiKey.age".publicKeys = [boba lanice-sencha];
