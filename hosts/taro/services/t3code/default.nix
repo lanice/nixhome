@@ -9,6 +9,8 @@
   home = "/home/t3code";
   pub = config.homelab.published.t3code;
 in {
+  imports = [./limit-alert.nix];
+
   users.groups.t3code = {};
   users.users.t3code = {
     isNormalUser = true;
