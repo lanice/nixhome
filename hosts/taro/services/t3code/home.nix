@@ -35,6 +35,7 @@
       procps
       ripgrep
       jq
+      gh
     ];
   };
 
