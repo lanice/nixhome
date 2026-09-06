@@ -36,6 +36,7 @@
       ripgrep
       jq
       gh
+      helix
     ];
   };
 
