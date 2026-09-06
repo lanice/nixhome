@@ -70,6 +70,16 @@ in {
       UMask = "0077";
       # Keep home writes, network access and the unprivileged Nix daemon usable.
       NoNewPrivileges = true;
+
+      # Agents run arbitrary installs/tests. Cap them so a runaway session
+      # cannot starve forgejo or the mail archive. Kernel OOM kills only the
+      # offending process; the server and other sessions keep running.
+      MemoryHigh = "9G";
+      MemoryMax = "10G";
+      OOMPolicy = "continue";
+      TasksMax = 4096;
+      CPUWeight = 50;
+      IOWeight = 50;
     };
   };
 
