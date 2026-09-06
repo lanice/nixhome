@@ -22,6 +22,7 @@
     ../common/virtualisation.nix
     ../common/steam.nix
     ../common/fleet-ssh.nix
+    ../common/workspace-secrets.nix
 
     ../common/cosmic.nix
   ];
@@ -30,6 +31,8 @@
   # (docs/runbooks/backup-recovery.md, "Bootstrap sencha's agenix identity").
   # Add secrets + ./backup.nix once fleet.nix has the host key.
   age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+
+  fleet.workspaceSecrets.account = "lanice";
 
   # Boot into Cosmic by default; pick the "gnome" entry in systemd-boot to switch.
   desktops.cosmic.enable = lib.mkDefault true;
