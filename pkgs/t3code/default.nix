@@ -38,6 +38,10 @@ in
       "--ro-bind"
       ''"$t3codeSshConfigCopy"''
       ''"$t3codeSshConfigTarget"''
+      # The FHS environment omits /etc/ssh; keep host-key trust available.
+      "--symlink"
+      "/.host-etc/ssh/ssh_known_hosts"
+      "/etc/ssh/ssh_known_hosts"
     ];
 
     extraInstallCommands = ''

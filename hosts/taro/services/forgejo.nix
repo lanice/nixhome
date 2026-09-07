@@ -24,6 +24,7 @@ in {
         # nginx proxies from the tailnet address; nothing else should reach
         # the plain-HTTP listener.
         HTTP_ADDR = "127.0.0.1";
+        HTTP_PORT = 13000;
       };
 
       session.COOKIE_SECURE = true;
