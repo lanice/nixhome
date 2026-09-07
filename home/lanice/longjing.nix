@@ -17,7 +17,7 @@
     ./features/cli/typst.nix
     ./features/cli/webdev.nix
 
-    # ./features/email
+    ./features/email
     ./features/distrobox
 
     ./features/desktop/firefox
