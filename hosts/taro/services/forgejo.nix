@@ -1,20 +1,10 @@
-{
-  inputs,
-  config,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   pub = config.homelab.published.git;
-
-  # Each host evaluates only its own config; cross-host facts come from the fleet registry.
-  boba = (import ../../fleet.nix).hosts.boba;
 in {
   services.forgejo = {
     enable = true;
 
-    # Whole forge state (SQLite DB, repos, LFS, config) lives under
-    # /var/lib/forgejo, so the dump and legacy nightly ship below contain a
-    # complete Forgejo backup.
+    # The dump captures SQLite, repositories, LFS and config under /var/lib/forgejo.
     lfs.enable = true;
 
     settings = {
@@ -41,8 +31,8 @@ in {
     };
 
     # Uncompressed tar lets restic deduplicate the roughly 3 GiB nightly dump.
-    # The host backup in ../backup.nix keeps durable history; local dumps bridge
-    # two nights and continue shipping to the legacy rsync landing until ticket 10.
+    # ../backup.nix sends each completed dump to boba; boba copies it to B2.
+    # Local dumps only bridge two nights.
     dump = {
       enable = true;
       type = "tar";
@@ -54,34 +44,5 @@ in {
 
   homelab.published.git = {
     proxyTo = config.services.forgejo.settings.server.HTTP_PORT;
-  };
-
-  age.secrets.forgejo-dump-key = {
-    file = "${inputs.self}/secrets/forgejo-dump-key.age";
-    owner = config.services.forgejo.user;
-    mode = "400";
-  };
-
-  programs.ssh.knownHosts.${boba.tailscaleIP}.publicKey = boba.hostKey;
-
-  # taro is a single unbacked-up SSD; boba's raidz1 pool holds the durable
-  # copy (landing side in hosts/boba/services/forgejo-runner.nix). Runs 44
-  # minutes after the 04:31 dump.
-  systemd.services.forgejo-dump-ship = {
-    description = "Ship Forgejo dumps to boba";
-    serviceConfig = {
-      Type = "oneshot";
-      User = config.services.forgejo.user;
-      Group = config.services.forgejo.group;
-      ExecStart = ''${pkgs.rsync}/bin/rsync -a --delete -e "${pkgs.openssh}/bin/ssh -i ${config.age.secrets.forgejo-dump-key.path}" ${config.services.forgejo.dump.backupDir}/ forgejo-dumps@${boba.tailscaleIP}:/data/storage/forgejo-dumps/'';
-    };
-  };
-
-  systemd.timers.forgejo-dump-ship = {
-    wantedBy = ["timers.target"];
-    timerConfig = {
-      OnCalendar = "*-*-* 05:15:00";
-      Persistent = true;
-    };
   };
 }

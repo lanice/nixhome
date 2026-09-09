@@ -51,29 +51,9 @@
     };
   };
 
-  # Landing area for taro's nightly Forgejo dumps (ship unit in
-  # hosts/taro/services/forgejo.nix). Dedicated key-only user; `restrict`
-  # keeps the key usable for nothing but the rsync it exists for.
-  users.users.forgejo-dumps = {
-    isSystemUser = true;
-    group = "forgejo-dumps";
-    home = "/data/storage/forgejo-dumps";
-    # rsync-over-ssh runs the remote rsync through the login shell; nologin
-    # would refuse it.
-    shell = pkgs.bash;
-    openssh.authorizedKeys.keys = [
-      "restrict ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBaUEzIqybWjbIauksRZYlrkxqBDU+xCgTe3Llu/J2Dv forgejo-dump@taro"
-    ];
-  };
-  users.groups.forgejo-dumps = {};
-
   systemd.tmpfiles.rules = [
-    "d /data/storage/forgejo-dumps 0750 forgejo-dumps forgejo-dumps -"
     # Job containers run as root (rootful podman), so cache contents end up
     # root-owned on the host.
     "d /var/cache/theorangeexplorer 0755 root root -"
   ];
-
-  # The receiving end of the rsync push.
-  environment.systemPackages = [pkgs.rsync];
 }

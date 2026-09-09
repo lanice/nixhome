@@ -44,7 +44,6 @@ in {
   "resticOffsiteForgejoPassword.age".publicKeys = [boba] ++ admins;
   "resticOffsiteMailArchivePassword.age".publicKeys = [boba] ++ admins;
   "resticOffsiteBobaPassword.age".publicKeys = [boba] ++ admins;
-  "forgejo-dump-key.age".publicKeys = [taro] ++ admins;
   "mailTaroPassword.age".publicKeys = [taro] ++ admins;
   "mailArchiveUsers.age".publicKeys = [taro] ++ admins;
   "mailArchiveSyncPassword.age".publicKeys = [taro] ++ admins;

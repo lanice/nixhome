@@ -162,6 +162,64 @@ and prunes on both nights, and both days' snapshots were verified in B2.
 Sencha's last pre-shutdown snapshot, September 6 at 15:00 EDT, was also in B2,
 matched by its landing ID `93a5ee2e` in the offsite snapshot's `original`.
 
+## Forgejo application restore
+
+Verified on 2026-09-09 with Forgejo 15.0.7, matching taro's deployed build.
+Landing snapshot `e3831934` and B2 snapshot `c8528a5a` contain
+`/var/lib/forgejo/dump/forgejo-dump-1788942660.tar`. Each tier was restored
+independently with `restic restore --include <dump-path> --verify`, using its
+own repository password and an empty target directory.
+
+- Landing restore and verification: 12.29 s.
+- B2 restore and verification without a restic cache: 46.18 s.
+- Archive size: 3,021,482,496 bytes. Both archives and taro's original matched
+  SHA-256 `d3bffebcc56403a72b4f9d35bbf7481454ec5cca17a70971b9cc88500b2f0758`.
+- Both imported SQLite databases passed `PRAGMA integrity_check`.
+- Both isolated instances served `lanice/theorangeexplorer` at commit
+  `039a688def0325588e976ab2f4af41fd548536a1` and
+  `lanice/obsidian-dnd-laerakond` at
+  `590f9204e0e943fcb5f38b542551d9a11aa57031`.
+- Authenticated API requests verified both private repositories, commit IDs,
+  root file trees and empty issue lists. The operator confirms there are no
+  issues to recover. `git fsck --full` passed for every restored repository.
+  The restored databases contain no LFS objects.
+
+Import procedure:
+
+1. Extract the selected tar into a private scratch directory. It contains
+   `app.ini`, `custom/`, `data/`, `repos/` and `forgejo-db.sql`.
+2. Rename `repos/` to `repositories/`. Use `data/forgejo.db` with its restored
+   WAL and SHM files, not the SQL export. Forgejo's
+   [backup guidance](https://forgejo.org/docs/v15.0/admin/upgrade/#backup)
+   confirms the SQLite database is included directly in the dump.
+3. Preserve the config and secret files. In the scratch `app.ini`, relocate
+   every `/var/lib/forgejo` path to the scratch instance, including file-backed
+   secret URIs. Preserve INI key casing; Forgejo ignores lowercase versions of
+   uppercase settings. Set `RUN_USER` to the scratch owner and pass explicit
+   `--config` and `--work-path` arguments.
+4. For a drill, use separate network namespaces with loopback-only HTTP.
+   Disable SSH, Actions, cron, mirrors and mail. The verified instances ran as
+   `restic`, with `PrivateNetwork=yes`, `ProtectSystem=strict`,
+   `ProtectHome=yes`, an empty `/run`, and only the scratch instance writable.
+   Production landing repositories, storage and runner state were inaccessible.
+5. Verify normal installed-server startup, not the installation page. Generate
+   a temporary read-only API token in the scratch database and check repository
+   metadata, commits, file trees and issues through that server. Check Git
+   object integrity independently. Stop the instances and remove all scratch
+   data, including tokens, when finished.
+
+This proves application imports from both backup tiers, not the separate
+packet-and-Bitwarden clean-room exercise in issue 09.
+
+After this proof, the legacy rsync ship service/timer, receiver account/key
+and `/data/storage/forgejo-dumps` were removed and the cutover deployed to
+taro and boba. A fresh production dump triggered restic successfully at
+17:30 EDT, creating landing snapshot `bc6393de`. A separate Forgejo-only
+copy produced B2 snapshot `4fb4cceb`, matched by `original`, in 5.00 s.
+It did not ping the aggregate offsite healthcheck. The nightly 04:31 dump
+and 05:30 offsite timers remain active. All drill instances and scratch
+data, including temporary tokens, were removed.
+
 ## Restore taro's remote coding environment
 
 The nightly `forgejo` backup set contains `/home/t3code`, excluding `workspaces`,
