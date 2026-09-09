@@ -294,6 +294,20 @@ in {
               position = 202;
               editedTitle = true;
             };
+            "Standup" = {
+              id = "4e7c863a-869a-4c11-958e-c51b3f6c3f3a";
+              url = "https://docs.google.com/document/d/1eDQ_BfGm1mFkI_o5xBXis54xqujVZzGERofg0QOa8EI/";
+              container = ctr.dbos;
+              position = 203;
+              editedTitle = true;
+            };
+            "Console" = {
+              id = "e19aacf2-5a96-4636-b52e-c10dd7363a68";
+              url = "https://github.com/dbos-inc/dbos-cloud-console/";
+              container = ctr.dbos;
+              position = 204;
+              editedTitle = true;
+            };
           };
         };
         "3-tmp" = {
