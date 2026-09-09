@@ -67,6 +67,8 @@
 
   hardware = {
     graphics.enable = true;
+    # Load the active GPU driver in the initrd.
+    intelgpu.driver = "xe";
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
   };
