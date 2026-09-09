@@ -22,9 +22,10 @@
     }.path;
   offsitePassword = name:
     config.age.secrets."resticOffsite${pascalCase name}Password".path;
+  # Zero disables source-age gating; sencha has its own dead-man check.
   freshnessHours = name:
     if name == "sencha"
-    then 30
+    then 0
     else 12;
 
   repoCalls = operation:
@@ -72,7 +73,7 @@
       fi
       now_epoch=$(${pkgs.coreutils}/bin/date +%s)
       age_seconds=$((now_epoch - newest_epoch))
-      if [ "$age_seconds" -gt "$((freshness_hours * 3600))" ]; then
+      if [ "$freshness_hours" -gt 0 ] && [ "$age_seconds" -gt "$((freshness_hours * 3600))" ]; then
         echo "[$name] stale source: newest snapshot is $age_seconds seconds old; threshold is $freshness_hours hours" >&2
         return 1
       fi

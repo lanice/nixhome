@@ -140,6 +140,28 @@ The bounded unreachable-boba run failed in 30.051s. The unit had no
 The dashboard's last-ping timestamp remained unchanged; its one-day period and
 six-hour grace produce the 30-hour deadline.
 
+## Planned sencha downtime
+
+Keep the sencha backup check at period one day, grace six hours. Before a
+long shutdown or time off AC, pause **only sencha's backup check** in
+[Healthchecks](https://healthchecks.io/docs/configuring_checks/).
+Under Filtering Rules, leave "Pinging a Paused Check" at its default,
+which resumes monitoring on the next ping. Do not select "Ignore the ping,
+stay in the paused state". After returning, verify an hourly backup succeeds
+and the check resumes. If no backup succeeds, resume the check manually so
+the pause cannot hide a broken backup job.
+
+Do not pause the offsite chain. It copies and prunes sencha's available
+snapshots regardless of age; empty/unreadable repositories and copy/prune
+errors still fail, and server sets retain their 12-hour freshness gates.
+While sencha's check is paused, its recovery-point age has no bound.
+
+On September 8 and 9, 2026, the old 30-hour offsite gate rejected sencha's
+38.5-hour and 62.5-hour snapshots. All three server sets completed their copies
+and prunes on both nights, and both days' snapshots were verified in B2.
+Sencha's last pre-shutdown snapshot, September 6 at 15:00 EDT, was also in B2,
+matched by its landing ID `93a5ee2e` in the offsite snapshot's `original`.
+
 ## Restore taro's remote coding environment
 
 The nightly `forgejo` backup set contains `/home/t3code`, excluding `workspaces`,

@@ -76,13 +76,13 @@ entirely (Bitwarden and the recovery packet only), so the two modes are
 equivalent against it; compliance only removes the console's ability to clean up a
 mistaken or runaway upload — 30 days of undeletable, billed garbage.
 
-**Clock offsets as ordering** — rejected. The offsite unit checks each
-source's newest snapshot against a freshness threshold (12 h for the nightly
-server sets — yesterday's snapshot cannot pass as tonight's — 30 h for the
-laptop) before copying, attempts all four
-repos regardless of earlier failures, and pings its healthcheck only on full
-success; forgejo's restic is chained on its dump unit. The mail chain already
-established this pattern.
+**Clock offsets as ordering**: rejected. The offsite unit requires a snapshot
+at most 12 h old for each nightly server set, so yesterday's snapshot cannot
+pass as tonight's. It copies sencha's available snapshots regardless of age;
+an intentionally offline laptop must not fail the offsite chain. Empty or
+unreadable repos and copy/prune errors still fail. It attempts all four repos
+regardless of earlier failures and pings its healthcheck only on full success;
+forgejo's restic is chained on its dump unit.
 
 ## Consequences
 
@@ -146,8 +146,11 @@ established this pattern.
   offsite check green while a broken monthly timer stayed silent.
 - sencha sends no failure mail: it has no msmtp, and an hourly unit that
   needs the tailnet would mail every hour the laptop sits on AC with boba
-  unreachable. Its 30 h dead-man healthcheck is the only alarm. boba and
-  taro units keep `OnFailure`.
+  unreachable. Its 30 h dead-man healthcheck is the only absence alarm.
+  Pause that check in Healthchecks for planned downtime; keep the default
+  behavior that resumes it on the next successful backup ping. While paused,
+  there is no sencha recovery-point age bound. Never pause the offsite check
+  for laptop downtime. boba and taro units keep `OnFailure`.
 - Every boba-side repo operation runs as the `restic` user on the local
   path; boba's own backup set also enters through rest-server (loopback),
   so no root-owned file ever lands in a landing repo.
