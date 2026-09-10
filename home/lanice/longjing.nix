@@ -28,7 +28,7 @@
 
     ./features/desktop/cosmic
 
-    ./themes/catppuccin-latte
+    ./themes/catppuccin-mocha
   ];
 
   browser.default = "zen";
