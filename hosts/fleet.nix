@@ -21,7 +21,7 @@
       hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGrqPXr49t/nDW8UtCjPVkmIW8qpHCnsYLjnZWYx7vED root@unstable";
       syncthingId = "ZSOKQGJ-K55JPO2-W4N75YJ-6NJI64R-HLQTT72-JENBU3L-DU44IG5-BVHIXAS";
     };
-    # No sshd yet, so no hostKey (hosts/longjing/default.nix).
+    # No sshd; agenix uses a manually generated host key.
     longjing = {
       syncthingId = "5JEE5H6-VNV7EFN-OFUK3YC-ID2B4W2-KDVP4O7-DDUI6GJ-D7STGCF-BT6VKA3";
       hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK0q2xGxqqxIAF7anXPZiltyt5EdVO+QzaGXPug5IjIq root@longjing";

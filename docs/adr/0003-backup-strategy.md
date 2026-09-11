@@ -1,5 +1,9 @@
 # Backups are restic, hub-and-spoke through boba, offsite on B2 behind Object Lock
 
+Longjing's extension was deployed on 2026-09-10 and its initial landing backup
+completed. The first offsite copy and production restore canary remain unverified;
+the backup recovery runbook records the next checks.
+
 Until now the fleet had one copy of almost everything. taro shipped its mail
 archive and forgejo dumps to boba nightly, but boba itself — paperless, every
 service's state, the ebooks — existed once, on a raidz1 pool that protects
@@ -7,9 +11,9 @@ against a dead disk and nothing else. sencha had no backup tooling at all. And
 boba's `zfs-snapshot-*` timers had been firing for months without snapshotting
 anything, because no dataset carried `com.sun:auto-snapshot`.
 
-The strategy: **restic everywhere, hub-and-spoke.** sencha and taro back up to
-landing repos on boba over Tailscale; boba copies every landing repo plus its
-own backup set to Backblaze B2 nightly. Only boba holds offsite credentials.
+The strategy: **restic everywhere, hub-and-spoke.** sencha, longjing and taro
+back up to landing repos on boba over Tailscale; boba copies every landing repo
+plus its own backup set to Backblaze B2 nightly. Only boba holds offsite credentials.
 Restoring with boba gone needs restic, the B2 key and the offsite repo
 password — `restic copy` produces a fully independent repository — plus the
 printed recovery packet to reach Bitwarden and the B2 console from nothing.
@@ -78,18 +82,18 @@ mistaken or runaway upload — 30 days of undeletable, billed garbage.
 
 **Clock offsets as ordering**: rejected. The offsite unit requires a snapshot
 at most 12 h old for each nightly server set, so yesterday's snapshot cannot
-pass as tonight's. It copies sencha's available snapshots regardless of age;
+pass as tonight's. It copies both laptops' available snapshots regardless of age;
 an intentionally offline laptop must not fail the offsite chain. Empty or
-unreadable repos and copy/prune errors still fail. It attempts all four repos
+unreadable repos and copy/prune errors still fail. It attempts all five repos
 regardless of earlier failures and pings its healthcheck only on full success;
 forgejo's restic is chained on its dump unit.
 
 ## Consequences
 
-- **Every secret exists in agenix and in Bitwarden.** sencha holds the only
-  portable, human-operated agenix identity; host identities give no clean-room
-  recovery once those hosts are gone. A scheme where losing the laptop also
-  loses the ability to decrypt its backup is not a backup.
+- **Every secret belongs in agenix and Bitwarden.** Both workstation user
+  identities are agenix admins. Host identities alone give no clean-room
+  recovery once those hosts are gone. New credentials must reach Bitwarden
+  before deployment; losing the laptop must not lose access to its backup.
 - Deliberately not backed up: shows/movies/anime, `/downloads`, container
   images, jellyfin trickplay, Steam and other re-downloadable game data, the
   nix store, package caches, `Sync/photo-share` (the other household laptop's
@@ -144,13 +148,13 @@ forgejo's restic is chained on its dump unit.
   here, and a second hop would not change what it points at). It has its
   own dead-man healthcheck: the daily copies would otherwise keep the
   offsite check green while a broken monthly timer stayed silent.
-- sencha sends no failure mail: it has no msmtp, and an hourly unit that
-  needs the tailnet would mail every hour the laptop sits on AC with boba
-  unreachable. Its 30 h dead-man healthcheck is the only absence alarm.
-  Pause that check in Healthchecks for planned downtime; keep the default
-  behavior that resumes it on the next successful backup ping. While paused,
-  there is no sencha recovery-point age bound. Never pause the offsite check
-  for laptop downtime. boba and taro units keep `OnFailure`.
+- Neither laptop sends failure mail: an hourly unit that needs the tailnet
+  would mail every hour boba is unreachable. Source dead-man deadlines are
+  30 h for longjing and 168 h for sencha, including grace. These external
+  Healthchecks settings are an operator deployment step, not Nix options.
+  Pause only the affected source check for planned downtime and retain
+  resume-on-ping. A paused check provides no recovery-point age alarm.
+  Never pause the offsite check for laptop downtime. boba and taro keep `OnFailure`.
 - Every boba-side repo operation runs as the `restic` user on the local
   path; boba's own backup set also enters through rest-server (loopback),
   so no root-owned file ever lands in a landing repo.
@@ -161,8 +165,21 @@ forgejo's restic is chained on its dump unit.
   namespacing option is set (the module sets `PrivateTmp`), so a mount made
   in a sandboxed prepare step dies with it; `+` is what makes one unit
   work.
-- sencha's set is `$HOME` minus a denylist, not a curated allowlist: a
-  forgotten include is silent data loss, a forgotten exclude is repo size.
+- Both workstation sets are `$HOME` minus a denylist, not curated allowlists:
+  a forgotten include is silent data loss, a forgotten exclude is repo size.
+  They share one source module; Sencha's capture policy is unchanged.
+- Longjing excludes the entire `.codex/sessions`, `.claude/projects` and
+  `.omp/agent/sessions` directories. Their transcripts, subagent records,
+  attachments and other contents are disposable after host loss, regardless
+  of file size or type. Settings and credentials elsewhere remain included.
+  Static directory exclusions replace size-based filtering to avoid custom
+  backup preparation code. Sencha's exclusions remain unchanged, and previously
+  captured session data ages out under normal retention.
+- Longjing's `dev/photos` contains disposable copies. Its explicit `.nobackup`
+  marker is honored. Neither this marker nor the session exclusions delete data.
+- Workstation backups start only on AC, may finish after unplugging, and inhibit
+  sleep during the actual restic backup, including lock waits. No wake schedule,
+  battery watcher or application shutdown is introduced.
 - `/etc/ssh/ssh_host_*` is in every host's set: it is that host's agenix
   identity.
 - taro's nightly `forgejo` backup set includes `/home/t3code`, retaining
@@ -189,28 +206,30 @@ forgejo's restic is chained on its dump unit.
   of that data would be missed. LibreChat's vector DB on the un-snapshotted
   `system/containers` is not backed up at all; each such volume carries a
   comment in Nix.
-- Retention is 7d/4w/12m on every repo; sencha, the only hourly source,
-  adds 24h. (`--keep-hourly 24` on a nightly repo keeps 24 nights.) Only
-  boba prunes, landing and offsite alike, in the nightly chain after each
-  repo's copy.
+- Retention is 7 daily / 4 weekly / 12 monthly snapshots on both tiers.
+  Both laptops additionally keep 24 hourly snapshots on landing only.
+  `--keep-hourly 24` on a nightly repo would keep 24 nights. Only boba prunes,
+  in the nightly chain after each repo's copy.
 - Operational procedures such as clean-room restore, the annual human drill,
   Forgejo import, credential retrieval order, measured timings, and the
   observed podman volume inventory live in
   `docs/runbooks/backup-recovery.md`, not in the gitignored spec. Deliberate
   inclusion and exclusion decisions stay in this ADR; any excluded or
   specially dumped volume also carries a comment beside its Nix declaration.
-- RPO is stated per lost domain, not as the capture cadence. Against loss
-  of the source host: 1 h (sencha), 24 h (taro). Against loss of boba — the
-  only case for boba's own data — **B2 is at most 40 h (server sets) /
-  58 h (sencha) behind before an alert must have fired**: freshness gate
-  12 h / 30 h + 25 h copy interval + 3 h grace. The interval is 25 h once a
-  year because the timers are local time and the hosts observe DST; no
-  daily timer may sit in the 02:00–02:59 hour, which is skipped at the
-  spring-forward. Copying right after each source backup would shave only
-  ~2.5 h, so the interval stays 24 h.
-- sencha's live-read browser and Thunderbird profiles are accepted loss
-  outside the RPO: logins are in Bitwarden and mail is IMAP; a torn SQLite
-  profile can cost bookmarks and address books.
+- Capture cadence is not a recovery-point guarantee. Both laptops attempt hourly
+  captures only while awake, on AC and able to reach boba; taro captures nightly.
+  With the agreed source monitoring active, the existing alert-bound calculation
+  gives 40 h for server B2 copies, 58 h for longjing and 196 h for sencha:
+  source freshness/deadline of 12/30/168 h plus a 25 h copy interval and 3 h grace.
+  These bounds depend on the external checks being configured and unpaused.
+  The interval is 25 h once a year because the hosts observe DST. Daily timers
+  stay outside the skipped 02:00–02:59 spring-forward hour.
+- Workstation application state is live-read, not an atomic desktop snapshot.
+  Browser, mail and coding-tool databases may need resetting after restore.
+  Logins can be recovered from Bitwarden and mail from IMAP; torn profiles
+  can still cost bookmarks, address books or local application history.
+  This loss is accepted; no database dumps or per-application capture hooks
+  are added. Longjing does not inherit taro's disposable coding-database policy.
 - ZFS auto-snapshots on boba keep no monthlies (`monthly = 0`): they are for
   oops-recovery, and the restic repos already hold 12 monthlies of the same
   data on the same pool.

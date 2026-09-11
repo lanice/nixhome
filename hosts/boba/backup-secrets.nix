@@ -29,11 +29,13 @@ in {
     resticBobaTransport.file = "${inputs.self}/secrets/resticBobaTransport.age";
 
     resticSenchaPassword = resticOwnedSecret "${inputs.self}/secrets/resticSenchaPassword.age";
+    resticLongjingPassword = resticOwnedSecret "${inputs.self}/secrets/resticLongjingPassword.age";
     resticForgejoPassword = resticOwnedSecret "${inputs.self}/secrets/resticForgejoPassword.age";
     mailArchiveResticPassword = resticOwnedSecret "${inputs.self}/secrets/mailArchiveResticPassword.age";
     resticBobaPassword = resticOwnedSecret "${inputs.self}/secrets/resticBobaPassword.age";
 
     resticOffsiteSenchaPassword = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteSenchaPassword.age";
+    resticOffsiteLongjingPassword = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteLongjingPassword.age";
     resticOffsiteForgejoPassword = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteForgejoPassword.age";
     resticOffsiteMailArchivePassword = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteMailArchivePassword.age";
     resticOffsiteBobaPassword = resticOwnedSecret "${inputs.self}/secrets/resticOffsiteBobaPassword.age";

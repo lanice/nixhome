@@ -1,5 +1,159 @@
 # Backup recovery runbook
 
+## Deploy Longjing backups
+
+Boba was deployed and Longjing switched on 2026-09-10. The operator completed
+the initial Longjing backup and restored both Boba timers. The landing repo
+measured 49 GiB; the shared landing tree measured 259 GiB, leaving about 61 GiB
+under the 320 GiB limit.
+
+The first Longjing offsite copy and production restore verification remain
+unconfirmed. Resume after the next 05:30 Boba offsite run by following
+**Verify offsite recovery** below. The last offsite completion inspected during
+deployment was 2026-09-10 at 05:33, before Longjing's first capture.
+
+### Prerequisites
+
+Run from this checkout on Longjing, in a private interactive terminal:
+
+```sh
+bash .scratch/longjing-backup/setup.sh
+```
+
+This one-off, gitignored wizard performs only the manual setup:
+
+1. Create Longjing's source check in Healthchecks: Simple schedule, period
+   one day, grace six hours. Enable the same notifications as Sencha's check
+   and keep resume-on-ping. Paste its UUID, not its full ping URL. The wizard
+   encrypts it as `secrets/resticLongjingHealthcheckUuid.age` for the declared
+   recipients and stages the file for flake evaluation. It sends no ping.
+2. Change Sencha's existing source check to period six days, grace one day.
+   This is a total deadline of 168 hours, not seven days plus extra grace.
+3. Save Longjing's transport password, landing password, offsite password and
+   check UUID in Bitwarden. The three repository/transport secrets are already
+   generated and encrypted. The wizard decrypts them only in your terminal.
+
+For a different checkout without the wizard, use the same manual settings and
+the normal agenix workflow to create `resticLongjingHealthcheckUuid.age` from
+the real check UUID. Keep the existing generated passwords; do not regenerate
+them after repository initialization.
+
+Complete these steps before switching: the configuration references the UUID
+file, so a build alone does not prove that agenix can install the secret.
+Review the encrypted changes and keep them in Git. New source files and the
+three generated credential files were staged during implementation; the wizard
+stages the remaining encrypted UUID. Keep `.scratch/` out of Git.
+
+### Build and switch
+
+While on AC, build both affected deployments:
+
+```sh
+nh os build
+colmena build --on boba
+```
+
+Coordinate the cutover so the nightly chain does not encounter an empty
+Longjing repository. Temporarily mask the two Boba timers, and wait for any
+already-running offsite or monthly job to finish before switching:
+
+```sh
+ssh boba "sudo systemctl mask --runtime --now restic-offsite.timer restic-offsite-monthly.timer"
+ssh boba "systemctl is-active restic-offsite.service restic-offsite-monthly.service"
+colmena apply --on boba
+nh os switch
+sudo systemctl start restic-backups-longjing.service
+systemctl show restic-backups-longjing.service -p Result -p ExecMainStatus
+journalctl -u restic-backups-longjing.service -n 80 --no-pager
+```
+
+The status command reports `inactive` and exits nonzero when neither Boba job
+is running; that is the desired pre-switch state. Run the commands individually.
+The initial Longjing backup must succeed and update its source check. Reconnecting
+AC alone does not trigger a run; starting the service explicitly avoids waiting
+for the next hourly timer.
+
+Once the landing contains its first snapshot, restore both Boba timers:
+
+```sh
+ssh boba "sudo systemctl unmask --runtime restic-offsite.timer restic-offsite-monthly.timer"
+ssh boba "sudo systemctl start restic-offsite.timer restic-offsite-monthly.timer"
+ssh boba "systemctl list-timers restic-offsite.timer restic-offsite-monthly.timer"
+```
+
+If provisioning fails, do not leave the timers masked indefinitely. Finish the
+initial landing capture promptly, or roll Boba back to its previous generation
+before restoring the timers. An empty configured repo intentionally fails the
+offsite chain; do not weaken that check.
+
+Sencha needs no immediate switch: its installed source behavior is unchanged.
+The seven-day deadline is an external Healthchecks change. A future Sencha
+rebuild uses the shared workstation module with the same capture policy.
+
+### Verify offsite recovery
+
+Let the next 05:30 chain complete. To run it manually, use the command below
+only while the server sets have snapshots within their 12-hour freshness window:
+
+```sh
+ssh boba "sudo systemctl start restic-offsite.service"
+ssh boba "systemctl show restic-offsite.service -p Result -p ExecMainStatus"
+ssh boba "sudo journalctl -u restic-offsite.service -n 100 --no-pager"
+ssh boba "sudo du --apparent-size -h -d1 /data/backups/restic"
+```
+
+Check that Longjing was copied and both tiers pruned successfully, the aggregate
+check received its success ping, and the landing tree has headroom below the
+shared 320 GiB limit. Stale server snapshots still fail a daytime manual run;
+keep their freshness gates rather than treating that as laptop downtime.
+
+After a successful copy, run the monthly job once to exercise the new repo's
+data check and independent landing/B2 restore-and-hash comparison:
+
+```sh
+ssh boba "sudo systemctl start restic-offsite-monthly.service"
+ssh boba "systemctl show restic-offsite-monthly.service -p Result -p ExecMainStatus"
+ssh boba "sudo journalctl -u restic-offsite-monthly.service -n 100 --no-pager"
+```
+
+This checks all five repositories and reads one twelfth of B2 data. Confirm
+Longjing's canary succeeded and the monthly check received its success ping.
+Record initial backup size, durations, quota headroom and restore results here
+after deployment, and remove the pending-deployment note in ADR-0003.
+
+### Session directory exclusions
+
+Longjing categorically excludes these directories and everything inside them:
+
+- `/home/lanice/.codex/sessions`
+- `/home/lanice/.claude/projects`
+- `/home/lanice/.omp/agent/sessions`
+
+This includes small transcripts, nested subagent records, attachments and other
+file types. Settings, credentials and project files outside these directories
+remain included. Previously captured session data ages out under normal
+retention. Sencha's exclusion policy is unchanged.
+
+These are static restic exclusions. No size scan, Python helper or generated
+per-run transcript exclusion file is needed.
+
+Disposable restic snapshots confirmed that Longjing omits all three trees,
+including small transcripts and non-JSONL attachments, while retaining neighboring
+configuration and project files. The same fixtures confirmed Sencha still captures
+those trees and both hosts honor `.nobackup`. Those checks used no production data.
+
+The generated offsite and monthly functions were also exercised against separate
+disposable local repositories. A stale server source was rejected; the same
+stale Longjing snapshot was copied and both tiers pruned. The monthly function
+restored matching original/copy snapshots and passed its SHA-256 comparison.
+
+Full NixOS toplevel builds passed again for Longjing and Sencha after this
+simplification; Boba's unchanged integration had passed previously. Effective
+module evaluation confirmed the three additional exclusions on Longjing and
+identical prepare commands and backup flags on both workstations. The setup
+wizard passed Bash syntax and ShellCheck checks. The real Healthchecks UUID was
+provisioned before deployment; keep its encrypted file available for future builds.
+
 ## B2 capacity guardrail
 
 The production bucket's storage cap is `$0.24/day`. Backblaze exposes only
@@ -16,11 +170,11 @@ boba's rest-server 0.14.0 starts with `--max-size 343597383680` (320 GiB).
 This is a shared limit for the entire `/data/backups/restic` path, not a
 per-repository limit. In that release, `mux.go` constructs one quota manager
 from `server.Path`, and `quota/quota.go` tallies that path recursively,
-including every subrepository. The four expected landing repositories currently
-total about 180 GiB (sencha 119 GiB, boba 50 GiB, mail archive 6.5 GiB,
-Forgejo 3 GiB), so the limit leaves about 140 GiB for churn and temporarily
-duplicated packs while bounding a hostile sender far below the 20 TiB available
-on the dataset.
+including every subrepository. At the original rollout, the four landing
+repositories totaled about 180 GiB. The Longjing planning inspection later
+measured about 210 GiB before adding its set, leaving about 110 GiB at that
+point. Re-measure after the initial Longjing backup and pruning; the planning
+estimate is not a compressed repository-size or retention-growth guarantee.
 
 Because the quota is shared, a hostile sender can exhaust the landing
 allowance and temporarily deny writes to the other senders; rest-server cannot
@@ -140,21 +294,20 @@ The bounded unreachable-boba run failed in 30.051s. The unit had no
 The dashboard's last-ping timestamp remained unchanged; its one-day period and
 six-hour grace produce the 30-hour deadline.
 
-## Planned sencha downtime
+## Planned workstation downtime
 
-Keep the sencha backup check at period one day, grace six hours. Before a
-long shutdown or time off AC, pause **only sencha's backup check** in
+After Longjing's setup, source deadlines are 30 hours for Longjing and 168 hours
+for Sencha, including grace. For planned downtime beyond that deadline, pause
+only the affected source check in
 [Healthchecks](https://healthchecks.io/docs/configuring_checks/).
-Under Filtering Rules, leave "Pinging a Paused Check" at its default,
-which resumes monitoring on the next ping. Do not select "Ignore the ping,
-stay in the paused state". After returning, verify an hourly backup succeeds
-and the check resumes. If no backup succeeds, resume the check manually so
-the pause cannot hide a broken backup job.
+Under Filtering Rules, keep the default that resumes monitoring on a ping.
+After returning, verify a successful hourly backup resumes the check. If none
+succeeds, resume it manually so a pause cannot hide a broken backup job.
 
-Do not pause the offsite chain. It copies and prunes sencha's available
-snapshots regardless of age; empty/unreadable repositories and copy/prune
-errors still fail, and server sets retain their 12-hour freshness gates.
-While sencha's check is paused, its recovery-point age has no bound.
+Do not pause the offsite chain for laptop downtime. It copies and prunes both
+laptops' available snapshots regardless of age; empty/unreadable repositories
+and copy/prune errors still fail. Server sets retain their 12-hour freshness
+gates. A paused source check provides no recovery-point age alarm.
 
 On September 8 and 9, 2026, the old 30-hour offsite gate rejected sencha's
 38.5-hour and 62.5-hour snapshots. All three server sets completed their copies
@@ -240,25 +393,27 @@ Session JSONL and retained files are live-read, not an atomic snapshot. Restore 
 not resume in-flight agent processes. If the host was compromised, revoke and replace its
 Git key and provider credentials rather than reusing the backed-up credentials.
 
-## Bootstrap sencha's agenix identity
+## Bootstrap a workstation's agenix identity
 
-sencha does not run sshd, so NixOS does not generate its host key. After a
-reinstall, restore the identity in this order:
+Both workstations use `/etc/ssh/ssh_host_ed25519_key` as their agenix identity.
+Sencha's key predates sshd and is now reused by it; Longjing does not run sshd.
+The existing Longjing public key already matches the fleet registry.
 
-```fish
+After reinstalling, prefer restoring the existing key and public key from backup.
+Keep the private key root-owned with mode `0600`. If recovery is impossible,
+generate a replacement only after confirming the old key is absent. For Longjing:
+
+```sh
 sudo install -d -m 0755 /etc/ssh
-sudo ssh-keygen -q -t ed25519 -N "" -C root@sencha \
+sudo ssh-keygen -q -t ed25519 -N "" -C root@longjing \
   -f /etc/ssh/ssh_host_ed25519_key
 cat /etc/ssh/ssh_host_ed25519_key.pub
 ```
 
-Add the printed public key as `fleet.hosts.sencha.hostKey` in
-`hosts/fleet.nix`, retain
-`age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"]` in sencha's
-configuration, add the new host key to every sencha-readable secret in
-`secrets/secrets.nix`, then re-key those secrets from the operator identity.
-Apply the sencha configuration only after the private key and recipient rules
-exist. Nothing else regenerates this key.
+Use `root@sencha` for Sencha. Update the corresponding `fleet.hosts.<host>.hostKey`,
+retain `age.identityPaths`, and re-key every affected secret with a surviving
+admin identity before switching. Never rotate a working host identity merely
+to add a backup job.
 
 ## Observed Podman volume inventory
 

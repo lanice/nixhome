@@ -8,6 +8,7 @@
   landingRoot = "/data/backups/restic";
   offsiteRoot = "s3:s3.us-east-005.backblazeb2.com/lanice-restic-offsite";
   uploadLimitKiB = 10240;
+  laptopRepos = ["sencha" "longjing"];
 
   pascalCase = name: let
     camel = lib.toCamelCase name;
@@ -22,9 +23,9 @@
     }.path;
   offsitePassword = name:
     config.age.secrets."resticOffsite${pascalCase name}Password".path;
-  # Zero disables source-age gating; sencha has its own dead-man check.
+  # Zero disables source-age gating; laptops have their own dead-man checks.
   freshnessHours = name:
-    if name == "sencha"
+    if lib.elem name laptopRepos
     then 0
     else 12;
 
@@ -130,7 +131,7 @@
       fi
 
       echo "[$name] pruning landing repository"
-      if [ "$name" = sencha ]; then
+      if ${lib.concatMapStringsSep " || " (name: ''[ "$name" = ${lib.escapeShellArg name} ]'') laptopRepos}; then
         if ! ${pkgs.restic}/bin/restic \
           --repo "$landing_repo" \
           --password-file "$landing_password" \

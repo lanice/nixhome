@@ -20,6 +20,7 @@ in {
     # offsite copy/prune chain added in ticket 08.
     homelab.backup.landingRepos = [
       "sencha"
+      "longjing"
       "forgejo"
       "mail-archive"
       "boba"
