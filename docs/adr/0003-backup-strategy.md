@@ -1,8 +1,8 @@
 # Backups are restic, hub-and-spoke through boba, offsite on B2 behind Object Lock
 
-Longjing's extension was deployed on 2026-09-10 and its initial landing backup
-completed. The first offsite copy and production restore canary remain unverified;
-the backup recovery runbook records the next checks.
+Longjing's extension was deployed on 2026-09-10. Its first offsite copy and
+production restore canary passed on 2026-09-11; the backup recovery runbook
+records snapshot identities, checksums and service outcomes.
 
 Until now the fleet had one copy of almost everything. taro shipped its mail
 archive and forgejo dumps to boba nightly, but boba itself — paperless, every

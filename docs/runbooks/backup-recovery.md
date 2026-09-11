@@ -7,10 +7,27 @@ the initial Longjing backup and restored both Boba timers. The landing repo
 measured 49 GiB; the shared landing tree measured 259 GiB, leaving about 61 GiB
 under the 320 GiB limit.
 
-The first Longjing offsite copy and production restore verification remain
-unconfirmed. Resume after the next 05:30 Boba offsite run by following
-**Verify offsite recovery** below. The last offsite completion inspected during
-deployment was 2026-09-10 at 05:33, before Longjing's first capture.
+Production verification completed on 2026-09-11; all times below are EDT:
+
+- The nightly offsite chain completed at 06:56:24 with `Result=success` and
+  exit status 0. Longjing's first copy started at 05:31:57; its copy and both
+  prunes completed at 06:55:06. All five repositories completed, and the
+  aggregate Healthchecks success ping was accepted.
+- The monthly verification was run manually from 15:20:24 to 15:26:14.
+  All five repositories passed landing metadata checks, the month's one-twelfth
+  offsite data check, and independent landing/B2 restore-and-hash comparisons.
+  The service exited successfully and its Healthchecks success ping was accepted.
+- Longjing's B2 snapshot `f72b4670` matched original landing snapshot `9702b3a5`,
+  captured at 02:00:01. The canary restored
+  `/home/lanice/.claude/.credentials.json` from each repository; both copies had
+  SHA-256 `02856b187a93fee04f2095a1b395fac5843a95cfd0e18de66e843800643a1f7a`.
+  No credential contents were displayed.
+- The landing tree measured about 260 GiB, including 49 GiB for Longjing,
+  leaving roughly 60 GiB under the shared 320 GiB limit.
+
+This verifies sampled repository data and one restored file per repository,
+not a full workstation or application restore. The initial deployment checks
+are complete; normal hourly, nightly and monthly schedules continue.
 
 ### Prerequisites
 
@@ -118,8 +135,8 @@ ssh boba "sudo journalctl -u restic-offsite-monthly.service -n 100 --no-pager"
 
 This checks all five repositories and reads one twelfth of B2 data. Confirm
 Longjing's canary succeeded and the monthly check received its success ping.
-Record initial backup size, durations, quota headroom and restore results here
-after deployment, and remove the pending-deployment note in ADR-0003.
+Record subsequent verification dates, snapshot identities, quota headroom and
+restore results alongside the deployment evidence above.
 
 ### Session directory exclusions
 
