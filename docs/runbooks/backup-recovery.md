@@ -5,7 +5,7 @@
 Boba was deployed and Longjing switched on 2026-09-10. The operator completed
 the initial Longjing backup and restored both Boba timers. The landing repo
 measured 49 GiB; the shared landing tree measured 259 GiB, leaving about 61 GiB
-under the 320 GiB limit.
+under the then-configured 320 GiB limit.
 
 Production verification completed on 2026-09-11; all times below are EDT:
 
@@ -23,7 +23,7 @@ Production verification completed on 2026-09-11; all times below are EDT:
   SHA-256 `02856b187a93fee04f2095a1b395fac5843a95cfd0e18de66e843800643a1f7a`.
   No credential contents were displayed.
 - The landing tree measured about 260 GiB, including 49 GiB for Longjing,
-  leaving roughly 60 GiB under the shared 320 GiB limit.
+  leaving roughly 60 GiB under the then-configured shared 320 GiB limit.
 
 This verifies sampled repository data and one restored file per repository,
 not a full workstation or application restore. The initial deployment checks
@@ -121,7 +121,7 @@ ssh boba "sudo du --apparent-size -h -d1 /data/backups/restic"
 
 Check that Longjing was copied and both tiers pruned successfully, the aggregate
 check received its success ping, and the landing tree has headroom below the
-shared 320 GiB limit. Stale server snapshots still fail a daytime manual run;
+shared 1 TiB limit. Stale server snapshots still fail a daytime manual run;
 keep their freshness gates rather than treating that as laptop downtime.
 
 After a successful copy, run the monthly job once to exercise the new repo's
@@ -183,15 +183,21 @@ caps do not bound this threat.
 
 ## Landing quota
 
-boba's rest-server 0.14.0 starts with `--max-size 343597383680` (320 GiB).
+Boba's rest-server 0.14.0 is configured with `--max-size 1099511627776` (1 TiB).
 This is a shared limit for the entire `/data/backups/restic` path, not a
 per-repository limit. In that release, `mux.go` constructs one quota manager
 from `server.Path`, and `quota/quota.go` tallies that path recursively,
-including every subrepository. At the original rollout, the four landing
-repositories totaled about 180 GiB. The Longjing planning inspection later
-measured about 210 GiB before adding its set, leaving about 110 GiB at that
-point. Re-measure after the initial Longjing backup and pruning; the planning
-estimate is not a compressed repository-size or retention-growth guarantee.
+including every subrepository.
+
+The configured ceiling was raised from 320 GiB to 1 TiB after Longjing's
+production verification. It is a runaway-upload safeguard, not an expected
+backup size or a B2 spending cap. At about 260 GiB of landing data, it leaves
+roughly 764 GiB of headroom. Deploy Boba to activate the change; confirm the
+running flag with:
+
+```sh
+ssh boba "systemctl show restic-rest-server.service -p ExecStart"
+```
 
 Because the quota is shared, a hostile sender can exhaust the landing
 allowance and temporarily deny writes to the other senders; rest-server cannot

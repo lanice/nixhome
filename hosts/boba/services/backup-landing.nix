@@ -7,7 +7,7 @@
   dataDir = "/data/backups/restic";
   port = 8000;
   # rest-server 0.14.0 applies this quota to the whole --path, not each repo.
-  maxSizeBytes = 320 * 1024 * 1024 * 1024;
+  maxSizeBytes = 1024 * 1024 * 1024 * 1024;
 in {
   options.homelab.backup.landingRepos = lib.mkOption {
     type = lib.types.listOf lib.types.str;
