@@ -6,12 +6,13 @@
 }: {
   imports = [
     ../../../../home/lanice/features/agents/codex
+    ../../../../home/lanice/features/agents/herdr
     ../../../../home/lanice/features/cli/git-core.nix
   ];
 
   home = {
-    username = osConfig.users.users.t3code.name;
-    homeDirectory = osConfig.users.users.t3code.home;
+    username = osConfig.users.users.coding.name;
+    homeDirectory = osConfig.users.users.coding.home;
     stateVersion = "26.05";
 
     packages = with pkgs; [

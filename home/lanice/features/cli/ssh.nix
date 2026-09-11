@@ -1,4 +1,4 @@
-{...}: {
+_: {
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
@@ -9,6 +9,11 @@
       };
       # Colmena targets `unstable`; its tailnet name is stable-diffusion.
       unstable.HostName = "stable-diffusion";
+      coding-taro = {
+        HostName = "taro";
+        User = "coding";
+        ForwardAgent = "no";
+      };
     };
   };
 }

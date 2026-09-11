@@ -375,23 +375,32 @@ data, including temporary tokens, were removed.
 
 ## Restore taro's remote coding environment
 
-The nightly `forgejo` backup set contains `/home/t3code`, excluding `workspaces`,
-`.t3/worktrees`, caches, and the disposable T3/Codex SQLite databases and their
-sidecars. Checkouts, unpushed work and database contents are not recovered.
+The nightly `forgejo` backup set contains `/home/coding`, excluding `workspaces`,
+`.t3/worktrees`, `.herdr/worktrees`, caches, and the disposable T3/Codex SQLite
+databases and their sidecars. Checkouts, unpushed work and database contents are
+not recovered. Herdr configuration and session layouts remain included.
 
-1. Stop `t3code.service` and close coding-account shells before restoring.
-2. Restore `/home/t3code`, including the retained `.t3` and `.codex` files,
-   and `.ssh`.
-3. Set the restored home tree's owner to the current `t3code:t3code` account,
+1. Stop `t3code.service` and `herdr.service`, and close coding-account shells.
+2. Restore `/home/coding`, including retained `.t3`, `.codex`, `.config/herdr`,
+   and `.ssh` files.
+3. Set the restored home tree's owner to the current `coding:coding` account,
    keep the home and `.ssh` private, and set private keys to mode `0600`.
-4. Clone projects again from their Git remotes into `/home/t3code/workspaces`.
-   Start `t3code.service` and pair the laptops again if needed. Re-add project
-   paths in T3; do not expect its old project or thread records to return.
-   Run `codex login status` as `t3code`; reauthenticate if necessary.
+4. Clone projects again from their Git remotes into `/home/coding/workspaces`.
+   Start `t3code.service` and `herdr.service`. Pair T3 clients again if needed
+   and re-add project paths; its old project or thread database is not restored.
+   Herdr layouts cannot recover excluded checkouts or live processes.
+   Run `codex login status` as `coding`; reauthenticate if necessary.
 
 Session JSONL and retained files are live-read, not an atomic snapshot. Restore does
 not resume in-flight agent processes. If the host was compromised, revoke and replace its
 Git key and provider credentials rather than reusing the backed-up credentials.
+
+The September 2026 account migration has a separate root-only rollback copy at
+`/var/backups/coding-migration-20260911T040420Z` on taro. Its `home.tar` contains
+the complete old home, including workspaces and databases; it is not an off-host
+backup. `home.tar.sha256` verifies the archive, and `previous-system` records the
+pre-migration system closure. Keep this copy until the migrated environment is
+accepted. Do not restore its old absolute paths into the running coding services.
 
 ## Bootstrap a workstation's agenix identity
 

@@ -10,6 +10,7 @@
     ./global # includes features/cli,features/helix
 
     ./features/agents
+    ./features/agents/herdr
 
     ./features/cli/ssh.nix
     ./features/cli/forgejo.nix

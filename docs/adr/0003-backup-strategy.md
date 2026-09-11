@@ -182,11 +182,12 @@ forgejo's restic is chained on its dump unit.
   battery watcher or application shutdown is introduced.
 - `/etc/ssh/ssh_host_*` is in every host's set: it is that host's agenix
   identity.
-- taro's nightly `forgejo` backup set includes `/home/t3code`, retaining
-  non-database T3/Codex state, authentication, and `.ssh` credentials and configuration.
-  `workspaces` and `.t3/worktrees` are disposable checkouts and excluded entirely,
-  including local Git history and uncommitted files. Projects must be recoverable
-  from their Git remotes; losing unpushed work is accepted.
+- taro's nightly `forgejo` backup set includes `/home/coding`, retaining
+  non-database T3/Codex state, herdr configuration and session layouts,
+  authentication, and `.ssh` credentials and configuration.
+  `workspaces`, `.t3/worktrees`, and `.herdr/worktrees` are disposable checkouts
+  and excluded entirely, including local Git history and uncommitted files.
+  Projects must be recoverable from their Git remotes; losing unpushed work is accepted.
   Package caches are also excluded. The exact exclusions live in `hosts/taro/backup.nix`.
 - T3's `.t3/userdata/state.sqlite` and Codex's root `.codex/*.sqlite`
   databases are disposable and deliberately excluded, along with their WAL,
@@ -194,8 +195,8 @@ forgejo's restic is chained on its dump unit.
   Losing their contents after host failure is accepted.
 - Coding session JSONL and retained files are live-read, not an atomic snapshot.
   In-flight processes and unflushed memory are not restored. Backups never stop
-  T3 and no pre-upgrade snapshot is taken. Changes to the database layout require
-  updating the exclusions.
+  T3 or herdr. Routine upgrades do not take a snapshot. Changes to the database
+  layout require updating the exclusions.
   Restore steps live in [the recovery runbook](../runbooks/backup-recovery.md#restore-taros-remote-coding-environment).
 - boba's consistency contract is crash-consistent: one multi-dataset
   `@backup` ZFS snapshot (a single point in time) bind-mounted over the live

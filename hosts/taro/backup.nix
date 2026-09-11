@@ -10,11 +10,11 @@
   # credentials, and recovery material all use "forgejo".
   boba = (import ../fleet.nix).hosts.boba;
   roundcubeDump = "/var/lib/roundcube/roundcube.sql";
-  t3codeHome = config.users.users.t3code.home;
+  codingHome = config.users.users.coding.home;
   # Disposable databases; exclude SQLite sidecars too.
   sqliteSources = [
-    "${t3codeHome}/.t3/userdata/state.sqlite"
-    "${t3codeHome}/.codex/*.sqlite"
+    "${codingHome}/.t3/userdata/state.sqlite"
+    "${codingHome}/.codex/*.sqlite"
   ];
 in {
   services.restic.backups.forgejo = {
@@ -27,22 +27,23 @@ in {
       "/var/lib/roundcube/des_key"
       roundcubeDump
       "/var/lib/acme"
-      t3codeHome
+      codingHome
     ];
     exclude =
       lib.concatMap (path: [path "${path}-wal" "${path}-shm" "${path}-journal"]) sqliteSources
       ++ [
-        "${t3codeHome}/workspaces"
-        "${t3codeHome}/.t3/worktrees"
-        "${t3codeHome}/.cache"
-        "${t3codeHome}/.npm"
-        "${t3codeHome}/.local/share/pnpm/store"
-        "${t3codeHome}/.bun/install/cache"
-        "${t3codeHome}/.cargo/registry"
-        "${t3codeHome}/.cargo/git"
-        "${t3codeHome}/.t3/caches"
-        "${t3codeHome}/.codex/tmp"
-        "${t3codeHome}/.codex/models_cache.json"
+        "${codingHome}/workspaces"
+        "${codingHome}/.t3/worktrees"
+        "${codingHome}/.herdr/worktrees"
+        "${codingHome}/.cache"
+        "${codingHome}/.npm"
+        "${codingHome}/.local/share/pnpm/store"
+        "${codingHome}/.bun/install/cache"
+        "${codingHome}/.cargo/registry"
+        "${codingHome}/.cargo/git"
+        "${codingHome}/.t3/caches"
+        "${codingHome}/.codex/tmp"
+        "${codingHome}/.codex/models_cache.json"
       ];
     passwordFile = config.age.secrets.resticForgejoPassword.path;
     initialize = true;
