@@ -192,13 +192,30 @@ worktrees rather than the same checkout.
 
 Home Manager installs the Codex hook on taro and the enabled Codex, Claude, and
 OMP integrations on longjing. Do not run `herdr integration install` over those
-managed files. Codex keeps its mutable project-trust config; activation enables
-hooks through `codex features enable hooks`.
+managed files. NixOS provides `/etc/codex/config.toml` whenever any Home Manager
+user enables `programs.codex.enable`. Adding or removing the Codex Home Manager
+feature is the only toggle; no per-host system import is needed. The system
+defaults enable hooks and allow 16 concurrent subagent threads. Codex loads them
+automatically; user and trusted project settings can override them.
+Update checks and analytics are disabled. Project instruction discovery tries
+`AGENTS.override.md`, `AGENTS.md`, `CLAUDE.local.md`, then `CLAUDE.md`, loading at
+most one file per directory.
 
-Codex may request hook approval on first use. Review the SessionStart hook pointing
-to `~/.codex/herdr-agent-state.sh`, then trust that hook. `herdr integration status`
-checks installed files; a live pane's `agent_session` confirms actual session
-reporting. Restart existing agents to load changed integrations.
+Codex owns the writable `~/.codex/config.toml`, including project trust and hook
+approvals. On taro this is `/home/coding/.codex/config.toml`. No Nix project list
+is needed. Codex 0.154.0 automatically records trust when T3 starts a thread with
+an explicit working directory, no existing trust decision, and effective write
+permission there. Explicitly untrusted projects remain untrusted. The CLI may
+prompt for trust; individual hook approvals remain separate.
+
+Use `/hooks` to review and trust Herdr's SessionStart hook pointing to
+`~/.codex/herdr-agent-state.sh`. Changed hook definitions need approval again.
+`herdr integration status` checks installed files; a live pane's `agent_session`
+confirms actual session reporting. Restart existing agents to load changed integrations.
+
+When migrating from a Home Manager-owned user config, keep any existing regular
+file. After switching, `~/.codex/config.toml` must be absent or a writable regular
+file. Move any leftover Nix-store symlink aside before launching Codex.
 
 ### Resource limits
 

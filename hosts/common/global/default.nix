@@ -2,6 +2,7 @@
 {inputs, ...}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    ../codex.nix
     ./lanice.nix
     ./fish.nix
     ./locale.nix

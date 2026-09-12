@@ -49,14 +49,6 @@ in {
     ];
   };
 
-  # Codex owns project trust in this mutable file; do not replace it with a symlink.
-  home.activation.herdrCodexHooks = lib.mkIf config.programs.codex.enable (
-    lib.hm.dag.entryAfter ["linkGeneration"] ''
-      run env CODEX_HOME=${lib.escapeShellArg codexDir} \
-        ${lib.getExe config.programs.codex.package} features enable hooks
-    ''
-  );
-
   programs.claude-code.settings.hooks = lib.mkIf config.programs.claude-code.enable {
     SessionStart = [
       {
