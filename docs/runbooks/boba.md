@@ -47,8 +47,8 @@ or an inotify watcher snapshot their view of the filesystem at start. If
 the mountpoint and see an empty share for their whole lifetime. navidrome hit
 this: started 0.7s before `zfs-mount.service`, marked all tracks missing.
 
-Non-legacy ZFS datasets are mounted by `zfs mount -a`, not by a generated
-`.mount` unit, so `RequiresMountsFor=` has nothing to attach to. Any new service
+The data datasets use native ZFS mounting, not generated fstab mount units.
+`RequiresMountsFor=` alone cannot order their initial mount. Any new service
 that sandboxes itself and reads a share needs
 `after`/`requires = ["zfs-mount.service"]` (see navidrome in
 `hosts/boba/services/media.nix` and shelfmark).
@@ -60,6 +60,53 @@ sudo nsenter -t $(systemctl show <svc> -p MainPID --value) -m -U --preserve-cred
 ```
 
 Recovery is a plain restart once the dataset is mounted.
+
+## Native data mounts (2026-09-13)
+
+The data datasets previously had both native ZFS mountpoints and fstab entries.
+`zfs mount -a` raced the generated mount units, producing "dataset is busy"
+failures even though the datasets mounted successfully.
+
+Keep their mountpoints in disko's `options.mountpoint`, not its `mountpoint`
+field. Keep `boot.zfs.extraPools = ["data"]`: without fstab entries, the pool
+needs an explicit import dependency. Root and system datasets are unchanged.
+
+For this cutover, use boot-only activation and a planned clean reboot, not a
+live switch that changes active mounts. Check pool imports, dataset mounts,
+service mount namespaces, and the boot journal afterward.
+
+## Netconsole verification (2026-09-13)
+
+The old module-load unit returned success even when the kernel rejected its
+target because `enp95s0` had no IP. The service now waits up to 60 seconds for
+carrier and global IPv4, then configures and checks a configfs target.
+
+Taro must use `enp1s0`: reserved IP `192.168.7.171`, MAC `00:e0:4c:56:27:82`.
+The receiver firewall rule is tied to that interface.
+
+After activation, check on boba:
+
+```bash
+sudo cat /sys/kernel/config/netconsole/taro/enabled
+printf '<3>netconsole manual forwarding check\n' | sudo tee /dev/kmsg
+```
+
+The enabled value must be `1`. On taro:
+
+```bash
+sudo journalctl -u netconsole-receiver --since '2 minutes ago' --grep='netconsole manual forwarding check'
+```
+
+Boba's console log level is 4, so a priority-4 warning is filtered; use
+priority 3 for the test. An enabled target does not prove packet delivery.
+Missing remote logs alone do not distinguish a hardware reset from a panic.
+
+## EFI random-seed permissions (2026-09-13)
+
+`/boot` uses FAT. Its `fmask=0077,dmask=0077` mount options restrict the
+bootloader random seed to root; `chmod` is not persistent permission control
+on FAT. After reboot, verify the masks with `findmnt /boot` and check that
+`stat -c %a /boot/loader/random-seed` reports `700`.
 
 ## Jellyfin: DbUpdateConcurrencyException (2026-05-16)
 

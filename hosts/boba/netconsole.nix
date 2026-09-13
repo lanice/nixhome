@@ -1,29 +1,56 @@
 {pkgs, ...}: {
-  # Stream kernel messages to taro over the LAN so a hard crash leaves
-  # evidence off-box. The 2026-08-01 crash left none on-box: journald lost
-  # its final ~30s and efi-pstore stayed empty, which also means a plain
-  # power/hardware reset stays indistinguishable from a panic. If netconsole
-  # AND pstore are both empty after the next crash, it's hardware.
-  #
-  # netconsole needs raw L2 facts the fleet registry doesn't carry: the
-  # receiver is taro's LAN address and NIC MAC (enp1s0, on-link from
-  # enp95s0). Update here if taro's DHCP reservation or NIC ever changes.
-  # The source IP is left blank so the module picks up enp95s0's current
-  # address; `+` enables extended (non-truncated) messages. The receiving
-  # end lives in hosts/taro/services/netconsole-receiver.nix.
-  #
-  # Loaded via a unit instead of boot.kernelModules because the module
-  # binds enp95s0 at load time, so the interface has to be up first.
+  # Forward kernel messages to taro so crashes leave evidence off-box.
+  # Destination is taro's reserved LAN IP and enp1s0 MAC.
+  # Receiver: hosts/taro/services/netconsole-receiver.nix.
   systemd.services.netconsole = {
     description = "Stream kernel log to taro via netconsole";
     wantedBy = ["multi-user.target"];
-    after = ["network-online.target"];
+    after = ["network-online.target" "sys-kernel-config.mount"];
     wants = ["network-online.target"];
+    requires = ["sys-kernel-config.mount"];
+    path = [pkgs.iproute2 pkgs.jq pkgs.kmod];
+    script = ''
+      source_ip=
+      for _ in {1..60}; do
+        if [[ $(cat /sys/class/net/enp95s0/carrier 2>/dev/null) == 1 ]]; then
+          source_ip=$(ip -j -4 address show dev enp95s0 scope global | jq -r '.[0].addr_info[0].local // empty')
+          if [[ -n "$source_ip" ]]; then
+            break
+          fi
+        fi
+        sleep 1
+      done
+      if [[ -z "$source_ip" ]]; then
+        echo "netconsole: enp95s0 has no carrier or global IPv4 address after 60s" >&2
+        exit 1
+      fi
+
+      modprobe netconsole
+      target=/sys/kernel/config/netconsole/taro
+      mkdir "$target"
+      echo enp95s0 > "$target/dev_name"
+      echo "$source_ip" > "$target/local_ip"
+      echo 192.168.7.171 > "$target/remote_ip"
+      echo 00:e0:4c:56:27:82 > "$target/remote_mac"
+      echo 6666 > "$target/remote_port"
+      echo 1 > "$target/extended"
+      echo 1 > "$target/enabled"
+      if [[ $(cat "$target/enabled") != 1 ]]; then
+        echo "netconsole: kernel did not enable the taro target" >&2
+        exit 1
+      fi
+    '';
+    postStop = ''
+      target=/sys/kernel/config/netconsole/taro
+      if [[ -d "$target" ]]; then
+        echo 0 > "$target/enabled"
+        rmdir "$target"
+      fi
+    '';
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStart = "${pkgs.kmod}/bin/modprobe netconsole netconsole=+@/enp95s0,6666@192.168.7.171/00:e0:4c:56:27:82";
-      ExecStop = "${pkgs.kmod}/bin/modprobe -r netconsole";
+      TimeoutStartSec = 75;
     };
   };
 }

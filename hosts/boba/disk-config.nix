@@ -33,6 +33,9 @@ let
     normalization = "formD"; # Validate and normalize file names, good for SMB
   };
 in {
+  # No fstab entries remain to pull in the data pool's import service.
+  boot.zfs.extraPools = ["data"];
+
   disko = {
     devices = {
       disk = {
@@ -55,6 +58,7 @@ in {
                   type = "filesystem";
                   format = "vfat";
                   mountpoint = "/boot";
+                  mountOptions = ["fmask=0077" "dmask=0077"];
                 };
               };
               nix = {
@@ -150,11 +154,12 @@ in {
             };
           };
 
+          # Native ZFS mountpoints: zfs-mount.service owns these, not fstab.
           datasets = {
             "media" = {
               type = "zfs_fs";
-              mountpoint = "/data/media";
               options = {
+                mountpoint = "/data/media";
                 "com.sun:auto-snapshot" = "false";
                 "com.sun:auto-snapshot:frequent" = "false";
                 "com.sun:auto-snapshot:hourly" = "false";
@@ -164,15 +169,15 @@ in {
             };
             "backups" = {
               type = "zfs_fs";
-              mountpoint = "/data/backups";
               options = {
+                mountpoint = "/data/backups";
                 "com.sun:auto-snapshot" = "false";
                 recordsize = "1M";
               };
             };
             "storage" = {
               type = "zfs_fs";
-              mountpoint = "/data/storage";
+              options.mountpoint = "/data/storage";
               options."com.sun:auto-snapshot" = "true";
             };
           };
