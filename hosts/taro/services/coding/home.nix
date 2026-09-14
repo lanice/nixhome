@@ -35,11 +35,48 @@
       openssh
       procps
       ripgrep
+      fd
+      dua
+      duf
       jq
       gh
       helix
     ];
   };
 
-  programs.bash.enable = true;
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      # Fish for SSH logins; keep Bash for agents and remote commands.
+      if shopt -q login_shell && [[ -n ''${SSH_TTY:-} && -z ''${BASH_EXECUTION_STRING+x} ]]; then
+        exec ${pkgs.fish}/bin/fish --login
+      fi
+    '';
+  };
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set -g fish_greeting
+    '';
+    plugins = [
+      {
+        name = "pure";
+        src = pkgs.fishPlugins.pure.src;
+      }
+    ];
+    shellAbbrs = {
+      gs = "git status";
+      gf = "git fetch";
+      gp = "git pull";
+      gd = "git diff";
+      gco = "git checkout";
+      gcan = "git commit --amend --no-edit";
+      gbd = "git branch -D";
+
+      p = "pnpm";
+    };
+  };
+
+  programs.eza.enable = true;
 }

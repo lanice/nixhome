@@ -66,7 +66,7 @@ in {
       ];
       environment = {
         HOME = account.home;
-        SHELL = "${pkgs.bashInteractive}/bin/bash";
+        SHELL = lib.getExe account.shell;
       };
       serviceConfig = {
         User = "coding";
