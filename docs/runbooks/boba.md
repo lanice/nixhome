@@ -71,9 +71,8 @@ Keep their mountpoints in disko's `options.mountpoint`, not its `mountpoint`
 field. Keep `boot.zfs.extraPools = ["data"]`: without fstab entries, the pool
 needs an explicit import dependency. Root and system datasets are unchanged.
 
-For this cutover, use boot-only activation and a planned clean reboot, not a
-live switch that changes active mounts. Check pool imports, dataset mounts,
-service mount namespaces, and the boot journal afterward.
+The cutover reboot is complete. Normal deployments no longer need boot-only
+activation for this migration.
 
 ## Netconsole verification (2026-09-13)
 
@@ -122,3 +121,27 @@ jellyfin/jellyfin#17560.
 
 `database.xml` is mutable runtime state. Stop Jellyfin before editing it;
 shutdown rewrites the in-memory value.
+
+## Sonarr queue and fake downloads (2026-09-14)
+
+SABnzbd's unwanted-extension filter is global, with no category exceptions.
+`services/sabnzbd.nix` instead assigns `reject-tv-payloads` only to `tv`.
+It checks filenames after unpacking and fails jobs containing executable/script
+extensions or `.docx`/`.zipx`. It does not inspect file signatures or archive
+contents, and cannot save the bandwidth already spent downloading a fake.
+Keep `script_can_fail = true`; otherwise script rejection still reports success.
+Software and ebook categories do not run the script.
+
+The guard was activated through SAB's API without a system switch. Its store
+path is pinned by `/nix/var/nix/gcroots/sabnzbd-tv-scripts`; remove that extra root
+after a system deployment includes the guard.
+
+Usenet-Crawler uses Prowlarr's **Manual search only** sync profile after supplying
+11 executable-only fake TV releases. Change its policy in Prowlarr, not Sonarr.
+AnimeTosho is disabled: its feed timed out and its
+[shutdown notice](https://animetosho.org/about/shutdown2) says ingestion stopped
+in May 2026.
+
+Bake Off US release numbering differs from Sonarr's UK numbering. Masterclass
+and festive releases belong under Specials. Verify episode content before
+manual import; a series-wide title exclusion would also block wanted specials.

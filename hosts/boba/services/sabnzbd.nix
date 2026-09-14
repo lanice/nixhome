@@ -1,11 +1,46 @@
 {
   inputs,
   config,
+  pkgs,
   ...
 }: let
   user = "sabnzbd";
   mediaGroup = config.homelab.media.group;
   downloadDir = config.homelab.media.shares.usenet.path;
+  tvScripts = pkgs.writeTextFile {
+    name = "sabnzbd-tv-scripts";
+    destination = "/reject-tv-payloads";
+    executable = true;
+    text = ''
+      #!${pkgs.python3}/bin/python3
+      import os
+      import sys
+      from pathlib import Path
+
+      if os.environ["SAB_CAT"] != "tv":
+          sys.exit(0)
+      if os.environ["SAB_PP_STATUS"] != "0":
+          sys.exit(0)
+
+      root = Path(os.environ["SAB_COMPLETE_DIR"])
+      if not root.is_dir():
+          sys.exit("TV payload check failed: download directory is missing")
+
+      # Documents are not TV payloads; fake releases also use .zipx.docx.
+      blocked = {".exe", ".com", ".bat", ".cmd", ".scr", ".msi",
+                 ".lnk", ".ps1", ".vbs", ".js", ".docx", ".zipx"}
+
+      def scan_error(error):
+          raise error
+
+      for directory, _, names in os.walk(root, onerror=scan_error):
+          for name in names:
+              if Path(name).suffix.lower() in blocked:
+                  path = (Path(directory) / name).relative_to(root)
+                  sys.exit(f"Rejected unwanted TV payload: {path}")
+      print("TV payload check passed")
+    '';
+  };
 in {
   # cheetah3 (a SABnzbd dependency) fails to build since the 2026-07-23 nixpkgs
   # bump: upstream renamed the published distribution from `cheetah3` to `ct3`,
@@ -74,6 +109,8 @@ in {
         admin_dir = "admin";
         backup_dir = "backups";
         cache_limit = "2G";
+        script_dir = "${tvScripts}";
+        script_can_fail = true;
       };
       servers = {
         "news.newsdemon.com" = {
@@ -137,7 +174,7 @@ in {
           name = "tv";
           order = 2;
           pp = "";
-          script = "Default";
+          script = "reject-tv-payloads";
           dir = "";
           newzbin = "";
           priority = -100;
