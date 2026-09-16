@@ -73,19 +73,21 @@ Update the pinned packages from the repository root:
 
 ```sh
 ./pkgs/t3code/update
-./pkgs/t3code/update v0.0.38
+./pkgs/t3code/update v0.0.42
 ./pkgs/t3code/update nightly
-./pkgs/t3code/update v0.0.39-nightly.20260905.1289
 ```
 
 No argument selects the latest stable release, even when a nightly is currently
 pinned. Explicit versions also work without the leading `v`. `nightly` resolves
 to one exact version; subsequent builds never follow a moving channel.
 
-The updater uses tools from the flake's locked nixpkgs and regenerates
-`pkgs/t3code/release.nix` and `package-lock.json`. Both desktop and server
-artifacts must exist for the selected version. It does not deploy, restart T3,
-or install an npm-managed runtime.
+The updater uses Python from the flake's locked nixpkgs and atomically replaces
+`pkgs/t3code/release.nix` after fetching the desktop AppImage and both Linux CLI
+archives. All three assets must exist for the selected version; older releases
+without CLI archives are rejected without changing the pin.
+The server package patches the self-contained executable and native libraries
+for NixOS; it no longer uses npm or a package lock. The updater does not deploy
+or restart T3. Do not use `t3 update` for this Nix-managed installation.
 
 Review the generated changes and build both packages before deploying:
 
