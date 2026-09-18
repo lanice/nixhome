@@ -211,8 +211,11 @@ in {
       applets.app-list.settings = {
         enable_drag_source = true;
         favorites = [
-          "firefox"
-          "zen-beta"
+          (
+            if config.browser.default == "zen"
+            then "zen-beta"
+            else "firefox"
+          )
           "com.mitchellh.ghostty"
           "slack"
           "thunderbird"
