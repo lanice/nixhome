@@ -3,9 +3,7 @@
 # full ffmpeg for contact sheets and MP4. Nothing comes from the project under test.
 #
 #   nix-shell <skill dir>/shell.nix --run 'node screencast.mjs'
-{
-  pkgs ? import <nixpkgs> { },
-}:
+{pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
   packages = [
     pkgs.nodejs
