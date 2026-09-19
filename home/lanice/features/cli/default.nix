@@ -23,7 +23,6 @@ in {
     fd # Better find
     ripgrep # Better grep
     duf # Better df
-    localPkgs.dirstat-rs # Fast, cross-platform disk usage CLI
     dust # A more intuitive version of du in rust
 
     htop
