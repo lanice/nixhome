@@ -79,8 +79,9 @@ in {
               description = "Media Library";
               widget = {
                 type = "jellyfin";
+                version = 2;
                 inherit url;
-                fields = ["pending" "approved" "available"];
+                fields = ["movies" "series" "episodes"];
                 enableBlocks = true;
                 enableNowPlaying = true;
                 enableUser = true;
