@@ -145,3 +145,29 @@ in May 2026.
 Bake Off US release numbering differs from Sonarr's UK numbering. Masterclass
 and festive releases belong under Specials. Verify episode content before
 manual import; a series-wide title exclusion would also block wanted specials.
+
+## BookOrbit upgrades and KOReader (2026-09-18)
+
+Before activating an upgrade, stop BookOrbit and take a fresh PostgreSQL dump
+and app-state backup. Preserve pending `/downloads/book-dock` files separately;
+the regular backup excludes `/downloads`. Database migrations run before the
+service starts. Rolling back the Nix generation alone does not undo them:
+restore the matching database and app state when reverting the application.
+
+The stock plugin download embeds the browser's origin. A ZIP downloaded through
+`https://bookorbit.lanice.dev` therefore contains an address the Kindle cannot
+reach. Set the plugin's server URL to `http://192.168.4.41:3004` on the Kindle
+and check it after installing a fresh preconfigured ZIP. Plugin self-update
+archives omit the provisioning file.
+
+After activation, check Book Dock filing, browser reading, and Kindle downloads,
+progress, and highlight sync.
+
+Stock nixpkgs 2.10.0 was deployed on September 18 at 21:45 EDT. All 17 pending
+migrations completed, with no series indexes cleared. Database counts remained
+11 books, 15 files, and one user. Local and published HTTPS health checks passed;
+the login page rendered. Authenticated reading, filing, and Kindle sync still
+need a user check.
+
+The one-off pre-upgrade backups and extra GC root were removed at the user's
+request after deployment. Regular backups and NixOS generations were unchanged.

@@ -2,9 +2,6 @@
 # the web reader, and sync to the KOReader Kindle. Downstream of shelfmark:
 # downloads land in the Book Dock share and wait there for curation;
 # audiobooks remain Audiobookshelf's alone.
-#
-# Runs from a module vendored out of an unmerged nixpkgs PR — see
-# ./vendored-module.nix for provenance and the deviations taken.
 {
   inputs,
   config,
@@ -14,8 +11,6 @@
   media = config.homelab.media;
   pub = config.homelab.published;
 in {
-  imports = [./vendored-module.nix];
-
   age.secrets.bookorbit.file = "${inputs.self}/secrets/bookorbit.age";
 
   # The Book Dock, moved out of the state directory when shelfmark became a
@@ -33,9 +28,6 @@ in {
     # unmapped ids appear as nobody inside the user namespace — but the unit's
     # own group is mapped, so hardening and share access coexist.
     inherit (media) group;
-    # Preconfigured plugin downloads must use the Kindle-reachable LAN origin,
-    # not the browser's tailnet-only published origin.
-    koreaderPluginOrigin = "http://192.168.4.41:${toString config.services.bookorbit.environment.PORT}";
 
     environment = {
       PORT = 3004;
@@ -67,7 +59,7 @@ in {
     after = ["zfs-mount.service"];
     requires = ["zfs-mount.service"];
 
-    # The vendored module's UMask=0077 would make everything BookOrbit writes
+    # The upstream module's UMask=0077 would make everything BookOrbit writes
     # to the books share 0600 bookorbit — invisible to the rest of the media
     # group. Group-rw keeps its writes co-accessible, which is the whole
     # point of a share.
