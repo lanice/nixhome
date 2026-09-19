@@ -4,7 +4,7 @@
   fetchurl,
 }: let
   pname = "codexbar-cli";
-  version = "0.49.4";
+  version = "0.61.0";
 in
   # Prebuilt static musl binary; the upstream CLI is Swift, which is not
   # practical to build from source with nixpkgs. The nixpkgs `codexbar`
@@ -14,7 +14,7 @@ in
 
     src = fetchurl {
       url = "https://github.com/steipete/CodexBar/releases/download/v${version}/CodexBarCLI-v${version}-linux-musl-x86_64.tar.gz";
-      hash = "sha256-OoaH4V+TkeGZn/1t4aDdhoon4ofyAULgcWIaqzrqwrg=";
+      hash = "sha256-b4MyWKfxA+u870MgQNnNnPJqb6LCUP80+N1AIEsfNj4=";
     };
 
     sourceRoot = ".";
