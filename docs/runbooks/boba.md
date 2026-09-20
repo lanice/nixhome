@@ -292,8 +292,8 @@ not prove collection.
 
 ### Verified rollout (2026-09-20)
 
-The fleet pin is `1adbbc43846e733cc823017626a82714a00234c4`. Its packaged reader
-reports `20.0.23+tokenscope.2`. Real imports exposed Codex copied ancestor headers
+The initial rollout used `1adbbc43846e733cc823017626a82714a00234c4`. Its reader
+reported `20.0.23+tokenscope.2`. Real imports exposed Codex copied ancestor headers
 and OMP's repeated subagent filenames and leading title records. The owner
 approved application fixes and a shared repin. Regression fixtures failed before
 the fixes, then passed with the full application package suite and static analysis.
@@ -335,3 +335,38 @@ Ticket 08's protected-service checkpoint remains the backup/restore evidence;
 this rollout needed no schema migration. Disposable servers, histories, credentials,
 manual enrollment state and scripts were removed. Detailed accounting snapshots
 and collection timestamps remain in the private ticket evidence, not public config.
+
+### Claude compatibility repair (2026-09-20)
+
+The shared application pin is `80a3cdfd5abf090678bd8d6812d8890290e1aae1`,
+with ccusage `20.0.23+tokenscope.3`. Ordinary Claude sessions use assistant-established
+native identities and their earliest matching location. Copied files share a native
+reader export; workflow agents retain ccusage's aggregate and parent attribution.
+The session reader now accepts the agent-progress envelopes already handled by
+daily discovery. Counting, pricing and deduplication remain in ccusage.
+
+Claude metadata skips syntax-invalid JSON lines, matching the reader. Damaged
+records remain outside accounting coverage. Valid JSON with invalid metadata and
+genuinely conflicting conversation identities still fail. Do not delete transcripts,
+limit history, or disable reconciliation to obtain a successful run.
+
+The corrected package imported Sencha's complete accessible Claude history into an
+isolated database. Every reporting day's tokens and costs matched ccusage; mixed-ID
+initial locations and a repeated oldest-day collection were verified. Synthetic
+regressions, the package's full Go suite and static analysis passed. No real
+transcript was changed. Temporary verification state and credentials were removed.
+
+Boba, Taro and Longjing were built, activated and verified at the new pin.
+Installed Longjing Claude/Codex/OMP and Taro Codex runs succeeded with reader
+provenance `20.0.23+tokenscope.3`. Central history and project assignments survived.
+Sencha's checkout is repinned and its system built, but SSH activation has no
+authentication agent and sudo requires a password. Its installed Claude unit still
+uses the previous package until an administrator runs this on Sencha:
+
+```sh
+sudo nixos-rebuild switch --flake /home/lanice/nixhome#sencha
+```
+
+Then check the installed Claude journal and central source freshness. Isolated
+verification is not a production import. Sencha's Codex transport failure recovered
+through its existing retry before this upgrade; no pending upload was discarded.
