@@ -27,6 +27,7 @@
     ./speedtest-tracker.nix
     ./stirlingpdf.nix
     ./syncthing.nix
+    ./tokenscope.nix
     ./tracearr.nix
     ./uptime-kuma.nix
     ./zfs-zed.nix

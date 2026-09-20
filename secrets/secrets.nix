@@ -21,6 +21,10 @@ in {
   "sabnzbd.age".publicKeys = [boba] ++ admins;
   "shelfmark.age".publicKeys = [boba] ++ admins;
   "bookorbit.age".publicKeys = [boba] ++ admins;
+  "tokenscopeGrants.age".publicKeys = [boba] ++ admins;
+  "tokenscopeLongjing.age".publicKeys = [longjing] ++ admins;
+  "tokenscopeSencha.age".publicKeys = [sencha] ++ admins;
+  "tokenscopeTaro.age".publicKeys = [taro] ++ admins;
   "slskd.age".publicKeys = [boba] ++ admins;
   "healthcheck-uuid.age".publicKeys = [boba] ++ admins;
   "peertube-secrets.age".publicKeys = [boba] ++ admins;

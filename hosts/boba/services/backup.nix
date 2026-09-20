@@ -6,6 +6,7 @@
 }: let
   dumpDir = "/var/lib/postgresql/backup";
   dumpFile = "${dumpDir}/pg_dumpall.sql";
+  tokenscopeRestartMarker = "/run/backup/tokenscope-restart-required";
 
   # Each inner list is one atomic ZFS snapshot operation, so it must contain
   # datasets from exactly one pool. Every source lifecycle operation below is
@@ -44,6 +45,17 @@
   cleanupSources = lib.reverseList snapshotSources;
   snapshotName = source: "${source.dataset}@backup";
 
+  resumeTokenscope = pkgs.writeShellScript "boba-backup-resume-tokenscope" ''
+    set -eu
+
+    if [ -e ${tokenscopeRestartMarker} ]; then
+      # Do not replace a concurrent shutdown job. Retain the marker if starting
+      # fails so ExecStopPost or the next prepare can retry.
+      ${pkgs.systemd}/bin/systemctl --job-mode=fail start tokenscope.service
+      ${pkgs.coreutils}/bin/rm -f ${tokenscopeRestartMarker}
+    fi
+  '';
+
   unmountSnapshots = pkgs.writeShellScript "boba-backup-unmount" ''
     set -u
 
@@ -62,6 +74,8 @@
     set -u
 
     status=0
+    # Recover even if prepare was killed, before potentially slow ZFS cleanup.
+    ${resumeTokenscope} || status=1
     ${unmountSnapshots} || status=1
 
     for snapshot in ${lib.escapeShellArgs (map snapshotName cleanupSources)}; do
@@ -88,12 +102,30 @@
     ${pkgs.coreutils}/bin/mv -f ${dumpFile}.tmp ${dumpFile}
     trap - EXIT
 
+    # /var/lib/tokenscope, including SQLite journals, belongs to system/var.
+    # Stop only an active writer; never start a previously inactive service.
+    # The host-visible marker survives a killed prepare for ExecStopPost.
+    tokenscopeState=$(${pkgs.systemd}/bin/systemctl show --property=ActiveState --value tokenscope.service)
+    case "$tokenscopeState" in
+      active|reloading)
+        ${pkgs.coreutils}/bin/install -m 0600 /dev/null ${tokenscopeRestartMarker}
+        ${pkgs.systemd}/bin/systemctl --job-mode=fail stop tokenscope.service
+        ;;
+      inactive|failed) ;;
+      *)
+        echo "Cannot capture Tokenscope while its service is $tokenscopeState" >&2
+        exit 1
+        ;;
+    esac
+
     # TXGs are pool-local. Take one atomic snapshot set per pool; OpenZFS
     # rejects a single multi-pool invocation with EXDEV.
     ${lib.concatMapStringsSep "\n" (
         group: "${pkgs.zfs}/bin/zfs snapshot ${lib.escapeShellArgs (map snapshotName group)}"
       )
       snapshotGroups}
+    # Downtime ends at capture, not after mounting or uploading the snapshots.
+    ${resumeTokenscope}
 
     # Explicit mounts are stable bind sources. Do not use lazy .zfs/snapshot
     # automounts: they are created in the init namespace and can expire.

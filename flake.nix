@@ -55,6 +55,8 @@
 
     kenku-fm.url = "github:lanice/kenku-fm.nix";
 
+    tokenscope.url = "git+https://git.lanice.dev/lanice/tokenscope.git";
+
     # Identifying data (email addresses, mail-archive source accounts) that
     # must not live in this public repo. Dumb data, not a flake. Every host's
     # eval forces it; fetches hit the by-rev cache and work offline, but a

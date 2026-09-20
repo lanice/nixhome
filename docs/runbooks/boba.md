@@ -190,3 +190,28 @@ Homepage's v2 widget requests `/api/v1/results/latest`, including failed and
 running results. Null measurements become zero throughput and blank ping.
 Check the result status before changing the API key or widget version.
 The widget does not fall back to the last successful measurement.
+
+## Tokenscope deployment (2026-09-20)
+
+Reports and `/projects` are at `https://tokenscope.lanice.dev`, tailnet-only.
+Any private UI viewer can edit projects. Ingestion separately requires a
+source-scoped bearer credential. Project identities and mappings live in SQLite.
+No Dashboard link or unattended collector was added by this deployment.
+
+`flake.lock` pins the Forgejo application for both server and future collectors.
+Keep its own nixpkgs pin so the packaged ccusage matches application verification.
+For development only, an override can be evaluated without rewriting that lock:
+
+```sh
+nix eval --raw .#nixosConfigurations.boba.config.systemd.services.tokenscope.serviceConfig.ExecStart \
+  --override-input tokenscope path:/path/to/tokenscope --no-write-lock-file
+```
+
+Do not use an override for a deployment. Normal activation is
+`colmena apply --on boba`.
+
+See [Tokenscope recovery](backup-recovery.md#tokenscope-recovery) for stopped
+SQLite capture, landing/B2 snapshot IDs, isolated restore evidence and the
+unrelated static-check and offsite-chain diagnostics observed during rollout.
+The protected-service recovery checkpoint passed. Production starts empty;
+ticket 09 owns source enrollment, unattended collection and personal backfill.

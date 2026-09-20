@@ -487,3 +487,131 @@ The migration safety dump for the otherwise excluded `pgdata2` volume is
 `pg_dumpall` before stopping Podman and loaded successfully with `psql
 --set ON_ERROR_STOP=1` into a fresh, tmpfs-backed `ankane/pgvector:latest`
 container. This dump is a one-off migration artifact, not a recurring backup.
+
+## Tokenscope recovery
+
+Tokenscope uses `/var/lib/tokenscope/usage.sqlite`, owned by `tokenscope` with
+directory mode `0700` and database mode `0600`. Usage, source/session metadata,
+retained worktree evidence, project IDs and location assignments all live in
+SQLite. There is no external project mapping file.
+
+Boba's backup prepare hook stops an active `tokenscope.service` before the
+existing ZFS snapshot operations and restarts it immediately afterward, before
+restic uploads. The `system/var` snapshot supplies the entire state directory,
+including any rollback journal. Do not copy the live database alone.
+
+`/run/backup/tokenscope-restart-required` records a pending restart. The normal
+cleanup hook retries it after a failed preparation or on the next backup.
+An inactive service stays inactive. If a restart fails, inspect the service
+before removing the marker; it represents an outstanding recovery action.
+
+### Restore procedure
+
+1. Select a successful Boba snapshot containing `/var/lib/tokenscope`.
+   For B2, match the offsite snapshot's `original` field to the full landing
+   snapshot ID rather than assuming both repositories' `latest` are equivalent.
+2. Restore into an empty, private scratch directory, never over running state:
+
+   ```sh
+   sudo restic-boba restore "$LANDING_ID" \
+     --target /var/tmp/tokenscope-restore \
+     --include /var/lib/tokenscope --verify
+   ```
+
+   B2 uses repository
+   `s3:s3.us-east-005.backblazeb2.com/lanice-restic-offsite/boba`,
+   `/run/agenix/resticOffsiteBobaPassword`, and the existing
+   `/run/agenix/resticB2Credentials` environment file. Run its restic command
+   through a transient systemd unit as `restic`, with that `EnvironmentFile`;
+   do not print or place credentials in shell arguments.
+3. Use the application revision pinned in `flake.lock`. Run its normal
+   `tokenscope serve` command against the restored database and a private
+   credential file. Use a separate loopback port and, on Boba, a transient unit
+   with `PrivateNetwork=yes`, `ProtectSystem=strict`, `ProtectHome=yes`, and
+   only the scratch directory writable. Query it with `nsenter` into its
+   network namespace. No collector or original transcript is needed.
+4. Compare `/api/report?day=YYYY-MM-DD` and `/api/projects` with the captured
+   report and project inventory. Check complete records and provenance, not
+   just totals. Restart the isolated instance, then verify project editing
+   preserves IDs, assignments and accounting.
+5. For actual recovery, stop the production service, restore the whole state
+   directory with its transaction files, set ownership to `tokenscope:tokenscope`,
+   and start the configured service. Never restore a drill database over
+   personal usage. For a drill, stop its unit and remove only its scratch state.
+
+Deployment configuration and encrypted grants follow the existing `nixhome`
+and agenix recovery conventions. Keep the repository and `flake.lock` available
+on the recovery machine. Boba's backed-up SSH host key can decrypt
+`secrets/tokenscopeGrants.age`; the two administrator recipients provide another
+recovery path. Restore existing B2/repository credentials from the recovery
+vault before opening backups. Collector credentials can be recovered or
+rotated independently of SQLite; reporting does not require a source laptop.
+Do not put decrypted grants in a derivation, transcript or recovery note.
+
+### Deployment and landing restore observed on 2026-09-20
+
+The deployed application was Forgejo revision
+`1dcb2480029de11cdf1ba43549e29093248f31f6`, with packaged ccusage `20.0.23`.
+The initial production database was empty. A runtime-only service override used
+`verification.sqlite` and a synthetic source grant under the same HTTPS proxy,
+service account and backup capture. The production database was not populated
+with fixtures.
+
+All three packaged readers submitted synthetic usage through trusted HTTPS.
+The report contained three records, 460 tokens and `$3.96` API-equivalent cost:
+260 uncached input, 120 cache reads, 20 cache creation and 60 output. Five
+reasoning tokens were an output breakdown, not additional tokens. Browser
+editing created and renamed project `2e85d6905a7427a9d12f6e82e64e69eb` and saved
+two assignments, including a checkout mapping used by a retained linked worktree.
+Desktop and mobile views showed the shared state. Restart preserved the full
+report, provenance, projects, assignments and collected metadata.
+
+Invalid bearer authorization returned 401; unauthorized host identity returned
+403. All five JSON project mutation operations and all five HTML mutation actions
+rejected cross-site requests with 403 without changing state. HTTPS listened
+only on Boba's tailnet address; the application listened on loopback. A connection
+through Boba's LAN address failed. Production agenix grants for Longjing, Sencha
+and Taro authenticated and rejected other hosts without inserting fixture data.
+
+Landing snapshot
+`9556b6119850e4dca971b075502bce58f4885b64047b64079d6ed90b3eb6423c`
+captured both databases at 15:47:21 EDT. The backup completed successfully in
+14.394 seconds. Journal entries showed Tokenscope stop and restart at 15:47:20,
+before restic's upload; the restart marker was absent afterward.
+
+The landing restore passed restic's file verification. An isolated application
+on Boba returned exactly the captured report and project inventory after all
+synthetic histories and the Git worktree had been deleted. A restart retained
+that state, and renaming the restored project preserved its ID and accounting.
+
+Separately, a reconstructed v4 fixture contained three usage rows, three
+sessions, three source rows and one worktree association. The pinned package
+upgraded it to v5 without changing those rows or the report; project creation
+then succeeded. This was isolated upgrade evidence, not a production migration.
+
+The application package and full integration suite passed, as did Boba's
+Colmena build and activation, fleet formatting and package checks. Changed Nix
+files passed Statix and Deadnix. Global checks reported pre-existing diagnostics
+in `hosts/common/fleet-ssh.nix:3`, `hosts/longjing/hardware-configuration.nix:7`
+and `home/lanice/features/cli/default.nix:6`; those unrelated files were unchanged.
+
+B2 snapshot
+`0e18a9af795eb7b04d7f4845b31678f52d54092c2d4b4315103758c61cedf333`
+matched that landing snapshot through `original`. Its restored verification
+database matched the landing copy's SHA-256:
+`f99a3d2fb309c6ce5b0c2cd2c20a04fc0672c640cf631558756c752039ba4f3f`.
+The independently restored B2 application returned the same complete report
+and project inventory before and after restart. Project creation, reassignment,
+deletion and reassignment back preserved usage, cost and provenance.
+
+The existing offsite chain completed Boba's copy and both prunes. Its aggregate
+unit nevertheless failed because the unrelated mail-archive snapshot was
+51,500 seconds old, exceeding its 12-hour freshness limit. The failure status,
+monitoring and freshness guard were not suppressed. This is successful Tokenscope
+offsite recovery, not a claim that the whole fleet's manual offsite run passed.
+
+All drill units, restored directories, local synthetic histories, temporary
+credentials and service overrides were removed. The fixture token no longer
+authenticates. Production is active with its untouched empty `usage.sqlite`
+and the agenix grants; no unattended collectors were installed or enabled.
+The populated landing and B2 snapshots remain subject to existing retention.

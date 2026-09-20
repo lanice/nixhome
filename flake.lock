@@ -667,6 +667,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_6": {
+      "locked": {
+        "lastModified": 1789684949,
+        "narHash": "sha256-ZKhUe/2IJUq1JhKxKMu8rbkgSGmPP2ZCqlIPn40aGCM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e554fab72f81915600f3f449b786fd9af40439a5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e554fab72f81915600f3f449b786fd9af40439a5",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -687,6 +703,7 @@
         "nixhome-private": "nixhome-private",
         "nixpkgs": "nixpkgs_5",
         "srvos": "srvos",
+        "tokenscope": "tokenscope",
         "zen-browser": "zen-browser"
       }
     },
@@ -784,6 +801,24 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "tokenscope": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_6"
+      },
+      "locked": {
+        "lastModified": 1789930305,
+        "narHash": "sha256-jUJYvi5tD9p2cji3fkRoEU7kohDbWsNSSD9q2vVTCUQ=",
+        "ref": "refs/heads/main",
+        "rev": "1dcb2480029de11cdf1ba43549e29093248f31f6",
+        "revCount": 11,
+        "type": "git",
+        "url": "https://git.lanice.dev/lanice/tokenscope.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.lanice.dev/lanice/tokenscope.git"
       }
     },
     "treefmt-nix": {
