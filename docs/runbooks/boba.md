@@ -223,8 +223,8 @@ checkpoint; ticket 09 owns source enrollment, unattended collection and backfill
 - Longjing and Sencha: the workstation account's Claude, Codex and OMP histories.
 - Taro: the coding account's Codex history. No Claude or OMP history was present.
 - Codex reads its home, including archived sessions. OMP has an explicit sessions
-  root. T3's database supplies retained worktree links on Longjing and Taro,
-  never another token source. Sencha's T3 state has not been inspected.
+  root. Worktree attribution uses verified Git links; wrapper databases are
+  not read.
 
 Each `tokenscope-collect-<tool>.timer` runs hourly and five minutes after boot.
 Persistent timers catch missed runs; failed services retry after fifteen minutes.
@@ -252,7 +252,7 @@ timestamp. Successful quiet scans advance freshness; failed scans do not.
 A disconnected collector cannot publish its failure, so the prior success ages.
 An offline host that has never submitted is absent, not a successful zero.
 Private temporary directories can hide Git worktrees under another process's
-`/tmp`; missing Git/T3 evidence remains an attribution gap.
+`/tmp`; missing Git evidence remains an attribution gap.
 
 ### Assignments through the private UI
 
@@ -283,6 +283,13 @@ Publish and test application fixes in its repository, then update only the
 deploy the same pin to server and collectors. Use `colmena apply --on boba,taro`
 for servers and `nh os switch` on an available workstation. An offline Sencha
 remains configuration-ready until it is switched.
+
+Revision `962ba7455b498a3f58e9a644eb39faf944b34b28` removes T3 database reading.
+The collector module no longer accepts `t3State` or passes `--t3-state`.
+Before activating this revision, finish pending uploads containing T3 links
+with the previous collector and server versions. New ingestion accepts only Git
+evidence. Keep existing state directories; stored usage and worktree associations
+remain intact.
 
 Preserve the server's SQLite state and collector progress directories across
 upgrades. Project state needs no mapping-file migration or `--projects` argument.

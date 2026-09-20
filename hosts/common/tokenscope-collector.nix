@@ -31,11 +31,6 @@ in {
       default = [];
       description = "Supported histories to collect independently; missing roots fail rather than being created.";
     };
-    t3State = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "Optional read-only T3 database for retained worktree links.";
-    };
   };
 
   config = lib.mkIf (cfg.account != null) {
@@ -63,21 +58,20 @@ in {
       restartTriggers = [config.age.secrets.${secret}.file];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = lib.concatStringsSep " " ([
-            "${package}/bin/tokenscope collect"
-            "--tool ${tool}"
-            "--root ${roots.${tool}}"
-            "--state /var/lib/${stateDirectory}"
-            "--host ${host}"
-            "--source coding"
-            "--destination ${destination}"
-            "--token-file %d/token"
-            # Packaged pricing avoids a second network dependency during catch-up.
-            "--offline"
-            # Every pass scans all history, including changed old sessions.
-            "--timeout 45m"
-          ]
-          ++ lib.optional (cfg.t3State != null) "--t3-state ${cfg.t3State}");
+        ExecStart = lib.concatStringsSep " " [
+          "${package}/bin/tokenscope collect"
+          "--tool ${tool}"
+          "--root ${roots.${tool}}"
+          "--state /var/lib/${stateDirectory}"
+          "--host ${host}"
+          "--source coding"
+          "--destination ${destination}"
+          "--token-file %d/token"
+          # Packaged pricing avoids a second network dependency during catch-up.
+          "--offline"
+          # Every pass scans all history, including changed old sessions.
+          "--timeout 45m"
+        ];
         LoadCredential = "token:${config.age.secrets.${secret}.path}";
         User = cfg.account;
         Group = config.users.users.${cfg.account}.group;

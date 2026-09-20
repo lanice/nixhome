@@ -36,7 +36,6 @@
   fleet.tokenscopeCollector = {
     account = "lanice";
     tools = ["claude" "codex" "omp"];
-    t3State = "${config.users.users.lanice.home}/.t3/userdata/state.sqlite";
   };
 
   # Boot into Cosmic by default; pick the "gnome" entry in systemd-boot to switch.
