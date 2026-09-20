@@ -198,7 +198,7 @@ Any private UI viewer can edit projects. Ingestion separately requires a
 source-scoped bearer credential. Project identities and mappings live in SQLite.
 No Dashboard link or unattended collector was added by this deployment.
 
-`flake.lock` pins the Forgejo application for both server and future collectors.
+`flake.lock` pins the Forgejo application for both server and collectors.
 Keep its own nixpkgs pin so the packaged ccusage matches application verification.
 For development only, an override can be evaluated without rewriting that lock:
 
@@ -213,5 +213,125 @@ Do not use an override for a deployment. Normal activation is
 See [Tokenscope recovery](backup-recovery.md#tokenscope-recovery) for stopped
 SQLite capture, landing/B2 snapshot IDs, isolated restore evidence and the
 unrelated static-check and offsite-chain diagnostics observed during rollout.
-The protected-service recovery checkpoint passed. Production starts empty;
-ticket 09 owns source enrollment, unattended collection and personal backfill.
+The protected-service recovery checkpoint passed. Production was empty at that
+checkpoint; ticket 09 owns source enrollment, unattended collection and backfill.
+
+## Tokenscope collection and project assignments
+
+`hosts/common/tokenscope-collector.nix` enrolls sources independently:
+
+- Longjing and Sencha: the workstation account's Claude, Codex and OMP histories.
+- Taro: the coding account's Codex history. No Claude or OMP history was present.
+- Codex reads its home, including archived sessions. OMP has an explicit sessions
+  root. T3's database supplies retained worktree links on Longjing and Taro,
+  never another token source. Sencha's T3 state has not been inspected.
+
+Each `tokenscope-collect-<tool>.timer` runs hourly and five minutes after boot.
+Persistent timers catch missed runs; failed services retry after fifteen minutes.
+They neither wake laptops nor require AC power. Each pass scans all accessible
+history, including resumed old sessions. The pinned reader uses packaged offline
+pricing, and reports keep its version and unavailable-pricing status.
+
+Collectors run as the history owner, with a read-only home and system filesystem.
+Systemd loads a root-only agenix token through `LoadCredential`; tokens are not
+command-line values. Private progress is under
+`/var/lib/tokenscope/<host>/coding/<tool>/<destination-sha256>/`, mode 0700.
+Do not share that directory between sources or destinations, or delete a pending
+upload to hide a failed pass. A subsequent run replays it before rescanning.
+
+Inspect an installed source with:
+
+```sh
+systemctl status tokenscope-collect-codex.service tokenscope-collect-codex.timer
+journalctl -u tokenscope-collect-codex.service
+sudo systemctl start tokenscope-collect-codex.service
+```
+
+Compare the journal result with the report's per-source status and last-success
+timestamp. Successful quiet scans advance freshness; failed scans do not.
+A disconnected collector cannot publish its failure, so the prior success ages.
+An offline host that has never submitted is absent, not a successful zero.
+Private temporary directories can hide Git worktrees under another process's
+`/tmp`; missing Git/T3 evidence remains an attribution gap.
+
+### Assignments through the private UI
+
+Open `https://tokenscope.lanice.dev/projects` after collection:
+
+1. Create a named project.
+2. Choose an observed location, or enter its host and absolute checkout directory.
+3. Save the mapping. Map other hosts' checkouts explicitly to the same project.
+4. Open the report and select that project. Combine provider, model, host and tool
+   filters as needed; download the selected JSON from the same page.
+
+Parent directories include descendants; more-specific mappings override them.
+Known subagents follow their parent. Verified worktrees follow the checkout
+unless an explicit worktree mapping overrides it. The location list describes
+directory rules; record provenance shows the effective session attribution.
+
+Renaming keeps the project's ID and saved filters. Reassigning or removing a
+mapping changes historical grouping on the next request. Project deletion
+requires confirmation and removes mappings, not usage. Unmapped locations and
+unknown directories remain in totals. Any private UI viewer can edit; SQLite
+shares assignments across browsers and devices, not browser-local storage.
+Never put personal project names or mappings in the flake or application defaults.
+
+### Upgrades
+
+Publish and test application fixes in its repository, then update only the
+`tokenscope` flake input. Build Boba and every enrolled host before activation;
+deploy the same pin to server and collectors. Use `colmena apply --on boba,taro`
+for servers and `nh os switch` on an available workstation. An offline Sencha
+remains configuration-ready until it is switched.
+
+Preserve the server's SQLite state and collector progress directories across
+upgrades. Project state needs no mapping-file migration or `--projects` argument.
+Use the existing coherent backup and isolated-restore procedure before a schema
+change. Verify installed runs and reports after activation; a build alone does
+not prove collection.
+
+### Verified rollout (2026-09-20)
+
+The fleet pin is `1adbbc43846e733cc823017626a82714a00234c4`. Its packaged reader
+reports `20.0.23+tokenscope.2`. Real imports exposed Codex copied ancestor headers
+and OMP's repeated subagent filenames and leading title records. The owner
+approved application fixes and a shared repin. Regression fixtures failed before
+the fixes, then passed with the full application package suite and static analysis.
+The Pi patch changes header discovery and session identity, not token counting
+or pricing; the application repository documents it.
+
+Boba, Taro, Longjing and Sencha built successfully. Boba and Taro were deployed
+with Colmena; Longjing was switched through desktop-authorized `nixos-rebuild`.
+Installed Longjing Claude/Codex/OMP and Taro Codex runs submitted through HTTPS.
+Their timers were active, persistent and non-waking, with fifteen-minute failure
+retries. Collector state was 0700 under the correct source account; agenix
+credentials stayed root-only. Sencha was offline: built and configured for three
+sources, but neither activated nor live-verified.
+
+Real fleet imports supplied the project setup. Eight project identities and ten
+location assignments were created through `/projects`. Shared-host grouping,
+known parent attribution and retained T3 worktree attribution were observed.
+Unmapped and unknown-directory history remained visible. The final server
+restart preserved projects, assignments and accounting totals.
+
+Desktop and mobile browser checks covered daily/monthly reports, five combined
+filters, provenance, matching JSON downloads, and shared assignments in an
+independent browser context. All five JSON mutations and all five HTML form
+actions rejected cross-site writes through the published proxy with HTTP 403.
+Isolated browser state covered rename with stable filters, reassignment, removal,
+confirmed deletion and unavailable pricing without changing accounting history.
+
+The final packaged collector passed isolated unavailable-destination recovery:
+pending bytes survived separate processes, replay worked after source removal,
+quiet scans advanced success, and older resumed sessions refreshed without a
+lookback or duplication. Source failures preserved prior success and did not
+block healthy sources. Deleted transcripts and disabled sources retained central
+history. Real repeated passes preserved historical records; ongoing sessions
+updated their existing aggregates.
+
+Fleet formatting/package checks and changed-file Statix/Deadnix passed. Existing
+backup exclusions, retention, publication and unrelated schedules were unchanged.
+Ticket 08's protected-service checkpoint remains the backup/restore evidence;
+this rollout needed no schema migration. Disposable servers, histories, credentials,
+manual enrollment state and scripts were removed. Detailed accounting snapshots
+and collection timestamps remain in the private ticket evidence, not public config.

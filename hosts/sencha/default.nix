@@ -31,6 +31,7 @@ in {
 
     ../common/fleet-ssh.nix
     ../common/workspace-secrets.nix
+    ../common/tokenscope-collector.nix
     ../common/workstation-backup.nix
     ../common/cosmic.nix
     ../common/gnome.nix
@@ -42,6 +43,10 @@ in {
   age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
 
   fleet.workspaceSecrets.account = "lanice";
+  fleet.tokenscopeCollector = {
+    account = "lanice";
+    tools = ["claude" "codex" "omp"];
+  };
 
   # Reachable over the tailnet only (common/tailscale.nix keeps port 22 closed).
   services.openssh = {

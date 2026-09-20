@@ -20,9 +20,16 @@ in {
     ../common/global
     ../common/tailscale.nix
     ../common/workspace-secrets.nix
+    ../common/tokenscope-collector.nix
 
     ./services
   ];
+
+  fleet.tokenscopeCollector = {
+    account = "coding";
+    tools = ["codex"];
+    t3State = "/home/coding/.t3/userdata/state.sqlite";
+  };
 
   networking = {
     hostName = "taro";

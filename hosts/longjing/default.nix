@@ -23,6 +23,7 @@
     ../common/steam.nix
     ../common/fleet-ssh.nix
     ../common/workspace-secrets.nix
+    ../common/tokenscope-collector.nix
     ../common/workstation-backup.nix
 
     ../common/cosmic.nix
@@ -32,6 +33,11 @@
   age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
 
   fleet.workspaceSecrets.account = "lanice";
+  fleet.tokenscopeCollector = {
+    account = "lanice";
+    tools = ["claude" "codex" "omp"];
+    t3State = "${config.users.users.lanice.home}/.t3/userdata/state.sqlite";
+  };
 
   # Boot into Cosmic by default; pick the "gnome" entry in systemd-boot to switch.
   desktops.cosmic.enable = lib.mkDefault true;
