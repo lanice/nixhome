@@ -171,3 +171,22 @@ need a user check.
 
 The one-off pre-upgrade backups and extra GC root were removed at the user's
 request after deployment. Regular backups and NixOS generations were unchanged.
+
+## Speedtest Tracker server failures (2026-09-20)
+
+Recurring Ookla socket errors and generic CLI failures began July 10.
+In completed results' `serverSelection` data, Frontier server 56485 failed
+latency selection 3/81 times July 1-9, 35/45 times July 10-19, and 80/90
+times September 1-20. Frontier 14229 also failed selection; Gateway Fiber
+68118 had no selection failures in that September sample.
+
+Scheduled tests now use Gateway Fiber 68118 in Springfield, MA, through
+`SPEEDTEST_SERVERS`. A queued test against it completed successfully.
+This avoids the unreliable Frontier endpoints; failed results do not retain
+the selected server, so attributing every failure to Frontier is unproven.
+No speedtest config or nixpkgs change was found at the July 10 cutoff.
+
+Homepage's v2 widget requests `/api/v1/results/latest`, including failed and
+running results. Null measurements become zero throughput and blank ping.
+Check the result status before changing the API key or widget version.
+The widget does not fall back to the last successful measurement.

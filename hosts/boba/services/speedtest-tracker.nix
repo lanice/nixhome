@@ -19,6 +19,8 @@ in {
       APP_KEY_FILE = config.age.secrets.speedtest-tracker-app-key.path;
       DB_CONNECTION = "sqlite";
       SPEEDTEST_SCHEDULE = "0 */2 * * *";
+      # Gateway Fiber, Springfield MA; Frontier's auto-selected servers fail.
+      SPEEDTEST_SERVERS = "68118";
       DISPLAY_TIMEZONE = "America/New_York";
       APP_TIMEZONE = "America/New_York";
       PUBLIC_DASHBOARD = true;
