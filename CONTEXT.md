@@ -113,3 +113,33 @@ _Avoid_: session (ambiguous with a running conversation or a collection of relat
 **Remote coding environment**:
 The shared coding environment on taro, with its own working repositories, tools, credentials, and conversation state. Both workstations connect to the same environment; their local projects and conversations remain separate.
 _Avoid_: synced workspace, transferred session, laptop mirror
+
+### Coding usage
+
+**Recorded coding usage**:
+Model token usage evidenced by saved coding-tool records, including subagent work. It does not imply complete coverage of background requests or other activity on the same provider account.
+_Avoid_: account usage, subscription usage
+
+**Usage record**:
+A coding session's token totals and estimated API-equivalent cost for one reporting day and model. Repeated observations describe revisions of the same totals, not additional usage.
+_Avoid_: model response, transcript row, request count
+
+**API-equivalent cost**:
+The latest collected estimate of what recorded coding usage would cost through an API, with its source and observation date recorded. Later observations may revise historical estimates; these are not subscription charges or actual provider invoices.
+_Avoid_: spend, bill, actual cost
+
+**Coding project**:
+A stable reporting identity for related coding work, independent of host, directory name, or coding tool. One coding project can have multiple project locations across the fleet.
+_Avoid_: repository, working directory, T3 project
+
+**Project location**:
+A host-specific directory associated with a coding project. Different project locations can identify the same coding project.
+_Avoid_: project name, repository identity
+
+**Coding session**:
+A tool-identified coding conversation whose usage is attributed together, including later continuations of that conversation. It is distinct from the coding transcript that preserves it.
+_Avoid_: session (unqualified), terminal session, transcript file
+
+**Session attribution**:
+The coding project obtained by applying the current host-and-path mapping to a coding session's initial location; subagents inherit their parent's attribution. Mapping changes also change historical attribution, while later work in a different directory does not.
+_Avoid_: per-file attribution, current-directory attribution
