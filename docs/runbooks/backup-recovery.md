@@ -491,7 +491,7 @@ container. This dump is a one-off migration artifact, not a recurring backup.
 ## Tokenscope recovery
 
 Tokenscope uses `/var/lib/tokenscope/usage.sqlite`, owned by `tokenscope` with
-directory mode `0700` and database mode `0600`. Usage, source/session metadata,
+directory mode `0700` and database mode `0600`. Usage, collection/session metadata,
 retained worktree evidence, project IDs and location assignments all live in
 SQLite. There is no external project mapping file.
 
@@ -530,10 +530,11 @@ before removing the marker; it represents an outstanding recovery action.
    with `PrivateNetwork=yes`, `ProtectSystem=strict`, `ProtectHome=yes`, and
    only the scratch directory writable. Query it with `nsenter` into its
    network namespace. No collector or original transcript is needed.
-4. Compare `/api/report?day=YYYY-MM-DD` and `/api/projects` with the captured
-   report and project inventory. Check complete records and provenance, not
-   just totals. Restart the isolated instance, then verify project editing
-   preserves IDs, assignments and accounting.
+4. Compare `/api/usage?from=YYYY-MM-DD&to=YYYY-MM-DD`, `/api/projects`, and
+   `/api/collection-states` with the captured reports and project inventory.
+   Check session detail and retained provenance, not just totals. Restart the
+   isolated instance, then verify project editing preserves IDs, assignments
+   and accounting.
 5. For actual recovery, stop the production service, restore the whole state
    directory with its transaction files, set ownership to `tokenscope:tokenscope`,
    and start the configured service. Never restore a drill database over
@@ -547,6 +548,11 @@ recovery path. Restore existing B2/repository credentials from the recovery
 vault before opening backups. Collector credentials can be recovered or
 rotated independently of SQLite; reporting does not require a source laptop.
 Do not put decrypted grants in a derivation, transcript or recovery note.
+
+Schema v6 migrates older databases on startup and requires host-only grants.
+For a rollback across this cutover, restore the stopped pre-migration database,
+old source-bearing grants and old application together. Switching the binary
+alone cannot downgrade a migrated database.
 
 ### Deployment and landing restore observed on 2026-09-20
 

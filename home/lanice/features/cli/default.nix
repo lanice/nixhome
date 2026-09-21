@@ -17,6 +17,8 @@ in {
   ];
 
   home.packages = with pkgs; [
+    inputs.tokenscope.packages.${pkgs.stdenv.hostPlatform.system}.tokenscope
+
     # Rust CLI tools
     bottom # System viewer
     dua # Disk Usage Analyzer
@@ -36,6 +38,10 @@ in {
 
     bluetui # TUI for managing bluetooth on Linux
   ];
+
+  xdg.configFile."tokenscope/config.json".text = builtins.toJSON {
+    server = "https://tokenscope.lanice.dev";
+  };
 
   programs.nix-index.enable = true;
   programs.nix-index-database.comma.enable = true;

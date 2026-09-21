@@ -64,7 +64,6 @@ in {
           "--root ${roots.${tool}}"
           "--state /var/lib/${stateDirectory}"
           "--host ${host}"
-          "--source coding"
           "--destination ${destination}"
           "--token-file %d/token"
           # Packaged pricing avoids a second network dependency during catch-up.

@@ -193,10 +193,10 @@ The widget does not fall back to the last successful measurement.
 
 ## Tokenscope deployment (2026-09-20)
 
-Reports and `/projects` are at `https://tokenscope.lanice.dev`, tailnet-only.
-Any private UI viewer can edit projects. Ingestion separately requires a
-source-scoped bearer credential. Project identities and mappings live in SQLite.
-No Dashboard link or unattended collector was added by this deployment.
+The API is at `https://tokenscope.lanice.dev`, tailnet-only. The pinned version
+has no web UI; `/` and `/projects` return 404. Reporting and project management
+require network access, not a token. Ingestion requires a host-scoped bearer
+credential. Project identities and mappings live in SQLite.
 
 `flake.lock` pins the Forgejo application for both server and collectors.
 Keep its own nixpkgs pin so the packaged ccusage matches application verification.
@@ -247,42 +247,54 @@ journalctl -u tokenscope-collect-codex.service
 sudo systemctl start tokenscope-collect-codex.service
 ```
 
-Compare the journal result with the report's per-source status and last-success
+Compare the journal result with `tokenscope status` and its host/tool last-success
 timestamp. Successful quiet scans advance freshness; failed scans do not.
 A disconnected collector cannot publish its failure, so the prior success ages.
 An offline host that has never submitted is absent, not a successful zero.
 Private temporary directories can hide Git worktrees under another process's
 `/tmp`; missing Git evidence remains an attribution gap.
 
-### Assignments through the private UI
+### Reports and assignments through the CLI
 
-Open `https://tokenscope.lanice.dev/projects` after collection:
+The shared Home Manager CLI configuration installs `tokenscope` and writes
+`~/.config/tokenscope/config.json` with `server = "https://tokenscope.lanice.dev"`.
+After activation, commands work from any directory without ingestion credentials:
 
-1. Create a named project.
-2. Choose an observed location, or enter its host and absolute checkout directory.
-3. Save the mapping. Map other hosts' checkouts explicitly to the same project.
-4. Open the report and select that project. Combine provider, model, host and tool
-   filters as needed; download the selected JSON from the same page.
+```sh
+tokenscope monthly                 # Year to date, grouped by month
+tokenscope                         # Month-to-date overview
+tokenscope monthly --range all
+tokenscope status
+tokenscope directories --unassigned
+tokenscope projects
+tokenscope project create NAME
+tokenscope project assign NAME --host HOST --directory /absolute/checkout
+tokenscope monthly --project NAME --json
+```
+
+Accounting dates use America/New_York. Costs are known estimates, not invoices.
+Server selection precedence is `--server`, `TOKENSCOPE_SERVER`, XDG config,
+then `http://127.0.0.1:8080`. CLI reports require the upgraded API server.
 
 Parent directories include descendants; more-specific mappings override them.
 Known subagents follow their parent. Verified worktrees follow the checkout
 unless an explicit worktree mapping overrides it. The location list describes
 directory rules; record provenance shows the effective session attribution.
 
-Renaming keeps the project's ID and saved filters. Reassigning or removing a
-mapping changes historical grouping on the next request. Project deletion
-requires confirmation and removes mappings, not usage. Unmapped locations and
-unknown directories remain in totals. Any private UI viewer can edit; SQLite
-shares assignments across browsers and devices, not browser-local storage.
+Reassigning or removing a mapping changes historical grouping on the next
+request, not usage. Unmapped locations and unknown directories remain in totals.
+The CLI creates projects and assigns directories; rename and deletion use the
+HTTP API. Assignment changes read and replace a complete set, so coordinate
+concurrent edits. Any tailnet client with access can edit projects.
 Never put personal project names or mappings in the flake or application defaults.
 
 ### Upgrades
 
 Publish and test application fixes in its repository, then update only the
 `tokenscope` flake input. Build Boba and every enrolled host before activation;
-deploy the same pin to server and collectors. Use `colmena apply --on boba,taro`
-for servers and `nh os switch` on an available workstation. An offline Sencha
-remains configuration-ready until it is switched.
+deploy the same pin to server and collectors. Follow the coordinated cutover
+below for this breaking revision, not an independent `colmena apply` or
+workstation switch. A host left on the old collector cannot submit to the new API.
 
 Revision `962ba7455b498a3f58e9a644eb39faf944b34b28` removes T3 database reading.
 The collector module no longer accepts `t3State` or passes `--t3-state`.
@@ -296,6 +308,45 @@ upgrades. Project state needs no mapping-file migration or `--projects` argument
 Use the existing coherent backup and isolated-restore procedure before a schema
 change. Verify installed runs and reports after activation; a build alone does
 not prove collection.
+
+### API and CLI cutover to b1bd84d
+
+The pin is `b1bd84d90246ac3f18c3d090e6c7862d9b9b6436`, upgraded from `962ba74`.
+The reader remains ccusage `20.0.23+tokenscope.3`. Database schema v6 removes
+`source`; usage identity and collection status now use host/tool. The module
+drops `--source`, and encrypted grants retain their tokens with host-only scope.
+The historical `coding` component in collector state paths stays unchanged.
+
+1. Pause all collector timers, including Sencha. Drain pending uploads with the
+   old server and collectors. Confirm no `pending.json` remains; never delete it.
+   Prevent collector retries and restarts during the cutover.
+2. Stop Boba's server and back up its whole state directory, old grants, and
+   system generation. Keep that backup private. Do not reboot during the cutover.
+3. Activate Boba with the new grants and package. Startup migrates schema 1–5
+   transactionally to v6. Conflicting observations abort without changing the
+   old database. A successful migration cannot be undone by switching binaries;
+   rollback requires restoring the stopped pre-migration state and old grants.
+4. Activate all collectors at the same pin, then resume collection and timers.
+   Check `tokenscope status` and `tokenscope monthly` through the HTTPS endpoint.
+
+The guided cutover uses per-unit
+`/run/systemd/system/<unit>.d/99-tokenscope-cutover.conf` conditions to prevent
+automatic starts during activation. A failed stage leaves its guards in place.
+Inspect the failure before removing them and reloading systemd; never resume an
+old collector against the new server. Guards disappear on reboot, so keep hosts
+running until the cutover finishes. Boba's private rollback backup includes
+`state/`, `grants.json` and `system`; its path is recorded in
+`/var/lib/tokenscope-pre-v6-backup-path`.
+
+The former `/api/report`, `/api/project-assignments`, and `/api/source-state`
+routes are removed. Use `/api/usage`, the project-management API, and
+`/api/collection-states`. `/api/projects` now returns an `items` envelope.
+
+Pre-activation verification built Boba, Taro, Longjing and Sencha and passed the
+packaged Go suite. A coherent online copy of the production schema-v5 database
+migrated to v6 with all usage/session rows, projects, assignments and worktrees
+preserved. XDG-configured monthly reports and JSON status/projects worked against
+that isolated copy from different working directories. This was not activation.
 
 ### Verified rollout (2026-09-20)
 
