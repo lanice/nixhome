@@ -228,9 +228,11 @@ checkpoint; ticket 09 owns source enrollment, unattended collection and backfill
 
 Each `tokenscope-collect-<tool>.timer` runs hourly and five minutes after boot.
 Persistent timers catch missed runs; failed services retry after fifteen minutes.
-They neither wake laptops nor require AC power. Each pass scans all accessible
-history, including resumed old sessions. The pinned reader uses packaged offline
-pricing, and reports keep its version and unavailable-pricing status.
+They neither wake laptops nor require AC power. Each pass discovers and hashes
+all accessible history, including resumed old sessions. Unchanged files reuse
+cached parsing; unchanged offline runs also reuse validated aggregates. Changed
+runs use one bulk reader export rather than an export per reporting day.
+The pinned reader uses packaged offline pricing.
 
 Collectors run as the history owner, with a read-only home and system filesystem.
 Systemd loads a root-only agenix token through `LoadCredential`; tokens are not
@@ -291,10 +293,10 @@ Never put personal project names or mappings in the flake or application default
 ### Upgrades
 
 Publish and test application fixes in its repository, then update only the
-`tokenscope` flake input. Build Boba and every enrolled host before activation;
-deploy the same pin to server and collectors. Follow the coordinated cutover
-below for this breaking revision, not an independent `colmena apply` or
-workstation switch. A host left on the old collector cannot submit to the new API.
+`tokenscope` flake input. Deploy Boba and Taro with `colmena apply --on boba,taro`;
+the owner pulls and runs `nh os switch` on Longjing and Sencha.
+Use the coordinated API/CLI cutover below only when crossing that older breaking
+revision. The incremental upgrade does not require it.
 
 Revision `962ba7455b498a3f58e9a644eb39faf944b34b28` removes T3 database reading.
 The collector module no longer accepts `t3State` or passes `--t3-state`.
@@ -308,6 +310,29 @@ upgrades. Project state needs no mapping-file migration or `--projects` argument
 Use the existing coherent backup and isolated-restore procedure before a schema
 change. Verify installed runs and reports after activation; a build alone does
 not prove collection.
+
+### Incremental collection (2026-09-21)
+
+Revision `23afd2f50ad7b4c7e2c889a9c71de3e42b0c5c1f` packages ccusage
+`20.0.23+tokenscope.4`. Updating the pin enables incremental processing with the
+existing `--state` and `--offline` arguments. No credentials, timer, state-path,
+ingestion-protocol or database migration is required.
+
+Keep existing state and pending uploads. The new collector replays pending
+batches before scanning; its first successful pass creates processing caches.
+Source bytes are still hashed on each pass, so late historical files are not
+excluded by date. Reader, pricing and relevant configuration changes invalidate
+derived results. Git/worktree evidence is rechecked even on unchanged runs.
+
+For a one-time full reconciliation, run the configured collection command with
+`--rebuild` in the same account and credential context. Do not leave that flag
+in the hourly service or delete the state directory to force a refresh.
+
+Boba and Taro were deployed through Colmena. The server retained all eight
+projects and their assignment counts. Taro's first observed new-reader pass
+took 515 ms; two repeat passes succeeded in 147 ms and 157 ms, compared with
+roughly 0.8–1.0 seconds before the upgrade. These are elapsed times from the
+service journal. Workstation activation is owner-managed.
 
 ### API and CLI cutover to b1bd84d
 

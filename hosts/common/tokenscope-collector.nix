@@ -68,7 +68,7 @@ in {
           "--token-file %d/token"
           # Packaged pricing avoids a second network dependency during catch-up.
           "--offline"
-          # Every pass scans all history, including changed old sessions.
+          # Full-history discovery reuses cached parsing and offline aggregates.
           "--timeout 45m"
         ];
         LoadCredential = "token:${config.age.secrets.${secret}.path}";
