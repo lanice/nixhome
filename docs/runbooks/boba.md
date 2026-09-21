@@ -334,6 +334,14 @@ took 515 ms; two repeat passes succeeded in 147 ms and 157 ms, compared with
 roughly 0.8–1.0 seconds before the upgrade. These are elapsed times from the
 service journal. Workstation activation is owner-managed.
 
+Follow-up revision `82b8d91e5e693eae83da8368c12d758b5d95067a` restores Claude's
+tolerance for syntactically corrupt final records, including NUL padding.
+Incomplete JSON prefixes still require a retry; source consistency checks remain.
+The reader stays at `.4`. Preserve transcripts, caches and pending uploads;
+normal collection after activation is sufficient, without `--rebuild`.
+Boba and Taro were deployed and verified at this revision; Taro's collection
+succeeded in 172 ms. Longjing and Sencha deployment remains owner-managed.
+
 ### API and CLI cutover to b1bd84d
 
 The pin is `b1bd84d90246ac3f18c3d090e6c7862d9b9b6436`, upgraded from `962ba74`.
