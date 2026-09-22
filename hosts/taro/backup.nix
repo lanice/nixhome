@@ -15,6 +15,7 @@
   sqliteSources = [
     "${codingHome}/.t3/userdata/state.sqlite"
     "${codingHome}/.codex/*.sqlite"
+    "${codingHome}/.omp/agent/models.db"
   ];
 in {
   services.restic.backups.forgejo = {
@@ -44,6 +45,12 @@ in {
         "${codingHome}/.t3/caches"
         "${codingHome}/.codex/tmp"
         "${codingHome}/.codex/models_cache.json"
+        "${codingHome}/.claude/cache"
+        "${codingHome}/.claude/plugins/marketplaces"
+        "${codingHome}/.claude/session-env"
+        "${codingHome}/.claude/shell-snapshots"
+        "${codingHome}/.claude/telemetry"
+        "${codingHome}/.omp/agent/cache"
       ];
     passwordFile = config.age.secrets.resticForgejoPassword.path;
     initialize = true;

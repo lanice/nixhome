@@ -27,7 +27,7 @@ in {
 
   fleet.tokenscopeCollector = {
     account = "coding";
-    tools = ["codex"];
+    tools = ["claude" "codex" "omp"];
   };
 
   networking = {

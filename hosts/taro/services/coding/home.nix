@@ -1,14 +1,24 @@
 {
   inputs,
+  lib,
   osConfig,
   pkgs,
   ...
 }: {
   imports = [
+    inputs.self.homeManagerModules.omp
+    ../../../../home/lanice/features/agents/common
+    ../../../../home/lanice/features/agents/claude-code
     ../../../../home/lanice/features/agents/codex
+    ../../../../home/lanice/features/agents/omp
     ../../../../home/lanice/features/agents/herdr
     ../../../../home/lanice/features/cli/git-core.nix
   ];
+
+  # Account shell is Bash, not zsh.
+  programs.claude-code.context = lib.mkForce ''
+    This is a NixOS system.
+  '';
 
   home = {
     username = osConfig.users.users.coding.name;
