@@ -226,8 +226,8 @@ checkpoint; ticket 09 owns source enrollment, unattended collection and backfill
   root. Worktree attribution uses verified Git links; wrapper databases are
   not read.
 
-Each `tokenscope-collect-<tool>.timer` runs hourly and five minutes after boot.
-Persistent timers catch missed runs; failed services retry after fifteen minutes.
+Each `tokenscope-collect-<tool>.timer` runs hourly, with no boot trigger or
+catch-up for runs missed while powered off. Failed services retry after fifteen minutes.
 They neither wake laptops nor require AC power. Each pass discovers and hashes
 all accessible history, including resumed old sessions. Unchanged files reuse
 cached parsing; unchanged offline runs also reuse validated aggregates. Changed

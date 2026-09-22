@@ -98,8 +98,7 @@ in {
       wantedBy = ["timers.target"];
       timerConfig = {
         OnCalendar = "hourly";
-        OnBootSec = "5min";
-        Persistent = true;
+        Persistent = false;
       };
     });
   };
