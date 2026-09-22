@@ -54,6 +54,12 @@
     '';
   };
 
+  # Fish in herdr panes; account shell stays Bash.
+  xdg.configFile."herdr/config.toml".text = ''
+    [terminal]
+    default_shell = "${pkgs.fish}/bin/fish"
+  '';
+
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
