@@ -808,11 +808,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1789967978,
-        "narHash": "sha256-DQ5X7Fq4nBFAp2vdC1/LnB9y6EtHePcVeLHtdmhslAY=",
+        "lastModified": 1790031507,
+        "narHash": "sha256-iT4g/QgEXU9IwrviKwPVCUF0kcQoKvn4aeUhDlz8SAM=",
         "ref": "refs/heads/main",
-        "rev": "82b8d91e5e693eae83da8368c12d758b5d95067a",
-        "revCount": 24,
+        "rev": "35aa985d06ca0dff6a6e47f1b58b0eb964329606",
+        "revCount": 28,
         "type": "git",
         "url": "https://git.lanice.dev/lanice/tokenscope.git"
       },
