@@ -25,6 +25,7 @@ in {
   "tokenscopeLongjing.age".publicKeys = [longjing] ++ admins;
   "tokenscopeSencha.age".publicKeys = [sencha] ++ admins;
   "tokenscopeTaro.age".publicKeys = [taro] ++ admins;
+  "binaryCacheKey.age".publicKeys = [boba] ++ admins;
   "slskd.age".publicKeys = [boba] ++ admins;
   "healthcheck-uuid.age".publicKeys = [boba] ++ admins;
   "peertube-secrets.age".publicKeys = [boba] ++ admins;

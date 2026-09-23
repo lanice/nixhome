@@ -29,9 +29,30 @@
       labels = [
         # GitHub-runner-like image; covers most `uses:` actions out of the box.
         "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-22.04"
+        # Unsandboxed on boba, building via the nix daemon, so outputs land in
+        # the store binary-cache.nix serves.
+        "nix:host"
+      ];
+
+      # Module default plus nix; setting the option replaces the default.
+      hostPackages = with pkgs; [
+        bash
+        coreutils
+        curl
+        gawk
+        gitMinimal
+        gnused
+        nodejs
+        wget
+        config.nix.package
       ];
 
       settings = {
+        # nix:host jobs keep their outputs alive by --out-link here, so the
+        # weekly GC can't drop them before other hosts fetch them. Inside the
+        # runner's StateDirectory, the only place its DynamicUser can write.
+        runner.envs.NIX_GCROOT_DIR = "/var/lib/gitea-runner/gcroots";
+
         container = {
           # Same CGNAT constraint as above, one layer down: actions/checkout
           # runs *inside* the job container and clones from git.lanice.dev, so
