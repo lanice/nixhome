@@ -72,6 +72,15 @@ in {
         flavor = capitalize config.theme.catppuccin.flavor;
         accent = capitalize config.theme.catppuccin.accent;
       };
+      # Catppuccin pins --arrowpanel-background dark, so <select> popups on
+      # light pages get dark bg + dark text. Firefox marks the popup with the
+      # page's color-scheme; restore a light bg there (Latte base).
+      userChrome = lib.mkIf config.theme.catppuccin.enable ''
+        @import "catppuccin/userChrome.css";
+        #ContentSelectDropdown > menupopup[style*="color-scheme: light"] {
+          --arrowpanel-background: #eff1f5 !important;
+        }
+      '';
 
       # Defaults (prefs.js); changeable in the browser.
       settings = {
