@@ -49,7 +49,13 @@ in {
       tui = "fullscreen";
       theme = "auto";
 
-      model = "fable";
+      # model = "opus";
+
+      modelSettings = {
+        "claude-opus-5-5" = {
+          effortLevel = "high";
+        };
+      };
 
       attribution = {
         commit = "";
