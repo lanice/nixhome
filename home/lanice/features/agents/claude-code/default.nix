@@ -6,7 +6,6 @@
   llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in {
   imports = [
-    # ./ralph-wiggum
     ./claude-usage
   ];
 
@@ -35,10 +34,6 @@ in {
       Commands you hand the user to run themselves land in their interactive **fish**,
       so write those in fish syntax.
     '';
-
-    skills = {
-      # freetime = ./skills/freetime;
-    };
 
     settings = {
       alwaysThinkingEnabled = true;
