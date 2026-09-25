@@ -74,42 +74,61 @@
     ${''mailbox "${address}"''}.auto = "subscribe";
   };
 
-  # One pass over the store, shared by mail-archive-trees (each deploy) and
-  # mail-archive-trees-refresh (each night). Per account: force the tree into
-  # existence via `mailbox status` (`auto` is lazy; a listing doesn't open the
-  # mailbox), grant the tree root before any listing (`mailbox list` is
-  # ACL-filtered even for the sync identity and a just-born tree has no ACL
-  # file; `mailbox path` computes the path without a lookup), grant every
-  # folder below, subscribe everything for Roundcube. Paths via `doveadm
-  # mailbox path`: on disk a non-ASCII name is mUTF-7 (`Gel&APY-scht`).
+  # One pass over the store, shared by mail-archive-trees (each boot and
+  # deploy) and mail-archive-trees-refresh (each night). Per account: force the
+  # tree into existence via `mailbox status` (`auto` is lazy; a listing doesn't
+  # open the mailbox), grant every folder, subscribe everything for Roundcube.
   treesPass = let
     doveadm = lib.getExe' config.services.dovecot2.package "doveadm";
+    coreutils = "${pkgs.coreutils}/bin";
   in
-    lib.concatStrings (lib.mapAttrsToList (address: account: let
+    ''
+      # Temp file, fsync, rename: a power cut mid-pass leaves the old ACL or
+      # the new one. A bare `install` can leave an empty file, which revokes
+      # every right, the sync identity's included. Unchanged files are skipped.
+      write_acl() {
+        if ${coreutils}/cmp -s "$1" "$2/dovecot-acl"; then
+          return
+        fi
+        ${coreutils}/install -o vmail -g vmail -m 0600 "$1" "$2/dovecot-acl.tmp"
+        ${coreutils}/sync "$2/dovecot-acl.tmp"
+        ${coreutils}/mv -fT "$2/dovecot-acl.tmp" "$2/dovecot-acl"
+      }
+    ''
+    + lib.concatStrings (lib.mapAttrsToList (address: account: let
         quoted = lib.escapeShellArg address;
       in ''
         ${doveadm} mailbox status -u ${syncUser} messages -- ${quoted}
 
-        ${pkgs.coreutils}/bin/install -o vmail -g vmail -m 0600 \
-          ${aclFile address account} \
-          "$(${doveadm} mailbox path -u ${syncUser} -- ${quoted})/dovecot-acl"
-
-        mailboxes=$(${doveadm} mailbox list -u ${syncUser} -- ${quoted} ${quoted}/'*')
-
-        # doveadm panics on an empty mailbox name and the install below would
-        # land its ACL file at the filesystem root. After the bootstrap above,
-        # an empty listing can only mean that bootstrap regressed.
-        if [ -z "$mailboxes" ]; then
-          printf 'no mailboxes listed for %s after its root ACL was installed\n' ${quoted} >&2
+        # `mailbox path` computes the path without a lookup, so it works on a
+        # just-born tree with no ACL file yet.
+        root=$(${doveadm} mailbox path -u ${syncUser} -- ${quoted})
+        if [ ! -d "$root" ]; then
+          printf 'no tree on disk for %s after its bootstrap\n' ${quoted} >&2
           exit 1
         fi
 
-        printf '%s\n' "$mailboxes" |
-          while IFS= read -r mailbox; do
-            ${pkgs.coreutils}/bin/install -o vmail -g vmail -m 0600 \
-              ${aclFile address account} \
-              "$(${doveadm} mailbox path -u ${syncUser} -- "$mailbox")/dovecot-acl"
+        # Mailboxes from the filesystem, not `mailbox list`: the listing is
+        # ACL-filtered even for the sync identity, so a folder whose ACL file
+        # broke would be invisible to the pass that repairs it. fs layout makes
+        # every mailbox a directory; cur/new/tmp are Maildir's own and
+        # fts-flatcurve is the search index.
+        ${pkgs.findutils}/bin/find "$root" \
+          \( -name cur -o -name new -o -name tmp -o -name fts-flatcurve \) -prune \
+          -o -type d -print0 |
+          while IFS= read -r -d "" dir; do
+            write_acl ${aclFile address account} "$dir"
           done
+
+        # Only now is the whole tree visible to the listing.
+        mailboxes=$(${doveadm} mailbox list -u ${syncUser} -- ${quoted} ${quoted}/'*')
+
+        # doveadm panics on an empty mailbox name. With the root granted above,
+        # an empty listing can only mean the bootstrap regressed.
+        if [ -z "$mailboxes" ]; then
+          printf 'no mailboxes listed for %s after its ACLs were installed\n' ${quoted} >&2
+          exit 1
+        fi
 
         printf '%s\n' "$mailboxes" |
           ${pkgs.findutils}/bin/xargs -d '\n' -r \
