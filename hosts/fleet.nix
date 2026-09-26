@@ -26,6 +26,10 @@
       syncthingId = "5JEE5H6-VNV7EFN-OFUK3YC-ID2B4W2-KDVP4O7-DDUI6GJ-D7STGCF-BT6VKA3";
       hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK0q2xGxqqxIAF7anXPZiltyt5EdVO+QzaGXPug5IjIq root@longjing";
     };
+    # macOS-generated host key.
+    matcha = {
+      hostKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPlYaOBca5GCQsTEWTFlKITRkTN+ZS4xrWAWe02vQ+um";
+    };
   };
 
   # Syncthing peers outside the fleet: devices this flake does not manage but
@@ -39,6 +43,7 @@
     lanice-sencha = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGwdc+uAZvNnh7OTdtIT1ei1n/S+jZdYBZlDXNkNouo2 lanice@sencha";
     lanice-unstable = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHr1ModaOEBmMoP4IhJim4Uorgg8KIz7pfSPEWzVk1aq lanice@unstable";
     lanice-longjing = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEt3cdjFpGUfLo47pun2HmJo9zGeOjGD+1fBXOJciMXN lanice@longjing";
+    lanice-matcha = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDtDwdJL4KcVqW8wDOijCISLUgdtTypOdjjHZc4MHVhL lanice@matcha";
     juicessh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICgsgaiVXnUCumEl99kkvf7xYpik5jCryuo4gsrxztKn JuiceSSH";
   };
 }

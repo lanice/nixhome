@@ -5,6 +5,7 @@
 in {
   programs.ssh.knownHosts = {
     sencha.publicKey = fleet.hosts.sencha.hostKey;
+    matcha.publicKey = fleet.hosts.matcha.hostKey;
     boba = {
       hostNames = ["boba" fleet.hosts.boba.tailscaleIP];
       publicKey = fleet.hosts.boba.hostKey;

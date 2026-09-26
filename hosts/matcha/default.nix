@@ -8,6 +8,7 @@
 in {
   imports = [
     inputs.home-manager.darwinModules.home-manager
+    ../common/fleet-ssh.nix
     ../common/global/fish.nix
     ../common/global/nix.nix
   ];
