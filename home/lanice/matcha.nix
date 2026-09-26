@@ -1,12 +1,4 @@
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  ...
-}: let
-  herdr = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.herdr;
-in {
+{lib, ...}: {
   imports = [
     ./global # includes features/cli,features/helix
 
@@ -26,20 +18,6 @@ in {
   ];
 
   programs.ghostty.settings.window-decoration = "auto";
-
-  # Owns the default herdr session, like taro's herdr.service; clients attach over SSH.
-  launchd.agents.herdr = {
-    enable = true;
-    config = {
-      ProgramArguments = ["${herdr}/bin/herdr" "server"];
-      EnvironmentVariables = {
-        XDG_CONFIG_HOME = config.xdg.configHome; # socket: ~/.config/herdr/herdr.sock
-        SHELL = "/run/current-system/sw/bin/fish"; # pane shell; launchd env has none
-      };
-      RunAtLoad = true;
-      KeepAlive = true;
-    };
-  };
 
   home = {
     sessionVariables = {

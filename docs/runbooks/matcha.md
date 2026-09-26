@@ -28,18 +28,17 @@ The host key is macOS's own. After the first boot, add it to `hosts/fleet.nix`
 
 ## Herdr server
 
-A home-manager launchd agent (`org.nix-community.home.herdr`) runs
-`herdr server` at login and restarts it if it exits; it owns the default
-session, like `herdr.service` on taro. Register it once from longjing:
+No service: the first `herdr` connection starts the server over SSH, and
+herdr detaches it itself (`setsid` plus the per-user launchd bootstrap
+context, like tmux), so it survives SSH drops. A launchd agent is worse:
+launchd children aren't session leaders, so herdr asks to "restart" them,
+and `KeepAlive` fights herdr's own restarts and update handoffs.
+
+Register once from longjing (or sencha):
 
 ```sh
 herdr machine add matcha --label Matcha
 ```
 
-The agent runs in the GUI login session: no login after boot, no server. A
+After a reboot the server is gone until the next connection starts it. A
 closed lid sleeps the Mac and drops the connection; panes resume on wake.
-
-```sh
-launchctl kickstart -k gui/(id -u)/org.nix-community.home.herdr  # restart (kills panes)
-tail ~/.config/herdr/herdr-server.log
-```
