@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   inputs,
   ...
@@ -9,8 +10,6 @@ in {
     enable = true;
     package = llm-agents.codex;
 
-    context = ''
-      This is a NixOS system.
-    '';
+    inherit (config.agents) context;
   };
 }

@@ -17,7 +17,4 @@
     # To make nix3 commands consistent with the flake
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
   };
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
 }

@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   inputs,
   ...
@@ -21,19 +22,7 @@ in {
     enable = true;
     package = llm-agents.claude-code;
 
-    context = ''
-      This is a NixOS system.
-
-      ## Shell
-
-      The `Bash` tool executes commands under **zsh** (`$SHELL`) — not the
-      interactive **fish** shown in the environment header, which is only the
-      shell `claude` was launched from. Write tool commands in POSIX/bash;
-      never fish syntax (`for … end`, `; and`, `; or`, `(cmd)` substitution).
-
-      Commands you hand the user to run themselves land in their interactive **fish**,
-      so write those in fish syntax.
-    '';
+    inherit (config.agents) context;
 
     settings = {
       alwaysThinkingEnabled = true;

@@ -1,9 +1,4 @@
-{
-  lib,
-  inputs,
-  config,
-  ...
-}: {
+{inputs, ...}: {
   imports = [inputs.nix-index-database.homeModules.nix-index] ++ (builtins.attrValues inputs.self.homeManagerModules);
 
   programs = {
@@ -11,10 +6,8 @@
     git.enable = true;
   };
 
+  # username/homeDirectory come from the OS user (home-manager as NixOS/darwin module)
   home = {
-    username = lib.mkDefault "lanice";
-    homeDirectory = lib.mkDefault "/home/${config.home.username}";
-
     sessionVariables = {
       FLAKE = "$HOME/nixhome";
     };

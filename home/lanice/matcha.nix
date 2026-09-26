@@ -1,30 +1,45 @@
 {
+  config,
   inputs,
   lib,
+  pkgs,
   ...
-}: {
+}: let
+  herdr = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.herdr;
+in {
   imports = [
-    ./global/home.nix
-    ./global/nix.nix
+    ./global # includes features/cli,features/helix
 
-    ./features/cli
+    # not ./features/agents: t3code is x86_64-linux only
+    ./features/agents/common
+    ./features/agents/claude-code
+    ./features/agents/codex
+    ./features/agents/omp
+    ./features/agents/herdr
+
+    ./features/cli/ssh.nix
 
     ./features/desktop/common/font.nix
-    ./features/desktop/ghostty/wrapped.nix
-    ./features/desktop/firefox
-    ./features/desktop/vscode
+    ./features/desktop/ghostty
+
+    ./themes/catppuccin-mocha
   ];
 
-  targets.genericLinux.nixGL.packages = inputs.nixgl.packages;
-  targets.genericLinux.nixGL.defaultWrapper = "mesa";
+  programs.ghostty.settings.window-decoration = "auto";
 
-  programs.ghostty.settings = {
-    background-opacity = 0.9;
-    window-decoration = "auto";
-    command = "fish --login --interactive";
+  # Owns the default herdr session, like taro's herdr.service; clients attach over SSH.
+  launchd.agents.herdr = {
+    enable = true;
+    config = {
+      ProgramArguments = ["${herdr}/bin/herdr" "server"];
+      EnvironmentVariables = {
+        XDG_CONFIG_HOME = config.xdg.configHome; # socket: ~/.config/herdr/herdr.sock
+        SHELL = "/run/current-system/sw/bin/fish"; # pane shell; launchd env has none
+      };
+      RunAtLoad = true;
+      KeepAlive = true;
+    };
   };
-
-  theme.polarity = "dark";
 
   home = {
     sessionVariables = {

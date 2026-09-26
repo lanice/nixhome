@@ -33,7 +33,10 @@ in {
     packages = [pkgs.home-manager];
   };
 
-  home-manager.users.lanice = import ../../../home/lanice/${config.networking.hostName}.nix;
+  home-manager.users.lanice.imports = [
+    ../../../home/lanice/${config.networking.hostName}.nix
+    ../../../home/lanice/platform/linux.nix
+  ];
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   # home-manager.backupFileExtension = "bak";

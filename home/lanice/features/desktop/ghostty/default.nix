@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   # GTK 4.20+ no longer handles compose/dead keys on Wayland without an IM;
@@ -14,6 +15,8 @@
 
   programs.ghostty = {
     enable = true;
+    # nixpkgs' ghostty is Linux-only; ghostty-bin is the upstream macOS app
+    package = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin pkgs.ghostty-bin;
     settings = {
       theme = lib.mkDefault "Gruvbox Material";
       # theme = "Monokai Remastered";

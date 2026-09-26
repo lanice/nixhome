@@ -38,8 +38,6 @@ in {
       scroll_dock = ''solaar config "MX Master 4" hires-smooth-resolution false'';
 
       nfu = "nix flake update";
-      nrb = "nh os build";
-      nrs = "nh os switch";
 
       # Git
       gs = "git status";

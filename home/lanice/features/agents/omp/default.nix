@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -9,7 +10,7 @@ in {
     enable = true;
     package = llm-agents.omp;
 
-    context = ./AGENTS.md;
+    inherit (config.agents) context;
     rules = ./RULES.md;
   };
 }

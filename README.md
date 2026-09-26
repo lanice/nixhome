@@ -20,18 +20,24 @@ sudo nixos-rebuild switch --flake .#<hostname>
 
 Reboot, done.
 
-### Non-NixOS
+### macOS (nix-darwin)
 
-**Prerequisites:** Nix (https://nixos.org/download.html) installed.
-
-Execute `nix-shell -p git` to enter a nix shell with git available. From there:
+**Prerequisites:** GitHub SSH key loaded (the `nixhome-private` input is fetched over SSH).
 
 ```bash
-git clone https://github.com/lanice/nixhome.git
-cd nixhome
-nix-shell # Enter the provided flake-enabled nix shell to bootstrap home-manager
-home-manager switch --flake .#<username>@<hostname>
+# Upstream Nix via the NixOS community installer; nix-darwin takes over nix.conf and the daemon
+curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install --enable-flakes
+# Homebrew for casks (nix-darwin manages the Brewfile, not brew itself)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+git clone https://github.com/lanice/nixhome.git ~/nixhome
+# nh builds as the user (SSH key available) and only activates via sudo
+nix run nixpkgs#nh -- darwin switch ~/nixhome -H <hostname>
 ```
+
+See `docs/runbooks/matcha.md` for first-switch snags.
+
+Afterwards: `nh darwin switch`.
 
 ## Hosts
 
@@ -40,7 +46,7 @@ home-manager switch --flake .#<username>@<hostname>
 - `boba`: ZimaCube Pro - 64GB RAM, i5 1235U | **NixOS** | headless
 - `unstable`: Desktop PC - 64GB RAM, i5 12400F, GTX 3060 | **NixOS** | headless
 - `taro`: ZimaBoard 2 - 16GB RAM, N150 | **NixOS** | headless
-- `matcha`: MacBook M1 Pro - 16GB RAM | **Fedora Asahi Remix** | KDE Plasma
+- `matcha`: MacBook M1 Pro - 16GB RAM | **macOS** | nix-darwin
 
 ## Use pinned pkgs version example
 

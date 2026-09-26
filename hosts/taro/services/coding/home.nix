@@ -1,11 +1,11 @@
 {
   inputs,
-  lib,
   osConfig,
   pkgs,
   ...
 }: {
   imports = [
+    inputs.self.homeManagerModules.agents
     inputs.self.homeManagerModules.omp
     ../../../../home/lanice/features/agents/common
     ../../../../home/lanice/features/agents/claude-code
@@ -15,9 +15,8 @@
     ../../../../home/lanice/features/cli/git-core.nix
   ];
 
-  # Account shell is Bash, not zsh.
-  programs.claude-code.context = lib.mkForce ''
-    This is a NixOS system.
+  agents.context = ''
+    This is a headless NixOS system.
   '';
 
   home = {

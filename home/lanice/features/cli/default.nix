@@ -33,10 +33,6 @@ in {
     devenv
 
     alejandra # Nix formatter
-
-    wl-clipboard # Command-line copy/paste utilities for Wayland
-
-    bluetui # TUI for managing bluetooth on Linux
   ];
 
   xdg.configFile."tokenscope/config.json".text = builtins.toJSON {

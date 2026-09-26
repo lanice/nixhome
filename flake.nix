@@ -7,6 +7,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-darwin.url = "github:nix-darwin/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     minecraft-servers.url = "github:mkaito/nixos-modded-minecraft-servers";
     minecraft-servers.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -31,9 +34,6 @@
 
     # not following nixpkgs so colmena.cachix.org hits (else Rust rebuild every bump)
     colmena.url = "github:zhaofengli/colmena";
-
-    nixgl.url = "github:nix-community/nixGL";
-    nixgl.inputs.nixpkgs.follows = "nixpkgs";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
@@ -73,12 +73,13 @@
     colmena,
     ...
   } @ inputs: let
-    systems = ["x86_64-linux" "aarch64-linux"];
+    systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
     forAllSystems = function: nixpkgs.lib.genAttrs systems (system: function nixpkgs.legacyPackages.${system});
   in {
     homeManagerModules = import ./modules/home-manager;
 
-    packages = forAllSystems (pkgs: import ./pkgs {inherit pkgs;});
+    # Only packages whose meta.platforms include the system
+    packages = forAllSystems (pkgs: nixpkgs.lib.filterAttrs (_: nixpkgs.lib.meta.availableOn pkgs.stdenv.hostPlatform) (import ./pkgs {inherit pkgs;}));
     devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
     formatter = forAllSystems (pkgs: pkgs.alejandra);
 
@@ -124,13 +125,11 @@
       };
     };
 
-    homeConfigurations."lanice@matcha" = inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        system = "aarch64-linux";
-        config.allowUnfree = true;
+    darwinConfigurations = {
+      matcha = inputs.nix-darwin.lib.darwinSystem {
+        modules = [./hosts/matcha];
+        specialArgs = {inherit inputs;};
       };
-      extraSpecialArgs = {inherit inputs;};
-      modules = [./home/lanice/matcha.nix];
     };
 
     colmenaHive = colmena.lib.makeHive self.outputs.colmena;
