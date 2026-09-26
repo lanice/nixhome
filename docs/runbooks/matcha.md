@@ -19,6 +19,20 @@ The Standalone app comes from the `tailscale-app` Homebrew cask. First launch:
 approve the network extension in System Settings → Privacy & Security, log in,
 and make sure the machine is named `matcha` in the admin console.
 
+## Ghostty hotkey
+
+`opt+enter` (global keybind, `home/lanice/matcha.nix`) needs System Settings →
+Privacy & Security → Accessibility → Ghostty. Grant once; the copied app keeps
+its signature, so the grant survives switches.
+
+## Tinycast
+
+Third-party tap. nix-darwin marks casks `trusted: true`; if the switch still
+fails on it, run `brew trust --tap abue-ammar/tinycast` once. The app is self-signed; if macOS blocks it, run
+`xattr -dr com.apple.quarantine /Applications/Tinycast.app`. For Cmd+Space,
+first disable Spotlight's shortcut (System Settings → Keyboard → Keyboard
+Shortcuts → Spotlight).
+
 ## SSH trust
 
 Remote Login is on (`services.openssh`), keys only, for sencha and longjing.

@@ -17,7 +17,20 @@
     ./themes/catppuccin-mocha
   ];
 
-  programs.ghostty.settings.window-decoration = "auto";
+  programs.ghostty.settings = {
+    window-decoration = "auto";
+    # Super+Return equivalent. Needs Accessibility permission for Ghostty.
+    keybind = ["global:opt+enter=new_window"];
+  };
+
+  # Global keybind only works while Ghostty runs
+  launchd.agents.ghostty = {
+    enable = true;
+    config = {
+      ProgramArguments = ["/usr/bin/open" "-a" "Ghostty"];
+      RunAtLoad = true;
+    };
+  };
 
   home = {
     sessionVariables = {

@@ -11,6 +11,7 @@ in {
     ../common/fleet-ssh.nix
     ../common/global/fish.nix
     ../common/global/nix.nix
+    ./defaults.nix
   ];
 
   nixpkgs = {
@@ -51,7 +52,12 @@ in {
   # MagicDNS incl. short names. Homebrew itself is installed manually.
   homebrew = {
     enable = true;
-    casks = ["tailscale-app"];
+    # Tinycast setup: docs/runbooks/matcha.md
+    taps = ["abue-ammar/tinycast"];
+    casks = [
+      "tailscale-app"
+      "abue-ammar/tinycast/tinycast" # launcher
+    ];
   };
 
   home-manager = {
