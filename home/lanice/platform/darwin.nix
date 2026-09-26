@@ -9,9 +9,4 @@
   agents.context = ''
     This is a macOS system (nix-darwin + home-manager). Userland is BSD, not GNU (e.g. `sed -i '''`).
   '';
-
-  programs.fish.shellAbbrs = {
-    nrb = "nh darwin build";
-    nrs = "nh darwin switch";
-  };
 }

@@ -22,11 +22,6 @@
     This is a NixOS system.
   '';
 
-  programs.fish.shellAbbrs = {
-    nrb = "nh os build";
-    nrs = "nh os switch";
-  };
-
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 }
