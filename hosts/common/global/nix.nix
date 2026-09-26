@@ -19,9 +19,9 @@
     };
     # GC handled by programs.nh.clean (see ./nh.nix)
 
-    # Add each flake input as a registry
-    # To make nix3 commands consistent with the flake
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+    # Pin nixpkgs# to the flake's nixpkgs. Only nixpkgs: an entry per input
+    # would force-fetch every input on every host.
+    registry.nixpkgs.flake = inputs.nixpkgs;
 
     # Add nixpkgs input to NIX_PATH
     # This lets nix2 commands still use <nixpkgs>

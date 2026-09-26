@@ -13,8 +13,7 @@
       # auto-optimise-store = lib.mkDefault true;
     };
 
-    # Add each flake input as a registry
-    # To make nix3 commands consistent with the flake
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+    # Pin nixpkgs# to the flake's nixpkgs (see hosts/common/global/nix.nix)
+    registry.nixpkgs.flake = inputs.nixpkgs;
   };
 }
