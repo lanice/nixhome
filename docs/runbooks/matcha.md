@@ -28,7 +28,8 @@ its signature, so the grant survives switches.
 ## Tinycast
 
 Third-party tap. nix-darwin marks casks `trusted: true`; if the switch still
-fails on it, run `brew trust --tap abue-ammar/tinycast` once. The app is self-signed; if macOS blocks it, run
+fails on it, run `brew trust --tap abue-ammar/tinycast` once. The app is
+self-signed; if macOS blocks it, run
 `xattr -dr com.apple.quarantine /Applications/Tinycast.app`. For Cmd+Space,
 first disable Spotlight's shortcut (System Settings → Keyboard → Keyboard
 Shortcuts → Spotlight).
