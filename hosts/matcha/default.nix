@@ -8,7 +8,9 @@
 in {
   imports = [
     inputs.home-manager.darwinModules.home-manager
+    inputs.agenix.darwinModules.default
     ../common/fleet-ssh.nix
+    ../common/tokenscope-collector-darwin.nix
     ../common/global/fish.nix
     ../common/global/nix.nix
     ./defaults.nix
@@ -25,6 +27,12 @@ in {
   };
 
   system.primaryUser = "lanice";
+
+  # agenix decrypts with macOS's own /etc/ssh host key (hosts/fleet.nix).
+  fleet.tokenscopeCollector = {
+    account = "lanice";
+    tools = ["claude" "codex"];
+  };
 
   # knownUsers lets nix-darwin set the login shell. 501 = first macOS user;
   # on mismatch activation warns and skips the user.

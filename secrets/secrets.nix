@@ -8,6 +8,7 @@ let
   boba = fleet.hosts.boba.hostKey;
   taro = fleet.hosts.taro.hostKey;
   longjing = fleet.hosts.longjing.hostKey;
+  matcha = fleet.hosts.matcha.hostKey;
 in {
   "workspaceAgeSencha.age".publicKeys = [sencha] ++ admins;
   "workspaceAgeTaro.age".publicKeys = [taro] ++ admins;
@@ -23,6 +24,7 @@ in {
   "bookorbit.age".publicKeys = [boba] ++ admins;
   "tokenscopeGrants.age".publicKeys = [boba] ++ admins;
   "tokenscopeLongjing.age".publicKeys = [longjing] ++ admins;
+  "tokenscopeMatcha.age".publicKeys = [matcha] ++ admins;
   "tokenscopeSencha.age".publicKeys = [sencha] ++ admins;
   "tokenscopeTaro.age".publicKeys = [taro] ++ admins;
   "binaryCacheKey.age".publicKeys = [boba] ++ admins;

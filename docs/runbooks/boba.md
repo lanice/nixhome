@@ -221,6 +221,8 @@ checkpoint; ticket 09 owns source enrollment, unattended collection and backfill
 `hosts/common/tokenscope-collector.nix` enrolls sources independently:
 
 - Longjing and Sencha: the workstation account's Claude, Codex and OMP histories.
+- Matcha: lanice's Claude and Codex histories, via launchd
+  (`tokenscope-collector-darwin.nix`; see [matcha.md](matcha.md#tokenscope-collector)).
 - Taro: the coding account's Codex history. No Claude or OMP history was present.
 - Codex reads its home, including archived sessions. OMP has an explicit sessions
   root. Worktree attribution uses verified Git links; wrapper databases are
@@ -294,7 +296,7 @@ Never put personal project names or mappings in the flake or application default
 
 Publish and test application fixes in its repository, then update only the
 `tokenscope` flake input. Deploy Boba and Taro with `colmena apply --on boba,taro`;
-the owner pulls and runs `nh os switch` on Longjing and Sencha.
+the owner pulls and runs `nh os switch` on Longjing and Sencha, `nh darwin switch` on Matcha.
 Use the coordinated API/CLI cutover below only when crossing that older breaking
 revision. The incremental upgrade does not require it.
 

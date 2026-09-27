@@ -57,3 +57,30 @@ herdr machine add matcha --label Matcha
 
 After a reboot the server is gone until the next connection starts it. A
 closed lid sleeps the Mac and drops the connection; panes resume on wake.
+
+## Tokenscope collector
+
+`hosts/common/tokenscope-collector-darwin.nix` runs launchd daemons
+`org.nixos.tokenscope-collect-{claude,codex}` as lanice, with the same flags,
+state paths and token scheme as the NixOS collector ([boba.md](boba.md#tokenscope-collection-and-project-assignments)).
+Differences: no sandboxing; the agenix token (`/run/agenix/tokenscopeMatcha`)
+is owned by lanice; each daemon runs at load (boot, switch) and on the hour,
+including once on wake for a slot missed asleep; failures retry after at least
+15 minutes. Logs: `/var/log/tokenscope/<tool>.log`, rotated by newsyslog.
+
+Ingestion needs a `{"host":"matcha","token":...}` entry in the server grants.
+The token lives only in `secrets/tokenscopeMatcha.age`; copy it over from an
+admin host (sencha/longjing):
+
+```sh
+cd secrets
+agenix -d tokenscopeMatcha.age   # token
+agenix -e tokenscopeGrants.age   # add the matcha entry
+colmena apply --on boba
+```
+
+```sh
+sudo launchctl print system/org.nixos.tokenscope-collect-codex
+sudo launchctl kickstart -k system/org.nixos.tokenscope-collect-codex
+tail /var/log/tokenscope/codex.log
+```

@@ -45,7 +45,7 @@ Operational knowledge that isn't derivable from the config lives in `docs/runboo
 
 - `boba.md` — NIC checksum offload workaround, podman0 firewall, zfs-mount ordering, sparse media, midnight I/O window, Jellyfin client issues
 - `sencha.md` — GPU thermal crashes, dock USB wedge, MX Master scroll, COSMIC audio applet, Tailscale DNS, Zen browser first run
-- `matcha.md` — nix-darwin first switch, Tailscale app, SSH host key, herdr server
+- `matcha.md` — nix-darwin first switch, Tailscale app, SSH host key, herdr server, Tokenscope collector
 - `backup-recovery.md` — restic/B2 recovery
 
 ## Agent skills
