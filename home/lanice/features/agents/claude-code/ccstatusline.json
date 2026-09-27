@@ -1,0 +1,130 @@
+{
+  "version": 4,
+  "lines": [
+    [
+      {
+        "id": "model",
+        "type": "model",
+        "color": "cyan",
+        "rawValue": true
+      },
+      {
+        "id": "s1",
+        "type": "separator"
+      },
+      {
+        "id": "effort",
+        "type": "thinking-effort",
+        "color": "magenta",
+        "rawValue": true
+      },
+      {
+        "id": "s2",
+        "type": "separator"
+      },
+      {
+        "id": "ctx",
+        "type": "context-bar",
+        "color": "brightYellow",
+        "metadata": {
+          "display": "slider"
+        }
+      },
+      {
+        "id": "s3",
+        "type": "separator"
+      },
+      {
+        "id": "session",
+        "type": "session-usage",
+        "color": "brightBlue",
+        "numberFormat": {
+          "style": "whole"
+        },
+        "metadata": {
+          "hide": "no-data"
+        }
+      },
+      {
+        "id": "reset-open",
+        "type": "custom-text",
+        "customText": " (",
+        "color": "brightBlue"
+      },
+      {
+        "id": "reset",
+        "type": "reset-timer",
+        "color": "brightBlue",
+        "metadata": {
+          "hide": "no-data"
+        },
+        "rawValue": true
+      },
+      {
+        "id": "reset-close",
+        "type": "custom-text",
+        "customText": ")",
+        "color": "brightBlue"
+      },
+      {
+        "id": "s4",
+        "type": "separator"
+      },
+      {
+        "id": "weekly",
+        "type": "weekly-usage",
+        "color": "blue",
+        "numberFormat": {
+          "style": "whole"
+        },
+        "metadata": {
+          "hide": "no-data"
+        }
+      },
+      {
+        "id": "s5",
+        "type": "separator"
+      },
+      {
+        "id": "cost",
+        "type": "session-cost",
+        "color": "yellow",
+        "rawValue": true
+      },
+      {
+        "id": "s6",
+        "type": "separator"
+      },
+      {
+        "id": "branch",
+        "type": "git-branch",
+        "color": "green",
+        "maxWidth": 24,
+        "metadata": {
+          "hide": "no-git"
+        }
+      }
+    ],
+    [],
+    []
+  ],
+  "flexMode": "full-minus-40",
+  "compactThreshold": 60,
+  "colorLevel": 2,
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "minimalistMode": false,
+  "powerline": {
+    "enabled": false,
+    "separators": [
+      "\ue0b0"
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [],
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
+  }
+}

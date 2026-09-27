@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   ...
@@ -17,6 +18,12 @@ in {
   home.packages = [
     llm-agents.ccusage
   ];
+
+  # Read-only: edit ccstatusline.json, not via the ccstatusline TUI
+  xdg.configFile."ccstatusline/settings.json" = {
+    source = ./ccstatusline.json;
+    force = true;
+  };
 
   programs.claude-code = {
     enable = true;
@@ -54,7 +61,7 @@ in {
       statusLine = {
         type = "command";
         # command = "input=$(cat); echo \"[$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.model.display_name')] 📁 $(basename \"$(echo \"$input\" | ${pkgs.jq}/bin/jq -r '.workspace.current_dir')\")\"";
-        command = "bunx ccstatusline@latest";
+        command = lib.getExe llm-agents.ccstatusline;
         padding = 0;
       };
     };
