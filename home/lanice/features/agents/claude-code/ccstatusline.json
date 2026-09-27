@@ -110,7 +110,7 @@
   ],
   "flexMode": "full-minus-40",
   "compactThreshold": 60,
-  "colorLevel": 2,
+  "colorLevel": 1,
   "inheritSeparatorColors": false,
   "globalBold": false,
   "minimalistMode": false,
