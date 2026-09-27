@@ -35,8 +35,14 @@
 
   mirrorUnit = address: "mail-archive-mirror@${escapeInstance address}.service";
 
+  # One reachability check gates every pass: a boot catch-up after a power cut
+  # beats the router's DHCP and uplink (../../wait-reachable.nix). A hostname,
+  # so DNS is covered too. A failed gate leaves the passes' Result stale, so
+  # the anchor must check the gate itself.
+  gateUnit = "mail-archive-online.service";
+
   # Everything the anchor waits for and health-checks, in chain order.
-  chainUnits = map mirrorUnit addresses ++ ["mail-archive-trees-refresh.service"];
+  chainUnits = [gateUnit] ++ map mirrorUnit addresses ++ ["mail-archive-trees-refresh.service"];
   backupUnit = "restic-backups-mail-archive.service";
 
   # The After= edges between consecutive passes, as drop-ins on the template
@@ -56,6 +62,22 @@ in {
   systemd.services =
     ordering
     // {
+      mail-archive-online = {
+        description = "Wait for internet before the mail-archive chain";
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${import ../../wait-reachable.nix {inherit pkgs;}} one.one.one.one 443";
+          DynamicUser = true;
+        };
+      };
+
+      # On the template, so a manual pass is gated too; the check is instant
+      # when online.
+      "mail-archive-mirror@" = {
+        after = [gateUnit];
+        requires = [gateUnit];
+      };
+
       # Subscribes and re-grants whatever the night's mirrors created
       # (store.nix).
       mail-archive-trees-refresh.after = map mirrorUnit addresses;

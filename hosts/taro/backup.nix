@@ -9,6 +9,7 @@
   # Keep the established repository identity: landing and offsite history,
   # credentials, and recovery material all use "forgejo".
   boba = (import ../fleet.nix).hosts.boba;
+  waitReachable = import ./wait-reachable.nix {inherit pkgs;};
   roundcubeDump = "/var/lib/roundcube/roundcube.sql";
   codingHome = config.users.users.coding.home;
   # Disposable databases; exclude SQLite sidecars too.
@@ -77,5 +78,9 @@ in {
   # OnSuccess is the trigger. After= alone would only order a restic job that
   # something else had already requested.
   systemd.services.forgejo-dump.unitConfig.OnSuccess = "restic-backups-forgejo.service";
-  systemd.services.restic-backups-forgejo.unitConfig.OnFailure = "notify-failure@%n.service";
+  systemd.services.restic-backups-forgejo = {
+    unitConfig.OnFailure = "notify-failure@%n.service";
+    # Ahead of restic's init check and the Roundcube dump.
+    preStart = lib.mkBefore "${waitReachable} ${boba.tailscaleIP} 8000";
+  };
 }

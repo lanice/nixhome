@@ -41,6 +41,8 @@ in {
   };
 
   systemd.services.forgejo-dump.unitConfig.OnFailure = "notify-failure@%n.service";
+  # Catch up a dump missed while powered off; the restic step waits for boba.
+  systemd.timers.forgejo-dump.timerConfig.Persistent = true;
 
   homelab.published.git = {
     proxyTo = config.services.forgejo.settings.server.HTTP_PORT;
