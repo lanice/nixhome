@@ -84,3 +84,11 @@ sudo launchctl print system/org.nixos.tokenscope-collect-codex
 sudo launchctl kickstart -k system/org.nixos.tokenscope-collect-codex
 tail /var/log/tokenscope/codex.log
 ```
+
+`kickstart` blocks while a failed job waits out its 15-minute throttle
+(`state = spawn scheduled`). To test sooner, run the plist's command as lanice:
+`sh -c "$(plutil -extract ProgramArguments.2 raw /Library/LaunchDaemons/org.nixos.tokenscope-collect-codex.plist)"`.
+
+Before Codex's first run, `~/.codex` held only home-manager symlinks and the
+collector failed with "symbolic links in native history are unsupported". It
+succeeded once a session existed.

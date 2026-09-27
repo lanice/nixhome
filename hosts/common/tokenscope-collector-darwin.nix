@@ -19,6 +19,7 @@
     codex = "${home}/.codex";
     omp = "${home}/.omp/agent/sessions";
   };
+  token = config.age.secrets.${secret}.path;
   logDir = "/var/log/tokenscope";
   unitName = tool: "tokenscope-collect-${tool}";
   stateDirectory = tool: "/var/lib/tokenscope/${host}/coding/${tool}/${destinationId}";
@@ -71,19 +72,24 @@ in {
       tool = lib.removePrefix "tokenscope-collect-" name;
     in {
       serviceConfig = {
+        # activate-agenix decrypts in its own daemon; the run at load races it.
         ProgramArguments = [
-          "${package}/bin/tokenscope"
-          "collect"
-          "--tool=${tool}"
-          "--root=${roots.${tool}}"
-          "--state=${stateDirectory tool}"
-          "--host=${host}"
-          "--destination=${destination}"
-          "--token-file=${config.age.secrets.${secret}.path}"
-          # Packaged pricing avoids a second network dependency during catch-up.
-          "--offline"
-          # Full-history discovery reuses cached parsing and offline aggregates.
-          "--timeout=45m"
+          "/bin/sh"
+          "-c"
+          "/bin/wait4path ${token} && exec ${lib.escapeShellArgs [
+            "${package}/bin/tokenscope"
+            "collect"
+            "--tool=${tool}"
+            "--root=${roots.${tool}}"
+            "--state=${stateDirectory tool}"
+            "--host=${host}"
+            "--destination=${destination}"
+            "--token-file=${token}"
+            # Packaged pricing avoids a second network dependency during catch-up.
+            "--offline"
+            # Full-history discovery reuses cached parsing and offline aggregates.
+            "--timeout=45m"
+          ]}"
         ];
         UserName = cfg.account;
         Umask = 63; # 0077
