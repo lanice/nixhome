@@ -55,4 +55,10 @@ in {
       DSDontWriteUSBStores = true;
     };
   };
+
+  # No system sleep on AC (display still sleeps). power.sleep.* uses
+  # systemsetup, which would also hit battery.
+  system.activationScripts.postActivation.text = ''
+    pmset -c sleep 0
+  '';
 }
