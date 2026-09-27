@@ -65,6 +65,9 @@ in {
     casks = [
       "tailscale-app"
       "abue-ammar/tinycast/tinycast" # launcher
+      "claude"
+      "chatgpt"
+      "blender"
     ];
   };
 
