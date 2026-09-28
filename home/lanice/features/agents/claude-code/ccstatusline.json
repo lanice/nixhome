@@ -23,16 +23,29 @@
         "type": "separator"
       },
       {
+        "id": "ctx-label",
+        "type": "custom-text",
+        "customText": "Ctx: ",
+        "color": "brightYellow"
+      },
+      {
         "id": "ctx",
         "type": "context-bar",
         "color": "brightYellow",
         "metadata": {
           "display": "slider"
-        }
+        },
+        "rawValue": true
       },
       {
         "id": "s3",
         "type": "separator"
+      },
+      {
+        "id": "session-label",
+        "type": "custom-text",
+        "customText": "S: ",
+        "color": "brightBlue"
       },
       {
         "id": "session",
@@ -43,7 +56,8 @@
         },
         "metadata": {
           "hide": "no-data"
-        }
+        },
+        "rawValue": true
       },
       {
         "id": "reset-open",
@@ -71,6 +85,12 @@
         "type": "separator"
       },
       {
+        "id": "weekly-label",
+        "type": "custom-text",
+        "customText": "W: ",
+        "color": "blue"
+      },
+      {
         "id": "weekly",
         "type": "weekly-usage",
         "color": "blue",
@@ -79,7 +99,8 @@
         },
         "metadata": {
           "hide": "no-data"
-        }
+        },
+        "rawValue": true
       },
       {
         "id": "s5",
@@ -117,7 +138,7 @@
   "powerline": {
     "enabled": false,
     "separators": [
-      "\ue0b0"
+      ""
     ],
     "separatorInvertBackground": [
       false
