@@ -87,7 +87,7 @@
       # the new one. A bare `install` can leave an empty file, which revokes
       # every right, the sync identity's included. Unchanged files are skipped.
       write_acl() {
-        if ${coreutils}/cmp -s "$1" "$2/dovecot-acl"; then
+        if ${pkgs.diffutils}/bin/cmp -s "$1" "$2/dovecot-acl"; then
           return
         fi
         ${coreutils}/install -o vmail -g vmail -m 0600 "$1" "$2/dovecot-acl.tmp"
