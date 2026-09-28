@@ -120,7 +120,6 @@
         "id": "branch",
         "type": "git-branch",
         "color": "green",
-        "maxWidth": 24,
         "metadata": {
           "hide": "no-git"
         }
