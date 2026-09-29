@@ -1,8 +1,11 @@
 {
   inputs,
   lib,
+  pkgs,
   ...
-}: {
+}: let
+  nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
+in {
   nix = {
     settings = {
       auto-optimise-store = lib.mkDefault true;
@@ -25,6 +28,8 @@
 
     # Add nixpkgs input to NIX_PATH
     # This lets nix2 commands still use <nixpkgs>
-    nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
+    # NixOS renamed nixPath to settings.nix-path; nix-darwin hasn't.
+    settings.nix-path = lib.mkIf pkgs.stdenv.hostPlatform.isLinux nixPath;
+    nixPath = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin nixPath;
   };
 }
