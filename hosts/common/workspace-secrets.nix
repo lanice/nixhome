@@ -22,8 +22,8 @@ in {
         message = "fleet.workspaceSecrets.account must name an existing account.";
       }
       {
-        assertion = pkgs.secretspec.version == "0.21.0";
-        message = "Workspace secrets require SecretSpec 0.21.0; review the runtime contract before upgrading.";
+        assertion = pkgs.secretspec.version == "0.21.1";
+        message = "Workspace secrets require SecretSpec 0.21.1; review the runtime contract before upgrading.";
       }
     ];
 
