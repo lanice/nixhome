@@ -1,8 +1,26 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
+  # torchcodec 0.16.0: mp3@8000Hz test_audio_against_cli tolerance failures break paperless-ngx (via sentence-transformers). Drop once fixed upstream.
+  nixpkgs.overlays = [
+    (final: prev: {
+      pythonPackagesExtensions =
+        prev.pythonPackagesExtensions
+        ++ [
+          (pyFinal: pyPrev: {
+            torchcodec = pyPrev.torchcodec.overridePythonAttrs (old: {
+              disabledTests =
+                (old.disabledTests or [])
+                ++ lib.optional (old.version == "0.16.0") "test_audio_against_cli";
+            });
+          })
+        ];
+    })
+  ];
+
   services.paperless = {
     enable = true;
     # fromtimestamp() otherwise interprets UTC sandbox time as Paperless local time.
