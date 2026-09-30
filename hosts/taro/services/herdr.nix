@@ -15,6 +15,8 @@ in {
   systemd.services.herdr = {
     description = "Herdr remote coding terminals";
     environment.XDG_CONFIG_HOME = "${home}/.config";
+    # Restart after activation, not stop-before/start-after: a client reconnecting in that gap spawns its own server.
+    stopIfChanged = false;
     serviceConfig = {
       ExecStart = "${package}/bin/herdr server";
       KillMode = "control-group";
