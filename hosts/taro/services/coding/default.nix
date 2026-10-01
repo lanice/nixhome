@@ -72,7 +72,9 @@ in {
     lib.genAttrs runtimeNames (_: {
       wantedBy = ["multi-user.target"];
       after = ["network.target" "home-manager-coding.service"] ++ agenixServices;
-      requires = ["home-manager-coding.service"] ++ agenixServices;
+      # Wants, not requires: HM restarts would otherwise stop/start the runtimes, letting a reconnecting herdr client spawn its own server in the gap.
+      wants = ["home-manager-coding.service"];
+      requires = agenixServices;
       path = [
         "/etc/profiles/per-user/coding"
         "${account.home}/.nix-profile"
