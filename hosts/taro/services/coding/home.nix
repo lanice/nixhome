@@ -64,9 +64,19 @@
   };
 
   # Fish in herdr panes; account shell stays Bash.
+  # Custom commands run on the endpoint server, so mirror the client's binding here.
   xdg.configFile."herdr/config.toml".text = ''
     [terminal]
     default_shell = "${pkgs.fish}/bin/fish"
+
+    [keys]
+    new_workspace = ""
+
+    [[keys.command]]
+    key = "prefix+shift+n"
+    type = "shell"
+    command = "\"$HERDR_BIN_PATH\" workspace create --cwd \"$HOME\" --focus"
+    description = "new workspace in ~"
   '';
 
   programs.fish = {
