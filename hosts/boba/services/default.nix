@@ -19,6 +19,7 @@
     ./media-estate.nix
     ./media.nix
     ./paperless.nix
+    ./recyclarr.nix
     ./peertube.nix
     ./sabnzbd.nix
     ./scrutiny.nix

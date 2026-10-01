@@ -20,6 +20,8 @@ in {
   "librechat.env.age".publicKeys = [boba] ++ admins;
   "mailBobaPassword.age".publicKeys = [boba] ++ admins;
   "sabnzbd.age".publicKeys = [boba] ++ admins;
+  "radarrApiKey.age".publicKeys = [boba] ++ admins;
+  "sonarrApiKey.age".publicKeys = [boba] ++ admins;
   "shelfmark.age".publicKeys = [boba] ++ admins;
   "bookorbit.age".publicKeys = [boba] ++ admins;
   "tokenscopeGrants.age".publicKeys = [boba] ++ admins;
