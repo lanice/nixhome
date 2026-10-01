@@ -1,6 +1,7 @@
 # Poll aggregate OOM/PID counters; MemoryHigh throttling is intentionally ignored.
-{
+{runtimeNames}: {
   config,
+  lib,
   pkgs,
   ...
 }: let
@@ -38,7 +39,7 @@
       printf 'oom_kill: %s (was %s)\npids max: %s (was %s)\n\n' "$oom" "$prev_oom" "$pids" "$prev_pids"
       printf -- '--- memory.events ---\n'; cat ${cg}/memory.events
       printf -- '\n--- systemctl status ---\n'
-      ${pkgs.systemd}/bin/systemctl status --full --lines=0 ${slice} t3code.service herdr.service || true
+      ${pkgs.systemd}/bin/systemctl status --full --lines=0 ${slice} ${lib.concatMapStringsSep " " (name: "${name}.service") runtimeNames} || true
     } | ${pkgs.msmtp}/bin/msmtp --read-recipients
   '';
 in {

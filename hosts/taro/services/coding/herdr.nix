@@ -1,4 +1,4 @@
-{
+{name}: {
   config,
   inputs,
   pkgs,
@@ -12,7 +12,7 @@ in {
     "d ${home}/.config/herdr 0700 coding coding -"
   ];
 
-  systemd.services.herdr = {
+  systemd.services.${name} = {
     description = "Herdr remote coding terminals";
     environment.XDG_CONFIG_HOME = "${home}/.config";
     # Restart after activation, not stop-before/start-after: a client reconnecting in that gap spawns its own server.

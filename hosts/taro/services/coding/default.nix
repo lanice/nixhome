@@ -8,8 +8,22 @@
   account = config.users.users.coding;
   slice = "user-${toString account.uid}";
   agenixServices = lib.optional (config.systemd.sysusers.enable || config.services.userborn.enable) "agenix-install-secrets.service";
+  runtimes = [
+    {
+      name = "t3code";
+      module = ./t3code.nix;
+    }
+    {
+      name = "herdr";
+      module = ./herdr.nix;
+    }
+  ];
+  runtimeNames = map (runtime: runtime.name) runtimes;
 in {
-  imports = [./limit-alert.nix];
+  imports =
+    # Preserve tmpfiles merge order.
+    map (runtime: import runtime.module {inherit (runtime) name;}) (lib.reverseList runtimes)
+    ++ [(import ./limit-alert.nix {inherit runtimeNames;})];
 
   users.groups.coding.gid = 988;
   users.users.coding = {
@@ -55,7 +69,7 @@ in {
   };
 
   systemd.services =
-    lib.genAttrs ["t3code" "herdr"] (_: {
+    lib.genAttrs runtimeNames (_: {
       wantedBy = ["multi-user.target"];
       after = ["network.target" "home-manager-coding.service"] ++ agenixServices;
       requires = ["home-manager-coding.service"] ++ agenixServices;
