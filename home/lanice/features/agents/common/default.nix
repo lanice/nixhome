@@ -8,5 +8,6 @@ in {
     claude-code.skills = skills;
     codex.skills = skills;
     omp.skills = skills;
+    opencode.skills = skills;
   };
 }

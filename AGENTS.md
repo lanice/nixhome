@@ -29,7 +29,7 @@ colmena build --on <hostname/tag> [--verbose]
 colmena apply --on <hostname/tag> [--verbose]
 ```
 
-Home-manager runs as a NixOS/nix-darwin module on every host. lanice's platform-specific home config lives in `home/lanice/platform/{linux,darwin}.nix`, imported next to the host file by `hosts/common/global/lanice.nix` and `hosts/matcha` (not `sharedModules`: that would reach other HM users like taro's `coding`). Coding-agent global context is `agents.context` (`modules/home-manager/agents.nix`), set per platform/host and fed to claude-code, codex and omp.
+Home-manager runs as a NixOS/nix-darwin module on every host. lanice's platform-specific home config lives in `home/lanice/platform/{linux,darwin}.nix`, imported next to the host file by `hosts/common/global/lanice.nix` and `hosts/matcha` (not `sharedModules`: that would reach other HM users like taro's `coding`). Coding-agent global context is `agents.context` (`modules/home-manager/agents.nix`), set per platform/host and fed to claude-code, codex, omp and opencode.
 
 Formatter is **alejandra**. New files must be `git add`ed before any flake eval (colmena build/apply) sees them.
 

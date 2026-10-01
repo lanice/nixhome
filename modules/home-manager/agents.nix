@@ -1,5 +1,5 @@
 {lib, ...}: {
-  # Merged from platform/host modules; feeds claude-code, codex and omp.
+  # Merged from platform/host modules; feeds claude-code, codex, omp and opencode.
   options.agents.context = lib.mkOption {
     type = lib.types.lines;
     default = "";

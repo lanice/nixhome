@@ -11,6 +11,7 @@
 
     ./features/agents
     ./features/agents/herdr
+    ./features/agents/opencode
 
     ./features/cli/ssh.nix
     ./features/cli/forgejo.nix
