@@ -43,10 +43,10 @@ Formatter is **alejandra**. New files must be `git add`ed before any flake eval 
 
 Operational knowledge that isn't derivable from the config lives in `docs/runbooks/`:
 
-- `boba.md` — NIC checksum offload workaround, podman0 firewall, zfs-mount ordering, sparse media, midnight I/O window, Jellyfin client issues
-- `sencha.md` — GPU thermal crashes, dock USB wedge, MX Master scroll, COSMIC audio applet, Tailscale DNS, Zen browser first run
-- `matcha.md` — nix-darwin first switch, Tailscale app, SSH host key, herdr server, Tokenscope collector
-- `backup-recovery.md` — restic/B2 recovery
+- `boba.md` — NIC checksum offload workaround, podman0 firewall, zfs-mount ordering, native data mounts, netconsole, EFI random-seed, Jellyfin DB errors, Sonarr queue and fake downloads, BookOrbit/KOReader, Speedtest Tracker, Tokenscope
+- `sencha.md` — GPU thermal crashes, dock USB wedge, MX Master scroll, remote coding on taro
+- `matcha.md` — nix-darwin first switch, Tailscale app, Ghostty hotkey, Tinycast, SSH trust, herdr server, Tokenscope collector
+- `backup-recovery.md` — restic/B2 recovery, backup capacity and performance, Forgejo and taro restores, agenix identity bootstrap, Tokenscope recovery
 
 ## Agent skills
 

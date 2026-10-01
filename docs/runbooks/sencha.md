@@ -1,8 +1,7 @@
 # sencha runbook
 
 ThinkPad P1 Gen 5, hybrid Intel Iris Xe + NVIDIA RTX A1000 in
-PRIME offload mode, COSMIC desktop. Zen browser notes at the end apply to
-longjing too.
+PRIME offload mode, COSMIC desktop.
 
 ## GPU "fallen off the bus" (Xid 79) is thermal
 
