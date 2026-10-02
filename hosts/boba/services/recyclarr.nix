@@ -140,13 +140,14 @@
   ];
   forGerman = lib.subtractLists notForGerman;
 
-  # Existing profiles, managed by name. Anime keeps its manual setup.
+  # Existing profiles, managed by name.
   general = "HD (4k fallback)";
   any = "Any";
   movies = "4k (HD fallback)";
   # German DL 25000/50000 and English Only 15000 rank language first; German-only gets 0.
   german = "German DL (Fallback: English)";
   germanLanguageCfs = ["German DL" "German DL 2" "Language: English Only" "Language: Not ENG/GER"];
+  anime = "Remux-1080p - Anime";
 in {
   age.secrets.sonarrApiKey.file = "${inputs.self}/secrets/sonarrApiKey.age";
   age.secrets.radarrApiKey.file = "${inputs.self}/secrets/radarrApiKey.age";
@@ -344,6 +345,17 @@ in {
           min_format_score = 0;
         }
         {
+          # Guide profile under the existing name. Min 2000 = Anime Dual Audio (guide 0) required;
+          # homebrew Anime English (+1000) lets English audio plus a decent tier through.
+          trash_id = "20e0fc959f1f1704bed501f23bdae76f"; # [Anime] Remux-1080p
+          name = anime;
+          reset_unmatched_scores = {
+            enabled = true;
+            except = ["Anime English"];
+          };
+          min_format_score = 2000;
+        }
+        {
           name = german;
           score_set = "german"; # unwanted -35000, below even German DL
           reset_unmatched_scores = {
@@ -385,6 +397,15 @@ in {
             ++ forGerman sonarrCfs.unwanted
             ++ sonarrCfs.germanUnwanted;
           assign_scores_to = [{name = german;}];
+        }
+        {
+          trash_ids = ["418f50b10f1907201b6cfdf881f467b7"]; # Anime Dual Audio
+          assign_scores_to = [
+            {
+              name = anime;
+              score = 2000;
+            }
+          ];
         }
       ];
     };
