@@ -16,6 +16,7 @@
     claude = "${home}/.claude/projects";
     codex = "${home}/.codex";
     omp = "${home}/.omp/agent/sessions";
+    pi = "${home}/.pi/agent/sessions";
   };
   unitName = tool: "tokenscope-collect-${tool}";
 in {
@@ -27,7 +28,7 @@ in {
       description = "Account whose coding histories are collected; null disables collection.";
     };
     tools = lib.mkOption {
-      type = lib.types.listOf (lib.types.enum ["claude" "codex" "omp"]);
+      type = lib.types.listOf (lib.types.enum ["claude" "codex" "omp" "pi"]);
       default = [];
       description = "Supported histories to collect independently; missing roots fail rather than being created.";
     };

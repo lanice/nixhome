@@ -220,12 +220,14 @@ checkpoint; ticket 09 owns source enrollment, unattended collection and backfill
 
 `hosts/common/tokenscope-collector.nix` enrolls sources independently:
 
-- Longjing and Sencha: the workstation account's Claude, Codex and OMP histories.
+- Longjing: the workstation account's Claude, Codex, OMP and Pi histories.
+- Sencha: the workstation account's Claude, Codex and OMP histories.
 - Matcha: lanice's Claude and Codex histories, via launchd
   (`tokenscope-collector-darwin.nix`; see [matcha.md](matcha.md#tokenscope-collector)).
 - Taro: the coding account's Codex history. No Claude or OMP history was present.
-- Codex reads its home, including archived sessions. OMP has an explicit sessions
-  root. Worktree attribution uses verified Git links; wrapper databases are
+- Codex reads its home, including archived sessions. OMP and Pi have explicit
+  sessions roots, which must not overlap. Upgrade the boba server before Pi
+  collectors (batch schema 5). Worktree attribution uses verified Git links; wrapper databases are
   not read.
 
 Each `tokenscope-collect-<tool>.timer` runs hourly, with no boot trigger or

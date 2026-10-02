@@ -35,7 +35,7 @@
   fleet.workspaceSecrets.account = "lanice";
   fleet.tokenscopeCollector = {
     account = "lanice";
-    tools = ["claude" "codex" "omp"];
+    tools = ["claude" "codex" "omp" "pi"];
   };
 
   # Boot into Cosmic by default; pick the "gnome" entry in systemd-boot to switch.
