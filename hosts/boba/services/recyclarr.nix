@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  lib,
   ...
 }: let
   # TRaSH custom formats scored into the general profiles. Scores come from the guide.
@@ -60,6 +61,20 @@
       "23297a736ca77c0fc8e70f8edd7ee56c" # Upscaled
       "ae575f95ab639ba5d15f663bf019e3e8" # Language: Not Original
     ];
+    germanGroups = [
+      "7940b2fb0278f27cf4f70187f2be95d6" # German Bluray Tier 01
+      "83b336a90d90d6b35ca673b007f80661" # German Bluray Tier 02
+      "d8f8e1539827967e0e564833e6c08d33" # German Bluray Tier 03
+      "68be37323132b35cf333c81a2ac8fc16" # German Web Tier 01
+      "f51b96a50b0e6196cb69724b7833d837" # German Web Tier 02
+      "bda67c2c0aae257308a4723d92475b86" # German Web Tier 03
+      "c2eec878fa1989599c226ce4c287d6a7" # German Scene
+    ];
+    germanUnwanted = [
+      "a6a6c33d057406aaad978a6902823c35" # German LQ
+      "d80c9f7cd2aad50271f1bd4e53125778" # German LQ (release title)
+      "237eda4ef550a97da2c9d87b437e500b" # German Microsized
+    ];
   };
 
   # Audio formats left out: lossless audio scores (up to 5000) outweigh group tiers and drive size.
@@ -101,12 +116,37 @@
       "712d74cd88bceb883ee32f773656b1f5" # Sing-Along Versions
       "bfd8eb01832d646a0a89c4deb46f8564" # Upscaled
     ];
+    germanGroups = [
+      "54795711b78ea87e56127928c423689b" # German Bluray Tier 01
+      "1bfc773c53283d47c68e535811da30b7" # German Bluray Tier 02
+      "aee01d40cd1bf4bcded81ee62f0f3659" # German Bluray Tier 03
+      "a2ab25194f463f057a5559c03c84a3df" # German Web Tier 01
+      "08d120d5a003ec4954b5b255c0691d79" # German Web Tier 02
+      "439f9d71becaed589058ec949e037ff3" # German Web Tier 03
+      "2d136d4e33082fe573d06b1f237c40dd" # German Scene
+    ];
+    germanUnwanted = [
+      "263943bc5d99550c68aad0c4278ba1c7" # German LQ
+      "a826ee9e46607bc61795c85a6f2b1279" # German LQ (release title)
+      "03c430f326f10a27a9739b8bc83c30e4" # German Microsized
+    ];
   };
 
-  # Existing profiles, managed by name. German DL and anime keep their manual setup.
+  # Bad Dual Groups would penalise German dual-audio releases; Not Original would penalise German audio.
+  notForGerman = [
+    "32b367365729d530ca1c124a0b180c64" # Bad Dual Groups (Sonarr)
+    "ae575f95ab639ba5d15f663bf019e3e8" # Language: Not Original
+    "b6832f586342ef70d9c128d40c07b872" # Bad Dual Groups (Radarr)
+  ];
+  forGerman = lib.subtractLists notForGerman;
+
+  # Existing profiles, managed by name. Anime keeps its manual setup.
   general = "HD (4k fallback)";
   any = "Any";
   movies = "4k (HD fallback)";
+  # German DL 25000/50000 and English Only 15000 rank language first; German-only gets 0.
+  german = "German DL (Fallback: English)";
+  germanLanguageCfs = ["German DL" "German DL 2" "Language: English Only" "Language: Not ENG/GER"];
 in {
   age.secrets.sonarrApiKey.file = "${inputs.self}/secrets/sonarrApiKey.age";
   age.secrets.radarrApiKey.file = "${inputs.self}/secrets/radarrApiKey.age";
@@ -120,14 +160,15 @@ in {
 
       media_management.propers_and_repacks = "do_not_prefer";
 
-      # Guide sizes (MB/min), except UHD Bluray encodes capped near 36 GB per 2h film.
+      # Guide sizes (MB/min), except UHD Bluray encodes capped near 48 GB per 2h film.
+      # Global: German DL encodes with two lossless tracks must fit too.
       quality_definition = {
         type = "movie";
         qualities = [
           {
             name = "Bluray-2160p";
-            max = 300;
-            preferred = 295;
+            max = 400;
+            preferred = 395;
           }
         ];
       };
@@ -178,6 +219,38 @@ in {
           trash_id = "fd161a61e3ab826d3a22d53f935696dd"; # Remux + WEB 2160p
           reset_unmatched_scores.enabled = true;
         }
+        {
+          name = german;
+          score_set = "german";
+          # Homebrew per-quality CFs (Bluray-2160p 8000 ... Bluray-720p 1000) rank inside the one group.
+          reset_unmatched_scores = {
+            enabled = true;
+            except =
+              germanLanguageCfs
+              ++ ["MIC DUB" "Remux-2160p" "Bluray-2160p" "WEBDL-2160p" "Remux-1080p" "Bluray-1080p" "WEBDL-1080p" "WebRip-1080p" "Bluray-720p"];
+          };
+          min_format_score = 15000;
+          upgrade = {
+            allowed = true;
+            until_quality = "WEB|Blueray";
+            until_score = 59600; # German DL Bluray-2160p from any tier
+          };
+          # One group so language beats resolution. Remuxes ranked above it: existing ones stay, no new ones.
+          qualities = [
+            {
+              name = "Remux-2160p";
+              enabled = false;
+            }
+            {
+              name = "Remux-1080p";
+              enabled = false;
+            }
+            {
+              name = "WEB|Blueray";
+              qualities = ["Bluray-2160p" "WEBDL-2160p" "Bluray-1080p" "WEBDL-1080p" "WEBRip-1080p" "Bluray-720p"];
+            }
+          ];
+        }
       ];
 
       custom_format_groups.add = [
@@ -197,6 +270,23 @@ in {
         {
           trash_ids = radarrCfs.hqGroups ++ radarrCfs.repacks ++ radarrCfs.hdr ++ radarrCfs.unwanted;
           assign_scores_to = [{name = movies;}];
+        }
+        {
+          trash_ids = radarrCfs.germanGroups ++ radarrCfs.hqGroups ++ radarrCfs.repacks;
+          assign_scores_to = [{name = german;}];
+        }
+        {
+          # Like MIC DUB: German DL's 50000 would outscore the guide's -35000.
+          trash_ids =
+            forGerman radarrCfs.unwanted
+            ++ radarrCfs.germanUnwanted
+            ++ ["923b6abef9b17f937fab56cfcf89e1f1"]; # DV (w/o HDR fallback)
+          assign_scores_to = [
+            {
+              name = german;
+              score = -75000;
+            }
+          ];
         }
       ];
     };
@@ -253,12 +343,48 @@ in {
           reset_unmatched_scores.enabled = true;
           min_format_score = 0;
         }
+        {
+          name = german;
+          score_set = "german"; # unwanted -35000, below even German DL
+          reset_unmatched_scores = {
+            enabled = true;
+            except = germanLanguageCfs;
+          };
+          min_format_score = 10;
+          upgrade = {
+            allowed = true;
+            until_quality = "WEB|Blueray";
+            until_score = 26500; # German DL from any tier
+          };
+          # One group so language beats source; HDTV stays in it, else English WEB would replace German HDTV.
+          # Remux ranked below: existing (English-only) ones get replaced, no new ones.
+          qualities = [
+            {
+              name = "WEB|Blueray";
+              qualities = ["Bluray-1080p" "WEBDL-1080p" "WEBRip-1080p" "HDTV-1080p"];
+            }
+            {
+              name = "Bluray-1080p Remux";
+              enabled = false;
+            }
+          ];
+        }
       ];
 
       custom_formats = [
         {
           trash_ids = sonarrCfs.hqGroups ++ sonarrCfs.repacks ++ sonarrCfs.streaming ++ sonarrCfs.unwanted;
           assign_scores_to = [{name = general;} {name = any;}];
+        }
+        {
+          trash_ids =
+            sonarrCfs.germanGroups
+            ++ sonarrCfs.hqGroups
+            ++ sonarrCfs.repacks
+            ++ sonarrCfs.streaming
+            ++ forGerman sonarrCfs.unwanted
+            ++ sonarrCfs.germanUnwanted;
+          assign_scores_to = [{name = german;}];
         }
       ];
     };
