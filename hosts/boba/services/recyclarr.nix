@@ -120,6 +120,18 @@ in {
 
       media_management.propers_and_repacks = "do_not_prefer";
 
+      # Guide sizes (MB/min), except UHD Bluray encodes capped near 36 GB per 2h film.
+      quality_definition = {
+        type = "movie";
+        qualities = [
+          {
+            name = "Bluray-2160p";
+            max = 300;
+            preferred = 295;
+          }
+        ];
+      };
+
       # File names only; folder format stays.
       media_naming.movie = {
         rename = true;
@@ -137,8 +149,8 @@ in {
             until_quality = "Bluray-2160p";
             until_score = 10000;
           };
-          # Remuxes disabled but ranked below 4K encodes: existing remux files get replaced by
-          # 4K encodes, never by 1080p. Movies that should keep remuxes go on the remux profile.
+          # Remuxes disabled but ranked so existing ones get replaced by encodes: 2160p remux by
+          # 4K only, 1080p remux by 4K or Bluray-1080p, never WEB 1080p. Keepers go on the remux profile.
           qualities = [
             {name = "Bluray-2160p";}
             {
@@ -149,11 +161,11 @@ in {
               name = "Remux-2160p";
               enabled = false;
             }
+            {name = "Bluray-1080p";}
             {
               name = "Remux-1080p";
               enabled = false;
             }
-            {name = "Bluray-1080p";}
             {
               name = "WEB 1080p";
               qualities = ["WEBDL-1080p" "WEBRip-1080p"];
