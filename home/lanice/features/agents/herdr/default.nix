@@ -39,6 +39,9 @@ in {
     (lib.mkIf (config.programs.omp.enable or false) {
       ".omp/agent/extensions/herdr-omp-agent-state.ts".source = "${integrations}/omp/herdr-agent-state.ts";
     })
+    (lib.mkIf config.programs.pi-coding-agent.enable {
+      "${config.programs.pi-coding-agent.configDir}/extensions/herdr-pi-agent-state.ts".source = "${integrations}/pi/herdr-agent-state.ts";
+    })
   ];
 
   programs.codex = lib.mkIf config.programs.codex.enable {

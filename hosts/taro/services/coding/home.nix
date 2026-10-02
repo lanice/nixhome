@@ -7,6 +7,7 @@
   imports = [
     inputs.self.homeManagerModules.agents
     inputs.self.homeManagerModules.omp
+    inputs.self.homeManagerModules.pi
     ../../../../home/lanice/features/agents/common
     ../../../../home/lanice/features/agents/claude-code
     ../../../../home/lanice/features/agents/codex

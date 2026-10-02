@@ -9,5 +9,6 @@ in {
     codex.skills = skills;
     omp.skills = skills;
     opencode.skills = skills;
+    pi-coding-agent.skills = skills;
   };
 }
