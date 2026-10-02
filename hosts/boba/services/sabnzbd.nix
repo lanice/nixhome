@@ -123,7 +123,6 @@ in {
           ssl = true;
           ssl_verify = 3;
           enable = true;
-          expire_date = "2026-09-29";
         };
         "news.newshosting.com" = {
           name = "news.newshosting.com";
@@ -135,7 +134,6 @@ in {
           ssl = true;
           ssl_verify = 3;
           enable = true;
-          expire_date = "2026-04-01";
         };
         "eunews.blocknews.net" = {
           name = "eunews.blocknews.net";
@@ -175,15 +173,6 @@ in {
           order = 2;
           pp = "";
           script = "reject-tv-payloads";
-          dir = "";
-          newzbin = "";
-          priority = -100;
-        };
-        "audio" = {
-          name = "audio";
-          order = 3;
-          pp = "";
-          script = "Default";
           dir = "";
           newzbin = "";
           priority = -100;

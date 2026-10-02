@@ -38,6 +38,7 @@ in {
       TZ = "America/New_York";
       PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${ytDlp}/bin";
       YTDLP_PLUGIN_DIRS = "${bgutilPlugin}";
+      LIDARR__LOG__LEVEL = "info";
     };
     volumes = [
       "${configDir}:/config:rw"

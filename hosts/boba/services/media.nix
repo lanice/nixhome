@@ -16,20 +16,13 @@ in {
   services.sonarr = {
     enable = true;
     group = mediaGroup;
+    settings.log.level = "info";
   };
 
   services.radarr = {
     enable = true;
     group = mediaGroup;
-  };
-
-  # Old v3 Lidarr kept on a side port so settings can be copied into the
-  # nightly container (different DB schema, so no in-place upgrade). Remove
-  # this block once migration is done.
-  services.lidarr = {
-    enable = true;
-    group = mediaGroup;
-    settings.server.port = 8687;
+    settings.log.level = "info";
   };
 
   services.bazarr = {
@@ -39,6 +32,7 @@ in {
 
   services.prowlarr = {
     enable = true;
+    settings.log.level = "info";
   };
 
   services.nzbhydra2 = {
@@ -100,8 +94,5 @@ in {
     prowlarr.proxyTo = config.services.prowlarr.settings.server.port;
     # As with jellyfin, nixpkgs' nzbhydra2 module exposes no port option.
     nzbhydra.proxyTo = 5076;
-
-    # Old v3 Lidarr, see the services.lidarr comment above.
-    lidarr-old.proxyTo = config.services.lidarr.settings.server.port;
   };
 }
