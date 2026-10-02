@@ -220,6 +220,9 @@ in {
         "+${hostPrepare}"
       ];
       ExecStopPost = lib.mkBefore ["+${hostCleanup}"];
+      # Bounds ExecStopPost. Under heavy pool writes `zfs destroy` waits minutes
+      # for txg sync; the 90s default killed a successful run (2026-10-02).
+      TimeoutStopSec = "30min";
       # `-` permits missing sources while the privileged hooks start. Prepare
       # mounts every source before the module-generated preStart and ExecStart.
       BindReadOnlyPaths =
