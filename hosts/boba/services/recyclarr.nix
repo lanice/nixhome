@@ -140,6 +140,41 @@
   ];
   forGerman = lib.subtractLists notForGerman;
 
+  # Any: for titles that only exist in SD/old HD. Best available up to 1080p; no 4K, remux or disc images.
+  anyQualities = [
+    {
+      name = "HD 1080p";
+      qualities = ["Bluray-1080p" "WEBDL-1080p" "WEBRip-1080p"];
+    }
+    {name = "HDTV-1080p";}
+    {name = "Bluray-720p";}
+    {
+      name = "WEB 720p";
+      qualities = ["WEBDL-720p" "WEBRip-720p"];
+    }
+    {name = "HDTV-720p";}
+    {name = "Bluray-576p";}
+    {name = "Bluray-480p";}
+    {
+      name = "WEB 480p";
+      qualities = ["WEBDL-480p" "WEBRip-480p"];
+    }
+    {name = "DVD";}
+    {name = "SDTV";}
+  ];
+  anyProfile = {
+    name = any;
+    reset_unmatched_scores.enabled = true;
+    min_format_score = 0;
+    # Stop at the first clean 1080p; no tier churn on obscure titles.
+    upgrade = {
+      allowed = true;
+      until_quality = "HD 1080p";
+      until_score = 0;
+    };
+    qualities = anyQualities;
+  };
+
   # Existing profiles, managed by name.
   general = "HD (4k fallback)";
   any = "Any";
@@ -180,9 +215,9 @@ in {
         standard = "standard";
       };
 
-      # TRaSH "UHD Bluray + WEB" with a 1080p fallback. No remuxes or HDTV.
       quality_profiles = [
         {
+          # TRaSH "UHD Bluray + WEB" with a 1080p fallback. No remuxes or HDTV.
           name = movies;
           reset_unmatched_scores.enabled = true;
           min_format_score = 0;
@@ -214,6 +249,7 @@ in {
             }
           ];
         }
+        anyProfile
         {
           # Guide-backed; assigned by hand to movies worth full quality. Guide default groups
           # (audio, HDR, streaming, unwanted, Golden Rule UHD) apply only to this profile.
@@ -270,7 +306,7 @@ in {
       custom_formats = [
         {
           trash_ids = radarrCfs.hqGroups ++ radarrCfs.repacks ++ radarrCfs.hdr ++ radarrCfs.unwanted;
-          assign_scores_to = [{name = movies;}];
+          assign_scores_to = [{name = movies;} {name = any;}];
         }
         {
           trash_ids = radarrCfs.germanGroups ++ radarrCfs.hqGroups ++ radarrCfs.repacks;
@@ -338,12 +374,7 @@ in {
             }
           ];
         }
-        {
-          # Qualities and upgrade rules stay as configured in Sonarr.
-          name = any;
-          reset_unmatched_scores.enabled = true;
-          min_format_score = 0;
-        }
+        anyProfile
         {
           # Guide profile under the existing name. Min 2000 = Anime Dual Audio (guide 0) required;
           # homebrew Anime English (+1000) lets English audio plus a decent tier through.
