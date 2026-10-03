@@ -100,14 +100,12 @@ forgejo's restic is chained on its dump unit.
   responsibility), `Sync/sd*`/`stable-diffusion`, Games ROMs. RAID plus ZFS
   snapshots are the only protection for media, and that is the intended level.
 - The Podman volumes observed during the `system/containers` migration are
-  deliberately excluded: LibreChat `pgdata2` vector state (disposable;
-  one-off migration dump only), Forgejo Actions workspace/environment volumes
-  (disposable job state), MongoDB's non-authoritative
-  `librechat-mongodb-configdb`, Tracearr's non-authoritative
-  `tracearr-backup`, and one empty orphan with no
-  current owner. MongoDB and Tracearr's authoritative state is in bind mounts
-  under `/var/lib` and remains in boba's backup set. Exact runtime-generated
-  volume IDs and observed owners live in the recovery runbook.
+  deliberately excluded: Forgejo Actions workspace/environment volumes
+  (disposable job state), Tracearr's non-authoritative `tracearr-backup`,
+  and one empty orphan with no current owner. Tracearr's authoritative state
+  is in a bind mount under `/var/lib` and remains in boba's backup set. Exact
+  runtime-generated volume IDs and observed owners live in the recovery
+  runbook.
 - Pruned packs linger 30 days offsite under Object Lock — a few GB, accepted.
   Restic never multiparts a pack (200 MiB part size, 128 MiB max pack), so
   the unfinished-large-file lifecycle rule is a safety net, not a cost
@@ -202,11 +200,10 @@ forgejo's restic is chained on its dump unit.
   `@backup` ZFS snapshot (a single point in time) bind-mounted over the live
   paths inside the backup unit, plus one atomic logical dump of the host
   PostgreSQL (peertube, bookorbit). Container databases on the snapshotted
-  datasets — Tracearr's postgres, LibreChat's mongo — are crash-consistent
-  only: they recover from an atomic snapshot as from a power cut, and none
-  of that data would be missed. LibreChat's vector DB on the un-snapshotted
-  `system/containers` is not backed up at all; each such volume carries a
-  comment in Nix.
+  datasets — Tracearr's postgres — are crash-consistent only: they recover
+  from an atomic snapshot as from a power cut, and none of that data would
+  be missed. Volumes on the un-snapshotted `system/containers` are not
+  backed up at all; each such volume carries a comment in Nix.
 - Retention is 7 daily / 4 weekly / 12 monthly snapshots on both tiers.
   Both laptops additionally keep 24 hourly snapshots on landing only.
   `--keep-hourly 24` on a nightly repo would keep 24 nights. Only boba prunes,

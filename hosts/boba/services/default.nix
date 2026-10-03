@@ -14,7 +14,6 @@
     ./forgejo-runner.nix
     ./healthcheck.nix
     ./homepage.nix
-    ./librechat.nix
     ./lidarr.nix
     ./media-estate.nix
     ./media.nix

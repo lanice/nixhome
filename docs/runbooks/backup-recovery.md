@@ -467,7 +467,10 @@ their names unchanged. Recreating MongoDB and Tracearr also recreated their
 empty image-declared anonymous volumes, exposing that those two IDs could never
 be stable across service restarts. Their declarations now assign the stable
 names `librechat-mongodb-configdb` and `tracearr-backup`; the replacement
-volumes remain deliberately excluded. The post-migration inventory is:
+volumes remain deliberately excluded. LibreChat was removed on 2026-10-03:
+`pgdata2`, `librechat-mongodb-configdb` and the `pgdata2` migration dump below
+were deleted, and its data ages out of restic under normal retention. The
+post-migration inventory is:
 
 - `pgdata2`
 - `706a369384c4db0d35c78f8a78938c38abd32b24029fd2b404f178f685d35699`

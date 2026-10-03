@@ -17,7 +17,6 @@ in {
   "porkbunApiKey.age".publicKeys = [boba] ++ admins;
   "porkbunSecretApiKey.age".publicKeys = [boba] ++ admins;
   "homepage.age".publicKeys = [boba] ++ admins;
-  "librechat.env.age".publicKeys = [boba] ++ admins;
   "mailBobaPassword.age".publicKeys = [boba] ++ admins;
   "sabnzbd.age".publicKeys = [boba] ++ admins;
   "radarrApiKey.age".publicKeys = [boba] ++ admins;

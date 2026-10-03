@@ -358,16 +358,6 @@ in {
             };
           }
           {
-            LibreChat = let
-              url = pub.librechat.url;
-            in {
-              href = url;
-              icon = "https://raw.githubusercontent.com/danny-avila/LibreChat/main/client/public/assets/logo.svg";
-              siteMonitor = url;
-              description = "All-In-One AI Conversations";
-            };
-          }
-          {
             Scrutiny = let
               url = pub.scrutiny.url;
             in {
