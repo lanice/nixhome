@@ -2,7 +2,7 @@
   skills =
     lib.mapAttrs
     (name: _: ./skills/${name})
-    (lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./skills));
+    (lib.filterAttrs (name: type: type == "directory" && !(lib.hasPrefix "_" name)) (builtins.readDir ./skills));
 in {
   programs = {
     claude-code.skills = skills;
