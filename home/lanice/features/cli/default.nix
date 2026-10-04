@@ -28,6 +28,7 @@ in {
     dust # A more intuitive version of du in rust
 
     htop
+    jq
     lazygit
 
     devenv
