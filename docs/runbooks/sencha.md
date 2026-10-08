@@ -186,6 +186,9 @@ is unchanged. Herdr uses SSH and private Unix sockets, not a published service.
 The systemd service owns the default session. Avoid named remote sessions unless
 they also have an explicit service owner.
 
+Sencha works the same way, with no service: the first connection starts its
+server. Register it with `herdr machine add sencha --label Sencha`.
+
 Detach with `Ctrl+B`, then `q`. Panes keep running. Restarting `herdr.service`
 terminates its processes; native agent restore can resume supported conversations
 after reattachment, not arbitrary builds. Run concurrent agents in separate Git
