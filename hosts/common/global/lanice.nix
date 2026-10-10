@@ -21,6 +21,7 @@ in {
         "wheel"
         "video"
         "audio"
+        "dialout"
       ]
       ++ ifTheyExist [
         "mysql"
