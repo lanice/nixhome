@@ -25,7 +25,7 @@ The single homepage that links to services across the whole fleet. It is a curat
 _Avoid_: homepage (ambiguous with the `homepage-dashboard` package), index, portal
 
 **Media estate**:
-The directories holding media, and media in transit, that the homelab's services hold in common. Membership is about being shared: a service's own state directory has a single writer and is not part of the estate, however much media flows through it.
+The directories holding media, and media in transit, that the homelab's services hold in common. Service-specific input feeds supplied by a transfer service to a single consumer, and a service's own state directory, are not part of the estate, however much media flows through them.
 _Avoid_: storage, library (Jellyfin's and Navidrome's word for a collection), media pool
 
 **Share**:

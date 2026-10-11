@@ -12,6 +12,7 @@
     ./bookorbit
     ./explo.nix
     ./forgejo-runner.nix
+    ./frameserver.nix
     ./healthcheck.nix
     ./homepage.nix
     ./lidarr.nix

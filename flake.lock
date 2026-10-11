@@ -314,6 +314,26 @@
         "type": "github"
       }
     },
+    "inkprep": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791698284,
+        "narHash": "sha256-TjW1gSRX/4RNvz2AHxHEjAZOlmzj/x/0xoIqof9VmqQ=",
+        "ref": "refs/heads/main",
+        "rev": "e03aed18af833dc15fbb092c0ea4267d5114f1d0",
+        "revCount": 18,
+        "type": "git",
+        "url": "https://git.lanice.dev/lanice/inkprep.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.lanice.dev/lanice/inkprep.git"
+      }
+    },
     "kenku-fm": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -614,6 +634,7 @@
         "firefox-addons": "firefox-addons",
         "hardware": "hardware",
         "home-manager": "home-manager",
+        "inkprep": "inkprep",
         "kenku-fm": "kenku-fm",
         "llm-agents": "llm-agents",
         "minecraft-servers": "minecraft-servers",

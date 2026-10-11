@@ -2,6 +2,7 @@
 # boba's services hold in common. A share is a directory more than one service
 # reads or writes; a service's own state directory has a single writer and is
 # not one, however much media flows through it.
+# Service-specific input feeds are excluded (ADR-0004).
 #
 # Every share is group-owned by the media group and mode 0770 — that is what
 # makes it reachable by everything that needs it, and it is why neither is an
