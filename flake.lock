@@ -321,11 +321,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791698284,
-        "narHash": "sha256-TjW1gSRX/4RNvz2AHxHEjAZOlmzj/x/0xoIqof9VmqQ=",
+        "lastModified": 1791704653,
+        "narHash": "sha256-m3z8Q+BL2kGGHTcqd40ePUtCsii3wnx+YBc+XYPA+/c=",
         "ref": "refs/heads/main",
-        "rev": "e03aed18af833dc15fbb092c0ea4267d5114f1d0",
-        "revCount": 18,
+        "rev": "afe552a4570ebba99552a755de8d1ae25b105402",
+        "revCount": 21,
         "type": "git",
         "url": "https://git.lanice.dev/lanice/inkprep.git"
       },
