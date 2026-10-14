@@ -226,10 +226,9 @@ in {
         filter_top_levels = null;
       };
 
-      # Idle: never suspend or turn off screen (docked).
-      # Change via COSMIC Settings when undocked; will reset on next home-manager switch.
+      # Turn off displays after 15 minutes; never suspend.
       idle = {
-        screen_off_time = mkRON "optional" null;
+        screen_off_time = mkRON "optional" 900000;
         suspend_on_ac_time = mkRON "optional" null;
         suspend_on_battery_time = mkRON "optional" null;
       };
