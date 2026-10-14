@@ -396,6 +396,38 @@ It did not ping the aggregate offsite healthcheck. The nightly 04:31 dump
 and 05:30 offsite timers remain active. All drill instances and scratch
 data, including temporary tokens, were removed.
 
+## Roundcube PostgreSQL collation repair
+
+Repaired on taro on 2026-10-14 after glibc changed from 2.42 to 2.44.
+`roundcube`, `postgres` and `template1` retained version 2.42; Roundcube had
+15 locale-dependent indexes. The mail archive itself is outside PostgreSQL.
+
+For another mismatch after an OS upgrade:
+
+1. Pause `phpfpm-roundcube.service`. Take private `pg_dumpall` and custom-format
+   dumps, including `template1`; ensure the service resumes even on failure.
+2. Connect to each affected database as `postgres`. Run `REINDEX DATABASE
+   "<database>"` and `REINDEX SYSTEM "<database>"` as separate, non-transactional
+   commands. The former excludes system catalogs. Use bounded lock waits.
+3. Refresh mismatched named collations with `ALTER COLLATION ... REFRESH VERSION`,
+   then `ALTER DATABASE ... REFRESH COLLATION VERSION`. Never refresh versions
+   before rebuilding: metadata refresh alone only hides the warning. Leave
+   the non-connectable `template0` pristine.
+4. Check heap/B-tree integrity with `pg_amcheck --heapallindexed --parent-check`
+   and temporarily installed `amcheck`; remove only extensions added for the
+   check. Compare Roundcube table row counts and confirm no invalid indexes or
+   remaining version mismatches. Resume PHP-FPM; verify the HTTPS login page
+   and `pg_dump` as `roundcube` without warnings.
+
+The repair passed these checks and paused Roundcube for about two seconds.
+Root-only safety dumps and the repair log remain on taro at
+`/var/lib/postgresql/collation-repair-20261014-152445` (320 KiB). These are local
+rollback material, not an off-host backup; normal nightly backups remain active.
+No automatic version refresh was added to the Nix configuration.
+
+References: [collation refresh](https://www.postgresql.org/docs/17/sql-altercollation.html),
+[reindex scope](https://www.postgresql.org/docs/17/sql-reindex.html).
+
 ## Restore taro's remote coding environment
 
 The nightly `forgejo` backup set contains `/home/coding`, excluding `workspaces`,
