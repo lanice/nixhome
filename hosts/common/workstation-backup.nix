@@ -7,6 +7,14 @@
 }: let
   boba = (import ../fleet.nix).hosts.boba;
   host = config.networking.hostName;
+  # Disposable agent databases; live reads aren't consistent. Exclude sidecars too.
+  sqliteSources = [
+    "/home/lanice/.t3/userdata/state.sqlite"
+    "/home/lanice/.t3/userdata/statev2.sqlite"
+    "/home/lanice/.codex/*.sqlite"
+    "/home/lanice/.local/share/opencode/opencode.db"
+    "/home/lanice/.omp/agent/models.db"
+  ];
   secretPrefix = "restic${lib.strings.toSentenceCase host}";
   pingHealthcheck = pkgs.writeShellScript "${host}-backup-healthcheck" ''
     uuid=$(${pkgs.coreutils}/bin/cat ${config.age.secrets."${secretPrefix}HealthcheckUuid".path})
@@ -108,6 +116,7 @@ in {
         ".pytest_cache"
         ".ruff_cache"
       ]
+      ++ lib.concatMap (path: [path "${path}-wal" "${path}-shm" "${path}-journal"]) sqliteSources
       ++ lib.optionals (host == "longjing") [
         "/home/lanice/.codex/sessions"
         "/home/lanice/.claude/projects"

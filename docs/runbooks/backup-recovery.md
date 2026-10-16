@@ -154,6 +154,11 @@ retention. Sencha's exclusion policy is unchanged.
 These are static restic exclusions. No size scan, Python helper or generated
 per-run transcript exclusion file is needed.
 
+Both workstations, including Sencha, also exclude the disposable agent databases
+listed in `sqliteSources` in `hosts/common/workstation-backup.nix`, with their
+sidecars. A restored laptop starts with empty T3, Codex and OpenCode thread
+history; settings, credentials and attachments remain included.
+
 Disposable restic snapshots confirmed that Longjing omits all three trees,
 including small transcripts and non-JSONL attachments, while retaining neighboring
 configuration and project files. The same fixtures confirmed Sencha still captures

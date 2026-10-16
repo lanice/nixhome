@@ -173,6 +173,13 @@ forgejo's restic is chained on its dump unit.
   Static directory exclusions replace size-based filtering to avoid custom
   backup preparation code. Sencha's exclusions remain unchanged, and previously
   captured session data ages out under normal retention.
+- Both workstations exclude disposable agent databases and their WAL, SHM and
+  rollback-journal sidecars: T3's `.t3/userdata/state.sqlite` and
+  `statev2.sqlite`, Codex's root `.codex/*.sqlite`, OpenCode's `opencode.db`
+  and omp's `models.db`. Live reads of them are not consistent, and losing their
+  thread history after host loss is accepted, as on taro. Other SQLite files,
+  such as browser profiles, stay included; there is no glob exclusion.
+  T3's downloaded runtimes under `.t3/tools` are excluded too.
 - Longjing's `dev/photos` contains disposable copies. Its explicit `.nobackup`
   marker is honored. Neither this marker nor the session exclusions delete data.
 - Workstation backups start only on AC, may finish after unplugging, and inhibit
