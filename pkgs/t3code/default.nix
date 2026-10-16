@@ -47,7 +47,7 @@ in
     extraInstallCommands = ''
       install -Dm444 ${appimageContents}/t3code.desktop $out/share/applications/t3code.desktop
       substituteInPlace $out/share/applications/t3code.desktop \
-        --replace-fail "Exec=AppRun --no-sandbox %U" "Exec=t3code %U"
+        --replace-fail "Exec=AppRun %U" "Exec=t3code %U"
       cp -r ${appimageContents}/usr/share/icons $out/share/
     '';
 
