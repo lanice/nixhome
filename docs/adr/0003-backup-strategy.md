@@ -187,7 +187,7 @@ forgejo's restic is chained on its dump unit.
   and excluded entirely, including local Git history and uncommitted files.
   Projects must be recoverable from their Git remotes; losing unpushed work is accepted.
   Package caches are also excluded. The exact exclusions live in `hosts/taro/backup.nix`.
-- T3's `.t3/userdata/state.sqlite` and Codex's root `.codex/*.sqlite`
+- T3's `.t3/userdata/state.sqlite` and `statev2.sqlite`, and Codex's root `.codex/*.sqlite`
   databases are disposable and deliberately excluded, along with their WAL,
   SHM and rollback-journal sidecars. No database capture or staging is needed.
   Losing their contents after host failure is accepted.

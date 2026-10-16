@@ -82,6 +82,7 @@ in {
         "/home/lanice/.config/t3code/Partitions/*/Dawn*Cache"
         "/home/lanice/.config/t3code/Partitions/*/Service Worker/CacheStorage"
         "/home/lanice/.t3/userdata/logs"
+        "/home/lanice/.t3/tools"
         "/home/lanice/.config/syncthing/index-v2"
         "/home/lanice/.thunderbird/lanice/ImapMail"
         "/home/lanice/.thunderbird/lanice/global-messages-db.sqlite"

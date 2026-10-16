@@ -15,6 +15,7 @@
   # Disposable databases; exclude SQLite sidecars too.
   sqliteSources = [
     "${codingHome}/.t3/userdata/state.sqlite"
+    "${codingHome}/.t3/userdata/statev2.sqlite"
     "${codingHome}/.codex/*.sqlite"
     "${codingHome}/.omp/agent/models.db"
   ];
@@ -44,6 +45,8 @@ in {
         "${codingHome}/.cargo/registry"
         "${codingHome}/.cargo/git"
         "${codingHome}/.t3/caches"
+        # Downloaded runtimes (browser, ACP agents)
+        "${codingHome}/.t3/tools"
         "${codingHome}/.codex/tmp"
         "${codingHome}/.codex/models_cache.json"
         "${codingHome}/.claude/cache"
