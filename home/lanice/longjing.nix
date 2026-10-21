@@ -28,6 +28,7 @@
     ./features/desktop/zed
     ./features/desktop/ghostty
     ./features/desktop/office
+    ./features/desktop/vicinae
 
     ./features/desktop/cosmic
 
