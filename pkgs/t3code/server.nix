@@ -37,6 +37,19 @@ in
     nativeBuildInputs = [autoPatchelfHook];
     buildInputs = [stdenv.cc.cc.lib];
 
+    # patchelf 0.19 breaks executables when the interpreter is set before the
+    # rpath, as autoPatchelf does (NixOS/nixpkgs#576412): .dynamic lands in a
+    # read-only segment and ld.so segfaults. Patch executables rpath-first and
+    # leave autoPatchelf the shared libraries. Drop once fixed upstream.
+    dontAutoPatchelf = true;
+    postFixup = ''
+      for exe in t3 resource-monitor/linux-${arch}/t3-resource-monitor; do
+        patchelf --set-rpath ${lib.makeLibraryPath [stdenv.cc.cc.lib stdenv.cc.cc.libgcc]} "$out/libexec/t3code/$exe"
+        patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" "$out/libexec/t3code/$exe"
+      done
+      autoPatchelf "$out/libexec/t3code/node_modules"
+    '';
+
     installPhase = ''
       runHook preInstall
 
