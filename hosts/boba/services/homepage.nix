@@ -276,26 +276,6 @@ in {
             };
           }
           {
-            Aurral = let
-              url = pub.aurral.url;
-            in {
-              href = url;
-              icon = "aurral";
-              siteMonitor = url;
-              description = "Music Discovery";
-            };
-          }
-          {
-            Explo = let
-              url = pub.explo.url;
-            in {
-              href = url;
-              icon = "explo";
-              siteMonitor = url;
-              description = "Music Discovery";
-            };
-          }
-          {
             Tracearr = let
               url = pub.tracearr.url;
             in {

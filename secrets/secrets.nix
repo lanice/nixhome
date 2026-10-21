@@ -33,7 +33,6 @@ in {
   "healthcheck-uuid.age".publicKeys = [boba] ++ admins;
   "peertube-secrets.age".publicKeys = [boba] ++ admins;
   "peertube-db-password.age".publicKeys = [boba] ++ admins;
-  "explo.age".publicKeys = [boba] ++ admins;
   "speedtest-tracker-app-key.age".publicKeys = [boba] ++ admins;
   "forgejo-runner-token.age".publicKeys = [boba] ++ admins;
   "resticB2Credentials.age".publicKeys = [boba] ++ admins;

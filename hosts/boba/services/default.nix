@@ -7,10 +7,8 @@
     ./backup-offsite.nix
     ./backup.nix
     ./audiobookrequest.nix
-    ./aurral.nix
     ./binary-cache.nix
     ./bookorbit
-    ./explo.nix
     ./forgejo-runner.nix
     ./frameserver.nix
     ./healthcheck.nix

@@ -131,8 +131,7 @@ in {
   networking.firewall.interfaces."podman0".allowedTCPPorts = with config.homelab.published; [
     prowlarr.proxyTo # for lidarr container
     sabnzbd.proxyTo # for lidarr container
-    slskd.proxyTo # for lidarr, explo containers
-    navidrome.proxyTo # for explo container
+    slskd.proxyTo # for lidarr container
     4416 # bgutil-provider — for lidarr container (yt-dlp POT tokens); not published
   ];
 
