@@ -121,7 +121,7 @@ in {
     config.virtualisation.oci-containers.containers
     // {
       podman = zfsMountDependency;
-      gitea-runner-boba = zfsMountDependency;
+      forgejo-runner-boba = zfsMountDependency;
     };
   systemd.sockets.podman = zfsMountDependency;
 

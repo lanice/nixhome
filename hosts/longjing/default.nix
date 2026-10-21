@@ -57,7 +57,18 @@
   boot.loader.efi.canTouchEfiVariables = true;
   # Panther Lake wants a current kernel; the hardware module only forces
   # linuxPackages_latest when the default is older than 6.17.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest.extend (kfinal: kprev: {
+    # Custom installPhase skips kmodigest signing, so the module aggregator
+    # fails on the missing framework_laptop.ko.cer. Drop once fixed upstream.
+    framework-laptop-kmod = kprev.framework-laptop-kmod.overrideAttrs (old: {
+      nativeBuildInputs = old.nativeBuildInputs ++ [pkgs.buildPackages.kmodigest];
+      postInstall =
+        (old.postInstall or "")
+        + ''
+          kmodigest $out/lib/modules/${kfinal.kernel.modDirVersion}/extra/framework_laptop.ko
+        '';
+    });
+  });
 
   programs = {
     dconf.enable = true;
