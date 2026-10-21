@@ -718,11 +718,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1792552574,
-        "narHash": "sha256-MEbFhPqkQKNufJIloVJPGbAKvBiWrE5jnARvEI+x7cw=",
+        "lastModified": 1792613312,
+        "narHash": "sha256-GMaVv2szIps0ZhFmVYPmx+nf0RtVjysyoqgYoLDmXA8=",
         "ref": "refs/heads/main",
-        "rev": "a97fc0363e101a744bd3fa5e41bce8806c8896f7",
-        "revCount": 80,
+        "rev": "77044fafd6f9ecc4ce4fd9b56cb8fa1786eba8d1",
+        "revCount": 81,
         "type": "git",
         "url": "https://git.lanice.dev/lanice/tokenscope.git"
       },
