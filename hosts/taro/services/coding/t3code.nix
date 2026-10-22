@@ -15,6 +15,7 @@ in {
 
   systemd.services.${name} = {
     description = "T3 Code remote coding environment";
+    environment.T3CODE_TELEMETRY_ENABLED = "false";
     serviceConfig = {
       ExecStart = "${package}/bin/t3 serve --host 127.0.0.1 --port ${toString pub.proxyTo} --base-dir ${home}/.t3";
       KillMode = "mixed";

@@ -22,6 +22,7 @@ in
 
     extraPreBwrapCmds = ''
       export T3CODE_DISABLE_AUTO_UPDATE=1
+      export T3CODE_TELEMETRY_ENABLED=false
 
       t3codeSshConfigTarget="$(
         ${coreutils}/bin/readlink -f "$HOME/.ssh/config"
