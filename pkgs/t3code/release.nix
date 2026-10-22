@@ -1,8 +1,8 @@
 {
-  version = "0.1.0";
-  desktopHash = "sha256-442cX7UTsezgpwi5BtM4O1tH7RmVdbOaMeQauINOt0Q=";
+  version = "0.1.2";
+  desktopHash = "sha256-zwHi0Wfv+dAcTBAE0xssDaniUizJQmLkFkTRyxXf21w=";
   serverHashes = {
-    x86_64-linux = "sha256-93A/8buPYkNYAFizzPLAKrti66S5keJrux2iL0tW2bE=";
-    aarch64-linux = "sha256-LQd1GpGCUrb6LTgRn+RMUUm2Kk1oSJSvXChT6LKpToE=";
+    x86_64-linux = "sha256-eu1iXLlhk43xdMGgZ8DwUjU2CUC1PogqFkMSa3VNoWw=";
+    aarch64-linux = "sha256-3xEuHxl3K0BVooyXsDLrbQONXXGCAV8cr9MlStb6vQ8=";
   };
 }
