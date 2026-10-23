@@ -72,7 +72,7 @@
         lumen
 
         auth0-cli
-        awscli
+        awscli2
         dbosctl
 
         sxiv
