@@ -47,6 +47,9 @@ in {
       # Bind on all interfaces so containers can reach it via the podman bridge.
       # LAN exposure is gated by the firewall (port 4533 only opened on podman0).
       Address = "0.0.0.0";
+      # nixpkgs defaults Folder to ${finalPackage}/share/plugins, absent without
+      # plugins; navidrome then mkdirs it in the store and dies.
+      Plugins.Enabled = false;
     };
   };
 
