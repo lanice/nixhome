@@ -93,7 +93,7 @@ in {
     audiobookshelf.proxyTo = config.services.audiobookshelf.port;
     sonarr.proxyTo = config.services.sonarr.settings.server.port;
     radarr.proxyTo = config.services.radarr.settings.server.port;
-    bazarr.proxyTo = config.services.bazarr.listenPort;
+    bazarr.proxyTo = config.services.bazarr.settings.general.port;
     prowlarr.proxyTo = config.services.prowlarr.settings.server.port;
     # As with jellyfin, nixpkgs' nzbhydra2 module exposes no port option.
     nzbhydra.proxyTo = 5076;
