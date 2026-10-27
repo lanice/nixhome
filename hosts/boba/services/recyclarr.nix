@@ -73,8 +73,8 @@
     germanUnwanted = [
       "a6a6c33d057406aaad978a6902823c35" # German LQ
       "d80c9f7cd2aad50271f1bd4e53125778" # German LQ (release title)
-      "237eda4ef550a97da2c9d87b437e500b" # German Microsized
     ];
+    germanMicrosized = "237eda4ef550a97da2c9d87b437e500b";
   };
 
   # Audio formats left out: lossless audio scores (up to 5000) outweigh group tiers and drive size.
@@ -428,6 +428,17 @@ in {
             ++ forGerman sonarrCfs.unwanted
             ++ sonarrCfs.germanUnwanted;
           assign_scores_to = [{name = german;}];
+        }
+        {
+          # Microsized German DL (~17000) beats any English Only (max ~16900), loses to proper German DL.
+          # At -35000 it sank below English Only, so RSS replaced dual-audio files with English-only.
+          trash_ids = [sonarrCfs.germanMicrosized];
+          assign_scores_to = [
+            {
+              name = german;
+              score = -8000;
+            }
+          ];
         }
         {
           trash_ids = ["418f50b10f1907201b6cfdf881f467b7"]; # Anime Dual Audio

@@ -146,6 +146,22 @@ Bake Off US release numbering differs from Sonarr's UK numbering. Masterclass
 and festive releases belong under Specials. Verify episode content before
 manual import; a series-wide title exclusion would also block wanted specials.
 
+### German DL profile downgrades (2026-10-25)
+
+German Microsized (FuN, w00t, …) used to score -35000 on the Sonarr German
+profile, putting a microsized German DL at -10000, below English Only (15000).
+RSS then "upgraded" dual-audio files to English-only (Yellowstone S1, The
+Diplomat S2). It now scores -8000 (`recyclarr.nix`), so microsized German DL
+ranks between English Only and proper German DL.
+
+Old German DL posts are often incomplete. A failed grab triggers Sonarr's
+automatic redownload, which takes the best remaining release, usually
+English-only, even for unmonitored episodes.
+
+Sonarr never searches for cutoff-unmet upgrades on its own. A German DL that
+was already on the indexers before the English file arrived needs a manual
+search (Wanted → Cutoff Unmet).
+
 ## BookOrbit upgrades and KOReader (2026-09-18)
 
 Before activating an upgrade, stop BookOrbit and take a fresh PostgreSQL dump
