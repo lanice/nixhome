@@ -1,8 +1,15 @@
-{lib, ...}: let
+{
+  lib,
+  inputs,
+  ...
+}: let
   skills =
     lib.mapAttrs
     (name: _: ./skills/${name})
-    (lib.filterAttrs (name: type: type == "directory" && !(lib.hasPrefix "_" name)) (builtins.readDir ./skills));
+    (lib.filterAttrs (name: type: type == "directory" && !(lib.hasPrefix "_" name)) (builtins.readDir ./skills))
+    // {
+      screencast = "${inputs.lanice-skills}/skills/dev/screencast";
+    };
 in {
   programs = {
     claude-code.skills = skills;

@@ -352,6 +352,22 @@
         "type": "github"
       }
     },
+    "lanice-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793299959,
+        "narHash": "sha256-m13zBm0fefOJqPNFUDg9jCCo4WGdUDYJcp1H9EPXAgw=",
+        "ref": "refs/heads/main",
+        "rev": "5f32649534f537193c2c75e9d31cf944fc8764b0",
+        "revCount": 25,
+        "type": "git",
+        "url": "ssh://forgejo@git.lanice.dev/lanice/skills.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://forgejo@git.lanice.dev/lanice/skills.git"
+      }
+    },
     "llm-agents": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -636,6 +652,7 @@
         "home-manager": "home-manager",
         "inkprep": "inkprep",
         "kenku-fm": "kenku-fm",
+        "lanice-skills": "lanice-skills",
         "llm-agents": "llm-agents",
         "minecraft-servers": "minecraft-servers",
         "nix-darwin": "nix-darwin",

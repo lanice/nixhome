@@ -59,6 +59,12 @@
     inkprep.url = "git+https://git.lanice.dev/lanice/inkprep.git";
     inkprep.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Private agent skills repo; not a flake.
+    lanice-skills = {
+      url = "git+ssh://forgejo@git.lanice.dev/lanice/skills.git";
+      flake = false;
+    };
+
     # Identifying data (email addresses, mail-archive source accounts) that
     # must not live in this public repo. Dumb data, not a flake. Every host's
     # eval forces it; fetches hit the by-rev cache and work offline, but a
