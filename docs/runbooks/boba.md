@@ -166,8 +166,9 @@ AIDA is on TRaSH's German LQ list (German track is AC3 2.0). A homebrew `AIDA`
 release-group CF scores +35000 in the Sonarr German profile to cancel it; it is
 in recyclarr's `except` list, so the score lives in Sonarr, not Nix. AIDA leaves
 the English track untagged: Sonarr then sees German only, scores 0 and blocks
-the import. Tag it before import:
-`mkvpropedit <file> --edit track:a2 --set language=eng`.
+the import. The SABnzbd `tv` script tags a lone untagged audio track `eng` in
+German DL releases (only if the rest has ger and no eng). Anything else still
+stuck: `mkvpropedit <file> --edit track:a2 --set language=eng`.
 
 ### Prowlarr app sync race (2026-10-29)
 

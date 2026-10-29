@@ -13,7 +13,10 @@
     executable = true;
     text = ''
       #!${pkgs.python3}/bin/python3
+      import json
       import os
+      import re
+      import subprocess
       import sys
       from pathlib import Path
 
@@ -39,6 +42,38 @@
                   path = (Path(directory) / name).relative_to(root)
                   sys.exit(f"Rejected unwanted TV payload: {path}")
       print("TV payload check passed")
+
+      # German DL releases (AIDA, ...) may leave the English track untagged; Sonarr then
+      # sees German only and blocks the import. Tag a lone untagged track eng when the
+      # rest has ger and no eng. Best effort: never fails the job.
+      name = os.environ.get("SAB_FINAL_NAME", root.name)
+      german_dl = (re.search(r"(?i)german[\s._-]*dl\b|\[(de\+[a-z]{2}|[a-z]{2}\+de)\]", name)
+                   or (re.search(r"(?i)\bgerman\b", name)
+                       and re.search(r"(?i)(?<!web[-_. ])\bdl\b", name)))
+      if not german_dl:
+          sys.exit(0)
+
+      tagged = 0
+      for mkv in sorted(root.rglob("*.mkv")):
+          try:
+              probe = subprocess.run(
+                  ["${pkgs.ffmpeg-headless}/bin/ffprobe", "-v", "error", "-select_streams", "a",
+                   "-show_entries", "stream_tags=language", "-of", "json", str(mkv)],
+                  capture_output=True, text=True, check=True, timeout=120)
+              langs = [s.get("tags", {}).get("language", "und")
+                       for s in json.loads(probe.stdout)["streams"]]
+              untagged = [i for i, lang in enumerate(langs) if lang == "und"]
+              if len(untagged) != 1 or "ger" not in langs or "eng" in langs:
+                  continue
+              subprocess.run(
+                  ["${pkgs.mkvtoolnix-cli}/bin/mkvpropedit", "-q", str(mkv),
+                   "--edit", f"track:a{untagged[0] + 1}", "--set", "language=eng"],
+                  check=True, timeout=120)
+              tagged += 1
+              print(f"Tagged audio track {untagged[0] + 1} eng: {mkv.name}")
+          except Exception as e:
+              print(f"Audio tag check skipped for {mkv.name}: {e}")
+      print(f"TV payload check passed; tagged English audio in {tagged} file(s)")
     '';
   };
 in {
