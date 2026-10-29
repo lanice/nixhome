@@ -9,6 +9,7 @@
     (lib.filterAttrs (name: type: type == "directory" && !(lib.hasPrefix "_" name)) (builtins.readDir ./skills))
     // {
       screencast = "${inputs.lanice-skills}/skills/dev/screencast";
+      sol-loop = "${inputs.lanice-skills}/skills/dev/sol-loop";
     };
 in {
   programs = {
