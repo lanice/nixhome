@@ -31,6 +31,9 @@ in {
 
     inherit (config.agents) context;
 
+    # Claude-only: drives codex as the reviewer
+    skills.sol-loop = "${inputs.lanice-skills}/skills/dev/sol-loop";
+
     settings = {
       alwaysThinkingEnabled = true;
       includeCoAuthoredBy = false;
