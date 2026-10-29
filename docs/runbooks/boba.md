@@ -162,6 +162,21 @@ Sonarr never searches for cutoff-unmet upgrades on its own. A German DL that
 was already on the indexers before the English file arrived needs a manual
 search (Wanted → Cutoff Unmet).
 
+AIDA is on TRaSH's German LQ list (German track is AC3 2.0). A homebrew `AIDA`
+release-group CF scores +35000 in the Sonarr German profile to cancel it; it is
+in recyclarr's `except` list, so the score lives in Sonarr, not Nix. AIDA leaves
+the English track untagged: Sonarr then sees German only, scores 0 and blocks
+the import. Tag it before import:
+`mkvpropedit <file> --edit track:a2 --set language=eng`.
+
+### Prowlarr app sync race (2026-10-29)
+
+Don't trigger *Sync App Indexers* right after adding an indexer: Prowlarr
+already syncs on add, and two concurrent syncs repointed Sonarr's NzbPlanet
+entry at the new indexer's feed (`localhost:9696/12/`). Duplicate results then
+showed up under NzbPlanet. A later full sync fixed it; check each app's indexer
+`baseUrl` against Prowlarr IDs after adding one.
+
 ## BookOrbit upgrades and KOReader (2026-09-18)
 
 Before activating an upgrade, stop BookOrbit and take a fresh PostgreSQL dump

@@ -391,7 +391,8 @@ in {
           score_set = "german"; # unwanted -35000, below even German DL
           reset_unmatched_scores = {
             enabled = true;
-            except = germanLanguageCfs;
+            # Homebrew AIDA (release group) +35000 cancels German LQ for their German DL Blurays.
+            except = germanLanguageCfs ++ ["AIDA"];
           };
           min_format_score = 10;
           upgrade = {
