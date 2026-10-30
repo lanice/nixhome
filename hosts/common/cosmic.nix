@@ -18,6 +18,20 @@
               hash = "sha256-GYzo7DRrS/qTThJnQnPTvuCy2U72MA8a1bHOHpr5ZUU=";
             });
         });
+        # Screencast crash ("create_frame sent before the previous frame was destroyed");
+        # remove once pop-os/cosmic-protocols#92 lands in a portal release.
+        xdg-desktop-portal-cosmic = prev.xdg-desktop-portal-cosmic.overrideAttrs (old: {
+          postPatch =
+            (old.postPatch or "")
+            + ''
+              for d in "$cargoDepsCopy"/*/cosmic-client-toolkit-*; do
+                patch -d "$d" -p2 < ${final.fetchpatch {
+                url = "https://github.com/pop-os/cosmic-protocols/commit/3ad1781fefeaea5224ec6917f53ccad32bf5219b.patch";
+                hash = "sha256-LSXaTdy5fyFSevhxdEviE6BHN8B+aa3csKNsrvx2GZE=";
+              }}
+              done
+            '';
+        });
       })
     ];
 
