@@ -28,7 +28,10 @@
                 patch -d "$d" -p2 < ${final.fetchpatch {
                 url = "https://github.com/pop-os/cosmic-protocols/commit/3ad1781fefeaea5224ec6917f53ccad32bf5219b.patch";
                 hash = "sha256-LSXaTdy5fyFSevhxdEviE6BHN8B+aa3csKNsrvx2GZE=";
-              }}
+              }} || {
+                  echo "cosmic-protocols#92 no longer applies (likely shipped upstream): drop this overlay in hosts/common/cosmic.nix" >&2
+                  exit 1
+                }
               done
             '';
         });
