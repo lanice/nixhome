@@ -23,6 +23,9 @@ in {
   };
 
   systemd.services.slskd.serviceConfig.UMask = "0002";
+  # .NET >= 10.0.13 puts named mutexes in $HOME; slskd's is read-only
+  # /var/empty, so 0.26.1 exits 0 at startup. Fixed in slskd 0.26.2 (slskd/slskd#1893).
+  systemd.services.slskd.environment.HOME = "/var/lib/slskd";
 
   age.secrets.slskd = {
     file = "${inputs.self}/secrets/slskd.age";
