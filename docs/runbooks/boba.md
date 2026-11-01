@@ -524,3 +524,17 @@ Connections live in its SQLite DB (`/var/lib/maintainerr`, backed up with
 `/var/lib`), set via its API, using `http://host.containers.internal:<port>`.
 Jellyfin uses a dedicated API key named `Maintainerr`. The image is pinned
 because it deletes media; read the changelog before bumping.
+
+Groups use "Keep in Maintainerr only", so no box sets reach Jellyfin; review in
+Maintainerr's UI. Rule definitions live only in its DB, not in Nix.
+
+Rule traps on Jellyfin:
+
+- Use `lastPlayedAt` for "nobody touched this". `sw_lastWatched` is the view date
+  of the highest-numbered episode watched: it missed donna's and sona's recent
+  plays and collected shows in active use. It also ignores unfinished plays.
+- A date rule on an empty value is false, so "never played" needs its own OR
+  branch (`NOT_EXISTS`).
+- The API's connection test lists admins only; rules read all users' history.
+- Jellyfin history reaches back ~20 months (2026-11), which caps usable thresholds.
+- Items not tracked in Sonarr/Radarr fail their *arr conditions and are never collected.
