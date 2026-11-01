@@ -49,8 +49,8 @@
       "218e93e5702f44a68ad9e3c6ba87d2f0" # HD Streaming Boost
       "43b3cf48cb385cd3eac608ee6bca7f09" # UHD Streaming Boost
     ];
+    av1 = "15a05bc7c1a36e2b57fd628f8977e2fc";
     unwanted = [
-      "15a05bc7c1a36e2b57fd628f8977e2fc" # AV1
       "32b367365729d530ca1c124a0b180c64" # Bad Dual Groups
       "85c61753df5da1fb2aab6f2a47426b09" # BR-DISK
       "fbcb31d8dabd2a319072b84fc0b7249c" # Extras
@@ -353,6 +353,8 @@ in {
             until_quality = "HD 1080p";
             until_score = 10000;
           };
+          # Cutoff is unreachable; skip streaming-tag-only (+75) and tier-to-tier (+50) swaps.
+          min_upgrade_format_score = 100;
           # Top first. 1080p WEB/Bluray tie on quality, CF score decides; 4K only as fallback.
           qualities = [
             {
@@ -417,7 +419,7 @@ in {
 
       custom_formats = [
         {
-          trash_ids = sonarrCfs.hqGroups ++ sonarrCfs.repacks ++ sonarrCfs.streaming ++ sonarrCfs.unwanted;
+          trash_ids = sonarrCfs.hqGroups ++ sonarrCfs.repacks ++ sonarrCfs.streaming ++ sonarrCfs.unwanted ++ [sonarrCfs.av1];
           assign_scores_to = [{name = general;} {name = any;}];
         }
         {
@@ -431,9 +433,10 @@ in {
           assign_scores_to = [{name = german;}];
         }
         {
-          # Microsized German DL (~17000) beats any English Only (max ~16900), loses to proper German DL.
-          # At -35000 it sank below English Only, so RSS replaced dual-audio files with English-only.
-          trash_ids = [sonarrCfs.germanMicrosized];
+          # Microsized/AV1 German DL (~17000) beats any English Only (max ~16900), loses to proper German DL.
+          # At -35000 they sank below English Only, so RSS replaced dual-audio files with English-only
+          # (Microsized) or even non-English releases (AV1, Dark S3).
+          trash_ids = [sonarrCfs.germanMicrosized sonarrCfs.av1];
           assign_scores_to = [
             {
               name = german;

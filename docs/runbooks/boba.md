@@ -154,6 +154,20 @@ RSS then "upgraded" dual-audio files to English-only (Yellowstone S1, The
 Diplomat S2). It now scores -8000 (`recyclarr.nix`), so microsized German DL
 ranks between English Only and proper German DL.
 
+AV1 had the same problem: Dark S3's German DL AV1 files (~-10000) were replaced
+by NF releases with Portuguese+German audio (75) on 2026-11-01. AV1 now also scores
+-8000 in the German profile.
+
+History's old-file score is recomputed from the renamed path and current
+languages, not the scene name. It hid Dark's AV1 penalty (showed 25005). For the
+real score, take `SceneName` from a scheduled backup DB and feed it to
+`/api/v3/parse`.
+
+The general profile's `until_score` (10000) is unreachable, so every file stays
+upgradable. After recyclarr took over (Oct 1), ~2100 files scored -10000 (TRaSH LQ:
+iVy, PSA, d3g; Obfuscated; AV1) and RSS replaces them as reposts appear.
+`min_upgrade_format_score = 100` skips +75 streaming-tag and +50 tier swaps.
+
 Old German DL posts are often incomplete. A failed grab triggers Sonarr's
 automatic redownload, which takes the best remaining release, usually
 English-only, even for unmonitored episodes.
