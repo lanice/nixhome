@@ -528,6 +528,16 @@ because it deletes media; read the changelog before bumping.
 Groups use "Keep in Maintainerr only", so no box sets reach Jellyfin; review in
 Maintainerr's UI. Rule definitions live only in its DB, not in Nix.
 
+The empty "Take action after days" can only be set through the API. The UI edit
+form requires a value for Delete/Unmonitor groups and fills in 30 when the action
+changes, so saving a group there enables automatic deletion. Edit via API, or
+enter 36500 (the max) to stay effectively review-only.
+
+`Manual: movies to delete` and `Manual: shows to delete` have rules off (`useRules`
+false) and only hold hand-added titles. The shows group also takes Anime. Maintainerr
+has no bulk trigger, so `ssh -t boba maintainerr-delete-manual` lists both groups and,
+after typing `delete`, runs each item's action. Handled items leave the collection.
+
 Rule traps on Jellyfin:
 
 - Use `lastPlayedAt` for "nobody touched this". `sw_lastWatched` is the view date
@@ -537,7 +547,8 @@ Rule traps on Jellyfin:
   branch (`NOT_EXISTS`).
 - The API's connection test lists admins only; rules read all users' history.
 - Jellyfin history reaches back ~20 months (2026-11), which caps usable thresholds.
-- Items not tracked in Sonarr/Radarr fail their *arr conditions and are never collected.
+- Maintainerr finds the *arr entry via Jellyfin's provider IDs. A title Jellyfin misidentified fails its *arr conditions and is never collected, even if tracked (log: `None of the resolved external IDs`). Fix with Jellyfin's Identify, using the *arr entry's TMDB ID; item IDs and watch state survive.
+- Same-name shows: Sonarr maps `Dark.Matter.2024.*` and untagged 2024 releases onto the 2015 entry. Release profile `Dark Matter 2015: reject 2024 show` (tag `dark-matter-2015`) blocks them; check release age and episode count before trusting an untagged name.
 
 Never downgrade the image: per a comment in 3.31.0's collection worker, older
 due queries read an empty window as 0, making every member due at once.
