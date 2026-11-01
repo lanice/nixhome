@@ -19,7 +19,8 @@
   systemd.timers.healthcheck-ping = {
     wantedBy = ["timers.target"];
     timerConfig = {
-      OnCalendar = "*:0/5"; # every 5 minutes
+      # Every 5 minutes. UTC: in local time the DST fall-back repeats 01:xx and systemd skips it (65 min gap).
+      OnCalendar = "*:0/5 UTC";
       RandomizedDelaySec = "30s";
     };
   };
