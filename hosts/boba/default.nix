@@ -133,6 +133,10 @@ in {
     sabnzbd.proxyTo # for lidarr container
     slskd.proxyTo # for lidarr container
     4416 # bgutil-provider — for lidarr container (yt-dlp POT tokens); not published
+    jellyfin.proxyTo # for maintainerr container
+    sonarr.proxyTo # for maintainerr container
+    radarr.proxyTo # for maintainerr container
+    seerr.proxyTo # for maintainerr container
   ];
 
   # For Jellyfin transcode hardware acceleration

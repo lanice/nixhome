@@ -109,6 +109,16 @@ in {
             };
           }
           {
+            Maintainerr = let
+              url = pub.maintainerr.url;
+            in {
+              href = url;
+              icon = "maintainerr";
+              siteMonitor = url;
+              description = "Stale Media Review";
+            };
+          }
+          {
             Audiobookshelf = let
               url = pub.audiobookshelf.url;
             in {

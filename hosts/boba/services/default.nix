@@ -14,6 +14,7 @@
     ./healthcheck.nix
     ./homepage.nix
     ./lidarr.nix
+    ./maintainerr.nix
     ./media-estate.nix
     ./media.nix
     ./paperless.nix

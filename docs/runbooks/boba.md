@@ -511,3 +511,16 @@ sudo nixos-rebuild switch --flake /home/lanice/nixhome#sencha
 Then check the installed Claude journal and central source freshness. Isolated
 verification is not a production import. Sencha's Codex transport failure recovered
 through its existing retry before this upgrade; no pending upload was discarded.
+
+## Maintainerr review-only cleanup (2026-11-01)
+
+Rule groups collect candidates; nothing is removed automatically. Keep every
+group's *arr action set but "Take action after days" empty: the worker skips
+collections without a window. Remove an item with **Trigger Rule Action** in its
+media modal; keep one with an exclusion. Don't use "Do nothing": it also hides
+that button.
+
+Connections live in its SQLite DB (`/var/lib/maintainerr`, backed up with
+`/var/lib`), set via its API, using `http://host.containers.internal:<port>`.
+Jellyfin uses a dedicated API key named `Maintainerr`. The image is pinned
+because it deletes media; read the changelog before bumping.
