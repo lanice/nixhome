@@ -538,3 +538,6 @@ Rule traps on Jellyfin:
 - The API's connection test lists admins only; rules read all users' history.
 - Jellyfin history reaches back ~20 months (2026-11), which caps usable thresholds.
 - Items not tracked in Sonarr/Radarr fail their *arr conditions and are never collected.
+
+Never downgrade the image: per a comment in 3.31.0's collection worker, older
+due queries read an empty window as 0, making every member due at once.
