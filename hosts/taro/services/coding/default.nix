@@ -23,7 +23,7 @@ in {
   imports =
     # Preserve tmpfiles merge order.
     map (runtime: import runtime.module {inherit (runtime) name;}) (lib.reverseList runtimes)
-    ++ [(import ./limit-alert.nix {inherit runtimeNames;})];
+    ++ [(import ./limit-alert.nix {inherit runtimeNames;}) ./rex.nix];
 
   users.groups.coding.gid = 988;
   users.users.coding = {

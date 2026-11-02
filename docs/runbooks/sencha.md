@@ -194,6 +194,30 @@ terminates its processes; native agent restore can resume supported conversation
 after reattachment, not arbitrary builds. Run concurrent agents in separate Git
 worktrees rather than the same checkout.
 
+### Rex on longjing and taro
+
+Trial alongside Herdr. Longjing runs a personal server. Taro runs a login server
+that maps the tailnet login to `coding`, at
+`https://taro.<tailnet>.ts.net:7297`; nginx keeps 443.
+
+Connect with the CLI:
+
+```sh
+rex -S https://taro.<tailnet>.ts.net:7297 ls
+```
+
+Give the port explicitly: 443 on taro is nginx. Unlike SSH to `coding`, access
+needs no key: any device logged in to the tailnet as this user gets a shell.
+
+- The first connection after enabling Serve can time out while tailscaled gets
+  a certificate (about 30s). Retry.
+- Rex starts the account's login shell. On taro that is Bash, and `.bashrc`
+  switches to Fish when `REX_SESSION` is set, as it does for SSH logins.
+- `nix flake update` also moves Rex's `snapshot` channel. On taro, sessions
+  survive the upgrade and keep the old version until they end. On longjing,
+  apply it with `systemctl --user restart rex`, which ends sessions.
+- Longjing's server stops at logout, ending its sessions.
+
 Home Manager installs the Codex hook on taro and the enabled Codex, Claude, and
 OMP integrations on longjing. Do not run `herdr integration install` over those
 managed files. NixOS provides `/etc/codex/config.toml` whenever any Home Manager

@@ -39,6 +39,10 @@
     zen-browser.inputs.home-manager.follows = "home-manager";
 
     llm-agents.url = "github:numtide/llm-agents.nix";
+
+    rex.url = "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz";
+    rex.inputs.nixpkgs.follows = "nixpkgs";
+
     catppuccin.url = "github:catppuccin/nix";
     catppuccin.inputs.nixpkgs.follows = "nixpkgs";
 

@@ -17,6 +17,7 @@
     ./features/cli/ssh.nix
     ./features/cli/forgejo.nix
     ./features/cli/fabric.nix
+    ./features/cli/rex.nix
     ./features/cli/typst.nix
     ./features/cli/webdev.nix
 

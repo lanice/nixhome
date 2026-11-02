@@ -57,8 +57,8 @@
   programs.bash = {
     enable = true;
     initExtra = ''
-      # Fish for SSH logins; keep Bash for agents and remote commands.
-      if shopt -q login_shell && [[ -n ''${SSH_TTY:-} && -z ''${BASH_EXECUTION_STRING+x} ]]; then
+      # Fish for SSH and Rex logins; keep Bash for agents and remote commands.
+      if shopt -q login_shell && [[ (-n ''${SSH_TTY:-} || -n ''${REX_SESSION:-}) && -z ''${BASH_EXECUTION_STRING+x} ]]; then
         exec ${pkgs.fish}/bin/fish --login
       fi
     '';
