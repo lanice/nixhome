@@ -547,7 +547,7 @@ Rule traps on Jellyfin:
   branch (`NOT_EXISTS`).
 - The API's connection test lists admins only; rules read all users' history.
 - Jellyfin history reaches back ~20 months (2026-11), which caps usable thresholds.
-- Maintainerr finds the *arr entry via Jellyfin's provider IDs. A title Jellyfin misidentified fails its *arr conditions and is never collected, even if tracked (log: `None of the resolved external IDs`). Fix with Jellyfin's Identify, using the *arr entry's TMDB ID; item IDs and watch state survive.
+- Maintainerr finds the *arr entry via Jellyfin's provider IDs. A title Jellyfin misidentified fails its *arr conditions and is never collected, even if tracked (log: `None of the resolved external IDs`). Fix with Jellyfin's Identify, using the *arr entry's TMDB ID; item IDs and watch state survive. Identify drops `language_*` tags, hiding German titles from `fredde` (AllowedTags) until the daily LanguageTags scan; run *Scan library for new language tags* afterwards.
 - Same-name shows: Sonarr maps `Dark.Matter.2024.*` and untagged 2024 releases onto the 2015 entry. Release profile `Dark Matter 2015: reject 2024 show` (tag `dark-matter-2015`) blocks them; check release age and episode count before trusting an untagged name.
 
 Never downgrade the image: per a comment in 3.31.0's collection worker, older
