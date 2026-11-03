@@ -29,6 +29,20 @@
       hc label "$HC_TERMINAL_ID" "claude.resume=$id" "claude.resume.cwd=$cwd" >/dev/null 2>&1 || true
     '';
   };
+
+  # Reopening the window resets the cursor and resizes terminals, but WINCH goes to
+  # claude, so fish can't restore its bar (see features/cli/fish/herdr-cursor.nix).
+  barCursor = pkgs.writeShellApplication {
+    name = "hc-claude-bar-cursor";
+    text = ''
+      # No pipeline: its subshell would outlive a kill. hc dies on its next heartbeat.
+      while read -r event; do
+        if [[ "$event" == *'"type":"size"'* ]]; then
+          printf '\e[6 q' >"$2" || exit 0
+        fi
+      done < <(hc events --json --terminal "$1")
+    '';
+  };
 in {
   programs.claude-code.settings.hooks.SessionStart = [
     {
@@ -47,8 +61,12 @@ in {
     if set -q HC_TERMINAL_ID
       # Quit on purpose: forget the session. Killed or shutting down: keep it.
       function claude --wraps claude
+        ${lib.getExe barCursor} $HC_TERMINAL_ID (tty) </dev/null >/dev/null 2>&1 &
+        set -l watcher $last_pid
+        disown $watcher
         command claude $argv
         set -l code $status
+        kill $watcher 2>/dev/null
         if test $code -lt 128; and test (systemctl is-system-running) != stopping
           hc label $HC_TERMINAL_ID claude.resume= claude.resume.cwd= >/dev/null 2>&1
         end
