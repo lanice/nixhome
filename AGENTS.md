@@ -36,6 +36,7 @@ Formatter is **alejandra**. New files must be `git add`ed before any flake eval 
 ## Working conventions
 
 - **Comments extremely concise.** No mannered prose.
+- **Commits go straight to `main`** unless specified otherwise.
 - **Missing CLI tools:** use `nix shell nixpkgs#<pkg> -c <cmd>` or `nix run`.
 - **ssh to fleet hosts** has two traps. Local fish mangles inner quotes/globs, so wrap the whole remote command in outer `"..."` (in Nix abbr strings use `''...''` so the double quotes need no escaping). The remote login shell is fish too (`hosts/common/global/lanice.nix`), so anything with loops, `$(...)`, `&&` chains or `[ ]` needs `ssh boba "bash -c '...'"` with `$` and `'` escaped inside. Simple single commands are fine bare.
 
