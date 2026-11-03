@@ -62,10 +62,11 @@ in {
           set -l note (hc get $HC_TERMINAL_ID --json 2>/dev/null | ${jq} -r '.labels | .["claude.resume"] // empty, .["claude.resume.cwd"] // empty')
           set -q note[1]; or return
           hc label $HC_TERMINAL_ID claude.resume= claude.resume.cwd= >/dev/null 2>&1
-          # At the prompt, not in this handler: it needs fish's job control.
           cd $note[2]; or return
-          commandline -r "claude --resume $note[1]"
-          commandline -f execute
+          # Typed, so fish sees normal input. `commandline -f execute` here panics fish
+          # when claude exits (claude eats the reply to its prompt query).
+          hc send $HC_TERMINAL_ID "claude --resume $note[1]" </dev/null >/dev/null 2>&1 &
+          disown
         end
       end
     end
