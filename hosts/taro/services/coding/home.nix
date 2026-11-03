@@ -13,6 +13,7 @@
     ../../../../home/lanice/features/agents/codex
     ../../../../home/lanice/features/agents/omp
     ../../../../home/lanice/features/agents/herdr
+    ../../../../home/lanice/features/cli/fish/herdr-cursor.nix
     ../../../../home/lanice/features/cli/git-core.nix
   ];
 
@@ -65,6 +66,10 @@
       # Fish for SSH and Rex logins; keep Bash for agents and remote commands.
       if shopt -q login_shell && [[ (-n ''${SSH_TTY:-} || -n ''${REX_SESSION:-}) && -z ''${BASH_EXECUTION_STRING+x} ]]; then
         exec ${pkgs.fish}/bin/fish --login
+      fi
+      # Fish for hc's own shell (direct child of its holder), not `bash` typed inside one.
+      if [[ -n ''${HC_TERMINAL_ID:-} && -z ''${BASH_EXECUTION_STRING+x} && $(</proc/$PPID/comm) == herdr-core ]]; then
+        exec ${pkgs.fish}/bin/fish
       fi
     '';
   };

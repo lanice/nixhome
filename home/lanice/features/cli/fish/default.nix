@@ -14,6 +14,8 @@
     text = builtins.readFile ./exif-image-metadata.sh;
   };
 in {
+  imports = [./herdr-cursor.nix];
+
   programs.fish = {
     enable = true;
 
