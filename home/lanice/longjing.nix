@@ -11,6 +11,7 @@
 
     ./features/agents
     ./features/agents/herdr
+    ./features/agents/herdr/resume.nix
     ./features/agents/opencode
     ./features/agents/pi
 

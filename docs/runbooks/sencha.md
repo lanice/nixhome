@@ -194,6 +194,19 @@ terminates its processes; native agent restore can resume supported conversation
 after reattachment, not arbitrary builds. Run concurrent agents in separate Git
 worktrees rather than the same checkout.
 
+### Herdr app: Claude resume after reboot
+
+herdr-core brings kept terminals back as shells and doesn't resume agents
+([#13](https://github.com/herdrdev/herdr-core/issues/13)).
+`home/lanice/features/agents/herdr/resume.nix` works around that on longjing: a
+Claude `SessionStart` hook stores the session on the terminal's
+`claude.resume` label, and the recovery shell runs `claude --resume <id>`.
+A normal exit clears the label. Drop the module once
+[#15](https://github.com/herdrdev/herdr-core/issues/15) lands.
+
+Sessions started before a switch aren't tracked until restarted. Launch flags
+aren't restored. Check a tab's note with `hc get <t> --json`.
+
 ### Rex on longjing and taro
 
 Trial alongside Herdr. Longjing runs a personal server. Taro runs a login server
