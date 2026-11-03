@@ -35,6 +35,8 @@ in {
     homeMode = "0700";
     shell = pkgs.bashInteractive;
     hashedPassword = "!";
+    # hc's core runs as a user service; without this it ends with the last login.
+    linger = true;
     openssh.authorizedKeys.keys = [
       fleet.users.lanice-sencha
       fleet.users.lanice-longjing

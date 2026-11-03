@@ -27,6 +27,7 @@
 
     packages = with pkgs; [
       inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.t3code-server
+      inputs.nixpkgs-herdr.legacyPackages.${pkgs.stdenv.hostPlatform.system}.herdr-core
       nodejs
       pnpm
       bun
@@ -56,6 +57,10 @@
 
   programs.bash = {
     enable = true;
+    # Precedes HM's guard, whose failed test leaves $?=1 even with `return 0`: `ssh coding-taro exit` (hc's login) would fail.
+    bashrcExtra = ''
+      case $- in *i*) ;; *) return ;; esac
+    '';
     initExtra = ''
       # Fish for SSH and Rex logins; keep Bash for agents and remote commands.
       if shopt -q login_shell && [[ (-n ''${SSH_TTY:-} || -n ''${REX_SESSION:-}) && -z ''${BASH_EXECUTION_STRING+x} ]]; then

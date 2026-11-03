@@ -50,6 +50,7 @@
       colmena-unstable = inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena;
       dbosctl = inputs.dbosctl.packages.${pkgs.stdenv.hostPlatform.system}.default;
       kenku-fm = inputs.kenku-fm.packages.${pkgs.stdenv.hostPlatform.system}.kenku-fm-experimental;
+      inherit (inputs.nixpkgs-herdr.legacyPackages.${pkgs.stdenv.hostPlatform.system}) herdr-core herdr-desktop;
     in
       with pkgs; [
         slack
@@ -78,6 +79,8 @@
         feishin
         kooha
         kenku-fm
+        herdr-core
+        herdr-desktop
       ];
 
     stateVersion = lib.mkDefault "26.05"; # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
