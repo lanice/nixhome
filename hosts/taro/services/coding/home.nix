@@ -28,7 +28,7 @@
 
     packages = with pkgs; [
       inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.t3code-server
-      inputs.nixpkgs-herdr.legacyPackages.${pkgs.stdenv.hostPlatform.system}.herdr-core
+      herdr-core
       nodejs
       pnpm
       bun

@@ -4,9 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # herdr-desktop merge commit (NixOS/nixpkgs#581031); drop once in nixos-unstable.
-    nixpkgs-herdr.url = "github:nixos/nixpkgs/76a45d9cb886f5bb48a5db693e980b896c7d5bfa";
-
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 

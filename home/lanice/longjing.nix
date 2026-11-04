@@ -51,7 +51,6 @@
       colmena-unstable = inputs.colmena.packages.${pkgs.stdenv.hostPlatform.system}.colmena;
       dbosctl = inputs.dbosctl.packages.${pkgs.stdenv.hostPlatform.system}.default;
       kenku-fm = inputs.kenku-fm.packages.${pkgs.stdenv.hostPlatform.system}.kenku-fm-experimental;
-      inherit (inputs.nixpkgs-herdr.legacyPackages.${pkgs.stdenv.hostPlatform.system}) herdr-core herdr-desktop;
     in
       with pkgs; [
         slack
