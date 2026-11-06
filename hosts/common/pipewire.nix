@@ -1,6 +1,8 @@
 _: {
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  # Greeter's WirePlumber can race a lingering user's for the card at boot; lost probe = Dummy Output.
+  systemd.user.services.wireplumber.unitConfig.ConditionUser = "!cosmic-greeter";
   services.pipewire = {
     enable = true;
     alsa.enable = true;

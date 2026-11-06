@@ -38,6 +38,9 @@
     tools = ["claude" "codex" "omp" "pi"];
   };
 
+  # hc's core runs as a user service; without this it ends with the last login.
+  users.users.lanice.linger = true;
+
   # Boot into Cosmic by default; pick the "gnome" entry in systemd-boot to switch.
   desktops.cosmic.enable = lib.mkDefault true;
 
