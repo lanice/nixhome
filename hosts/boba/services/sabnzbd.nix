@@ -230,6 +230,17 @@ in {
           newzbin = "";
           priority = -100;
         };
+        # BookOrbit book requests; kept apart from shelfmark's ebooks, whose
+        # completed jobs shelfmark moves out itself.
+        "bookorbit" = {
+          name = "bookorbit";
+          order = 6;
+          pp = "";
+          script = "Default";
+          dir = "bookorbit";
+          newzbin = "";
+          priority = -100;
+        };
         "music" = {
           name = "music";
           order = 7;

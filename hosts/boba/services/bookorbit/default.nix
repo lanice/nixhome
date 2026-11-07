@@ -20,6 +20,13 @@ in {
     owner = "bookorbit";
   };
 
+  # Sabnzbd's bookorbit category dir: book requests hardlink completed jobs
+  # from here into the dock (same dataset).
+  homelab.media.shares."usenet/complete/bookorbit" = {
+    under = "downloads";
+    owner = "sabnzbd";
+  };
+
   services.bookorbit = {
     enable = true;
 
