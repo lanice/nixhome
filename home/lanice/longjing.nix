@@ -41,6 +41,18 @@
 
   programs.fish.shellAbbrs.sshs = ''ghostty --theme="Catppuccin Macchiato" -e ssh sencha'';
 
+  # Speakers and USB-C/DP audio share one card profile; toggle between them.
+  programs.fish.functions.audio-toggle = ''
+    set -l card alsa_card.pci-0000_00_1f.3
+    if ${pkgs.pulseaudio}/bin/pactl list short sinks | string match -q '*1f.3.hdmi*'
+      ${pkgs.pulseaudio}/bin/pactl set-card-profile $card output:analog-stereo+input:analog-stereo
+      and echo "Audio: laptop speakers"
+    else
+      ${pkgs.pulseaudio}/bin/pactl set-card-profile $card output:hdmi-stereo+input:analog-stereo
+      and echo "Audio: USB-C / DisplayPort"
+    end
+  '';
+
   home = {
     sessionVariables = {
       EDITOR = "hx";
