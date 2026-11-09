@@ -9,6 +9,42 @@
   localPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
   mkRON = cosmicLib.cosmic.mkRON;
   importRON = cosmicLib.cosmic.importRON;
+  # Applet polls every 60s per output; the 30d cost scan takes ~18 CPU-s.
+  # Cache its two calls (shared across applets via flock), pass the rest through.
+  codexbarCached = pkgs.writeShellApplication {
+    name = "codexbar";
+    runtimeInputs = [pkgs.coreutils pkgs.util-linux];
+    text = ''
+      real=${lib.getExe localPkgs.codexbar-cli}
+      case "$*" in
+        "usage --format json")
+          key=usage
+          ttl=120
+          ;;
+        "cost --format json --days 30")
+          key=cost
+          ttl=1800
+          ;;
+        *) exec "$real" "$@" ;;
+      esac
+
+      dir=''${XDG_CACHE_HOME:-$HOME/.cache}/codexbar-cached
+      out=$dir/$key.json
+      mkdir -p "$dir"
+      exec 9>"$dir/$key.lock"
+      flock 9
+
+      if [ -f "$out" ] && (($(date +%s) - $(stat -c %Y "$out") < ttl)); then
+        exec cat "$out"
+      fi
+
+      rc=0
+      "$real" "$@" >"$out.tmp" || rc=$?
+      cat "$out.tmp"
+      if ((rc == 0)); then mv "$out.tmp" "$out"; else rm -f "$out.tmp"; fi
+      exit "$rc"
+    '';
+  };
   dockAutohideBehavior = {
     wait_time = 500;
     transition_time = 200;
@@ -53,7 +89,7 @@ in {
       # inputs.cosmic-applets-collection.packages.${pkgs.stdenv.hostPlatform.system}.minimon-applet
       # inputs.cosmic-applets-collection.packages.${pkgs.stdenv.hostPlatform.system}.cosmic-ext-applet-clipboard-manager
       localPkgs.cosmic-ext-applet-codexbar
-      localPkgs.codexbar-cli # CLI the applet shells out to for usage data
+      codexbarCached # CLI the applet shells out to for usage data
     ];
 
     home.activation.configureCosmicFrostedGlass = lib.hm.dag.entryAfter ["configureCosmic"] ''
