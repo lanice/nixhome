@@ -12,6 +12,15 @@ in {
     systemd.enable = true;
     # catppuccin sets theme keys; keep settings.json writable from the UI.
     mutableSettings = true;
+    # App state churns constantly; each change re-scans the dir (exact-path match, prunes subtree).
+    settings.providers.files.preferences.excludedIndexingPaths = map (d: "${config.home.homeDirectory}/${d}") [
+      ".claude"
+      ".codex"
+      ".config"
+      ".local"
+      ".mozilla"
+      ".thunderbird"
+    ];
   };
 
   # Alt+Space is free; COSMIC's own launcher stays on Super / Super+slash.
