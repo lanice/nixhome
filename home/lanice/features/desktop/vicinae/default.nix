@@ -20,6 +20,26 @@ in {
       ".local"
       ".mozilla"
       ".thunderbird"
+      ".agents"
+      ".atuin"
+      ".bitmonero"
+      ".convex"
+      ".dbus"
+      ".debug"
+      ".hyperframes"
+      ".librewolf"
+      ".omp"
+      ".pi"
+      ".shared-ringdb"
+      ".steam"
+      ".t3"
+      ".var"
+      ".zoom"
+      # Bulk generated/scratch trees.
+      "dbos/tmp"
+      "dev/photos/inkplate/firmware/.arduino"
+      "dev/projects/us_historical_directory/evidence/objects"
+      "dev/projects/us_historical_directory/research/objects"
     ];
   };
 
