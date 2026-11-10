@@ -9,8 +9,9 @@
   localPkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
   mkRON = cosmicLib.cosmic.mkRON;
   importRON = cosmicLib.cosmic.importRON;
-  # Applet polls every 60s per output; the 30d cost scan takes ~18 CPU-s.
+  # Applet polls every 60s per output; the 30d cost scan takes ~45 CPU-s.
   # Cache its usage/cost calls (shared across applets via flock), pass the rest through.
+  # Cost outlasts the applet's 30s CLI kill: serve stale, refresh detached.
   codexbarCached = pkgs.writeShellApplication {
     name = "codexbar";
     runtimeInputs = [pkgs.coreutils pkgs.util-linux];
@@ -35,17 +36,27 @@
 
       dir=''${XDG_CACHE_HOME:-$HOME/.cache}/codexbar-cached
       out=$dir/$key.json
+      bg=''${CODEXBAR_CACHED_BG:-}
       mkdir -p "$dir"
-      exec 9>"$dir/$key.lock"
-      flock 9
+      fresh() { [ -f "$out" ] && (($(date +%s) - $(stat -c %Y "$out") < ttl)); }
 
-      if [ -f "$out" ] && (($(date +%s) - $(stat -c %Y "$out") < ttl)); then
+      # mv is atomic, so stale reads need no lock. Detached child must not hold the applet's pipes.
+      if [ "$key" = cost ] && [ -z "$bg" ] && [ -f "$out" ]; then
+        fresh || CODEXBAR_CACHED_BG=1 setsid -f "$0" "$@" </dev/null >/dev/null 2>&1
+        exec cat "$out"
+      fi
+
+      exec 9>"$dir/$key.lock"
+      if [ -n "$bg" ]; then flock -n 9 || exit 0; else flock 9; fi
+
+      if fresh; then
+        [ -n "$bg" ] && exit 0
         exec cat "$out"
       fi
 
       rc=0
       "$real" "$@" >"$out.tmp" || rc=$?
-      cat "$out.tmp"
+      [ -n "$bg" ] || cat "$out.tmp"
       if ((rc == 0)); then mv "$out.tmp" "$out"; else rm -f "$out.tmp"; fi
       exit "$rc"
     '';
