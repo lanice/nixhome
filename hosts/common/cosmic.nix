@@ -7,16 +7,21 @@
   options.desktops.cosmic.enable = lib.mkEnableOption "Cosmic desktop environment";
 
   config = lib.mkIf config.desktops.cosmic.enable {
-    # Backport recording clock fix; remove once nixpkgs ships Kooha 2.3.2.
     nixpkgs.overlays = [
       (final: prev: {
+        # Backport recording clock fix; eval fails once nixpkgs ships Kooha 2.3.2.
         kooha = prev.kooha.overrideAttrs (old: {
           patches =
-            (old.patches or [])
-            ++ lib.optional (lib.versionOlder old.version "2.3.2") (final.fetchurl {
-              url = "https://github.com/SeaDve/Kooha/commit/7e940a9b6e3a5557e271d2fd5ecc6cf079e4f5dc.patch";
-              hash = "sha256-GYzo7DRrS/qTThJnQnPTvuCy2U72MA8a1bHOHpr5ZUU=";
-            });
+            if lib.versionOlder old.version "2.3.2"
+            then
+              (old.patches or [])
+              ++ [
+                (final.fetchurl {
+                  url = "https://github.com/SeaDve/Kooha/commit/7e940a9b6e3a5557e271d2fd5ecc6cf079e4f5dc.patch";
+                  hash = "sha256-GYzo7DRrS/qTThJnQnPTvuCy2U72MA8a1bHOHpr5ZUU=";
+                })
+              ]
+            else throw "kooha ${old.version} ships the clock fix: drop the kooha overlay in hosts/common/cosmic.nix";
         });
         # Screencast crash ("create_frame sent before the previous frame was destroyed");
         # remove once pop-os/cosmic-protocols#92 lands in a portal release.
