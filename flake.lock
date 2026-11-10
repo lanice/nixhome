@@ -624,11 +624,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1793341285,
-        "narHash": "sha256-Y1CiZ4SoBUjLQyQM/pY+rS2dXD3CHLPstF0lmOc73D4=",
+        "lastModified": 1794042290,
+        "narHash": "sha256-ziZn2PvCJE5JEEpqTdxXwJpPB+L3YqoCpTAMCzyaP3U=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1c89083e451e891152365b799595cf7790a43325",
+        "rev": "f4a03c008967841f2a0b3cb7c436fc6fc31671f6",
         "type": "github"
       },
       "original": {
@@ -753,11 +753,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1793584075,
-        "narHash": "sha256-2Qz/sFx1NUqRKcR+bECL64t/SiiAN0Y9qnFKLEw7t50=",
+        "lastModified": 1794264444,
+        "narHash": "sha256-l/p1IXwuF3hdzktKGacoNPQ/JDKE/YRzvl/ZWzhx+q0=",
         "ref": "refs/heads/main",
-        "rev": "fe796a746bc6f5dff75eb52b043674f2759ba1c2",
-        "revCount": 84,
+        "rev": "b9fc75f3865983ec153c66366f3e378df7d26937",
+        "revCount": 85,
         "type": "git",
         "url": "https://git.lanice.dev/lanice/tokenscope.git"
       },
