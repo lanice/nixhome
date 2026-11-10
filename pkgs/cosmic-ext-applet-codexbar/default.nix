@@ -7,7 +7,7 @@
   just,
 }: let
   pname = "cosmic-ext-applet-codexbar";
-  version = "0.1.0";
+  version = "0.2.1";
 in
   rustPlatform.buildRustPackage {
     inherit pname version;
@@ -16,10 +16,10 @@ in
       owner = "andrew-verde";
       repo = pname;
       rev = "v${version}";
-      hash = "sha256-1C2LFN+YR+f/1HYR4YP/TDGvPvieWC15/8UmndHfexo=";
+      hash = "sha256-TS3/e1/vGXhWivxh85LQZ2sEz9fUIrgi0uwJFRoIyxM=";
     };
 
-    cargoHash = "sha256-qzZ5o6o+KIM/dHlarKRTgCiUF3hHoG8dIzUDPS1aD2I=";
+    cargoHash = "sha256-JkCpJoKJFusiByAmCc5sn0tlqq5e0SO8Fqd9Fbj7JT8=";
 
     nativeBuildInputs = [just libcosmicAppHook];
 

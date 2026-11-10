@@ -10,7 +10,7 @@
   mkRON = cosmicLib.cosmic.mkRON;
   importRON = cosmicLib.cosmic.importRON;
   # Applet polls every 60s per output; the 30d cost scan takes ~18 CPU-s.
-  # Cache its two calls (shared across applets via flock), pass the rest through.
+  # Cache its usage/cost calls (shared across applets via flock), pass the rest through.
   codexbarCached = pkgs.writeShellApplication {
     name = "codexbar";
     runtimeInputs = [pkgs.coreutils pkgs.util-linux];
@@ -19,6 +19,11 @@
       case "$*" in
         "usage --format json")
           key=usage
+          ttl=120
+          ;;
+        # Per-provider account expansion (applet 0.2+), run every refresh.
+        "usage --provider "[a-z0-9-]*" --all-accounts --format json")
+          key=usage-$3-accounts
           ttl=120
           ;;
         "cost --format json --days 30")
