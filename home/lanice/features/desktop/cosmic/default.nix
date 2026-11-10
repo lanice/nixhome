@@ -294,6 +294,14 @@ in {
             value = [(mkRON "enum" "Terminal")];
           };
         }
+        # Overrides default Focus(Right)
+        {
+          key = "Super+l";
+          action = mkRON "enum" {
+            variant = "System";
+            value = [(mkRON "enum" "LockScreen")];
+          };
+        }
       ];
 
       systemActions = mkRON "map" [
