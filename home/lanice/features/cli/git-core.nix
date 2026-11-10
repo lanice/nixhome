@@ -1,4 +1,16 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: let
+  # Reject AI co-author trailers (agents ignore attribution settings sometimes)
+  noAiCoauthor = pkgs.writeShellScript "no-ai-coauthor" ''
+    if ${pkgs.gnugrep}/bin/grep -qiE '^co-authored-by:.*(claude|anthropic)' "$1"; then
+      echo "commit-msg: remove the Claude/Anthropic Co-Authored-By trailer" >&2
+      exit 1
+    fi
+  '';
+in {
   programs.git = {
     enable = true;
     signing.format = "ssh";
@@ -24,6 +36,12 @@
       # Populate manually with: * <content of id_ed25519.pub>
       gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
       push.autoSetupRemote = true;
+
+      # Config-based hook: runs alongside repo-local .git/hooks
+      hook.no-ai-coauthor = {
+        event = "commit-msg";
+        command = "${noAiCoauthor}";
+      };
     };
   };
 }
